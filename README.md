@@ -1,4 +1,6 @@
-## TCP/IP Fingerprinting
+## Passive TCP/IP Fingerprinting
+
+Passive TCP/IP Fingerprinting Tool. Run this on your server and find out what operating systems your clients are *really* using.
 
 Why?
 
