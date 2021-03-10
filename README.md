@@ -34,3 +34,10 @@ This is surely no exact science, but it's better than nothing.
 Some code has been taken from: https://github.com/xnih/satori
 However, the codebase of github.com/xnih/satori was quite frankly 
 a huge mess (randomly failing code segments and capturing the Errors, not good).
+
+### How to run
+
+```bash
+py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
+nohup $py tcp_fingerprint.py -i eth0 > tcp_fingerprint.out 2> tcp_fingerprint.err < /dev/null &
+```

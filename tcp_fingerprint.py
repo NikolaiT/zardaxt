@@ -37,6 +37,7 @@ verbose = False
 fingerprints = {}
 
 def updateFile():
+  print('writing fingerprints.json with {} objects...'.format(len(fingerprints)))
   with open('fingerprints.json', 'w') as fp:
     json.dump(fingerprints, fp, indent=2, sort_keys=False)
 
@@ -169,7 +170,7 @@ def tcpProcess(pkt, layer, ts):
       }
 
       # update file once in a while
-      if len(fingerprints) > 0 and len(fingerprints) % 4 == 0:
+      if len(fingerprints) > 0 and len(fingerprints) % 8 == 0:
         updateFile()
 
     print('---------------------------------')
