@@ -36,9 +36,12 @@ interface = None
 verbose = False
 fingerprints = {}
 
-def signal_handler(sig, frame):
+def updateFile():
   with open('fingerprints.json', 'w') as fp:
     json.dump(fingerprints, fp, indent=2, sort_keys=False)
+
+def signal_handler(sig, frame):
+  updateFile()
   sys.exit(0)
 
 signal.signal(signal.SIGINT, signal_handler) # ctlr + c
@@ -164,6 +167,11 @@ def tcpProcess(pkt, layer, ts):
         'tcp_timestamp_echo_reply': tcpTimeStampEchoReply,
         'tcp_mss': mss
       }
+
+      # update file once in a while
+      if len(fingerprints) > 0 and len(fingerprints) % 4 == 0:
+        updateFile()
+
     print('---------------------------------')
 
 
