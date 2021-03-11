@@ -28,19 +28,19 @@ incoming TCP/IP stream.
 
 ### What fields are used for TCP/IP fingerprinting?
 
-Inspiration by 
+Sources:
 
 1. Wikipedia [TCP/IP fingerprinting article](https://en.wikipedia.org/wiki/TCP/IP_stack_fingerprinting)
 2. [Satori.py](https://github.com/xnih/satori)
 3. Other TCP/IP fingerprinting [tool](https://github.com/agirishkumar/passive-os-detection/tree/master/OS-Fingerprinting)
 
-Entropy taken from the [IP header](https://en.wikipedia.org/wiki/IPv4):
+#### Entropy from the [IP header](https://en.wikipedia.org/wiki/IPv4)
 
 + Initial TTL of the IP frame. Different OS use a differnt initial TTL. 
 + Don't Fragment (DF) flag. Some OS set the DF bit in the IP header, others don't	
 + More Fragments (MF)
 
-Entropy taken from the [TCP header](https://en.wikipedia.org/wiki/Transmission_Control_Protocol):
+#### Entropy from the [TCP header](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)
 
 + Initial packet size. May differ between different OSes	
 + Initial Window size. Differentiate implementations based on default Window Size in TCP	
