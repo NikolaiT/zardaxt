@@ -89,7 +89,7 @@ def makeOsGuess(fp, n=4):
     os = None
     try:
       os = re.findall(r'\((.*?)\)', dbList[guess[0]]['navigatorUserAgent'])[0]
-    except e:
+    except Exception as e:
       pass
     guesses.append({
       'score': '{}/{}'.format(guess[1], perfectScore),
