@@ -1,3 +1,5 @@
+import struct
+
 """
 Parse TCP options.
 
