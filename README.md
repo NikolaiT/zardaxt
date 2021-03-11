@@ -25,7 +25,7 @@ a huge mess (randomly failing code segments and capturing the Errors, not good).
 This project does not attempt to be exact, it should give some hints what might be the OS of the 
 incoming TCP/IP stream.
 
-### What header fields do we use for TCP/IP fingerprinting?
+### What fields are used for TCP/IP fingerprinting?
 
 + Initial packet size 
 + Initial TTL
