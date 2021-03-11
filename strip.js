@@ -8,4 +8,4 @@ for (let entry of data) {
   delete entry.dst_port;
 }
 
-fs.writeFileSync('databaseC.json', JSON.stringify(data, null, 2))
+fs.writeFileSync('database.json', JSON.stringify(data, null, 2))
