@@ -11,7 +11,9 @@ import pcapy
 import getopt
 import time
 import sys
+import traceback
 import os
+import re
 import signal
 import untangle
 import json
@@ -20,6 +22,7 @@ from pathlib import Path
 
 """
 Author: Nikolai Tschacher
+Website: incolumitas.com
 Date: March 2021
 
 Allows to fingerprint an incoming TCP/IP connection.
@@ -35,6 +38,62 @@ a huge mess (randomly failing code segments and capturing the Errors, not good).
 interface = None
 verbose = False
 fingerprints = {}
+databaseFile = './database.json'
+dbList = []
+with open(databaseFile) as f:
+  dbList = json.load(f)
+
+print('Loaded {} fingerprints from the database'.format(len(dbList)))
+
+def makeOsGuess(fp, n=3):
+  scores = []
+  for i, entry in enumerate(dbList):
+    score = 0
+    # check IP DF bit
+    if entry['ip_df'] == fp['ip_df']:
+      score += 1
+    # check IP MF bit
+    if entry['ip_mf'] == fp['ip_mf']:
+      score += 1
+    # check TCP window size
+    if entry['tcp_window_size'] == fp['tcp_window_size']:
+      score += 1.5
+    # check TCP flags
+    if entry['tcp_flags'] == fp['tcp_flags']:
+      score += 1
+    # check TCP header length
+    if entry['tcp_header_length'] == fp['tcp_header_length']:
+      score += 1
+    # check TCP MSS
+    if entry['tcp_mss'] == fp['tcp_mss']:
+      score += 1
+    # check TCP options
+    if entry['tcp_options'] == fp['tcp_options']:
+      score += 3
+    else:
+      # check order of TCP options (this is weaker than TCP options equality)
+      orderEntry = ''.join([e[0] for e in entry['tcp_options'].split(',') if e])
+      orderFp = ''.join([e[0] for e in fp['tcp_options'].split(',') if e])
+      if orderEntry == orderFp:
+        score += 2
+
+    scores.append((i, score))
+
+  # sort the top n scores
+  scores.sort(key=lambda x: x[1], reverse=True)
+  guesses = []
+  for guess in scores[:n]:
+    os = None
+    try:
+      os = re.findall(r'\((.*?)\)', dbList[guess[0]]['navigatorUserAgent'])[0]
+    except e:
+      pass
+    guesses.append({
+      'score': guess[1],
+      'OS': os
+    })
+
+  return guesses
 
 def updateFile():
   print('writing fingerprints.json with {} objects...'.format(len(fingerprints)))
@@ -169,6 +228,8 @@ def tcpProcess(pkt, layer, ts):
         'tcp_mss': mss
       }
 
+      print(makeOsGuess(fingerprints[key]))
+
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % 8 == 0:
         updateFile()
@@ -289,7 +350,8 @@ def main():
     except (KeyboardInterrupt, SystemExit):
       raise
     except Exception as e:
-      print(str(e))
+      error_string = traceback.format_exc()
+      print(str(error_string))
 
   endTime = time.time()
   totalTime = endTime - startTime

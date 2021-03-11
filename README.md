@@ -5,7 +5,11 @@ Passive TCP/IP fingerprinting tool. Run this on your server and find out what op
 Why?
 
 + [p0f](https://github.com/p0f/p0f) is dead. It's database is too old. Also: C is a bit overkill and hard to quickly hack in.
-+ [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the 'code' are awesome)
++ [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the *code* are awesome)
+
+What is TCP/IP fingerprinting?
+
+[Read this.](https://github.com/agirishkumar/passive-os-detection/tree/master/OS-Fingerprinting)
 
 TCP/IP fingerprinting is super old. Let's revive it.
 
