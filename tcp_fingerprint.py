@@ -19,6 +19,7 @@ import untangle
 import json
 import struct
 from pathlib import Path
+from tcp_options import decodeTCPOptions
 
 """
 Author: Nikolai Tschacher
@@ -109,46 +110,6 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler) # ctlr + c
 signal.signal(signal.SIGTSTP, signal_handler) # ctlr + z
 
-def decodeTCPOptions(opts):
-  res = ''
-  mss = 0
-  tcpTimeStampEchoReply = ''
-  tcpTimeStamp = ''
-
-  for i in opts:
-    if i.type == 0: # End of options list
-      res = res + 'E,'
-    elif i.type == 1: # No operation
-      res = res + 'N,'
-    elif i.type == 2: # Maximum segment size
-      mss = struct.unpack('!h',i.body_bytes)[0]
-      res = res + 'M' + str(mss) + ','
-    elif i.type == 3: # Window scale
-      x = struct.unpack('!b',i.body_bytes)[0]
-      res = res + 'W' + str(x) + ','
-    elif i.type == 4: # Selective Acknowledgement permitted
-      res = res + 'S,'
-    elif i.type == 5: # Selective ACKnowledgement (SACK)
-      res = res + 'K,' 
-    elif i.type == 6:
-      res = res + 'J,'
-    elif i.type == 7:
-      res = res + 'F,'  
-      #print("Options Echo (need to compute?):  %s" % (i.body_bytes))
-    elif i.type == 8:
-      res = res + 'T,'
-      tcpTimeStamp = struct.unpack('!I',i.body_bytes[0:4])[0]
-      tcpTimeStampEchoReply = struct.unpack('!I',i.body_bytes[4:8])[0] 
-    elif i.type == 9:
-      res = res + 'P,'
-    elif i.type == 10:
-      res = res + 'R,'
-    else:
-      res = res + 'U,'
-      print('unknown TCP Options')
-
-  return(res, tcpTimeStamp, tcpTimeStampEchoReply, mss)
-
 
 def tcpProcess(pkt, layer, ts):
   """
@@ -160,7 +121,9 @@ def tcpProcess(pkt, layer, ts):
 
   Capture SYN-ACK: 
 
-  tcpdump -ni <device> -c 25 'tcp[tcpflags] & (tcp-ack | tcp-syn) !=0 '
+  tcpdump -ni <device> -c 25 'tcp[tcpflags] & (tcp-ack | tcp-syn) !=0'
+
+  TCP stuff: https://gitlab.com/mike01/pypacker/-/blob/master/pypacker/layer4/tcp.py
   """
   if layer == 'eth':
     src_mac = pkt[ethernet.Ethernet].src_s
@@ -184,31 +147,19 @@ def tcpProcess(pkt, layer, ts):
     print("%d: %s:%s -> %s:%s [%s]" % (ts, pkt[ip.IP].src_s, pkt[tcp.TCP].sport,
         pkt[ip.IP].dst_s, pkt[tcp.TCP].dport, label))
 
+    # http://www.iana.org/assignments/ip-parameters/ip-parameters.xml
     [ipVersion, ipHdrLen] = computeIP(ip4.v_hl)
     [ethTTL, ttl] = computeNearTTL(ip4.ttl)
     [df, mf, offset] = computeIPOffset(ip4.off)
 
-    [tcpOpts, tcpTimeStamp, tcpTimeStampEchoReply, mss] = decodeTCPOptions(tcp1.opts)
+    [tcpOpts, tcpTimeStamp, tcpTimeStampEchoReply, mss, windowScaling] = decodeTCPOptions(tcp1.opts)
 
     if verbose:
       print('IP version={}, header length={}, TTL={}, df={}, mf={}, offset={}'.format(
-        ipVersion,
-        ipHdrLen,
-        ip4.ttl,
-        df,
-        mf,
-        offset,
+        ipVersion, ipHdrLen, ip4.ttl, df, mf, offset,
       ))
       print('TCP window size={}, flags={}, ack={}, header length={}, urp={}, options={}, time stamp={}, timestamp echo reply = {}, MSS={}'.format(
-        tcp1.win,
-        tcp1.flags,
-        tcp1.ack,
-        tcp1.off_x2,
-        tcp1.urp,
-        tcpOpts,
-        tcpTimeStamp,
-        tcpTimeStampEchoReply,
-        mss
+        tcp1.win, tcp1.flags, tcp1.ack, tcp1.off_x2, tcp1.urp, tcpOpts, tcpTimeStamp, tcpTimeStampEchoReply, mss
       ))
     
     if label == 'SYN':
@@ -218,6 +169,7 @@ def tcpProcess(pkt, layer, ts):
         'src_ip': pkt[ip.IP].src_s,
         'dst_ip': '{}'.format(pkt[ip.IP].dst_s),
         'dst_port': '{}'.format(pkt[tcp.TCP].dport),
+        'ip_ttl': ip4.ttl,
         'ip_df': df,
         'ip_mf': mf,
         'tcp_window_size': tcp1.win,
@@ -226,6 +178,8 @@ def tcpProcess(pkt, layer, ts):
         'tcp_header_length': tcp1.off_x2,
         'tcp_urp': tcp1.urp,
         'tcp_options': tcpOpts,
+        'tcp_window_scaling': windowScaling,
+        'tcp_timestamp': tcpTimeStamp,
         'tcp_timestamp_echo_reply': tcpTimeStampEchoReply,
         'tcp_mss': mss
       }
@@ -246,22 +200,22 @@ def computeIP(info):
 
 
 def computeNearTTL(info):
-  if (info>0) and (info<=16):
+  if info > 0 and info <= 16:
     ttl = 16
     ethTTL = 16
-  elif (info>16) and (info<=32):
+  elif info > 16 and info <= 32:
     ttl = 32 
     ethTTL = 43
-  elif (info>32) and (info<=60):
+  elif info > 32 and info <= 60:
     ttl = 60 #unlikely to find many of these anymore
     ethTTL = 64
-  elif (info>60) and (info<=64):
+  elif info > 60 and info <= 64:
     ttl = 64
     ethTTL = 64
-  elif (info>64) and (info<=128):
+  elif info > 64 and info <= 128:
     ttl = 128
     ethTTL = 128
-  elif (info>128):
+  elif info > 128:
     ttl = 255
     ethTTL = 255
   else:

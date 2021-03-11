@@ -26,17 +26,31 @@ incoming TCP/IP stream.
 
 ### What fields are used for TCP/IP fingerprinting?
 
-+ Initial packet size 
-+ Initial TTL
-+ Window size 
-+ Max segment size 
-+ Window scaling value
-+ "don't fragment" flag
-+ "sackOK" flag
-+ "nop" flag
+Inspiration by 
+
+1. Wikipedia TCP/IP fingerprinting article
+2. [Satori.py](https://github.com/xnih/satori)
+3. Other TCP/IP fingerprinting [tool](https://github.com/agirishkumar/passive-os-detection/tree/master/OS-Fingerprinting)
+
+Entropy taken from the [IP header](https://en.wikipedia.org/wiki/IPv4):
+
++ Initial TTL of the IP frame. Different OS use a differnt initial TTL. 
++ Don't Fragment (DF) flag. Some OS set the DF bit in the IP header, others don't	
++ More Fragments (MF)
+
+Entropy taken from the [TCP header](https://en.wikipedia.org/wiki/Transmission_Control_Protocol):
+
++ Initial packet size. May differ between different OSes	
++ Initial Window size. Differentiate implementations based on default Window Size in TCP	
++ TCP Flags
++ ACK field.
++ URP field
++ Max segment size
++ Window scaling value. Not all operating systems use this option	
++ All TCP Options. Bears a lot of information.
++ TCP Options order. Also the order of the TCP options is taken into account.
 
 ### Installation & Usage
-
 
 First clone the repo:
 
@@ -66,7 +80,3 @@ Or run in the background on your server
 py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
 nohup $py tcp_fingerprint.py -i eth0 > fp.out 2> fp.err < /dev/null &
 ```
-
-### Resources
-
-[Read this.](https://github.com/agirishkumar/passive-os-detection/tree/master/OS-Fingerprinting)
