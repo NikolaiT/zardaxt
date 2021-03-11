@@ -1,6 +1,6 @@
 ## Passive TCP/IP Fingerprinting
 
-This is a passive TCP/IP fingerprinting tool. Run this on your server and find out what operating systems your clients are *really* using.
+This is a passive TCP/IP fingerprinting tool. Run this on your server and find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the TCP three-way handshake. Nothing else is considered.
 
 Why?
 
@@ -28,7 +28,7 @@ incoming TCP/IP stream.
 
 Inspiration by 
 
-1. Wikipedia TCP/IP fingerprinting article
+1. Wikipedia [TCP/IP fingerprinting article](https://en.wikipedia.org/wiki/TCP/IP_stack_fingerprinting)
 2. [Satori.py](https://github.com/xnih/satori)
 3. Other TCP/IP fingerprinting [tool](https://github.com/agirishkumar/passive-os-detection/tree/master/OS-Fingerprinting)
 
