@@ -1,10 +1,11 @@
 ## Passive TCP/IP Fingerprinting
 
-This is a passive TCP/IP fingerprinting tool. Run this on your server and find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the TCP three-way handshake. Nothing else is considered.
+This is a passive TCP/IP fingerprinting tool. Run this on your server and find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the 
+TCP 3-Way Handshake. Nothing else is considered.
 
 Why?
 
-+ [p0f](https://github.com/p0f/p0f) is dead. It's database is too old. Also: C is a bit overkill and hard to quickly hack.
++ [p0f](https://github.com/p0f/p0f) is dead. It's database is too old. Also: C is a bit overkill and hard to quickly hack in.
 + [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the *code* are awesome)
 + The actual statistics behind TCP/IP fingerprinting are more important than the tool itself. Therefore it makes sense to rewrite it.
 
@@ -17,9 +18,10 @@ or IP Fragment Flag depend heavily on the OS type and version.
 
 Detecting operating systems by analyizing the first incoming SYN packet is surely no exact science, but it's better than nothing.
 
-Some code has been taken from: https://github.com/xnih/satori
+Some code and inspiration has been taken from: https://github.com/xnih/satori
+
 However, the codebase of github.com/xnih/satori was quite frankly 
-a huge mess (randomly failing code segments and capturing the Errors, not good).
+a huge mess (randomly failing code segments and capturing all Errors: Not good, no no no).
 
 This project does not attempt to be exact, it should give some hints what might be the OS of the 
 incoming TCP/IP stream.
