@@ -35,6 +35,7 @@ However, the codebase of github.com/xnih/satori was quite frankly
 a huge mess (randomly failing code segments and capturing the Errors, not good). 
 """
 
+writeAfter = 10
 interface = None
 verbose = False
 fingerprints = {}
@@ -45,7 +46,8 @@ with open(databaseFile) as f:
 
 print('Loaded {} fingerprints from the database'.format(len(dbList)))
 
-def makeOsGuess(fp, n=3):
+def makeOsGuess(fp, n=4):
+  perfectScore = 9.5
   scores = []
   for i, entry in enumerate(dbList):
     score = 0
@@ -89,8 +91,8 @@ def makeOsGuess(fp, n=3):
     except e:
       pass
     guesses.append({
-      'score': guess[1],
-      'OS': os
+      'score': '{}/{}'.format(guess[1], perfectScore),
+      'os': os
     })
 
   return guesses
@@ -231,7 +233,7 @@ def tcpProcess(pkt, layer, ts):
       print(makeOsGuess(fingerprints[key]))
 
       # update file once in a while
-      if len(fingerprints) > 0 and len(fingerprints) % 8 == 0:
+      if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
         updateFile()
 
     print('---------------------------------')
