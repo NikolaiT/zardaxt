@@ -15,7 +15,7 @@ Why?
 Several fields such as TCP Options or TCP Window Size 
 or IP Fragment Flag depend heavily on the OS type and version.
 
-This is surely no exact science, but it's better than nothing.
+Detecting operating systems by analyizing the first incoming SYN packet is surely no exact science, but it's better than nothing.
 
 Some code has been taken from: https://github.com/xnih/satori
 However, the codebase of github.com/xnih/satori was quite frankly 
