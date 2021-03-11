@@ -11,6 +11,37 @@ Why?
 
 [What is TCP/IP fingerprinting?](https://en.wikipedia.org/wiki/TCP/IP_stack_fingerprinting)
 
+### Installation & Usage
+
+First clone the repo:
+
+```bash
+git clone https://github.com/NikolaiT/zardaxt
+
+cd zardaxt
+```
+
+Setup with `pipenv`.
+
+```
+pipenv shell
+
+pipenv install
+```
+
+And run it
+
+```bash
+python tcp_fingerprint.py -i eth0
+```
+
+Or run in the background on your server
+
+```bash
+py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
+nohup $py tcp_fingerprint.py -i eth0 > fp.out 2> fp.err < /dev/null &
+```
+
 ### Introduction
 
 Several fields such as TCP Options or TCP Window Size 
@@ -51,34 +82,3 @@ Sources:
 + Window scaling value. Not all operating systems use this option	
 + All TCP Options. Bears a lot of information.
 + TCP Options order. Also the order of the TCP options is taken into account.
-
-### Installation & Usage
-
-First clone the repo:
-
-```bash
-git clone https://github.com/NikolaiT/zardaxt
-
-cd zardaxt
-```
-
-Setup with `pipenv`.
-
-```
-pipenv shell
-
-pipenv install
-```
-
-And run it
-
-```bash
-python tcp_fingerprint.py -i eth0
-```
-
-Or run in the background on your server
-
-```bash
-py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
-nohup $py tcp_fingerprint.py -i eth0 > fp.out 2> fp.err < /dev/null &
-```
