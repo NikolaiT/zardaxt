@@ -3,3 +3,4 @@ up.sh
 run.sh
 fp/*
 fp/
+fingerprints.json
