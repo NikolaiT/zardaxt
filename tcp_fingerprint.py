@@ -175,7 +175,8 @@ def tcpProcess(pkt, layer, ts):
         'tcp_window_size': tcp1.win,
         'tcp_flags': tcp1.flags,
         'tcp_ack': tcp1.ack,
-        'tcp_header_length': tcp1.off_x2,
+        'tcp_seq': tcp1.seq,
+        'tcp_header_length': tcp1.off_x2, # tcp_data_offset
         'tcp_urp': tcp1.urp,
         'tcp_options': tcpOpts,
         'tcp_window_scaling': windowScaling,
