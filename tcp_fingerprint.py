@@ -36,7 +36,7 @@ However, the codebase of github.com/xnih/satori was quite frankly
 a huge mess (randomly failing code segments and capturing the Errors, not good). 
 """
 
-writeAfter = 10
+writeAfter = 40
 interface = None
 verbose = False
 fingerprints = {}
