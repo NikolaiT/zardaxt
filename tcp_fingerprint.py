@@ -59,6 +59,8 @@ def makeOsGuess(fp, n=3):
   scores = []
   for i, entry in enumerate(dbList):
     score = 0
+    # @TODO: consider `ip_tll`
+    # @TODO: consider `tcp_window_scaling`
     # check IP DF bit
     if entry['ip_df'] == fp['ip_df']:
       score += 1
@@ -105,19 +107,18 @@ def makeOsGuess(fp, n=3):
       'os': guess['os'],
     })
 
-  os_score = {}
   # get the os with the highest, normalized average score
+  os_score = {}
   for guess in scores:
     if guess['os']:
       if not os_score.get(guess['os']):
         os_score[guess['os']] = []
-
       os_score[guess['os']].append(guess['score'])
 
   avg_os_score = {}
-
   for key in os_score:
     N = len(os_score[key])
+    # only consider OS classes with at least 8 elements
     if N >= 8:
       avg = sum(os_score[key]) / len(os_score[key])
       avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
