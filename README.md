@@ -85,10 +85,9 @@ py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
 nohup $py tcp_fingerprint.py -i eth0 > fp.out 2> fp.err < /dev/null &
 ```
 
-### Introduction
+## Theory
 
-Several fields such as TCP Options or TCP Window Size 
-or IP Fragment Flag depend heavily on the OS type and version.
+Several fields such as TCP Options or TCP Window Size or IP Fragment Flag depend heavily on the OS type and version.
 
 Detecting operating systems by analyizing the first incoming SYN packet is surely no exact science, but it's better than nothing.
 
