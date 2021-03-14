@@ -12,7 +12,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone"
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "os": {
+      "name": "iOS",
+      "version": "14.4"
+    }
   },
   {
     "ts": 1615391923,
@@ -27,7 +35,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15",
-    "platform": "MacIntel"
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615394076,
@@ -42,9 +58,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4427.0 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 2,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615406175,
@@ -59,9 +82,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1350,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615408247,
@@ -76,9 +104,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615390044,
@@ -93,9 +128,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 1,
-    "hardwareConcurrency": 11
+    "hardwareConcurrency": 11,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615403379,
@@ -110,8 +152,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1400,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.1",
+      "versionName": "7"
+    }
   },
   {
     "ts": 1615391973,
@@ -126,9 +175,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615389897,
@@ -143,9 +199,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1358,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615396569,
@@ -160,9 +223,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 6
+    "hardwareConcurrency": 6,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615389920,
@@ -177,7 +247,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone"
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "os": {
+      "name": "iOS",
+      "version": "14.4"
+    }
   },
   {
     "ts": 1615396662,
@@ -192,9 +270,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615391048,
@@ -209,9 +295,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1280,
     "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 10; RMX1801) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/13.0 Chrome/83.0.4103.106 Mobile Safari/537.36",
-    "platform": "Linux armv8l",
+    "platform": {
+      "type": "mobile"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
   },
   {
     "ts": 1615395125,
@@ -226,9 +318,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.1",
+      "versionName": "7"
+    }
   },
   {
     "ts": 1615408920,
@@ -243,9 +342,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615398280,
@@ -260,8 +366,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 8
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615399907,
@@ -276,9 +389,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615406909,
@@ -293,9 +413,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615394247,
@@ -310,9 +438,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615392809,
@@ -327,9 +462,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1346,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615404718,
@@ -344,9 +487,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615402418,
@@ -361,8 +511,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1380,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 8
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615401795,
@@ -377,9 +532,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "10.14.6",
+      "versionName": "Mojave"
+    }
   },
   {
     "ts": 1615403117,
@@ -394,9 +557,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "10.14.6",
+      "versionName": "Mojave"
+    }
   },
   {
     "ts": 1615405520,
@@ -411,9 +582,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.1",
+      "versionName": "7"
+    }
   },
   {
     "ts": 1615403553,
@@ -428,9 +606,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615403114,
@@ -445,9 +630,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615391146,
@@ -462,9 +654,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1340,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615394695,
@@ -479,9 +679,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615391115,
@@ -496,9 +703,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615396941,
@@ -513,9 +727,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1360,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 24
+    "hardwareConcurrency": 24,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615395357,
@@ -530,7 +751,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
-    "platform": "MacIntel"
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615405101,
@@ -545,9 +774,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615407178,
@@ -562,9 +798,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 2,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615392269,
@@ -579,7 +822,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-    "platform": "iPhone"
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "os": {
+      "name": "iOS",
+      "version": "14.4"
+    }
   },
   {
     "ts": 1615400044,
@@ -594,9 +845,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615401414,
@@ -611,9 +869,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615389904,
@@ -628,8 +893,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 8
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615400678,
@@ -644,9 +914,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36 OPR/74.0.3911.160",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615437419,
@@ -661,9 +938,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615414322,
@@ -678,9 +963,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1350,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.2",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615441949,
@@ -695,9 +988,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1500,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 YaBrowser/21.2.0 Yowser/2.5 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615442415,
@@ -712,9 +1012,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/89.1.23.31 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 64
+    "hardwareConcurrency": 64,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615441391,
@@ -729,9 +1036,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1500,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 YaBrowser/21.2.0 Yowser/2.5 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615414975,
@@ -746,8 +1060,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 12
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615424025,
@@ -762,9 +1083,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615453728,
@@ -779,9 +1107,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36 Edg/89.0.774.45",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615424492,
@@ -796,9 +1131,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4298.0 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615419021,
@@ -813,8 +1153,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.3; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 1
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 1,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.3",
+      "versionName": "8.1"
+    }
   },
   {
     "ts": 1615449435,
@@ -829,9 +1176,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615414712,
@@ -846,9 +1200,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1380,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615456118,
@@ -863,9 +1224,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 0.5,
-    "hardwareConcurrency": 3
+    "hardwareConcurrency": 3,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615413951,
@@ -880,9 +1248,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615421656,
@@ -897,8 +1270,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 16
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615435687,
@@ -913,9 +1293,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615435733,
@@ -930,9 +1315,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615455779,
@@ -947,9 +1339,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 1,
-    "hardwareConcurrency": 11
+    "hardwareConcurrency": 11,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615431013,
@@ -964,9 +1363,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Opera/9.80 (Android; Opera Mini/7.5.33361/31.1543; U; en) Presto/2.8.119 Version/11.1010",
-    "platform": "Win32",
+    "platform": {
+      "type": "mobile"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Android",
+      "version": ""
+    }
   },
   {
     "ts": 1615457889,
@@ -981,9 +1386,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.3"
+    }
   },
   {
     "ts": 1615445055,
@@ -998,9 +1410,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1420,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615451542,
@@ -1015,9 +1434,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1420,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615452019,
@@ -1032,9 +1458,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.2"
+    }
   },
   {
     "ts": 1615459149,
@@ -1049,9 +1482,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615447467,
@@ -1066,8 +1507,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1260,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 8
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615442335,
@@ -1082,9 +1530,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1500,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615441397,
@@ -1099,9 +1554,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615420800,
@@ -1116,8 +1578,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:78.0) Gecko/20100101 Firefox/78.0",
-    "platform": "MacIntel",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "10.11",
+      "versionName": "El Capitan"
+    }
   },
   {
     "ts": 1615423276,
@@ -1132,7 +1602,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1420,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15",
-    "platform": "MacIntel"
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.5",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615456546,
@@ -1147,9 +1625,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615421611,
@@ -1164,8 +1649,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615456602,
@@ -1180,9 +1672,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615438353,
@@ -1197,9 +1696,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615447438,
@@ -1214,9 +1720,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36 Edg/89.0.774.45",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615452203,
@@ -1231,9 +1744,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615423504,
@@ -1248,9 +1768,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615414477,
@@ -1265,9 +1792,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1400,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615451357,
@@ -1282,9 +1816,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1300,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 1,
-    "hardwareConcurrency": 3
+    "hardwareConcurrency": 3,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615441650,
@@ -1299,9 +1840,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1500,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615427352,
@@ -1316,9 +1864,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615449667,
@@ -1333,9 +1889,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.1",
+      "versionName": "7"
+    }
   },
   {
     "ts": 1615441352,
@@ -1350,9 +1913,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615425176,
@@ -1367,9 +1937,14 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/90.0.4403.0 Safari/537.36 WordPress.com mShots",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615429354,
@@ -1384,9 +1959,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1360,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615413925,
@@ -1401,9 +1984,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.3",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615414439,
@@ -1418,9 +2009,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.3"
+    }
   },
   {
     "ts": 1615423961,
@@ -1435,9 +2033,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615446408,
@@ -1452,9 +2055,10 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (compatible; AhrefsBot/7.0; +http://ahrefs.com/robot/)",
-    "platform": "Linux x86_64",
+    "platform": {},
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {}
   },
   {
     "ts": 1615440994,
@@ -1469,9 +2073,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615432337,
@@ -1486,9 +2097,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1360,
     "navigatorUserAgent": "Mozilla/5.0 (Linux; arm_64; Android 10; VOG-L29) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 YaApp_Android/20.125.1 YaSearchBrowser/20.125.1 BroPP/1.0 SA/3 Mobile Safari/537.36",
-    "platform": "Linux aarch64",
+    "platform": {
+      "type": "mobile"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
   },
   {
     "ts": 1615451991,
@@ -1503,9 +2120,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1394,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615415536,
@@ -1520,9 +2144,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615415885,
@@ -1537,7 +2168,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
-    "platform": "MacIntel"
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615429623,
@@ -1552,8 +2191,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615422471,
@@ -1568,9 +2212,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "11.0.1"
+    }
   },
   {
     "ts": 1615441075,
@@ -1585,9 +2236,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 6
+    "hardwareConcurrency": 6,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615454923,
@@ -1602,8 +2260,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1400,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 1
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 1,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615450230,
@@ -1631,8 +2294,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "MacIntel",
-    "hardwareConcurrency": 2
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "hardwareConcurrency": 2,
+    "os": {
+      "name": "macOS",
+      "version": "10.16"
+    }
   },
   {
     "ts": 1615421542,
@@ -1647,9 +2317,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615435393,
@@ -1664,9 +2341,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1424,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615426129,
@@ -1681,9 +2365,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "10.13.6",
+      "versionName": "High Sierra"
+    }
   },
   {
     "ts": 1615432377,
@@ -1698,9 +2390,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1380,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615444138,
@@ -1715,9 +2414,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1380,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615444517,
@@ -1732,8 +2436,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615458288,
@@ -1748,8 +2459,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 8
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615449156,
@@ -1764,8 +2480,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615442792,
@@ -1780,9 +2501,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 56
+    "hardwareConcurrency": 56,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615451272,
@@ -1797,9 +2525,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.1",
+      "versionName": "7"
+    }
   },
   {
     "ts": 1615423752,
@@ -1814,9 +2549,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615446939,
@@ -1831,9 +2573,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36 Edg/89.0.774.45",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615429685,
@@ -1848,9 +2597,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1416,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.2 Chrome/83.0.4103.122 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615429407,
@@ -1865,9 +2619,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1375,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615459037,
@@ -1882,9 +2643,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 10; Mi Note 10) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Mobile Safari/537.36",
-    "platform": "Linux armv8l",
+    "platform": {
+      "type": "mobile"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
   },
   {
     "ts": 1615452235,
@@ -1899,9 +2666,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "11.1.0"
+    }
   },
   {
     "ts": 1615453014,
@@ -1916,9 +2690,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615442650,
@@ -1933,9 +2714,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1436,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615459738,
@@ -1950,9 +2738,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36 Edg/89.0.774.45",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615438234,
@@ -1967,9 +2762,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.71 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 40
+    "hardwareConcurrency": 40,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615421582,
@@ -1984,9 +2786,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 2,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615432957,
@@ -2001,9 +2810,10 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (compatible; iSec_Bot/2.0; +http://www.xforce-security.com/crawler/iSec_Bot/)",
-    "platform": "Linux x86_64",
+    "platform": {},
     "deviceMemory": 8,
-    "hardwareConcurrency": 32
+    "hardwareConcurrency": 32,
+    "os": {}
   },
   {
     "ts": 1615435601,
@@ -2018,9 +2828,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615453974,
@@ -2035,9 +2852,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1392,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75  Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615431710,
@@ -2052,9 +2876,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4403.0 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 1,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615442088,
@@ -2069,9 +2898,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615440597,
@@ -2086,9 +2922,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615422312,
@@ -2103,8 +2944,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615443452,
@@ -2119,9 +2965,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615447127,
@@ -2136,9 +2989,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.186 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.3",
+      "versionName": "8.1"
+    }
   },
   {
     "ts": 1615427218,
@@ -2153,9 +3013,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 8.0.0; Infinix X608) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Mobile Safari/537.36",
-    "platform": "Linux armv8l",
+    "platform": {
+      "type": "mobile"
+    },
     "deviceMemory": 0.5,
-    "hardwareConcurrency": 2
+    "hardwareConcurrency": 2,
+    "os": {
+      "name": "Android",
+      "version": "8.0.0",
+      "versionName": "Oreo"
+    }
   },
   {
     "ts": 1615415731,
@@ -2170,9 +3037,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1446,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615444725,
@@ -2187,9 +3061,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615441087,
@@ -2204,9 +3086,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1500,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 YaBrowser/21.2.0 Yowser/2.5 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615447987,
@@ -2221,9 +3110,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615453106,
@@ -2238,8 +3134,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1350,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 4
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615478146,
@@ -2254,9 +3157,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615464350,
@@ -2271,9 +3179,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615466959,
@@ -2288,7 +3201,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
-    "platform": "MacIntel"
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615478317,
@@ -2303,9 +3224,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 2,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615480035,
@@ -2320,9 +3248,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4427.0 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615465103,
@@ -2337,8 +3272,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.3; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 1
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 1,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.3",
+      "versionName": "8.1"
+    }
   },
   {
     "ts": 1615476604,
@@ -2353,9 +3295,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1420,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615467684,
@@ -2370,9 +3319,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.2"
+    }
   },
   {
     "ts": 1615466657,
@@ -2387,9 +3343,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615471673,
@@ -2404,8 +3367,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1358,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "MacIntel",
-    "hardwareConcurrency": 8
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "10.16"
+    }
   },
   {
     "ts": 1615477706,
@@ -2420,9 +3390,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615473755,
@@ -2437,9 +3414,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615472676,
@@ -2454,8 +3438,13 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Linux x86_64",
-    "hardwareConcurrency": 12
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615465884,
@@ -2470,9 +3459,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615470226,
@@ -2487,9 +3481,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615474382,
@@ -2504,8 +3505,15 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1349,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
-    "platform": "Win32",
-    "hardwareConcurrency": 12
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615479909,
@@ -2520,9 +3528,17 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1400,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "10.14.6",
+      "versionName": "Mojave"
+    }
   },
   {
     "ts": 1615473912,
@@ -2537,9 +3553,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36 Edg/89.0.774.48",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615465360,
@@ -2554,9 +3577,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1412,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 6
+    "hardwareConcurrency": 6,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615465545,
@@ -2571,9 +3601,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36 Edg/88.0.705.50",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615471376,
@@ -2588,9 +3625,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1410,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615479039,
@@ -2605,9 +3649,14 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1416,
     "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.2 Chrome/83.0.4103.122 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
   },
   {
     "ts": 1615472930,
@@ -2622,9 +3671,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 4,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615476976,
@@ -2639,9 +3695,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1386,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 4
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.2"
+    }
   },
   {
     "ts": 1615471877,
@@ -2656,9 +3719,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.3"
+    }
   },
   {
     "ts": 1615465329,
@@ -2673,9 +3743,12 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (X11; CrOS x86_64 13729.41.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.76 Safari/537.36",
-    "platform": "Linux x86_64",
+    "platform": {},
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Chrome OS"
+    }
   },
   {
     "ts": 1615472944,
@@ -2690,9 +3763,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615473568,
@@ -2707,7 +3787,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1408,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15",
-    "platform": "MacIntel"
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.13.6",
+      "versionName": "High Sierra"
+    }
   },
   {
     "ts": 1615476509,
@@ -2722,9 +3810,17 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
-    "platform": "MacIntel",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
   },
   {
     "ts": 1615469104,
@@ -2739,9 +3835,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615472604,
@@ -2756,9 +3859,16 @@
     "tcp_timestamp_echo_reply": "",
     "tcp_mss": 1452,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 16
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615471309,
@@ -2773,9 +3883,16 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1440,
     "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
-    "platform": "Win32",
+    "platform": {
+      "type": "desktop"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 12
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
   },
   {
     "ts": 1615468650,
@@ -2790,7 +3907,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/600.2.5 (KHTML, like Gecko) Version/8.0.2 Safari/600.2.5 (Applebot/0.1; +http://www.apple.com/go/applebot)",
-    "platform": "MacIntel"
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.10.1",
+      "versionName": "Yosemite"
+    }
   },
   {
     "ts": 1615473998,
@@ -2805,8 +3930,15 @@
     "tcp_timestamp_echo_reply": 0,
     "tcp_mss": 1460,
     "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 4.4.2; SM-T531 Build/KOT49H; ru-ru) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36 Puffin/8.3.1.41624AT",
-    "platform": "Linux x86_64",
+    "platform": {
+      "type": "tablet"
+    },
     "deviceMemory": 8,
-    "hardwareConcurrency": 8
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "4.4.2",
+      "versionName": "KitKat"
+    }
   }
 ]

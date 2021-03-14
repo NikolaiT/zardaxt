@@ -48,6 +48,10 @@ with open(databaseFile) as f:
 print('Loaded {} fingerprints from the database'.format(len(dbList)))
 
 def makeOsGuess(fp, n=4):
+  """
+  Return the n highest scoring TCP/IP fingerprinting matches from 
+  the database.
+  """
   perfectScore = 9.5
   scores = []
   for i, entry in enumerate(dbList):

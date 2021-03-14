@@ -1,0 +1,2427 @@
+[
+  {
+    "ts": 1615676403,
+    "ip_ttl": 119,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1131,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1131,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 1,
+    "hardwareConcurrency": 7,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615660166,
+    "ip_ttl": 56,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 1886362341,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.197 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 4,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615652715,
+    "ip_ttl": 120,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1440,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1440,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615640279,
+    "ip_ttl": 52,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 309178358,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615699474,
+    "ip_ttl": 117,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615656383,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615649528,
+    "ip_ttl": 47,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1424,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 1527214984,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1424,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615675318,
+    "ip_ttl": 119,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 8192,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W2,N,N,S,",
+    "tcp_window_scaling": 2,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.1",
+      "versionName": "7"
+    }
+  },
+  {
+    "ts": 1615697802,
+    "ip_ttl": 119,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 6,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615681614,
+    "ip_ttl": 50,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615667560,
+    "ip_ttl": 50,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 3950908152,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615724199,
+    "ip_ttl": 47,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 104896574,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615698881,
+    "ip_ttl": 112,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615669071,
+    "ip_ttl": 53,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 2809175824,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615731191,
+    "ip_ttl": 56,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1360,S,T,N,W9,",
+    "tcp_window_scaling": 9,
+    "tcp_timestamp": 15233906,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1360,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 9; moto g(6)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 2,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "9",
+      "versionName": "Pie"
+    }
+  },
+  {
+    "ts": 1615729760,
+    "ip_ttl": 118,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64680,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1220,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1220,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615659145,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1360,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 628375404,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1360,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.3"
+    }
+  },
+  {
+    "ts": 1615644693,
+    "ip_ttl": 47,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 823640184,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.14.5",
+      "versionName": "Mojave"
+    }
+  },
+  {
+    "ts": 1615641170,
+    "ip_ttl": 47,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1436,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1436,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615722555,
+    "ip_ttl": 57,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1412,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 3187627074,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1412,
+    "navigatorUserAgent": "Mozilla/5.0 (Android 10; Mobile; rv:86.0) Gecko/86.0 Firefox/86.0",
+    "platform": {
+      "type": "mobile"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
+  },
+  {
+    "ts": 1615649977,
+    "ip_ttl": 116,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615651475,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 OPR/74.0.3911.203",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615651328,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 21900,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,N,S,N,W11,",
+    "tcp_window_scaling": 11,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615652525,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 635739269,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "os": {
+      "name": "iOS",
+      "version": "14.4"
+    }
+  },
+  {
+    "ts": 1615656389,
+    "ip_ttl": 55,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1360,S,T,N,W9,",
+    "tcp_window_scaling": 9,
+    "tcp_timestamp": 34866372,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1360,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 10; Mi 9 Lite) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
+  },
+  {
+    "ts": 1615659573,
+    "ip_ttl": 119,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615719887,
+    "ip_ttl": 50,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1409,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 353828921,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1409,
+    "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Mobile/15E148 Safari/604.1",
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "os": {
+      "name": "iOS",
+      "version": "14.3"
+    }
+  },
+  {
+    "ts": 1615661424,
+    "ip_ttl": 119,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1400,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1400,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615721567,
+    "ip_ttl": 57,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 80987373,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 9; SM-G950F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.181 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "9",
+      "versionName": "Pie"
+    }
+  },
+  {
+    "ts": 1615707747,
+    "ip_ttl": 50,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1300,S,T,N,W9,",
+    "tcp_window_scaling": 9,
+    "tcp_timestamp": 2172056824,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1300,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 10; M2007J17G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
+  },
+  {
+    "ts": 1615694515,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W9,",
+    "tcp_window_scaling": 9,
+    "tcp_timestamp": 3572032516,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 10; HD1905) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
+  },
+  {
+    "ts": 1615668456,
+    "ip_ttl": 120,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 8192,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1412,N,W2,N,N,S,",
+    "tcp_window_scaling": 2,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1412,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 3,
+    "os": {
+      "name": "Windows",
+      "version": "NT 6.1",
+      "versionName": "7"
+    }
+  },
+  {
+    "ts": 1615715774,
+    "ip_ttl": 55,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1400,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1400,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36 OPR/74.0.3911.203",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615677387,
+    "ip_ttl": 52,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W5,N,N,T,S,E,E,",
+    "tcp_window_scaling": 5,
+    "tcp_timestamp": 404367379,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615728317,
+    "ip_ttl": 50,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 588757260,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615680283,
+    "ip_ttl": 121,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615642279,
+    "ip_ttl": 55,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1325,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 3616334665,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1325,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615674599,
+    "ip_ttl": 44,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 1701653375,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 4,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615676672,
+    "ip_ttl": 120,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615705927,
+    "ip_ttl": 118,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 2,
+    "hardwareConcurrency": 5,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615686805,
+    "ip_ttl": 119,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1420,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1420,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615652959,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1400,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1400,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 32,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615648332,
+    "ip_ttl": 60,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 29200,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 1757045763,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615658923,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 545103600,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615647536,
+    "ip_ttl": 52,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 311054970,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615706690,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1440,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 468921244,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1440,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615705347,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615699045,
+    "ip_ttl": 53,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 259132896,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615721808,
+    "ip_ttl": 53,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 749693671,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.0"
+    }
+  },
+  {
+    "ts": 1615704109,
+    "ip_ttl": 58,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65280,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1360,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 2382478826,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1360,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615721119,
+    "ip_ttl": 117,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615651546,
+    "ip_ttl": 49,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615725784,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 29200,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W6,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 525452230,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615642542,
+    "ip_ttl": 114,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 2,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615723661,
+    "ip_ttl": 118,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 112,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,N,S,",
+    "tcp_window_scaling": null,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615642683,
+    "ip_ttl": 116,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1339,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1339,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615689331,
+    "ip_ttl": 55,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 1385605024,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.1"
+    }
+  },
+  {
+    "ts": 1615701532,
+    "ip_ttl": 49,
+    "ip_df": 0,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1412,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 832626933,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1412,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615650704,
+    "ip_ttl": 55,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W8,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": 5636574,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 8.1.0; Redmi 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 2,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "8.1.0",
+      "versionName": "Oreo"
+    }
+  },
+  {
+    "ts": 1615648483,
+    "ip_ttl": 117,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615654894,
+    "ip_ttl": 57,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1412,S,T,N,W8,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": 3093412,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1412,
+    "navigatorUserAgent": "Mozilla/5.0 (Android 9; Mobile; rv:86.0) Gecko/86.0 Firefox/86.0",
+    "platform": {
+      "type": "mobile"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "9",
+      "versionName": "Pie"
+    }
+  },
+  {
+    "ts": 1615689354,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1420,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1420,
+    "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1",
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "iOS",
+      "version": "11.0"
+    }
+  },
+  {
+    "ts": 1615653591,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36 Edg/89.0.774.50",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615654912,
+    "ip_ttl": 53,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 2608972468,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0 Safari/605.1.15 Surf/2.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615674947,
+    "ip_ttl": 55,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 431662507,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615728277,
+    "ip_ttl": 120,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36 Edg/89.0.774.50",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 4,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615690311,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615660826,
+    "ip_ttl": 112,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1416,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1416,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615664143,
+    "ip_ttl": 50,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 3371876859,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615686730,
+    "ip_ttl": 112,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615656011,
+    "ip_ttl": 120,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1412,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1412,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615720526,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 317760842,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "macOS",
+      "version": "11.1.0"
+    }
+  },
+  {
+    "ts": 1615667093,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1448,S,T,N,W8,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": 34870304,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1448,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 8.0.0; G3121) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 2,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "8.0.0",
+      "versionName": "Oreo"
+    }
+  },
+  {
+    "ts": 1615656193,
+    "ip_ttl": 53,
+    "ip_df": 0,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W9,S,T,",
+    "tcp_window_scaling": 9,
+    "tcp_timestamp": 201867824,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Mobile/15E148 Safari/604.1",
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "os": {
+      "name": "iOS",
+      "version": "13.6"
+    }
+  },
+  {
+    "ts": 1615655334,
+    "ip_ttl": 118,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1440,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1440,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615662241,
+    "ip_ttl": 117,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615648643,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1300,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 830349383,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1300,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 3,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615640902,
+    "ip_ttl": 54,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 479606380,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 12,
+    "os": {
+      "name": "macOS",
+      "version": "11.2.3"
+    }
+  },
+  {
+    "ts": 1615722256,
+    "ip_ttl": 51,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1440,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 1511700376,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1440,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615727450,
+    "ip_ttl": 43,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 543153187,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615710778,
+    "ip_ttl": 56,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1420,S,T,N,W9,",
+    "tcp_window_scaling": 9,
+    "tcp_timestamp": 362180103,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1420,
+    "navigatorUserAgent": "Mozilla/5.0 (Linux; Android 10; CPH2069) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.86 Mobile Safari/537.36",
+    "platform": {
+      "type": "mobile"
+    },
+    "deviceMemory": 4,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Android",
+      "version": "10"
+    }
+  },
+  {
+    "ts": 1615650571,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615692219,
+    "ip_ttl": 115,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615706834,
+    "ip_ttl": 50,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1452,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 1686413817,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1452,
+    "navigatorUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 8,
+    "os": {
+      "name": "Linux"
+    }
+  },
+  {
+    "ts": 1615647321,
+    "ip_ttl": 45,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1370,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 367227349,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1370,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615665228,
+    "ip_ttl": 55,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1448,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 598266349,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1448,
+    "navigatorUserAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+    "platform": {
+      "type": "mobile",
+      "vendor": "Apple",
+      "model": "iPhone"
+    },
+    "os": {
+      "name": "iOS",
+      "version": "14.4"
+    }
+  },
+  {
+    "ts": 1615708808,
+    "ip_ttl": 121,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1131,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1131,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615682998,
+    "ip_ttl": 118,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615710665,
+    "ip_ttl": 52,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 3247396146,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.7",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615674696,
+    "ip_ttl": 53,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 65535,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 176,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W6,N,N,T,S,E,E,",
+    "tcp_window_scaling": 6,
+    "tcp_timestamp": 535648307,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15",
+    "platform": {
+      "type": "desktop",
+      "vendor": "Apple"
+    },
+    "os": {
+      "name": "macOS",
+      "version": "10.15.6",
+      "versionName": "Catalina"
+    }
+  },
+  {
+    "ts": 1615714732,
+    "ip_ttl": 57,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 160,
+    "tcp_urp": 0,
+    "tcp_options": "M1336,S,T,N,W7,",
+    "tcp_window_scaling": 7,
+    "tcp_timestamp": 2467796548,
+    "tcp_timestamp_echo_reply": 0,
+    "tcp_mss": 1336,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0",
+    "platform": {
+      "type": "desktop"
+    },
+    "hardwareConcurrency": 16,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  },
+  {
+    "ts": 1615699645,
+    "ip_ttl": 120,
+    "ip_df": 1,
+    "ip_mf": 0,
+    "tcp_window_size": 64240,
+    "tcp_flags": 2,
+    "tcp_ack": 0,
+    "tcp_header_length": 128,
+    "tcp_urp": 0,
+    "tcp_options": "M1460,N,W8,N,N,S,",
+    "tcp_window_scaling": 8,
+    "tcp_timestamp": "",
+    "tcp_timestamp_echo_reply": "",
+    "tcp_mss": 1460,
+    "navigatorUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36",
+    "platform": {
+      "type": "desktop"
+    },
+    "deviceMemory": 8,
+    "hardwareConcurrency": 4,
+    "os": {
+      "name": "Windows",
+      "version": "NT 10.0",
+      "versionName": "10"
+    }
+  }
+]
