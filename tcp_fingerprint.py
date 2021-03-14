@@ -95,7 +95,7 @@ def makeOsGuess(fp, n=4):
   # Return the highest scoring TCP/IP fingerprinting match
   scores.sort(key=lambda x: x['score'], reverse=True)
   guesses = []
-  highest_score = scores[0][1]
+  highest_score = scores[0].get('score')
   for guess in scores:
     if guess['score'] != highest_score:
       break
@@ -104,20 +104,18 @@ def makeOsGuess(fp, n=4):
       'os': guess['os'],
     })
 
-  if len(guesses) == 1:
-    guesses = guesses[0]
-
   avg_os_score = {}
   # get the os with the highest, normalized average score
   for guess in scores:
-    if not avg_os_score.get(guess['os']):
-      avg_os_score[guess['os']] = []
+    if guess['os']:
+      if not avg_os_score.get(guess['os']):
+        avg_os_score[guess['os']] = []
 
-    avg_os_score[guess['os']].append(guess['score'])
+      avg_os_score[guess['os']].append(guess['score'])
 
   for key in avg_os_score:
     avg = sum(avg_os_score[key]) / len(avg_os_score[key])
-    avg_os_score[key] = avg
+    avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), len(avg_os_score[key]))
 
   return guesses, avg_os_score
 
