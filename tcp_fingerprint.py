@@ -40,7 +40,7 @@ writeAfter = 40
 interface = None
 verbose = False
 fingerprints = {}
-databaseFile = './database/database.json'
+databaseFile = './database/combined.json'
 dbList = []
 with open(databaseFile) as f:
   dbList = json.load(f)
@@ -49,10 +49,12 @@ print('Loaded {} fingerprints from the database'.format(len(dbList)))
 
 def makeOsGuess(fp, n=4):
   """
-  Return the n highest scoring TCP/IP fingerprinting matches from 
-  the database.
+  Return the highest scoring TCP/IP fingerprinting match from the database.
+  If there is more than one highest scoring match, return all the highest scoring matches.
+
+  As a second guess, output the operating system with the highest, normalized average score.
   """
-  perfectScore = 9.5
+  perfectScore = 10
   scores = []
   for i, entry in enumerate(dbList):
     score = 0
@@ -73,7 +75,7 @@ def makeOsGuess(fp, n=4):
       score += 1
     # check TCP MSS
     if entry['tcp_mss'] == fp['tcp_mss']:
-      score += 1
+      score += 1.5
     # check TCP options
     if entry['tcp_options'] == fp['tcp_options']:
       score += 3
@@ -84,18 +86,40 @@ def makeOsGuess(fp, n=4):
       if orderEntry == orderFp:
         score += 2
 
-    scores.append((i, score))
+    scores.append({
+      'i': i,
+      'score': score,
+      'os': entry['os']['name'],
+    }})
 
-  # sort the top n scores
-  scores.sort(key=lambda x: x[1], reverse=True)
+  # Return the highest scoring TCP/IP fingerprinting match
+  scores.sort(key=lambda x: x['score'], reverse=True)
   guesses = []
-  for guess in scores[:n]:
+  highest_score = scores[0][1]
+  for guess in scores:
+    if guess['score'] != highest_score:
+      break
     guesses.append({
-      'score': '{}/{}'.format(guess[1], perfectScore),
-      'os': dbList[guess[0]].os.name,
+      'score': '{}/{}'.format(guess['score'], perfectScore),
+      'os': guess['os'],
     })
 
-  return guesses
+  if len(guesses) == 1:
+    guesses = guesses[0]
+
+  avg_os_score = {}
+  # get the os with the highest, normalized average score
+  for guess in scores:
+    if not avg_os_score.get(guess['os']):
+      avg_os_score[guess['os']] = []
+
+    avg_os_score[guess['os']].append(guess['score'])
+
+  for key in avg_os_score:
+    avg = sum(avg_os_score[key]) / len(avg_os_score[key])
+    avg_os_score[key] = avg
+
+  return guesses, avg_os_score
 
 def updateFile():
   print('writing fingerprints.json with {} objects...'.format(len(fingerprints)))
