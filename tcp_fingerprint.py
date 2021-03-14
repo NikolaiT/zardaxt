@@ -11,6 +11,7 @@ import pcapy
 import getopt
 import time
 import sys
+import pprint
 import traceback
 import os
 import re
@@ -213,7 +214,7 @@ def tcpProcess(pkt, layer, ts):
         'tcp_mss': mss
       }
 
-      print(makeOsGuess(fingerprints[key]))
+      pprint.pprint(makeOsGuess(fingerprints[key]))
 
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
