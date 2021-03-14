@@ -40,7 +40,7 @@ writeAfter = 40
 interface = None
 verbose = False
 fingerprints = {}
-databaseFile = './database.json'
+databaseFile = './database/database.json'
 dbList = []
 with open(databaseFile) as f:
   dbList = json.load(f)
@@ -90,14 +90,9 @@ def makeOsGuess(fp, n=4):
   scores.sort(key=lambda x: x[1], reverse=True)
   guesses = []
   for guess in scores[:n]:
-    os = None
-    try:
-      os = re.findall(r'\((.*?)\)', dbList[guess[0]]['navigatorUserAgent'])[0]
-    except Exception as e:
-      pass
     guesses.append({
       'score': '{}/{}'.format(guess[1], perfectScore),
-      'os': os
+      'os': dbList[guess[0]].os.name,
     })
 
   return guesses
