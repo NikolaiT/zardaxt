@@ -120,7 +120,7 @@ def makeOsGuess(fp, n=3):
     N = len(os_score[key])
     # only consider OS classes with at least 8 elements
     if N >= 8:
-      avg = sum(os_score[key]) / len(os_score[key])
+      avg = sum(os_score[key]) / N
       avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
 
   return {
