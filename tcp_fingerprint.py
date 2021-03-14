@@ -89,7 +89,7 @@ def makeOsGuess(fp, n=4):
     scores.append({
       'i': i,
       'score': score,
-      'os': entry['os']['name'],
+      'os': entry.get('os', {}).get('name'),
     })
 
   # Return the highest scoring TCP/IP fingerprinting match
