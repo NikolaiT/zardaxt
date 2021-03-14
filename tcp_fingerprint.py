@@ -285,7 +285,8 @@ def usage():
   print("""
     -i, --interface   interface to listen to; example: -i eth0
     -l, --log         log file to write output to; example -l output.txt (not implemented yet)
-    -v, --verbose     verbose logging, mostly just telling you where/what we're doing, not recommended if want to parse output typically""")
+    -v, --verbose     verbose logging, mostly just telling you where/what we're doing, not recommended if want to parse output typically
+    -c, --classify    classify TCP SYN connections when they are coming in""")
 
 def main():
   #override some warning settings in pypacker.  May need to change this to .CRITICAL in the future, but for now we're trying .ERROR
