@@ -37,6 +37,7 @@ However, the codebase of github.com/xnih/satori was quite frankly
 a huge mess (randomly failing code segments and capturing the Errors, not good). 
 """
 
+classify = False
 writeAfter = 40
 interface = None
 verbose = False
@@ -215,7 +216,8 @@ def tcpProcess(pkt, layer, ts):
         'tcp_mss': mss
       }
 
-      pprint.pprint(makeOsGuess(fingerprints[key]))
+      if classify:
+        pprint.pprint(makeOsGuess(fingerprints[key]))
 
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
@@ -347,7 +349,7 @@ def main():
     print ('Total Time: %s, Total Packets: %s, Packets/s: %s' % (totalTime, counter, counter / totalTime ))
 
 try:
-  opts, args = getopt.getopt(sys.argv[1:], "i:v:", ['interface=', 'verbose',])
+  opts, args = getopt.getopt(sys.argv[1:], "i:v:c:", ['interface=', 'verbose', 'classify'])
   proceed = False
 
   for opt, val in opts:
@@ -356,6 +358,8 @@ try:
       proceed = True
     if opt in ('-v', '--verbose'):
       verbose = True
+    if opt in ('-c', '--classify'):
+      classify = True
 
   if (__name__ == '__main__') and proceed:
     main()
