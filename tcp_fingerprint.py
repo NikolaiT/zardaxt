@@ -48,7 +48,7 @@ with open(databaseFile) as f:
 
 print('Loaded {} fingerprints from the database'.format(len(dbList)))
 
-def makeOsGuess(fp, n=4):
+def makeOsGuess(fp, n=3):
   """
   Return the highest scoring TCP/IP fingerprinting match from the database.
   If there is more than one highest scoring match, return all the highest scoring matches.
@@ -123,7 +123,7 @@ def makeOsGuess(fp, n=4):
       avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
 
   return {
-    'bestGuess': guesses,
+    'bestGuess': guesses[:n],
     'avgScoreOsClass': avg_os_score,
   }
 
