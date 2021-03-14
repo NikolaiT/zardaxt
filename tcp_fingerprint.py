@@ -104,20 +104,27 @@ def makeOsGuess(fp, n=4):
       'os': guess['os'],
     })
 
-  avg_os_score = {}
+  os_score = {}
   # get the os with the highest, normalized average score
   for guess in scores:
     if guess['os']:
-      if not avg_os_score.get(guess['os']):
-        avg_os_score[guess['os']] = []
+      if not os_score.get(guess['os']):
+        os_score[guess['os']] = []
 
-      avg_os_score[guess['os']].append(guess['score'])
+      os_score[guess['os']].append(guess['score'])
 
-  for key in avg_os_score:
-    avg = sum(avg_os_score[key]) / len(avg_os_score[key])
-    avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), len(avg_os_score[key]))
+  avg_os_score = {}
 
-  return guesses, avg_os_score
+  for key in os_score:
+    N = len(os_score[key])
+    if N >= 8:
+      avg = sum(os_score[key]) / len(os_score[key])
+      avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
+
+  return {
+    'bestGuess': guesses,
+    'avgScoreOsClass': avg_os_score,
+  }
 
 def updateFile():
   print('writing fingerprints.json with {} objects...'.format(len(fingerprints)))
