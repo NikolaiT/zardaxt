@@ -90,7 +90,7 @@ def makeOsGuess(fp, n=4):
       'i': i,
       'score': score,
       'os': entry['os']['name'],
-    }})
+    })
 
   # Return the highest scoring TCP/IP fingerprinting match
   scores.sort(key=lambda x: x['score'], reverse=True)
