@@ -20,6 +20,7 @@ $ python tcp_fingerprint.py -i eth0 --classify
 WARNING (<module>): Couldn't load netifaces, some utils won't work
 Loaded 260 fingerprints from the database
 listening on interface eth0
+
 1615745887: 73.153.184.210:38169 -> 167.99.241.135:443 [SYN]
 {'avgScoreOsClass': {'Android': 'avg=5.72, N=16',
                      'Linux': 'avg=5.09, N=35',
@@ -35,6 +36,11 @@ listening on interface eth0
 Classifying a Windows NT 10.0 desktop computer (friend of mine visiting my website for the first time):
 
 ```bash
+$ python tcp_fingerprint.py -i eth0 --classify
+WARNING (<module>): Couldn't load netifaces, some utils won't work
+Loaded 260 fingerprints from the database
+listening on interface eth0
+
 1615746475: 33.67.251.73:5098 -> 167.99.241.135:443 [SYN]
 {'avgScoreOsClass': {'Android': 'avg=3.72, N=16',
                      'Linux': 'avg=4.27, N=35',
