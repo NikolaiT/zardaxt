@@ -11,6 +11,43 @@ Why?
 
 [What is TCP/IP fingerprinting?](https://en.wikipedia.org/wiki/TCP/IP_stack_fingerprinting)
 
+### Example
+
+Classifying my Android smartphone:
+
+```bash
+$ python tcp_fingerprint.py -i eth0 --classify
+WARNING (<module>): Couldn't load netifaces, some utils won't work
+Loaded 260 fingerprints from the database
+listening on interface eth0
+1615745887: 73.153.184.210:38169 -> 167.99.241.135:443 [SYN]
+{'avgScoreOsClass': {'Android': 'avg=5.72, N=16',
+                     'Linux': 'avg=5.09, N=35',
+                     'Windows': 'avg=2.74, N=146',
+                     'iOS': 'avg=3.56, N=8',
+                     'macOS': 'avg=3.62, N=51'},
+ 'bestGuess': [{'os': 'Android', 'score': '8.0/10'}]}
+---------------------------------
+1615745887: 167.99.241.135:443 -> 73.153.184.210:38169 [SYN+ACK]
+---------------------------------
+```
+
+Classifying a Windows NT 10.0 desktop computer (friend of mine visiting my website for the first time):
+
+```bash
+1615746475: 33.67.251.73:5098 -> 167.99.241.135:443 [SYN]
+{'avgScoreOsClass': {'Android': 'avg=3.72, N=16',
+                     'Linux': 'avg=4.27, N=35',
+                     'Windows': 'avg=6.39, N=146',
+                     'iOS': 'avg=3.44, N=8',
+                     'macOS': 'avg=3.02, N=51'},
+ 'bestGuess': [{'os': 'Windows', 'score': '10.0/10'},
+               {'os': 'Windows', 'score': '10.0/10'},
+               {'os': 'Windows', 'score': '10.0/10'}]}
+---------------------------------
+1615746475: 167.99.241.135:443 -> 33.67.251.73:5098 [SYN+ACK]
+```
+
 ### Installation & Usage
 
 First clone the repo:
