@@ -75,7 +75,7 @@ pipenv install
 And run it
 
 ```bash
-python tcp_fingerprint.py -i eth0
+python tcp_fingerprint.py -i eth0 --classify
 ```
 
 Or run in the background on your server
