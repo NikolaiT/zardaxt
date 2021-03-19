@@ -192,7 +192,7 @@ def tcpProcess(pkt, layer, ts):
       print('TCP window size={}, flags={}, ack={}, header length={}, urp={}, options={}, time stamp={}, timestamp echo reply = {}, MSS={}'.format(
         tcp1.win, tcp1.flags, tcp1.ack, tcp1.off_x2, tcp1.urp, tcpOpts, tcpTimeStamp, tcpTimeStampEchoReply, mss
       ))
-    
+      
     if label == 'SYN':
       key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
       fingerprints[key] = {
@@ -217,7 +217,9 @@ def tcpProcess(pkt, layer, ts):
       }
 
       if classify:
-        pprint.pprint(makeOsGuess(fingerprints[key]))
+        classification = makeOsGuess(fingerprints[key])
+        fingerprints[key].update(classification)
+        pprint.pprint(classification)
 
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
@@ -286,7 +288,8 @@ def usage():
     -i, --interface   interface to listen to; example: -i eth0
     -l, --log         log file to write output to; example -l output.txt (not implemented yet)
     -v, --verbose     verbose logging, mostly just telling you where/what we're doing, not recommended if want to parse output typically
-    -c, --classify    classify TCP SYN connections when they are coming in""")
+    -c, --classify    classify TCP SYN connections when they are coming in
+    -n, --writeAfter  after how many SYN packets writing to the file""")
 
 def main():
   #override some warning settings in pypacker.  May need to change this to .CRITICAL in the future, but for now we're trying .ERROR
@@ -361,6 +364,8 @@ try:
       verbose = True
     if opt in ('-c', '--classify'):
       classify = True
+    if opt in ('-n', '--writeAfter'):
+      writeAfter = int(val)
 
   if (__name__ == '__main__') and proceed:
     main()
