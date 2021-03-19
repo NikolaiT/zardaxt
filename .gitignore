@@ -5,3 +5,5 @@ fp/*
 fp/
 fingerprints.json
 database/node_modules/
+
+fingerprintsOld.json
