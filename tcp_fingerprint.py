@@ -125,7 +125,7 @@ def makeOsGuess(fp, n=3):
       avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
 
   return {
-    'bestGuess': guesses[:n],
+    'bestNGuesses': guesses[:n],
     'avgScoreOsClass': avg_os_score,
   }
 

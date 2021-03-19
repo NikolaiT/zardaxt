@@ -16,42 +16,69 @@ Why?
 Classifying my Android smartphone:
 
 ```bash
-$ python tcp_fingerprint.py -i eth0 --classify
-WARNING (<module>): Couldn't load netifaces, some utils won't work
-Loaded 260 fingerprints from the database
+python tcp_fingerprint.py -i eth0 --classify
+
+Loaded 716 fingerprints from the database
 listening on interface eth0
 
-1615745887: 73.153.184.210:38169 -> 167.99.241.135:443 [SYN]
-{'avgScoreOsClass': {'Android': 'avg=5.72, N=16',
-                     'Linux': 'avg=5.09, N=35',
-                     'Windows': 'avg=2.74, N=146',
-                     'iOS': 'avg=3.56, N=8',
-                     'macOS': 'avg=3.62, N=51'},
- 'bestGuess': [{'os': 'Android', 'score': '8.0/10'}]}
+1616184306: 73.153.184.210:48646 -> 167.99.241.135:443 [SYN]
+{'avgScoreOsClass': {'Android': 'avg=5.78, N=36',
+                     'Linux': 'avg=5.11, N=99',
+                     'Windows': 'avg=2.66, N=365',
+                     'iOS': 'avg=3.62, N=20',
+                     'macOS': 'avg=3.65, N=189'},
+ 'bestNGuesses': [{'os': 'Android', 'score': '8.0/10'},
+                  {'os': 'Android', 'score': '8.0/10'},
+                  {'os': 'Android', 'score': '8.0/10'}]}
 ---------------------------------
-1615745887: 167.99.241.135:443 -> 73.153.184.210:38169 [SYN+ACK]
+1616184306: 167.99.241.135:443 -> 73.153.184.210:48646 [SYN+ACK]
 ---------------------------------
 ```
 
-Classifying a Windows NT 10.0 desktop computer (friend of mine visiting my website for the first time):
+A iPhone (User-Agent: `iPhone; CPU iPhone OS 14_4_1 like Mac OS X`) visting my server. Based on the SYN fingerprint alone, it's not possible to discern whether it's an macOS device or iOS device. But the guess is accurate enough.
 
 ```bash
-$ python tcp_fingerprint.py -i eth0 --classify
-WARNING (<module>): Couldn't load netifaces, some utils won't work
-Loaded 260 fingerprints from the database
+python tcp_fingerprint.py -i eth0 --classify
+
+Loaded 716 fingerprints from the database
 listening on interface eth0
 
-1615746475: 33.67.251.73:5098 -> 167.99.241.135:443 [SYN]
-{'avgScoreOsClass': {'Android': 'avg=3.72, N=16',
-                     'Linux': 'avg=4.27, N=35',
-                     'Windows': 'avg=6.39, N=146',
-                     'iOS': 'avg=3.44, N=8',
-                     'macOS': 'avg=3.02, N=51'},
- 'bestGuess': [{'os': 'Windows', 'score': '10.0/10'},
-               {'os': 'Windows', 'score': '10.0/10'},
-               {'os': 'Windows', 'score': '10.0/10'}]}
 ---------------------------------
-1615746475: 167.99.241.135:443 -> 33.67.251.73:5098 [SYN+ACK]
+1616184541: 85.19.65.217:49988 -> 167.99.241.135:443 [SYN]
+{'avgScoreOsClass': {'Android': 'avg=4.18, N=36',
+                     'Linux': 'avg=3.31, N=99',
+                     'Windows': 'avg=3.36, N=365',
+                     'iOS': 'avg=6.95, N=20',
+                     'macOS': 'avg=7.26, N=189'},
+ 'bestNGuesses': [{'os': 'macOS', 'score': '10.0/10'},
+                  {'os': 'macOS', 'score': '10.0/10'},
+                  {'os': 'macOS', 'score': '10.0/10'}]}
+---------------------------------
+1616184541: 167.99.241.135:443 -> 85.19.65.217:49988 [SYN+ACK]
+---------------------------------
+```
+
+And a Windows 10 (`Windows NT 10.0; Win64; x64`) device visiting my server:
+
+```bash
+python tcp_fingerprint.py -i eth0 --classify
+
+Loaded 716 fingerprints from the database
+listening on interface eth0
+
+---------------------------------
+1616184750: 186.53.223.136:10047 -> 167.99.241.135:443 [SYN]
+{'avgScoreOsClass': {'Android': 'avg=3.88, N=36',
+                     'Linux': 'avg=4.85, N=99',
+                     'Windows': 'avg=7.47, N=365',
+                     'iOS': 'avg=4.03, N=20',
+                     'macOS': 'avg=3.81, N=189'},
+ 'bestNGuesses': [{'os': 'Windows', 'score': '10.0/10'},
+                  {'os': 'Windows', 'score': '10.0/10'},
+                  {'os': 'Windows', 'score': '10.0/10'}]}
+---------------------------------
+1616184750: 167.99.241.135:443 -> 186.53.223.136:10047 [SYN+ACK]
+---------------------------------
 ```
 
 ### Installation & Usage
