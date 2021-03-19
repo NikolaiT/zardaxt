@@ -1,7 +1,7 @@
 const fs = require('fs')
 const Bowser = require("bowser");
 
-const db_file = 'database.json';
+const db_file = 'database3.json';
 let data = JSON.parse(fs.readFileSync(db_file))
 let newData = [];
 
