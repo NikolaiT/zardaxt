@@ -42,6 +42,7 @@ writeAfter = 40
 interface = None
 verbose = False
 fingerprints = {}
+classifications = {}
 databaseFile = './database/combined.json'
 dbList = []
 with open(databaseFile) as f:
@@ -128,6 +129,13 @@ def makeOsGuess(fp, n=3):
     'bestNGuesses': guesses[:n],
     'avgScoreOsClass': avg_os_score,
   }
+
+
+def updateClassificationFile():
+  print('writing classify.json with {} objects...'.format(len(classifications)))
+  with open('classify.json', 'w') as fp:
+    json.dump(classifications, fp, indent=2, sort_keys=False)
+
 
 def updateFile():
   print('writing fingerprints.json with {} objects...'.format(len(fingerprints)))
@@ -218,9 +226,11 @@ def tcpProcess(pkt, layer, ts):
 
       if classify:
         classification = makeOsGuess(fingerprints[key])
-        fingerprints[key].update(classification)
         pprint.pprint(classification)
 
+        classifications[pkt[ip.IP].src_s] = classification
+        updateClassificationFile()
+        
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
         updateFile()
