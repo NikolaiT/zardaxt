@@ -232,6 +232,7 @@ def tcpProcess(pkt, layer, ts):
         classifications[pkt[ip.IP].src_s] = classification
         updateClassificationFile()
         if len(classifications) > purgeClassificationAfter:
+          print('Purge classifications dict')
           classifications = {}
         
       # update file once in a while
