@@ -227,6 +227,7 @@ def tcpProcess(pkt, layer, ts):
       }
 
       if classify:
+        global classifications
         classification = makeOsGuess(fingerprints[key])
         pprint.pprint(classification)
         classifications[pkt[ip.IP].src_s] = classification
