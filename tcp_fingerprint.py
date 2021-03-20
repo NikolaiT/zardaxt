@@ -39,6 +39,8 @@ a huge mess (randomly failing code segments and capturing the Errors, not good).
 
 classify = False
 writeAfter = 40
+# we don't want huge files, purge classification files after 100 entries
+purgeClassificationAfter = 100
 interface = None
 verbose = False
 fingerprints = {}
@@ -227,9 +229,10 @@ def tcpProcess(pkt, layer, ts):
       if classify:
         classification = makeOsGuess(fingerprints[key])
         pprint.pprint(classification)
-
         classifications[pkt[ip.IP].src_s] = classification
         updateClassificationFile()
+        if len(classifications) > purgeClassificationAfter:
+          classifications = {}
         
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
