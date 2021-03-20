@@ -11,6 +11,10 @@ Why?
 
 [What is TCP/IP fingerprinting?](https://en.wikipedia.org/wiki/TCP/IP_stack_fingerprinting)
 
+### Demo
+
+[Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
+
 ### Example
 
 Classifying my Android smartphone:
