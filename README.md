@@ -60,25 +60,31 @@ listening on interface eth0
 
 And a Windows 10 (`Windows NT 10.0; Win64; x64`) device visiting my server:
 
-```bash
-python tcp_fingerprint.py -i eth0 --classify
-
-Loaded 3203 fingerprints from the database
-listening on interface eth0
-
----------------------------------
-1616184750: 186.53.223.136:10047 -> 167.99.241.135:443 [SYN]
-{'avgScoreOsClass': {'Android': 'avg=3.88, N=36',
-                     'Linux': 'avg=4.85, N=99',
-                     'Windows': 'avg=7.47, N=365',
-                     'iOS': 'avg=4.03, N=20',
-                     'macOS': 'avg=3.81, N=189'},
- 'bestNGuesses': [{'os': 'Windows', 'score': '10.0/10'},
-                  {'os': 'Windows', 'score': '10.0/10'},
-                  {'os': 'Windows', 'score': '10.0/10'}]}
----------------------------------
-1616184750: 167.99.241.135:443 -> 186.53.223.136:10047 [SYN+ACK]
----------------------------------
+```json
+{
+  "bestNGuesses": [
+    {
+      "score": "10.0/10",
+      "os": "Windows"
+    },
+    {
+      "score": "10.0/10",
+      "os": "Windows"
+    },
+    {
+      "score": "10.0/10",
+      "os": "Windows"
+    }
+  ],
+  "avgScoreOsClass": {
+    "Windows": "avg=6.54, N=1019",
+    "Android": "avg=3.12, N=779",
+    "iOS": "avg=3.01, N=447",
+    "macOS": "avg=2.99, N=520",
+    "Linux": "avg=4.3, N=422",
+    "Chrome OS": "avg=3.75, N=8"
+  }
+}
 ```
 
 ### Installation & Usage
