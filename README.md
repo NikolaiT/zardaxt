@@ -20,21 +20,19 @@ Classifying my Android smartphone:
 ```bash
 python tcp_fingerprint.py -i eth0 --classify
 
-Loaded 716 fingerprints from the database
+Loaded 3203 fingerprints from the database
 listening on interface eth0
 
-1616184306: 73.153.184.210:48646 -> 167.99.241.135:443 [SYN]
-{'avgScoreOsClass': {'Android': 'avg=5.78, N=36',
-                     'Linux': 'avg=5.11, N=99',
-                     'Windows': 'avg=2.66, N=365',
-                     'iOS': 'avg=3.62, N=20',
-                     'macOS': 'avg=3.65, N=189'},
- 'bestNGuesses': [{'os': 'Android', 'score': '8.0/10'},
-                  {'os': 'Android', 'score': '8.0/10'},
-                  {'os': 'Android', 'score': '8.0/10'}]}
----------------------------------
-1616184306: 167.99.241.135:443 -> 73.153.184.210:48646 [SYN+ACK]
----------------------------------
+1618054161: 84.120.157.113:1812 -> 167.99.241.135:80 [SYN]
+{'avgScoreOsClass': {'Android': 'avg=6.27, N=779',
+                     'Chrome OS': 'avg=5.0, N=8',
+                     'Linux': 'avg=4.99, N=422',
+                     'Windows': 'avg=2.64, N=1019',
+                     'iOS': 'avg=3.66, N=447',
+                     'macOS': 'avg=3.64, N=520'},
+ 'bestNGuesses': [{'os': 'Android', 'score': '9.0/10'},
+                  {'os': 'Android', 'score': '9.0/10'},
+                  {'os': 'Android', 'score': '9.0/10'}]}
 ```
 
 A iPhone (User-Agent: `iPhone; CPU iPhone OS 14_4_1 like Mac OS X`) visting my server. Based on the SYN fingerprint alone, it's not possible to discern whether it's an macOS device or iOS device. But the guess is accurate enough.
@@ -42,7 +40,7 @@ A iPhone (User-Agent: `iPhone; CPU iPhone OS 14_4_1 like Mac OS X`) visting my s
 ```bash
 python tcp_fingerprint.py -i eth0 --classify
 
-Loaded 716 fingerprints from the database
+Loaded 3203 fingerprints from the database
 listening on interface eth0
 
 ---------------------------------
@@ -65,7 +63,7 @@ And a Windows 10 (`Windows NT 10.0; Win64; x64`) device visiting my server:
 ```bash
 python tcp_fingerprint.py -i eth0 --classify
 
-Loaded 716 fingerprints from the database
+Loaded 3203 fingerprints from the database
 listening on interface eth0
 
 ---------------------------------
