@@ -2,7 +2,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import _thread
 import time
 import json
-import ssl
 
 class MyServer(BaseHTTPRequestHandler):
   def __init__(self, data):
@@ -20,7 +19,10 @@ class MyServer(BaseHTTPRequestHandler):
       self.end_headers()
       res_for_ip = 'by_ip=1' in self.path
       if res_for_ip:
-        res = self.data.get(self.client_address[0], None)
+        ip = self.client_address[0]
+        if ip == '127.0.0.1':
+          ip = self.headers.get('X-Real-IP')
+        res = self.data.get(ip, None)
         self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
       else:
         self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
@@ -34,12 +36,7 @@ def create_server(data):
   server_address = ('0.0.0.0', 8249)
   handler = MyServer(data)
   httpd = HTTPServer(server_address, handler)
-  httpd.socket = ssl.wrap_socket(httpd.socket,
-                               server_side=True,
-                               certfile='/etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem',
-                               keyfile='/etc/letsencrypt/live/abs.incolumitas.com/privkey.pem',
-                               ssl_version=ssl.PROTOCOL_TLSv1_2)
-  print("Api started on https://%s:%s" % server_address)
+  print("Api started on http://%s:%s" % server_address)
 
   try:
     httpd.serve_forever()
