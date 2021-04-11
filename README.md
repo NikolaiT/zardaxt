@@ -118,6 +118,16 @@ py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
 nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
 ```
 
+## Classification Api
+
+When you run `tcp_fingerprint.py`, the program automatically launches a simple web API that you can query. A http server is bound to `0.0.0.0:8249`. You can query it on `http://0.0.0.0:8249/classify`.
+
+It will return the last 500 classification results, IP addresses as keys. So your web application can comfortably query the most recent TCP/IP classification results like that
+
+```
+curl http://0.0.0.0:8249/classify
+```
+
 ## Theory
 
 Several fields such as TCP Options or TCP Window Size or IP Fragment Flag depend heavily on the OS type and version.

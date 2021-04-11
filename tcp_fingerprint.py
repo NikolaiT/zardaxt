@@ -21,26 +21,27 @@ import json
 import struct
 from pathlib import Path
 from tcp_options import decodeTCPOptions
+from fucking_api import run_api
 
 """
 Author: Nikolai Tschacher
 Website: incolumitas.com
-Date: March 2021
+Date: March/April 2021
 
-Allows to fingerprint an incoming TCP/IP connection.
+Allows to fingerprint an incoming TCP/IP connection by the intial SYN packet.
 
 Several fields such as TCP Options or TCP Window Size 
-or IP Fragment Flag depend heavily on the OS type and version.
+or IP fragment flag depend heavily on the OS type and version.
 
 Some code has been taken from: https://github.com/xnih/satori
 However, the codebase of github.com/xnih/satori was quite frankly 
-a huge mess (randomly failing code segments and capturing the Errors, not good). 
+a huge mess (randomly failing code segments and capturing the errors, not good). 
 """
 
 classify = False
 writeAfter = 40
 # we don't want huge files, purge classification files after 100 entries
-purgeClassificationAfter = 100
+purgeClassificationAfter = 500
 interface = None
 verbose = False
 fingerprints = {}
@@ -51,6 +52,7 @@ with open(databaseFile) as f:
   dbList = json.load(f)
 
 print('Loaded {} fingerprints from the database'.format(len(dbList)))
+run_api(classifications)
 
 def makeOsGuess(fp, n=3):
   """
@@ -131,13 +133,6 @@ def makeOsGuess(fp, n=3):
     'bestNGuesses': guesses[:n],
     'avgScoreOsClass': avg_os_score,
   }
-
-
-def updateClassificationFile():
-  print('writing classify.json with {} objects...'.format(len(classifications)))
-  with open('classify.json', 'w') as fp:
-    json.dump(classifications, fp, indent=2, sort_keys=False)
-
 
 def updateFile():
   print('writing fingerprints.json with {} objects...'.format(len(fingerprints)))
@@ -231,7 +226,6 @@ def tcpProcess(pkt, layer, ts):
         classification = makeOsGuess(fingerprints[key])
         pprint.pprint(classification)
         classifications[pkt[ip.IP].src_s] = classification
-        updateClassificationFile()
         if len(classifications) > purgeClassificationAfter:
           print('Purge classifications dict')
           classifications = {}
@@ -335,7 +329,7 @@ def main():
       layer = None
 
       # try to determine what type of packets we have, there is the chance that 0x800
-      #  may be in the spot we're checking, may want to add better testing in future
+      # may be in the spot we're checking, may want to add better testing in future
       eth = ethernet.Ethernet(buf)
       if hex(eth.type) == '0x800':
         layer = 'eth'
