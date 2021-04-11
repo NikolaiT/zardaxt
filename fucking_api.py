@@ -38,7 +38,7 @@ def create_server(data):
                                server_side=True,
                                certfile='/etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem',
                                keyfile='/etc/letsencrypt/live/abs.incolumitas.com/privkey.pem',
-                               ssl_version=ssl.PROTOCOL_TLS)
+                               ssl_version=ssl.PROTOCOL_TLSv1_2)
   print("Api started on https://%s:%s" % server_address)
 
   try:
