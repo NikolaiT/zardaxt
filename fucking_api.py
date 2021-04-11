@@ -12,12 +12,17 @@ class MyServer(BaseHTTPRequestHandler):
     super().__init__(*args, **kwargs)
 
   def do_GET(self):
-    if self.path == '/classify':
+    if self.path.startswith('/classify'):
       global data
       self.send_response(200)
       self.send_header("Content-type", "text/json")
       self.end_headers()
-      self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
+      res_for_ip = 'by_ip=1' in self.path
+      if res_for_ip:
+        res = self.data.get(self.client_address[0], None)
+        self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
+      else:
+        self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
     else:
       self.send_response(400)
       self.end_headers()
