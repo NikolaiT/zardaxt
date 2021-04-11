@@ -42,11 +42,11 @@ def create_server(data):
   print("Api started on https://%s:%s" % (hostName, serverPort))
 
   try:
-      webServer.serve_forever()
+    httpd.serve_forever()
   except KeyboardInterrupt:
-      pass
+    pass
 
-  webServer.server_close()
+  httpd.server_close()
   print("Server stopped.")
 
 
