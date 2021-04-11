@@ -31,15 +31,15 @@ class MyServer(BaseHTTPRequestHandler):
 
 
 def create_server(data):
-  hostName = "0.0.0.0"
-  serverPort = 8249
-  # is it bad you know that?
-  keyfile = '/etc/letsencrypt/live/abs.incolumitas.com/privkey.pem'
-  certfile = '/etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem'
+  server_address = ('0.0.0.0', 8249)
   handler = MyServer(data)
-  httpd = HTTPServer((hostName, serverPort), handler)
-  httpd.socket = ssl.wrap_socket(httpd.socket, keyfile=keyfile, certfile=certfile, server_side=True)
-  print("Api started on https://%s:%s" % (hostName, serverPort))
+  httpd = HTTPServer(server_address, handler)
+  httpd.socket = ssl.wrap_socket(httpd.socket,
+                               server_side=True,
+                               certfile='/etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem',
+                               keyfile='/etc/letsencrypt/live/abs.incolumitas.com/privkey.pem',
+                               ssl_version=ssl.PROTOCOL_TLS)
+  print("Api started on https://%s:%s" % server_address)
 
   try:
     httpd.serve_forever()
