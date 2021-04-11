@@ -128,6 +128,12 @@ It will return the last 500 classification results, IP addresses as keys. So you
 curl http://0.0.0.0:8249/classify
 ```
 
+If you want to query the TCP/IP fingerprint only for the client IP address, use 
+
+```
+curl http://0.0.0.0:8249/classify?by_ip=1
+```
+
 ## Theory
 
 Several fields such as TCP Options or TCP Window Size or IP Fragment Flag depend heavily on the OS type and version.
