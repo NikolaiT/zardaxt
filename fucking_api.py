@@ -11,6 +11,10 @@ class MyServer(BaseHTTPRequestHandler):
     """ Handle a request """
     super().__init__(*args, **kwargs)
 
+  def end_headers (self):
+    self.send_header('Access-Control-Allow-Origin', '*')
+    BaseHTTPRequestHandler.end_headers(self)
+
   def do_GET(self):
     if self.path.startswith('/classify'):
       global data
