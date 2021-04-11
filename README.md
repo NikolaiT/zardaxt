@@ -118,7 +118,7 @@ py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
 nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
 ```
 
-## Classification Api
+## Api Support
 
 When you run `tcp_fingerprint.py`, the program automatically launches a simple web API that you can query. A http server is bound to `0.0.0.0:8249`. You can query it on `http://0.0.0.0:8249/classify`.
 
