@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import _thread
 import time
 import json
+import ssl
 
 class MyServer(BaseHTTPRequestHandler):
   def __init__(self, data):
@@ -32,10 +33,13 @@ class MyServer(BaseHTTPRequestHandler):
 def create_server(data):
   hostName = "0.0.0.0"
   serverPort = 8249
-
+  # is it bad you know that?
+  keyfile = '/etc/letsencrypt/live/abs.incolumitas.com/privkey.pem'
+  certfile = '/etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem'
   handler = MyServer(data)
-  webServer = HTTPServer((hostName, serverPort), handler)
-  print("Api started on http://%s:%s" % (hostName, serverPort))
+  httpd = HTTPServer((hostName, serverPort), handler)
+  httpd.socket = ssl.wrap_socket(httpd.socket, keyfile=keyfile, certfile=certfile, server_side=True)
+  print("Api started on https://%s:%s" % (hostName, serverPort))
 
   try:
       webServer.serve_forever()
