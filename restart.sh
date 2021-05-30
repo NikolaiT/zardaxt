@@ -1,4 +1,6 @@
 #/bin/bash
+
+cd /root/satori
   
 pkill -f "python tcp_fingerprint.py"
 

@@ -13,6 +13,21 @@ Why?
 
 [Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
 
+
+### Real World Examples
+
+I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices on real browsers. It's the perfect site to test this tool. Here are the results:
+
+![Galaxy S21 Android with Chrome](tcp-ip-fps/galaxy-s21-chrome.png "Galaxy S21 Android with Chrome")
+
+![Google Pixel 5 Android with Chrom](tcp-ip-fps/google-pixel-5-chrome.png "Google Pixel 5 Android with Chrome")
+
+![iPhone 12 iOS with Safari](tcp-ip-fps/iphone-12-pro-safari.png "iPhone 12 iOS with Safari")
+
+![MacOs Big Sur with Safari](tcp-ip-fps/macOs-big-sur-safari.png "MacOs Big Sur with Safari")
+
+![Windows 10 with Chrome](tcp-ip-fps/win10-chrome.png "Windows 10 with Chrome")
+
 ### Example
 
 Classifying my Android smartphone:
