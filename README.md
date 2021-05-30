@@ -16,9 +16,14 @@ Why?
 
 ### Real World Examples
 
-I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices on real browsers. It's the perfect site to test this tool. Here are the results:
+I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool. Here are the results:
+
+`zardax.py` gives a high rating for all the Linux Operating Systems when the device is Android. Good enough.
 
 ![Galaxy S21 Android with Chrome](tcp-ip-fps/galaxy-s21-chrome.png "Galaxy S21 Android with Chrome")
+
+`zardax.py` gives a high rating for all the Linux Operating Systems when the device is Android. Good enough.
+
 
 ![Google Pixel 5 Android with Chrom](tcp-ip-fps/google-pixel-5-chrome.png "Google Pixel 5 Android with Chrome")
 
