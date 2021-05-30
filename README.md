@@ -18,18 +18,27 @@ Why?
 
 I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool. Here are the results:
 
+#### Galaxy S21 Android with Chrome
+
 `zardax.py` gives a high rating for all the Linux Operating Systems when the device is Android. Good enough.
 
 ![Galaxy S21 Android with Chrome](tcp-ip-fps/galaxy-s21-chrome.png "Galaxy S21 Android with Chrome")
 
-`zardax.py` gives a high rating for all the Linux Operating Systems when the device is Android. Good enough.
+#### Google Pixel 5 Android with Chrome
 
+`zardax.py` gives a high rating for all the Linux Operating Systems when the device is Android. Good enough.
 
 ![Google Pixel 5 Android with Chrom](tcp-ip-fps/google-pixel-5-chrome.png "Google Pixel 5 Android with Chrome")
 
+#### iPhone 12 iOS with Safari
+
 ![iPhone 12 iOS with Safari](tcp-ip-fps/iphone-12-pro-safari.png "iPhone 12 iOS with Safari")
 
+#### MacOs Big Sur with Safari
+
 ![MacOs Big Sur with Safari](tcp-ip-fps/macOs-big-sur-safari.png "MacOs Big Sur with Safari")
+
+#### Windows 10 with Chrome
 
 ![Windows 10 with Chrome](tcp-ip-fps/win10-chrome.png "Windows 10 with Chrome")
 
