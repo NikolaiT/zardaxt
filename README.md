@@ -20,25 +20,31 @@ I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browsersta
 
 #### Galaxy S21 Android with Chrome
 
-`zardax.py` gives a high rating for all the Linux Operating Systems when the device is Android. Good enough.
+`zardax.py` gives a high rating for all the Linux operating systems when the device is Android. Good enough.
 
 ![Galaxy S21 Android with Chrome](tcp-ip-fps/galaxy-s21-chrome.png "Galaxy S21 Android with Chrome")
 
 #### Google Pixel 5 Android with Chrome
 
-`zardax.py` gives a high rating for all the Linux Operating Systems when the device is Android. Good enough.
+Same as above. The tool is able to say that it's a Linux OS, but not with certainity that it's Android.
 
 ![Google Pixel 5 Android with Chrom](tcp-ip-fps/google-pixel-5-chrome.png "Google Pixel 5 Android with Chrome")
 
 #### iPhone 12 iOS with Safari
 
+`zardax.py` gives a high rating for iOS and macOS, but can't say with certainity that it's iOS.
+
 ![iPhone 12 iOS with Safari](tcp-ip-fps/iphone-12-pro-safari.png "iPhone 12 iOS with Safari")
 
 #### MacOs Big Sur with Safari
 
+Same here. MacOS scores a bit higher, but `zardax.py` gives a high rating for both iOS and macOS, but can't say with certainity that it's macOS.
+
 ![MacOs Big Sur with Safari](tcp-ip-fps/macOs-big-sur-safari.png "MacOs Big Sur with Safari")
 
 #### Windows 10 with Chrome
+
+`zardax.py` 🚀🚀🚀🚀🚀🚀
 
 ![Windows 10 with Chrome](tcp-ip-fps/win10-chrome.png "Windows 10 with Chrome")
 
