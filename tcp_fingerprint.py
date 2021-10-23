@@ -132,6 +132,7 @@ def makeOsGuess(fp, n=3):
   return {
     'bestNGuesses': guesses[:n],
     'avgScoreOsClass': avg_os_score,
+    'fp': fp,
   }
 
 def updateFile():
@@ -204,6 +205,7 @@ def tcpProcess(pkt, layer, ts):
         'ts': ts,
         'src_ip': pkt[ip.IP].src_s,
         'dst_ip': '{}'.format(pkt[ip.IP].dst_s),
+        'src_port': '{}'.format(pkt[tcp.TCP].sport),
         'dst_port': '{}'.format(pkt[tcp.TCP].dport),
         'ip_ttl': ip4.ttl,
         'ip_df': df,

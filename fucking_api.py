@@ -28,6 +28,7 @@ class MyServer(BaseHTTPRequestHandler):
           if ip == '127.0.0.1':
             ip = self.headers.get('X-Real-IP')
           res = self.data.get(ip, None)
+          res['ip'] = ip
           self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
         else:
           self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
