@@ -1,10 +1,7 @@
-from pypacker import ppcap
 from pypacker.layer12 import ethernet
 from pypacker.layer12 import linuxcc
 from pypacker.layer3 import ip
-from pypacker.layer3 import icmp
 from pypacker.layer4 import tcp
-from pypacker.layer4 import udp
 from pypacker import pypacker
 from datetime import datetime
 import pcapy
@@ -13,12 +10,8 @@ import time
 import sys
 import pprint
 import traceback
-import os
-import re
 import signal
-import untangle
 import json
-import struct
 from pathlib import Path
 from tcp_options import decodeTCPOptions
 from fucking_api import run_api
@@ -207,6 +200,8 @@ def tcpProcess(pkt, layer, ts):
         'dst_ip': '{}'.format(pkt[ip.IP].dst_s),
         'src_port': '{}'.format(pkt[tcp.TCP].sport),
         'dst_port': '{}'.format(pkt[tcp.TCP].dport),
+        'ip_hdr_length': ip4.v_hl,
+        'ip_opts': ip4.opts,
         'ip_ttl': ip4.ttl,
         'ip_df': df,
         'ip_mf': mf,
