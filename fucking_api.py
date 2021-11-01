@@ -1,6 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import _thread
-import time
 import json
 
 class MyServer(BaseHTTPRequestHandler):
@@ -33,9 +32,9 @@ class MyServer(BaseHTTPRequestHandler):
         else:
           self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
       else:
-        self.send_response(400)
+        self.send_response(403)
         self.end_headers()
-        self.wfile.write(bytes("naaa naaa naa", "utf-8"))
+        self.wfile.write(bytes("Access Denied", "utf-8"))
     except Exception as e:
       print(e)
 
