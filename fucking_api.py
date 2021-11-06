@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import _thread
 import json
+import traceback
 from tcpip_fp_logging import log
 
 class MyServer(BaseHTTPRequestHandler):
@@ -28,11 +29,14 @@ class MyServer(BaseHTTPRequestHandler):
           if ip == '127.0.0.1':
             ip = self.headers.get('X-Real-IP')
           res = self.data.get(ip, None)
-          res['ip'] = ip
-          res['vpn_detected'] = False
-          if 'fp' in res and 'tcp_mss' in res['fp']:
-            res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
-          self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
+          if res:
+            res['ip'] = ip
+            res['vpn_detected'] = False
+            if 'fp' in res and 'tcp_mss' in res['fp']:
+              res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
+            self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
+          else:
+            self.wfile.write(bytes(json.dumps({'ip': ip, 'msg': 'no data'}, indent=2, sort_keys=True), "utf-8"))
         else:
           self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
       else:
@@ -40,7 +44,8 @@ class MyServer(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(bytes("Access Denied", "utf-8"))
     except Exception as e:
-      log(f'do_GET() failed: ' + str(e), level='ERROR')
+      traceback_str = ''.join(traceback.format_tb(e.__traceback__))
+      log(f'do_GET() failed: {traceback_str}', level='ERROR')
       print(e)
 
 
