@@ -1,0 +1,6 @@
+.git/
+.git/*
+.gitignore
+fp/*
+fp/
+Pipfile-Server

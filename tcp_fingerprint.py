@@ -180,7 +180,15 @@ def tcpProcess(pkt, layer, ts):
     # http://www.iana.org/assignments/ip-parameters/ip-parameters.xml
     [ipVersion, ipHdrLen] = computeIP(ip4.v_hl)
     [ethTTL, ttl] = computeNearTTL(ip4.ttl)
-    [df, mf, offset] = computeIPOffset(ip4.off)
+
+    # https://github.com/mike01/pypacker/blob/master/pypacker/layer3/ip.py
+    ip_off = None
+    if hasattr(ip4, 'off'):
+      ip_off = ip4.off
+    elif hasattr(ip4, 'frag_off'):
+      ip_off = ip4.frag_off
+
+    [df, mf, offset] = computeIPOffset(ip_off)
 
     [tcpOpts, tcpTimeStamp, tcpTimeStampEchoReply, mss, windowScaling] = decodeTCPOptions(tcp1.opts)
 
@@ -205,6 +213,7 @@ def tcpProcess(pkt, layer, ts):
         'ip_ttl': ip4.ttl,
         'ip_df': df,
         'ip_mf': mf,
+        'ip_frag_off': ip_off,
         'tcp_window_size': tcp1.win,
         'tcp_flags': tcp1.flags,
         'tcp_ack': tcp1.ack,

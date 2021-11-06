@@ -1,9 +1,19 @@
 #/bin/bash
 
-cd /root/satori
+cd /root/tcp_fingerprint
+
+if [ -f /var/run/tcp_fingerprint.pid ]
+then
+  kill `cat /var/run/tcp_fingerprint.pid`
+  echo tcp_fingerprint pid `cat /var/run/tcp_fingerprint.pid` killed.
+  rm -f /var/run/tcp_fingerprint.pid
+else
+  echo tcp_fingerprint not running.
+fi
   
-pkill -f "python tcp_fingerprint.py"
+nohup pipenv run python tcp_fingerprint.py -i eth0 --classify > log/fp.out 2> log/fp.err < /dev/null &
 
-py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
+# Write tcp_fingerprint's PID to a file
+echo $! > /var/run/tcp_fingerprint.pid
 
-nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
+echo tcp_fingerprint pid `cat /var/run/tcp_fingerprint.pid`
