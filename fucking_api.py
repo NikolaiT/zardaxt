@@ -4,6 +4,9 @@ import json
 import traceback
 from tcpip_fp_logging import log
 
+# I know. Change this.
+API_KEY='juvS44lvNkos78Vs'
+
 class MyServer(BaseHTTPRequestHandler):
   def __init__(self, data):
     self.data = data
@@ -37,7 +40,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
           else:
             self.wfile.write(bytes(json.dumps({'ip': ip, 'msg': 'no data'}, indent=2, sort_keys=True), "utf-8"))
-        else:
+        elif API_KEY in self.path:
           self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
       else:
         self.send_response(403)
