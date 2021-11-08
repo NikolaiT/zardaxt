@@ -23,7 +23,7 @@ pkill --echo -f "python tcp_fingerprint.py"
 
 PATH=/usr/local/bin:$PATH
 
-nohup pipenv run python tcp_fingerprint.py -i eth0 --classify > log/tcp_fp.out 2> log/tcp_fp.err < /dev/null &
+nohup /usr/local/bin/pipenv run python tcp_fingerprint.py -i eth0 --classify > log/tcp_fp.out 2> log/tcp_fp.err < /dev/null &
 
 # Write tcp_fingerprint's PID to a file
 echo $! > /var/run/tcp_fingerprint.pid
