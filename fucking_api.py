@@ -3,6 +3,8 @@ import _thread
 import json
 import traceback
 from tcpip_fp_logging import log
+from dune_client import incr
+from urllib.parse import urlparse, parse_qs
 
 # I know. Change this.
 API_KEY='juvS44lvNkos78Vs'
@@ -15,11 +17,26 @@ class MyServer(BaseHTTPRequestHandler):
     """ Handle a request """
     super().__init__(*args, **kwargs)
 
-  def end_headers (self):
+  def get_ip(self):
+    ip = self.client_address[0]
+    if ip == '127.0.0.1':
+      ip = self.headers.get('X-Real-IP')
+    return ip
+
+  def get_query_arg(self, arg):
+    query_components = parse_qs(urlparse(self.path).query)
+    arg = query_components.get(arg)
+    if arg and len(arg) > 0:
+      return arg[0].strip()
+
+  def end_headers(self):
     self.send_header('Access-Control-Allow-Origin', '*')
     BaseHTTPRequestHandler.end_headers(self)
 
   def do_GET(self):
+    ip = self.get_ip()
+    incr('tcp_ip_fingerprint', ip)
+
     try:
       if self.path.startswith('/classify'):
         global data
@@ -28,9 +45,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.end_headers()
         res_for_ip = 'by_ip=1' in self.path
         if res_for_ip:
-          ip = self.client_address[0]
-          if ip == '127.0.0.1':
-            ip = self.headers.get('X-Real-IP')
+          ip = self.get_ip()
           res = self.data.get(ip, None)
           if res:
             res['ip'] = ip
@@ -41,15 +56,27 @@ class MyServer(BaseHTTPRequestHandler):
           else:
             self.wfile.write(bytes(json.dumps({'ip': ip, 'msg': 'no data'}, indent=2, sort_keys=True), "utf-8"))
         elif API_KEY in self.path:
-          self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
+          lookup_ip = self.get_query_arg('ip')
+          if lookup_ip:
+            res = self.data.get(lookup_ip, None)
+            if res:
+              res['ip'] = ip
+              res['lookup_ip'] = lookup_ip
+              res['vpn_detected'] = False
+              if 'fp' in res and 'tcp_mss' in res['fp']:
+                res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
+              self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
+          else:
+            self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
       else:
         self.send_response(403)
         self.end_headers()
         self.wfile.write(bytes("Access Denied", "utf-8"))
     except Exception as e:
       traceback_str = ''.join(traceback.format_tb(e.__traceback__))
-      log(f'do_GET() failed: {traceback_str}', level='ERROR')
-      print(e)
+      msg = f'do_GET() failed: {e} with traceback {traceback_str}'
+      log(msg, level='ERROR')
+      print(msg)
 
 
 def create_server(data):
