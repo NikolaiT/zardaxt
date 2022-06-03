@@ -1,11 +1,17 @@
 const fs = require('fs')
 
-for (let db_file of ['database1.json', 'database2.json', 'database3.json', 'combined.json']) {
+const files = [
+  'combinedJune2022.json',
+  'combined.json'
+];
+
+for (let db_file of files) {
   let data = JSON.parse(fs.readFileSync(db_file))
 
-  let count = {};
-  
+  let count = { _total: 0 };
+
   for (let entry of data) {
+    count._total++;
     if (entry.os) {
       if (!count[entry.os.name]) {
         count[entry.os.name] = 0;

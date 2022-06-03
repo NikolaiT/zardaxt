@@ -14,7 +14,7 @@ fi
 # kill everything just in case
 pkill --echo -f "python tcp_fingerprint.py"
 
-# I fucking hate Python. It's a utterly broken language and ecosystem. JavaScript is 
+# I hate Python. It's a utterly broken language and ecosystem. JavaScript is 
 # just so much better. Like I spent just too much time to figure this shit out:
 # https://stackoverflow.com/questions/48990067/how-to-run-a-cron-job-with-pipenv
 

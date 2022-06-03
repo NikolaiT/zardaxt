@@ -14,7 +14,7 @@ import signal
 import json
 from pathlib import Path
 from tcp_options import decodeTCPOptions
-from fucking_api import run_api
+from api import run_api
 
 """
 Author: Nikolai Tschacher
@@ -39,7 +39,7 @@ interface = None
 verbose = False
 fingerprints = {}
 classifications = {}
-databaseFile = './database/combined.json'
+databaseFile = './database/combinedJune2022.json'
 dbList = []
 with open(databaseFile) as f:
   dbList = json.load(f)

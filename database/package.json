@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "bowser": "^2.11.0"
+  }
+}
