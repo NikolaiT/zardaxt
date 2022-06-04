@@ -1,79 +1,100 @@
-## Passive TCP/IP Fingerprinting
+## Passive TCP/IP Fingerprinting 🚀
 
-This is a passive TCP/IP fingerprinting tool. Run this on your server and find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake. Nothing else is considered.
+Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake. Nothing else is considered.
 
-Why the rewrite?
+**Why the rewrite?**
 
 + [p0f](https://github.com/p0f/p0f) is dead. It's database is too old. Also: C is a bit overkill and hard to quickly hack in.
 + [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the *code* are awesome)
-+ The actual statistics behind TCP/IP fingerprinting are more important than the tool itself. Therefore it makes sense to rewrite it.
++ The actual statistics/traffic samples behind TCP/IP fingerprinting are more important than the tool itself. Therefore it makes sense to rewrite it.
 
-What can I do with this tool?
+**What can I do with this tool?**
 
-This tool may be used to correlate an incoming TCP/IP connection with a operating system class. For example, It can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the User-Agent operating system.
+This tool may be used to correlate an incoming TCP/IP connection with a operating system class. For example, It can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the operating system taken from the User-Agent.
 
 ### Demo
 
-[Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
-
-[API page](https://incolumitas.com/pages/TCP-IP-Fingerprint/)
+- [Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
+- [API page](https://incolumitas.com/pages/TCP-IP-Fingerprint/)
 
 
 ### Real World Examples
 
 I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool. Here are the results:
 
-#### Galaxy S21 Android with Chrome
+#### Safari on iPhone 13
 
-`zardax.py` gives a high rating for all the Linux operating systems when the device is Android. Good enough.
+![Safari on iPhone 13](tcp-ip-fps/new/iPhone 13 Safari.png "Safari on iPhone 13")
 
-![Galaxy S21 Android with Chrome](tcp-ip-fps/galaxy-s21-chrome.png "Galaxy S21 Android with Chrome")
+#### Chrome on Galaxy S22
 
-#### Google Pixel 5 Android with Chrome
+![Chrome on Galaxy S22](tcp-ip-fps/new/Chrome on Galaxy S22.png "Chrome on Galaxy S22")
 
-Same as above. The tool is able to say that it's a Linux OS, but not with certainity that it's Android.
+#### Edge on Windows 11
 
-![Google Pixel 5 Android with Chrom](tcp-ip-fps/google-pixel-5-chrome.png "Google Pixel 5 Android with Chrome")
+![Edge on Windows 11](tcp-ip-fps/new/Edge on Windows 11.png "Edge on Windows 11")
 
-#### iPhone 12 iOS with Safari
+#### Chrome 102 on Windows 7
 
-`zardax.py` gives a high rating for iOS and macOS, but can't say with certainity that it's iOS.
+![Chrome 102 on Windows 7](tcp-ip-fps/new/Chrome 102 on Windows 7.png "Chrome 102 on Windows 7")
 
-![iPhone 12 iOS with Safari](tcp-ip-fps/iphone-12-pro-safari.png "iPhone 12 iOS with Safari")
+#### Chrome on Google Pixel 6
 
-#### MacOs Big Sur with Safari
-
-Same here. MacOS scores a bit higher, but `zardax.py` gives a high rating for both iOS and macOS, but can't say with certainity that it's macOS.
-
-![MacOs Big Sur with Safari](tcp-ip-fps/macOs-big-sur-safari.png "MacOs Big Sur with Safari")
-
-#### Windows 10 with Chrome
-
-`zardax.py` 🚀🚀🚀🚀🚀🚀
-
-![Windows 10 with Chrome](tcp-ip-fps/win10-chrome.png "Windows 10 with Chrome")
+![Chrome on Google Pixel 6](tcp-ip-fps/new/Chrome on Google Pixel 6.png "Chrome on Google Pixel 6")
 
 ### Quick Example
 
 Classifying my Android smartphone:
 
 ```bash
+# activate python environment
+pipenv shell
+
+# load env variables
+set -a
 source tcpip_fp.env
+set +a
+
+# run zardaxt.py
 python tcp_fingerprint.py -i eth0 --classify
 
-Loaded 3203 fingerprints from the database
+# tool outputs
+
+Loaded 2916 fingerprints from the database
 listening on interface eth0
 
-1618054161: 84.120.157.113:1812 -> 167.99.241.135:80 [SYN]
-{'avgScoreOsClass': {'Android': 'avg=6.27, N=779',
-                     'Chrome OS': 'avg=5.0, N=8',
-                     'Linux': 'avg=4.99, N=422',
-                     'Windows': 'avg=2.64, N=1019',
-                     'iOS': 'avg=3.66, N=447',
-                     'macOS': 'avg=3.64, N=520'},
- 'bestNGuesses': [{'os': 'Android', 'score': '9.0/10'},
-                  {'os': 'Android', 'score': '9.0/10'},
-                  {'os': 'Android', 'score': '9.0/10'}]}
+1654345217: 86.56.31.158:42706 -> 167.99.241.135:443 [SYN]
+{'avgScoreOsClass': {'Android': 'avg=9.04, N=230',
+                     'Linux': 'avg=8.11, N=360',
+                     'Windows': 'avg=4.52, N=1378',
+                     'iOS': 'avg=6.83, N=152',
+                     'macOS': 'avg=6.78, N=791'},
+ 'bestNGuesses': [{'os': 'Android', 'score': '11.5/11.5'},
+                  {'os': 'Android', 'score': '11.5/11.5'},
+                  {'os': 'Android', 'score': '11.5/11.5'}],
+ 'fp': {'dst_ip': '167.99.241.135',
+        'dst_port': '443',
+        'ip_df': 1,
+        'ip_frag_off': 16384,
+        'ip_hdr_length': 69,
+        'ip_mf': 0,
+        'ip_opts': [],
+        'ip_ttl': 53,
+        'src_ip': '86.56.31.158',
+        'src_port': '42706',
+        'tcp_ack': 0,
+        'tcp_flags': 2,
+        'tcp_header_length': 160,
+        'tcp_mss': 1460,
+        'tcp_options': 'M1460,S,T,N,W8,',
+        'tcp_seq': 4111906994,
+        'tcp_timestamp': 377751994,
+        'tcp_timestamp_echo_reply': 0,
+        'tcp_urp': 0,
+        'tcp_window_scaling': 8,
+        'tcp_window_size': 65535,
+        'ts': 1654345217},
+ 'perfectScore': 11.5}
 ```
 
 ### Installation & Usage
@@ -103,7 +124,10 @@ API_KEY='abcd1234' # set your API key here
 And run it
 
 ```bash
+# load env variables
+set -a
 source tcpip_fp.env
+set +a
 
 python tcp_fingerprint.py -i eth0 --classify
 ```
@@ -111,7 +135,10 @@ python tcp_fingerprint.py -i eth0 --classify
 Or run in the background on your server
 
 ```bash
+# load env variables
+set -a
 source tcpip_fp.env
+set +a
 py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
 nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
 ```
@@ -137,7 +164,6 @@ If you want to query/lookup a specific IP address (Example: 103.14.251.215), you
 ```
 curl http://0.0.0.0:8249/classify?key=abcd1234&ip=103.14.251.215
 ```
-
 
 ## Theory
 

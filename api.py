@@ -46,16 +46,6 @@ class MyServer(BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/json")
         self.end_headers()
         ip = self.get_ip()
-        res = self.data.get(ip, None)
-        if res:
-          res['ip'] = ip
-          res['vpn_detected'] = False
-          if 'fp' in res and 'tcp_mss' in res['fp']:
-            res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
-          self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
-        else:
-          self.wfile.write(bytes(json.dumps({'ip': ip, 'msg': 'no fingerprint for this IP'}, indent=2, sort_keys=True), "utf-8"))
-        
         if API_KEY in self.path:
           lookup_ip = self.get_query_arg('ip')
           if lookup_ip:
@@ -67,8 +57,20 @@ class MyServer(BaseHTTPRequestHandler):
               if 'fp' in res and 'tcp_mss' in res['fp']:
                 res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
               self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
+            else:
+              self.wfile.write(bytes(json.dumps({'lookup_ip': lookup_ip, 'msg': 'no data for this IP'}, indent=2, sort_keys=True), "utf-8"))
           else:
             self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
+        else:
+          res = self.data.get(ip, None)
+          if res:
+            res['ip'] = ip
+            res['vpn_detected'] = False
+            if 'fp' in res and 'tcp_mss' in res['fp']:
+              res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
+            self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
+          else:
+            self.wfile.write(bytes(json.dumps({'ip': ip, 'msg': 'no fingerprint for this IP'}, indent=2, sort_keys=True), "utf-8"))
       else:
         self.send_response(403)
         self.end_headers()
