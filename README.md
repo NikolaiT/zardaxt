@@ -24,6 +24,8 @@ I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browsersta
 
 #### Safari on iPhone 13
 
+<img src="tcp-ip-fps/new/iPhone-13-Safari.png" width=50%>
+
 ![Safari on iPhone 13](tcp-ip-fps/new/iPhone-13-Safari.png "Safari on iPhone 13")
 
 #### Chrome on Galaxy S22
