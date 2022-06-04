@@ -24,23 +24,23 @@ I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browsersta
 
 #### Safari on iPhone 13
 
-![Safari on iPhone 13](tcp-ip-fps/new/iPhone\ 13\ Safari.png "Safari on iPhone 13")
+![Safari on iPhone 13](tcp-ip-fps/new/iPhone-13-Safari.png "Safari on iPhone 13")
 
 #### Chrome on Galaxy S22
 
-![Chrome on Galaxy S22](tcp-ip-fps/new/Chrome on Galaxy S22.png "Chrome on Galaxy S22")
+![Chrome on Galaxy S22](tcp-ip-fps/new/Chrome-Galaxy-S22.png "Chrome on Galaxy S22")
 
 #### Edge on Windows 11
 
-![Edge on Windows 11](tcp-ip-fps/new/Edge on Windows 11.png "Edge on Windows 11")
+![Edge on Windows 11](tcp-ip-fps/new/Edge-Windows-11.png "Edge on Windows 11")
 
 #### Chrome 102 on Windows 7
 
-![Chrome 102 on Windows 7](tcp-ip-fps/new/Chrome 102 on Windows 7.png "Chrome 102 on Windows 7")
+![Chrome 102 on Windows 7](tcp-ip-fps/new/Chrome-102-Windows-7.png "Chrome 102 on Windows 7")
 
 #### Chrome on Google Pixel 6
 
-![Chrome on Google Pixel 6](tcp-ip-fps/new/Chrome on Google Pixel 6.png "Chrome on Google Pixel 6")
+![Chrome on Google Pixel 6](tcp-ip-fps/new/Chrome-Google-Pixel-6.png "Chrome on Google Pixel 6")
 
 ### Quick Example
 
