@@ -1,4 +1,4 @@
-## Passive TCP/IP Fingerprinting 🚀
+# Passive TCP/IP Fingerprinting 🚀
 
 Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake. Nothing else is considered.
 
@@ -12,37 +12,37 @@ Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your serve
 
 This tool may be used to correlate an incoming TCP/IP connection with a operating system class. For example, It can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the operating system taken from the User-Agent.
 
-### Demo
+## Demo
 
 - [Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
 - [API page](https://incolumitas.com/pages/TCP-IP-Fingerprint/)
 
 
-### Real World Examples
+## Real World Examples
 
 I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool. Here are the results:
 
-#### Safari on iPhone 13
+### Safari on iPhone 13
 
 <img src="tcp-ip-fps/new/iPhone-13-Safari.png" width=50%>
 
-#### Chrome on Galaxy S22
+### Chrome on Galaxy S22
 
 <img src="tcp-ip-fps/new/Chrome-Galaxy-S22.png" width=50%>
 
-#### Edge on Windows 11
+### Edge on Windows 11
 
-<img src="tcp-ip-fps/new/Edge-Windows-11.png" width=50%>
+<img src="tcp-ip-fps/new/Edge-Windows-11.png" width=40%>
 
-#### Chrome 102 on Windows 7
+### Chrome 102 on Windows 7
 
-<img src="tcp-ip-fps/new/Chrome-102-Windows-7.png" width=50%>
+<img src="tcp-ip-fps/new/Chrome-102-Windows-7.png" width=40%>
 
-#### Chrome on Google Pixel 6
+### Chrome on Google Pixel 6
 
 <img src="tcp-ip-fps/new/Chrome-Google-Pixel-6.png" width=50%>
 
-### Quick Example
+## Quick Example
 
 Classifying my Android smartphone:
 
@@ -97,7 +97,7 @@ listening on interface eth0
  'perfectScore': 11.5}
 ```
 
-### Installation & Usage
+## Installation & Usage
 
 First clone the repo:
 
@@ -179,7 +179,7 @@ a huge mess (randomly failing code segments and capturing all Errors: Not good, 
 This project does not attempt to be exact, it should give some hints what might be the OS of the 
 incoming TCP/IP stream.
 
-### What fields are used for TCP/IP fingerprinting?
+## What fields are used for TCP/IP fingerprinting?
 
 Sources:
 
@@ -187,12 +187,12 @@ Sources:
 2. A lot of inspiration from [Satori.py](https://github.com/xnih/satori)
 3. Another TCP/IP fingerprinting [tool](https://github.com/agirishkumar/passive-os-detection/tree/master/OS-Fingerprinting)
 
-#### Entropy from the [IP header](https://en.wikipedia.org/wiki/IPv4)
+### Entropy from the [IP header](https://en.wikipedia.org/wiki/IPv4)
 
 + `IP.ttl (8 bits)` - Initial time to live (TTL) value of the IP header. The TTL indicates how long a IP packet is allowed to circulate in the Internet. Each hop (such as a router) decrements the TTL field by one. The maximum TTL value is 255, the maximum value of a single octet (8 bits). A recommended initial value is 64, but some operating systems customize this value. Hence it's relevancy for TCP/IP fingerprinting.
 + `IP.flags (3 bits)` - Don't fragment (DF) and more fragments (MF) flags. In the flags field of the IPv4 header, there are three bits for control flags. The "don't fragment" (DF) bit plays a central role in Path Maximum Transmission Unit Discovery (PMTUD) because it determines whether or not a packet is allowed to be [fragmented](https://www.cisco.com/c/en/us/support/docs/ip/generic-routing-encapsulation-gre/25885-pmtud-ipfrag.html). Some OS set the DF flag in the IP header, others don't.
 
-#### Entropy from the [TCP header](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)
+### Entropy from the [TCP header](https://en.wikipedia.org/wiki/Transmission_Control_Protocol)
 
 + `TCP.data_offset (4 bits)` - This is the size of the TCP header in 32-bit words with a minimum size of 5 words and a maximum size of 15 words. Therefore, the maximum TCP header size size is 60 bytes (with 40 bytes of options data). The TCP header size thus depends on how much options are present at the end of the header. 
 + `TCP.window_size (16 bits)` - Initial window size. The idea is that different operating systems use a different initial window size in the initial TCP SYN packet.
