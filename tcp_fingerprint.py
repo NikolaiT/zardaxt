@@ -55,11 +55,13 @@ def makeOsGuess(fp, n=3):
 
   As a second guess, output the operating system with the highest, normalized average score.
   """
-  perfectScore = 10
+  perfectScore = 11.5
   scores = []
   for i, entry in enumerate(dbList):
     score = 0
     # @TODO: consider `ip_tll`
+    if computeNearTTL(entry['ip_ttl']) == computeNearTTL(fp['ip_ttl']):
+      score += 1.5
     # @TODO: consider `tcp_window_scaling`
     # check IP DF bit
     if entry['ip_df'] == fp['ip_df']:
@@ -124,6 +126,7 @@ def makeOsGuess(fp, n=3):
       avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
 
   return {
+    'perfectScore': perfectScore,
     'bestNGuesses': guesses[:n],
     'avgScoreOsClass': avg_os_score,
     'fp': fp,
@@ -180,7 +183,6 @@ def tcpProcess(pkt, layer, ts):
 
     # http://www.iana.org/assignments/ip-parameters/ip-parameters.xml
     [ipVersion, ipHdrLen] = computeIP(ip4.v_hl)
-    [ethTTL, ttl] = computeNearTTL(ip4.ttl)
 
     # https://github.com/mike01/pypacker/blob/master/pypacker/layer3/ip.py
     ip_off = None
@@ -250,29 +252,23 @@ def computeIP(info):
   return [ipVersion, ipHdrLen]
 
 
-def computeNearTTL(info):
-  if info > 0 and info <= 16:
-    ttl = 16
-    ethTTL = 16
-  elif info > 16 and info <= 32:
-    ttl = 32 
-    ethTTL = 43
-  elif info > 32 and info <= 60:
-    ttl = 60 # unlikely to find many of these anymore
-    ethTTL = 64
-  elif info > 60 and info <= 64:
-    ttl = 64
-    ethTTL = 64
-  elif info > 64 and info <= 128:
-    ttl = 128
-    ethTTL = 128
-  elif info > 128:
-    ttl = 255
-    ethTTL = 255
-  else:
-    ttl = info
-    ethTTL = info
-  return [ethTTL, ttl]
+def computeNearTTL(ip_ttl):
+  guessed_ttl_start = ip_ttl
+
+  if ip_ttl > 0 and ip_ttl <= 16:
+    guessed_ttl_start = 16
+  elif ip_ttl > 16 and ip_ttl <= 32:
+    guessed_ttl_start = 32 
+  elif ip_ttl > 32 and ip_ttl <= 60:
+    guessed_ttl_start = 60 # unlikely to find many of these anymore
+  elif ip_ttl > 60 and ip_ttl <= 64:
+    guessed_ttl_start = 64
+  elif ip_ttl > 64 and ip_ttl <= 128:
+    guessed_ttl_start = 128
+  elif ip_ttl > 128:
+    guessed_ttl_start = 255
+
+  return guessed_ttl_start
 
 
 def computeIPOffset(info):
