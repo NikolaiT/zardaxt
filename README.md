@@ -20,7 +20,9 @@ This tool may be used to correlate an incoming TCP/IP connection with a operatin
 
 ## Real World Examples
 
-I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool. Here are the results:
+I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool. 
+
+Please forgive me, browserstack sometimes reduces the resolution of the screen recording for the devices. It's not my fault here :)
 
 ### Safari on iPhone 13
 
