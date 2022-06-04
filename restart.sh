@@ -18,10 +18,12 @@ pkill --echo -f "python tcp_fingerprint.py"
 # just so much better. Like I spent just too much time to figure this shit out:
 # https://stackoverflow.com/questions/48990067/how-to-run-a-cron-job-with-pipenv
 
-# `which pipenv`
-# /usr/local/bin/pipenv
-
 PATH=/usr/local/bin:$PATH
+
+# https://stackoverflow.com/questions/40216311/reading-in-environment-variables-from-an-environment-file
+set -a
+source tcpip_fp.env
+set +a
 
 nohup /usr/local/bin/pipenv run python tcp_fingerprint.py -i eth0 --classify > log/tcp_fp.out 2> log/tcp_fp.err < /dev/null &
 

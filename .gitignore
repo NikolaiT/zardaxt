@@ -8,3 +8,4 @@ fingerprints.json
 database/node_modules/
 fingerprintsOld.json
 database/db_June_2022.json
+tcpip_fp.env

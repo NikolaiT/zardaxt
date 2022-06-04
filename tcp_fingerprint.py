@@ -20,6 +20,7 @@ from api import run_api
 Author: Nikolai Tschacher
 Website: incolumitas.com
 Date: March/April 2021
+Update: May 2022
 
 Allows to fingerprint an incoming TCP/IP connection by the intial SYN packet.
 
@@ -230,7 +231,7 @@ def tcpProcess(pkt, layer, ts):
       if classify:
         global classifications
         classification = makeOsGuess(fingerprints[key])
-        # pprint.pprint(classification)
+        pprint.pprint(classification)
         classifications[pkt[ip.IP].src_s] = classification
         if len(classifications) > purgeClassificationAfter:
           print('Purge classifications dict')
@@ -257,7 +258,7 @@ def computeNearTTL(info):
     ttl = 32 
     ethTTL = 43
   elif info > 32 and info <= 60:
-    ttl = 60 #unlikely to find many of these anymore
+    ttl = 60 # unlikely to find many of these anymore
     ethTTL = 64
   elif info > 60 and info <= 64:
     ttl = 64

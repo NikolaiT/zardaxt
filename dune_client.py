@@ -1,4 +1,5 @@
 import requests
+import os
 
 # API client implementation
 counter = {
@@ -6,7 +7,7 @@ counter = {
     "data": {},
 }
 
-def incr(api, ip, push_after=50):
+def incr(api, ip, push_after=200):
     global counter
     counter['hits'] += 1
 
@@ -25,5 +26,7 @@ def incr(api, ip, push_after=50):
             'hits': 0,
             'data': {},
         }
-        response = requests.post('https://dune.incolumitas.com/update?key=ggbbKKss', json=payload)
+        api_key = os.environ.get('DUNE_API_KEY', '')
+        api_url = 'https://dune.incolumitas.com/update?key={}'.format(api_key)
+        response = requests.post(api_url, json=payload)
         print(response)

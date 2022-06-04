@@ -1,17 +1,22 @@
 ## Passive TCP/IP Fingerprinting
 
-This is a passive TCP/IP fingerprinting tool. Run this on your server and find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the 
-TCP 3-Way Handshake. Nothing else is considered.
+This is a passive TCP/IP fingerprinting tool. Run this on your server and find out what operating systems your clients are *really* using. This tool considers only the fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake. Nothing else is considered.
 
-Why?
+Why the rewrite?
 
 + [p0f](https://github.com/p0f/p0f) is dead. It's database is too old. Also: C is a bit overkill and hard to quickly hack in.
 + [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the *code* are awesome)
 + The actual statistics behind TCP/IP fingerprinting are more important than the tool itself. Therefore it makes sense to rewrite it.
 
+What can I do with this tool?
+
+This tool may be used to correlate an incoming TCP/IP connection with a operating system class. For example, It can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the User-Agent operating system.
+
 ### Demo
 
 [Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
+
+[API page](https://incolumitas.com/pages/TCP-IP-Fingerprint/)
 
 
 ### Real World Examples
@@ -48,11 +53,12 @@ Same here. MacOS scores a bit higher, but `zardax.py` gives a high rating for bo
 
 ![Windows 10 with Chrome](tcp-ip-fps/win10-chrome.png "Windows 10 with Chrome")
 
-### Example
+### Quick Example
 
 Classifying my Android smartphone:
 
 ```bash
+source tcpip_fp.env
 python tcp_fingerprint.py -i eth0 --classify
 
 Loaded 3203 fingerprints from the database
@@ -70,58 +76,6 @@ listening on interface eth0
                   {'os': 'Android', 'score': '9.0/10'}]}
 ```
 
-A iPhone (User-Agent: `iPhone; CPU iPhone OS 14_4_1 like Mac OS X`) visting my server. Based on the SYN fingerprint alone, it's not possible to discern whether it's an macOS device or iOS device. But the guess is accurate enough.
-
-```bash
-python tcp_fingerprint.py -i eth0 --classify
-
-Loaded 3203 fingerprints from the database
-listening on interface eth0
-
----------------------------------
-1616184541: 85.19.65.217:49988 -> 167.99.241.135:443 [SYN]
-{'avgScoreOsClass': {'Android': 'avg=4.18, N=36',
-                     'Linux': 'avg=3.31, N=99',
-                     'Windows': 'avg=3.36, N=365',
-                     'iOS': 'avg=6.95, N=20',
-                     'macOS': 'avg=7.26, N=189'},
- 'bestNGuesses': [{'os': 'macOS', 'score': '10.0/10'},
-                  {'os': 'macOS', 'score': '10.0/10'},
-                  {'os': 'macOS', 'score': '10.0/10'}]}
----------------------------------
-1616184541: 167.99.241.135:443 -> 85.19.65.217:49988 [SYN+ACK]
----------------------------------
-```
-
-And a Windows 10 (`Windows NT 10.0; Win64; x64`) device visiting my server:
-
-```json
-{
-  "bestNGuesses": [
-    {
-      "score": "10.0/10",
-      "os": "Windows"
-    },
-    {
-      "score": "10.0/10",
-      "os": "Windows"
-    },
-    {
-      "score": "10.0/10",
-      "os": "Windows"
-    }
-  ],
-  "avgScoreOsClass": {
-    "Windows": "avg=6.54, N=1019",
-    "Android": "avg=3.12, N=779",
-    "iOS": "avg=3.01, N=447",
-    "macOS": "avg=2.99, N=520",
-    "Linux": "avg=4.3, N=422",
-    "Chrome OS": "avg=3.75, N=8"
-  }
-}
-```
-
 ### Installation & Usage
 
 First clone the repo:
@@ -136,38 +90,54 @@ Setup with `pipenv`.
 
 ```
 pipenv shell
-
 pipenv install
+```
+
+Now you need to create an environment file called `tcpip_fp.env` with the following variable:
+
+```bash
+# tcpip_fp.env
+API_KEY='abcd1234' # set your API key here
 ```
 
 And run it
 
 ```bash
+source tcpip_fp.env
+
 python tcp_fingerprint.py -i eth0 --classify
 ```
 
 Or run in the background on your server
 
 ```bash
+source tcpip_fp.env
 py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
 nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
 ```
 
-## Api Support
+## API Support
 
 When you run `tcp_fingerprint.py`, the program automatically launches a simple web API that you can query. A http server is bound to `0.0.0.0:8249`. You can query it on `http://0.0.0.0:8249/classify`.
 
-It will return the last 500 classification results, IP addresses as keys. So your web application can comfortably query the most recent TCP/IP classification results like that
+If you want to query the TCP/IP fingerprint only for the client IP address, use 
 
 ```
 curl http://0.0.0.0:8249/classify
 ```
 
-If you want to query the TCP/IP fingerprint only for the client IP address, use 
+If you want to query all fingerprints in the API database, you have to specify the API key:
 
 ```
-curl http://0.0.0.0:8249/classify?by_ip=1
+curl http://0.0.0.0:8249/classify?key=abcd1234
 ```
+
+If you want to query/lookup a specific IP address (Example: 103.14.251.215), you will have to specify the IP address and the API key:
+
+```
+curl http://0.0.0.0:8249/classify?key=abcd1234&ip=103.14.251.215
+```
+
 
 ## Theory
 
