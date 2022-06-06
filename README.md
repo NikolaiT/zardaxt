@@ -74,7 +74,13 @@ Now you need to create an environment file called `tcpip_fp.env` with the follow
 API_KEY='abcd1234' # set your API key here
 ```
 
-And run it
+You can do so with this command:
+
+```bash
+echo "API_KEY='abcd1234'" > tcpip_fp.env
+```
+
+Now we can run Zardaxt.py:
 
 ```bash
 # load tcpip_fp.env file
@@ -92,8 +98,8 @@ Or run in the background on your server
 set -a
 source tcpip_fp.env
 set +a
-py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
-nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
+
+nohup python tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
 ```
 
 ## Quick Example
