@@ -44,6 +44,58 @@ Please forgive me, browserstack sometimes reduces the resolution of the screen r
 
 <img src="tcp-ip-fps/new/Chrome-Google-Pixel-6.png" width=50%>
 
+
+## Installation & Usage
+
+**Important:** I tested this only on my Ubuntu 20.04 server. Installation currently does not work on my MacBook Pro for example.
+
+First clone the repo:
+
+```bash
+# clone repo
+git clone https://github.com/NikolaiT/zardaxt
+# move into directory
+cd zardaxt
+```
+
+Setup with `pipenv`. You can also use `pew`.
+
+```bash
+# create a virtual environment
+pipenv shell --python python3
+# install packages
+pipenv install pypacker pcapy untangle requests
+```
+
+Now you need to create an environment file called `tcpip_fp.env` with the following variable:
+
+```bash
+# tcpip_fp.env
+API_KEY='abcd1234' # set your API key here
+```
+
+And run it
+
+```bash
+# load tcpip_fp.env file
+set -a
+source tcpip_fp.env
+set +a
+
+python tcp_fingerprint.py -i eth0 --classify
+```
+
+Or run in the background on your server
+
+```bash
+# load tcpip_fp.env file
+set -a
+source tcpip_fp.env
+set +a
+py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
+nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
+```
+
 ## Quick Example
 
 Classifying my Android smartphone:
@@ -97,52 +149,6 @@ listening on interface eth0
         'tcp_window_size': 65535,
         'ts': 1654345217},
  'perfectScore': 11.5}
-```
-
-## Installation & Usage
-
-First clone the repo:
-
-```bash
-git clone https://github.com/NikolaiT/zardaxt
-
-cd zardaxt
-```
-
-Setup with `pipenv`.
-
-```
-pipenv shell
-pipenv install
-```
-
-Now you need to create an environment file called `tcpip_fp.env` with the following variable:
-
-```bash
-# tcpip_fp.env
-API_KEY='abcd1234' # set your API key here
-```
-
-And run it
-
-```bash
-# load env variables
-set -a
-source tcpip_fp.env
-set +a
-
-python tcp_fingerprint.py -i eth0 --classify
-```
-
-Or run in the background on your server
-
-```bash
-# load env variables
-set -a
-source tcpip_fp.env
-set +a
-py=/root/.local/share/virtualenvs/satori-v7E0JF0G/bin/python
-nohup $py tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
 ```
 
 ## API Support

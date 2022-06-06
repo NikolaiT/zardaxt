@@ -26,7 +26,6 @@ def incr(api, ip, push_after=200):
             'hits': 0,
             'data': {},
         }
-        api_key = os.environ.get('DUNE_API_KEY', '')
+        api_key = os.environ.get('DUNE_API_KEY', 'DunePublicAPIKey')
         api_url = 'https://dune.incolumitas.com/update?key={}'.format(api_key)
         response = requests.post(api_url, json=payload)
-        print(response)
