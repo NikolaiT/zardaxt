@@ -37,7 +37,7 @@ class MyServer(BaseHTTPRequestHandler):
 
   def do_GET(self):
     ip = self.get_ip()
-    incr('tcp_ip_fingerprint', ip)
+    incr('tcp_ip_fingerprint_public', ip)
 
     try:
       if self.path.startswith('/classify'):
