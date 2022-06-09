@@ -27,7 +27,7 @@ class MyServer(BaseHTTPRequestHandler):
 
   def get_query_arg(self, arg):
     query_components = parse_qs(urlparse(self.path).query)
-    arg = query_components.get(arg)
+    arg = query_components.get(arg, None)
     if arg and len(arg) > 0:
       return arg[0].strip()
 
@@ -41,14 +41,17 @@ class MyServer(BaseHTTPRequestHandler):
 
     try:
       if self.path.startswith('/classify'):
-        global data
         self.send_response(200)
         self.send_header("Content-type", "text/json")
         self.end_headers()
         ip = self.get_ip()
-        if API_KEY in self.path:
+        log('Incoming API request from IP: {} with path: {}'.format(ip, self.path), 'api')
+        key = self.get_query_arg('key')
+
+        if key and API_KEY == key:
           lookup_ip = self.get_query_arg('ip')
           if lookup_ip:
+            log('Api Key provided. Looking up IP {}'.format(lookup_ip), 'api')
             res = self.data.get(lookup_ip, None)
             if res:
               res['ip'] = ip
@@ -58,10 +61,15 @@ class MyServer(BaseHTTPRequestHandler):
                 res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
               self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
             else:
-              self.wfile.write(bytes(json.dumps({'lookup_ip': lookup_ip, 'msg': 'no data for this IP'}, indent=2, sort_keys=True), "utf-8"))
+              msg = {
+                'lookup_ip': lookup_ip, 
+                'msg': 'no fingerprint for this IP ({} db entries)'.format(len(self.data)),
+              }
+              self.wfile.write(bytes(json.dumps(msg, indent=2, sort_keys=True), "utf-8"))
           else:
             self.wfile.write(bytes(json.dumps(self.data, indent=2, sort_keys=True), "utf-8"))
         else:
+          log('No Api Key provided. Looking up client IP {}'.format(ip), 'api')
           res = self.data.get(ip, None)
           if res:
             res['ip'] = ip
@@ -70,7 +78,11 @@ class MyServer(BaseHTTPRequestHandler):
               res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
             self.wfile.write(bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
           else:
-            self.wfile.write(bytes(json.dumps({'ip': ip, 'msg': 'no fingerprint for this IP'}, indent=2, sort_keys=True), "utf-8"))
+            msg = {
+              'ip': ip, 
+              'msg': 'no fingerprint for this IP ({} db entries)'.format(len(self.data)),
+            }
+            self.wfile.write(bytes(json.dumps(msg, indent=2, sort_keys=True), "utf-8"))
       else:
         self.send_response(403)
         self.end_headers()
@@ -78,15 +90,13 @@ class MyServer(BaseHTTPRequestHandler):
     except Exception as e:
       traceback_str = ''.join(traceback.format_tb(e.__traceback__))
       msg = f'do_GET() failed: {e} with traceback {traceback_str}'
-      log(msg, level='ERROR')
-      print(msg)
-
+      log(msg, 'api', level='ERROR')
 
 def create_server(data):
   server_address = ('0.0.0.0', 8249)
   handler = MyServer(data)
   httpd = HTTPServer(server_address, handler)
-  log("TCP/IP Fingerprint API started on http://%s:%s" % server_address, level='INFO')
+  log("TCP/IP Fingerprint API started on http://%s:%s" % server_address, 'api', level='INFO')
 
   try:
     httpd.serve_forever()
@@ -94,7 +104,7 @@ def create_server(data):
     pass
 
   httpd.server_close()
-  log("TCP/IP Fingerprint API stopped.", level='INFO')
+  log("TCP/IP Fingerprint API stopped.", 'api', level='INFO')
 
 
 def run_api(data):

@@ -14,13 +14,14 @@ import signal
 import json
 from pathlib import Path
 from tcp_options import decodeTCPOptions
+from tcpip_fp_logging import log
 from api import run_api
 
 """
 Author: Nikolai Tschacher
 Website: incolumitas.com
 Date: March/April 2021
-Update: May 2022
+Update: May/June 2022
 
 Allows to fingerprint an incoming TCP/IP connection by the intial SYN packet.
 
@@ -34,8 +35,9 @@ a huge mess (randomly failing code segments and capturing the errors, not good).
 
 classify = False
 writeAfter = 40
-# we don't want huge files, purge classification files after 100 entries
-purgeClassificationAfter = 500
+# after how many classifications the data structure should be reset?
+# we have to reset in order to prevent memory leaks
+purgeClassificationAfter = 1000
 interface = None
 verbose = False
 fingerprints = {}
@@ -45,7 +47,7 @@ dbList = []
 with open(databaseFile) as f:
   dbList = json.load(f)
 
-print('Loaded {} fingerprints from the database'.format(len(dbList)))
+log('Loaded {} fingerprints from the database'.format(len(dbList)), 'tcp_fingerprint')
 run_api(classifications)
 
 def makeOsGuess(fp, n=3):
@@ -133,7 +135,7 @@ def makeOsGuess(fp, n=3):
   }
 
 def updateFile():
-  print('writing fingerprints.json with {} objects...'.format(len(fingerprints)))
+  log('writing fingerprints.json with {} objects...'.format(len(fingerprints)), 'tcp_fingerprint')
   with open('fingerprints.json', 'w') as fp:
     json.dump(fingerprints, fp, indent=2, sort_keys=False)
 
@@ -178,8 +180,9 @@ def tcpProcess(pkt, layer, ts):
     if (tcp1.flags & tcp.TH_SYN) and (tcp1.flags & tcp.TH_ACK):
       label = 'SYN+ACK'
 
-    print("%d: %s:%s -> %s:%s [%s]" % (ts, pkt[ip.IP].src_s, pkt[tcp.TCP].sport,
-        pkt[ip.IP].dst_s, pkt[tcp.TCP].dport, label))
+    if verbose:
+      log("%d: %s:%s -> %s:%s [%s]" % (ts, pkt[ip.IP].src_s, pkt[tcp.TCP].sport,
+          pkt[ip.IP].dst_s, pkt[tcp.TCP].dport, label), 'tcp_fingerprint')
 
     # http://www.iana.org/assignments/ip-parameters/ip-parameters.xml
     [ipVersion, ipHdrLen] = computeIP(ip4.v_hl)
@@ -196,12 +199,12 @@ def tcpProcess(pkt, layer, ts):
     [tcpOpts, tcpTimeStamp, tcpTimeStampEchoReply, mss, windowScaling] = decodeTCPOptions(tcp1.opts)
 
     if verbose:
-      print('IP version={}, header length={}, TTL={}, df={}, mf={}, offset={}'.format(
+      log('IP version={}, header length={}, TTL={}, df={}, mf={}, offset={}'.format(
         ipVersion, ipHdrLen, ip4.ttl, df, mf, offset,
-      ))
-      print('TCP window size={}, flags={}, ack={}, header length={}, urp={}, options={}, time stamp={}, timestamp echo reply = {}, MSS={}'.format(
+      ), 'tcp_fingerprint')
+      log('TCP window size={}, flags={}, ack={}, header length={}, urp={}, options={}, time stamp={}, timestamp echo reply = {}, MSS={}'.format(
         tcp1.win, tcp1.flags, tcp1.ack, tcp1.off_x2, tcp1.urp, tcpOpts, tcpTimeStamp, tcpTimeStampEchoReply, mss
-      ))
+      ), 'tcp_fingerprint')
       
     if label == 'SYN':
       key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
@@ -233,17 +236,19 @@ def tcpProcess(pkt, layer, ts):
       if classify:
         global classifications
         classification = makeOsGuess(fingerprints[key])
-        pprint.pprint(classification)
+        if verbose:
+          pprint.pprint(classification)
+
         classifications[pkt[ip.IP].src_s] = classification
+        log('Classified SYN packet from IP={}'.format(pkt[ip.IP].src_s), 'tcp_fingerprint')
+
         if len(classifications) > purgeClassificationAfter:
-          print('Purge classifications dict')
+          log('Resetting classifications dict', 'tcp_fingerprint')
           classifications = {}
         
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
         updateFile()
-
-    print('---------------------------------')
 
 
 def computeIP(info):
@@ -312,7 +317,7 @@ def main():
   counter = 0
   startTime = time.time()
 
-  print('listening on interface {}'.format(interface))
+  log('listening on interface {}'.format(interface), 'tcp_fingerprint')
 
   try:
     preader = pcapy.open_live(interface, 65536, False, 1)
@@ -356,13 +361,13 @@ def main():
       raise
     except Exception as e:
       error_string = traceback.format_exc()
-      print(str(error_string))
+      log(str(error_string), 'tcp_fingerprint', level='ERROR')
 
   endTime = time.time()
   totalTime = endTime - startTime
 
   if verbose:
-    print ('Total Time: %s, Total Packets: %s, Packets/s: %s' % (totalTime, counter, counter / totalTime ))
+    log('Total Time: %s, Total Packets: %s, Packets/s: %s' % (totalTime, counter, counter / totalTime ), 'tcp_fingerprint')
 
 try:
   opts, args = getopt.getopt(sys.argv[1:], "i:v:c:", ['interface=', 'verbose', 'classify'])
@@ -382,7 +387,7 @@ try:
   if (__name__ == '__main__') and proceed:
     main()
   else:
-    print('Need to provide a pcap to read in or an interface to watch', end='\n', flush=True)
+    log('Need to provide a pcap to read in or an interface to watch', 'tcp_fingerprint')
     usage()
 except getopt.error:
   usage()
