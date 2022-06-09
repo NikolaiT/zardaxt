@@ -35,13 +35,13 @@ a huge mess (randomly failing code segments and capturing the errors, not good).
 
 classify = False
 writeAfter = 40
-# after how many classifications the data structure should be reset?
+# after how many classifications the data structure should be cleared
 # we have to reset in order to prevent memory leaks
-purgeClassificationAfter = 1000
+clearDictAfter = 3000
 interface = None
 verbose = False
 fingerprints = {}
-classifications = {}
+classifications = dict()
 databaseFile = './database/combinedJune2022.json'
 dbList = []
 with open(databaseFile) as f:
@@ -234,8 +234,6 @@ def tcpProcess(pkt, layer, ts):
       }
 
       if classify:
-        global classifications
-        global purgeClassificationAfter
         classification = makeOsGuess(fingerprints[key])
         if verbose:
           pprint.pprint(classification)
@@ -244,11 +242,11 @@ def tcpProcess(pkt, layer, ts):
         log('Classified SYN packet from IP={} [{}/{}]'.format(
           pkt[ip.IP].src_s,
           len(classifications),
-          purgeClassificationAfter), 'tcp_fingerprint')
+          clearDictAfter), 'tcp_fingerprint')
 
-        if len(classifications) > purgeClassificationAfter:
-          log('Resetting classifications dict', 'tcp_fingerprint')
-          classifications = {}
+        if len(classifications) > clearDictAfter:
+          log('Clearing classifications dict', 'tcp_fingerprint')
+          classifications.clear()
         
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:

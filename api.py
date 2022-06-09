@@ -92,6 +92,7 @@ class MyServer(BaseHTTPRequestHandler):
       msg = f'do_GET() failed: {e} with traceback {traceback_str}'
       log(msg, 'api', level='ERROR')
 
+
 def create_server(data):
   server_address = ('0.0.0.0', 8249)
   handler = MyServer(data)
@@ -108,4 +109,5 @@ def create_server(data):
 
 
 def run_api(data):
-  t = _thread.start_new_thread(create_server, (data, ))
+  thread = _thread.start_new_thread(create_server, (data, ))
+  return thread
