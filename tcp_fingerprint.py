@@ -241,8 +241,10 @@ def tcpProcess(pkt, layer, ts):
           pprint.pprint(classification)
 
         classifications[pkt[ip.IP].src_s] = classification
-        log('Classified SYN packet from IP={}'.format(pkt[ip.IP].src_s), 'tcp_fingerprint')
-        log('Database level {}/{}'.format(len(classifications), purgeClassificationAfter), 'tcp_fingerprint')
+        log('Classified SYN packet from IP={} [{}/{}]'.format(
+          pkt[ip.IP].src_s,
+          len(classifications),
+          purgeClassificationAfter), 'tcp_fingerprint')
 
         if len(classifications) > purgeClassificationAfter:
           log('Resetting classifications dict', 'tcp_fingerprint')
