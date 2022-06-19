@@ -214,7 +214,7 @@ def tcpProcess(pkt, layer, ts):
         'dst_ip': '{}'.format(pkt[ip.IP].dst_s),
         'src_port': '{}'.format(pkt[tcp.TCP].sport),
         'dst_port': '{}'.format(pkt[tcp.TCP].dport),
-        'ip_hdr_length': ip4.v_hl,
+        'ip_hdr_length': ipHdrLen,
         'ip_opts': ip4.opts,
         'ip_ttl': ip4.ttl,
         'ip_df': df,
