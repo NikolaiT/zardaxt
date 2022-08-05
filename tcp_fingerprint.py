@@ -21,7 +21,7 @@ from api import run_api
 Author: Nikolai Tschacher
 Website: incolumitas.com
 Date: March/April 2021
-Update: May/June 2022
+Update: August 2022
 
 Allows to fingerprint an incoming TCP/IP connection by the intial SYN packet.
 
@@ -33,6 +33,7 @@ However, the codebase of github.com/xnih/satori was quite frankly
 a huge mess (randomly failing code segments and capturing the errors, not good). 
 """
 
+# global variables
 classify = False
 writeAfter = 40
 # after how many classifications the data structure should be cleared
@@ -41,14 +42,9 @@ clearDictAfter = 3000
 interface = None
 verbose = False
 fingerprints = {}
-classifications = dict()
+classifications = {}
 databaseFile = './database/combinedJune2022.json'
 dbList = []
-with open(databaseFile) as f:
-  dbList = json.load(f)
-
-log('Loaded {} fingerprints from the database'.format(len(dbList)), 'tcp_fingerprint')
-run_api(classifications)
 
 def makeOsGuess(fp, n=3):
   """
@@ -145,7 +141,6 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler) # ctlr + c
 signal.signal(signal.SIGTSTP, signal_handler) # ctlr + z
-
 
 def tcpProcess(pkt, layer, ts):
   """
@@ -311,8 +306,8 @@ def usage():
     -n, --writeAfter  after how many SYN packets writing to the file""")
 
 def main():
-  #override some warning settings in pypacker.  May need to change this to .CRITICAL in the future, but for now we're trying .ERROR
-  #without this when parsing http for example we get "WARNINGS" when packets aren't quite right in the header.
+  # override some warning settings in pypacker.  May need to change this to .CRITICAL in the future, but for now we're trying .ERROR
+  # without this when parsing http for example we get "WARNINGS" when packets aren't quite right in the header.
   logger = pypacker.logging.getLogger("pypacker")
   pypacker.logger.setLevel(pypacker.logging.ERROR)
 
@@ -371,6 +366,8 @@ def main():
   if verbose:
     log('Total Time: %s, Total Packets: %s, Packets/s: %s' % (totalTime, counter, counter / totalTime ), 'tcp_fingerprint')
 
+
+# program entry point
 try:
   opts, args = getopt.getopt(sys.argv[1:], "i:v:c:", ['interface=', 'verbose', 'classify'])
   proceed = False
@@ -387,6 +384,13 @@ try:
       writeAfter = int(val)
 
   if (__name__ == '__main__') and proceed:
+    # load fingerprints into database
+    with open(databaseFile) as f:
+      dbList = json.load(f)
+    log('Loaded {} fingerprints from the database'.format(len(dbList)), 'tcp_fingerprint')
+    # run the API thread
+    run_api(classifications)
+    # run PCAP loop
     main()
   else:
     log('Need to provide a pcap to read in or an interface to watch', 'tcp_fingerprint')
