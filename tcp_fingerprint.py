@@ -250,9 +250,11 @@ def tcpProcess(pkt, layer, ts, packetReceived):
     elif label == 'SYN+ACK':
       key = '{}:{}'.format(pkt[ip.IP].dst_s, pkt[tcp.TCP].dport)
       if key in fingerprints:
-        fingerprints[key]['ack__tcp_timestamp_echo_reply'] = tcpTimeStampEchoReply
-        fingerprints[key]['ack__tcp_tcp_timestamp'] = tcpTimeStamp
-        fingerprints[key]['ack__packet_received'] = packetReceived
+        fingerprints[key]['ack'] = {
+          'tcp_timestamp_echo_reply': tcpTimeStampEchoReply,
+          'tcp_timestamp': tcpTimeStamp,
+          'packet_received': packetReceived
+        }
 
 
 def computeIP(info):
