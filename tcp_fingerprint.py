@@ -142,7 +142,7 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler) # ctlr + c
 signal.signal(signal.SIGTSTP, signal_handler) # ctlr + z
 
-def tcpProcess(pkt, layer, ts):
+def tcpProcess(pkt, layer, ts, packetReceived):
   """
   Understand this: https://www.keycdn.com/support/tcp-flags
 
@@ -204,6 +204,7 @@ def tcpProcess(pkt, layer, ts):
     if label == 'SYN':
       key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
       fingerprints[key] = {
+        'packet_received': packetReceived,
         'ts': ts,
         'src_ip': pkt[ip.IP].src_s,
         'dst_ip': '{}'.format(pkt[ip.IP].dst_s),
@@ -246,6 +247,12 @@ def tcpProcess(pkt, layer, ts):
       # update file once in a while
       if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
         updateFile()
+    elif label == 'SYN+ACK':
+      key = '{}:{}'.format(pkt[ip.IP].dst_s, pkt[tcp.TCP].dport)
+      if key in fingerprints:
+        fingerprints[key]['ack__tcp_timestamp_echo_reply'] = tcpTimeStampEchoReply
+        fingerprints[key]['ack__tcp_tcp_timestamp'] = tcpTimeStamp
+        fingerprints[key]['ack__packet_received'] = packetReceived
 
 
 def computeIP(info):
@@ -328,6 +335,7 @@ def main():
       counter = counter + 1
       (header, buf) = preader.next()
       ts = header.getts()[0]
+      packetReceived = time.time()
 
       tcpPacket = False
       pkt = None
@@ -352,7 +360,7 @@ def main():
           tcpPacket = True
 
       if tcpPacket and pkt and layer:
-        tcpProcess(pkt, layer, ts)
+        tcpProcess(pkt, layer, ts, packetReceived)
 
     except (KeyboardInterrupt, SystemExit):
       raise
