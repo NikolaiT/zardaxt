@@ -256,13 +256,24 @@ def tcpProcess(pkt, layer, ts, packetReceived):
       updateFile()
 
   elif label == 'ACK':
-    # Here we take timestamp samples from the client
+    # Here we take timestamp samples from the client. We only regard timestamps from 
+    # ACK segments from the client ---> server.
+
+    # RFC 1323 specifies timestamps must be monotonically increasing, and tick between 1 ms and 1 second.
+    # The starting value for the timestamp is not explicitly specified, however many network stack implementations
+    # use a systems uptime to calculate the timestamp. [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
+
     # Read https://www.rfc-editor.org/rfc/rfc1323#section-4 in order to understand
-    # how TCP timestamps work
-    # We only take a new timestamp sample if the timestamp increases, otherwise
+    # how TCP timestamps work. 
+
+    # We only take new timestamp samples, if the timestamp increases, otherwise
     # there is no further information to extract from identical timestamps (I guess 
     # this happens because TCP/IP stacks fire out segments with the same TCP timestamp)
-    # Most commonly, timestamps are in MS (millieseconds), but this is not always the case
+    # Most commonly, timestamps are in MS (millieseconds) (which means the frequency is 1000hz), but this is not always the case.
+
+    # If we managed to infer the frequency (hz) of at least two timestamps, we will infer the likely exact 
+    # frequency and then we compute the uptime. For most modern systems, uptime computation will be wrong:
+    # On Linux the TCP timestamp feature can be controlled with the net.ipv4.tcp_timestamp kernel parameter. Normally the option can either be enabled (1) or disabled (0), however more recent kernels also have an option to add a random offset which will effectively hide the systems uptime [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
     key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
     if key in fingerprints:
       if not key in timestamps:
