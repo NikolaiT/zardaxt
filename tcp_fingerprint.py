@@ -253,6 +253,8 @@ def tcpProcess(pkt, layer, ts, packetReceived):
       if len(classifications) > clearDictAfter:
         log('Clearing classifications dict', 'tcp_fingerprint')
         classifications.clear()
+        fingerprints.clear()
+        timestamps.clear()
       
     # update file once in a while
     if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
@@ -283,15 +285,24 @@ def tcpProcess(pkt, layer, ts, packetReceived):
       if len(timestamps[key]) >= 2:
         samples = list(timestamps[key].items())
         first, last = samples[0], samples[-1]
-        hertz_observed = (last[0] - first[0]) / (last[1] - first[1])
+        delta_tcp_ts = last[0] - first[0]
+        delta_clock = last[1] - first[1]
+        hertz_observed = delta_tcp_ts / delta_clock
         hertz = computeNearTimestampTick(hertz_observed)
         fingerprints[key]['uptime_interpolation'] = {
           'hz_observed': hertz_observed,
           'hz': hertz,
-          'num_timestamps': len(samples)
+          'num_timestamps': len(samples),
         }
+        uptime = None
         if isinstance(hertz, int):
-          fingerprints[key]['uptime_interpolation']['uptime'] = str(timedelta(seconds=first[0] / hertz))
+          uptime = first[0] / hertz
+        else:
+          uptime = first[0] / hertz_observed
+
+        if uptime:
+          fingerprints[key]['uptime_interpolation']['uptime'] = str(timedelta(seconds=uptime))
+
 
 
 def addTimestamp(key, tcp_ts, packetReceived):
@@ -332,15 +343,15 @@ def computeNearTimestampTick(hertz_observed):
 
   Theory: https://www.rfc-editor.org/rfc/rfc1323#section-4
 
-  So far, what I have seen in the wild is 1000hz, 100hz and 10hz
+  So far, what I have seen in the wild is 1000hz, 250hz, 100hz and 10hz
   """
-  if hertz_observed > 500 and hertz_observed < 1500:
+  if hertz_observed > 800 and hertz_observed < 1200:
     return 1000
 
-  if hertz_observed > 245 and hertz_observed < 255:
+  if hertz_observed > 240 and hertz_observed < 260:
     return 250
 
-  if hertz_observed > 50 and hertz_observed < 150:
+  if hertz_observed > 90 and hertz_observed < 110:
     return 100
 
   if hertz_observed > 5 and hertz_observed < 15:
@@ -388,7 +399,7 @@ def main():
   pypacker.logger.setLevel(pypacker.logging.ERROR)
 
   counter = 0
-  startTime = time.time()
+  startTime = time.perf_counter()
 
   log('listening on interface {}'.format(interface), 'tcp_fingerprint')
 
@@ -404,7 +415,7 @@ def main():
       counter = counter + 1
       (header, buf) = preader.next()
       ts = header.getts()[0]
-      packetReceived = time.time()
+      packetReceived = time.perf_counter()
 
       tcpPacket = False
       pkt = None
@@ -437,7 +448,7 @@ def main():
       error_string = traceback.format_exc()
       log(str(error_string), 'tcp_fingerprint', level='ERROR')
 
-  endTime = time.time()
+  endTime = time.perf_counter()
   totalTime = endTime - startTime
 
   if verbose:
