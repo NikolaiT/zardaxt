@@ -236,6 +236,9 @@ def tcpProcess(pkt, layer, ts, packetReceived):
       'tcp_mss': mss
     }
 
+    # add tcp ts from syn packet
+    addTimestamp(key, tcpTimeStamp, packetReceived)
+
     if classify:
       classification = makeOsGuess(fingerprints[key])
       if verbose:
@@ -276,17 +279,26 @@ def tcpProcess(pkt, layer, ts, packetReceived):
     # On Linux the TCP timestamp feature can be controlled with the net.ipv4.tcp_timestamp kernel parameter. Normally the option can either be enabled (1) or disabled (0), however more recent kernels also have an option to add a random offset which will effectively hide the systems uptime [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
     key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
     if key in fingerprints:
-      if not key in timestamps:
-        timestamps[key] = dict()
-      elif len(timestamps[key]) <= 20:
-          timestamps[key][tcpTimeStamp] = packetReceived
-          if len(timestamps[key]) >= 2:
-            samples = list(timestamps[key].items())
-            first, last = samples[0], samples[-1]
-            hertz_estimate = (last[0] - first[0]) / (last[1] - first[1])
-            hertz = computeNearTimestampTick(hertz_estimate)
-            fingerprints[key]['hz'] = hertz
-            fingerprints[key]['uptime'] = str(timedelta(seconds=first[0] / hertz))
+      addTimestamp(key, tcpTimeStamp, packetReceived)
+      if len(timestamps[key]) >= 2:
+        samples = list(timestamps[key].items())
+        first, last = samples[0], samples[-1]
+        hertz_observed = (last[0] - first[0]) / (last[1] - first[1])
+        hertz = computeNearTimestampTick(hertz_observed)
+        fingerprints[key]['uptime_interpolation'] = {
+          'hz_observed': hertz_observed,
+          'hz': hertz,
+          'num_timestamps': len(samples)
+        }
+        if isinstance(hertz, int):
+          fingerprints[key]['uptime_interpolation']['uptime'] = str(timedelta(seconds=first[0] / hertz))
+
+
+def addTimestamp(key, tcp_ts, packetReceived):
+  if not key in timestamps:
+    timestamps[key] = dict()
+  elif len(timestamps[key]) <= 20:
+      timestamps[key][tcp_ts] = packetReceived
 
 
 def computeIP(info):
@@ -314,7 +326,7 @@ def computeNearTTL(ip_ttl):
   return guessed_ttl_start
 
 
-def computeNearTimestampTick(hz_estimate):
+def computeNearTimestampTick(hertz_observed):
   """
   Guess what the TCP timestmap tick must have been from measurements
 
@@ -322,13 +334,16 @@ def computeNearTimestampTick(hz_estimate):
 
   So far, what I have seen in the wild is 1000hz, 100hz and 10hz
   """
-  if hz_estimate > 500 and hz_estimate < 1500:
+  if hertz_observed > 500 and hertz_observed < 1500:
     return 1000
 
-  if hz_estimate > 50 and hz_estimate < 150:
+  if hertz_observed > 245 and hertz_observed < 255:
+    return 250
+
+  if hertz_observed > 50 and hertz_observed < 150:
     return 100
 
-  if hz_estimate > 5 and hz_estimate < 15:
+  if hertz_observed > 5 and hertz_observed < 15:
     return 10
 
   return 'unknown'
