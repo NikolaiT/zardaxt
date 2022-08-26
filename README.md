@@ -2,7 +2,7 @@
 
 [Live Demo](https://tcpip.incolumitas.com/classify?by_ip=1)
 
-Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers the fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake. Furthermore, in order to interpolate the [uptime via TCP timestamps](https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html), the [TCP Timestamp](https://www.rfc-editor.org/rfc/rfc1323#section-4) from a couple of consecutive TCP segments is taken.
+Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers the fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake. Furthermore, in order to interpolate the [uptime via TCP timestamps](https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html), the [TCP timestamp](https://www.rfc-editor.org/rfc/rfc1323#section-4) from a couple of consecutive TCP segments is taken.
 
 **Why the rewrite?**
 
