@@ -322,7 +322,11 @@ def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply):
     deltas = []
     if len(tss) > 2:
       for i in range(len(tss) - 1):
-        rtt = int(tss[i+1]) - int(tss[i])
+        rtt = '{}-{}'.format(tss[i+1], tss[i])
+        try:
+          rtt = int(tss[i+1]) - int(tss[i])
+        except Exception as e:
+          pass
         real = ticks[i+1] - ticks[i]
         deltas.append('rtt={}, clock={}'.format(rtt, real))
 
