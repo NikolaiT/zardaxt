@@ -286,21 +286,21 @@ def tcpProcess(pkt, layer, ts, packetReceived):
       tss = timestamps[key].get('timestamps', [])
       ticks = timestamps[key].get('clock_ticks', [])
       if len(tss) >= 2:
-        delta_tcp_ts = tss[0] - tss[0]
-        delta_clock = ticks[1] - ticks[1]
+        delta_tcp_ts = tss[1] - tss[0]
+        delta_clock = ticks[1] - ticks[0]
         hertz_observed = delta_tcp_ts / delta_clock
         hertz = computeNearTimestampTick(hertz_observed)
         fingerprints[key]['uptime_interpolation'] = {
           'hz_observed': hertz_observed,
           'hz': hertz,
-          'num_timestamps': len(samples),
+          'num_timestamps': len(tss),
           'data': timestamps[key]
         }
         uptime = None
         if isinstance(hertz, int):
-          uptime = first[0] / hertz
+          uptime = tss[0] / hertz
         else:
-          uptime = first[0] / hertz_observed
+          uptime = tss[0] / hertz_observed
 
         if uptime:
           fingerprints[key]['uptime_interpolation']['uptime'] = str(timedelta(seconds=uptime))
