@@ -217,3 +217,30 @@ Sources:
 + `TCP.sequence_number (32 bits)` - If the SYN flag is set (1), then this is the initial sequence number. It is conjectured that different operating systems use different initial sequence numbers, but the initial sequence number is most likely randomly chosen. Therefore this field is most likely of no particular help regarding fingerprinting.
 + `TCP.urgent_pointer (16 bits)` - If the URG flag is set, then this 16-bit field is an offset from the sequence number indicating the last urgent data byte. It *should* be zero in initial SYN packets.
 + `TCP.options (Variable 0-320 bits)` - All TCP Options. The length of this field is determined by the data offset field. Contains a lot of information, but most importantly: The Maximum Segment Size (MSS), the Window scale value. Because the TCP options data is variable in size, it is the most important source of entropy to distinguish operating systems. The order of the TCP options is also taken into account.
+
+### TCP Timestamp Mechanism
+
+Source: <https://www.networkdatapedia.com/post/2018/10/08/how-tcp-works-the-timestamp-option>
+
+What is a TCP Timestamp?
+
+The timestamps option in TCP enables the endpoints to keep a current measurement of the roundtrip time (RTT) of the network between them. This value helps each TCP stack to set and adjust its retransmission timer. There are other benefits, but RTT measurement is the major one.
+
+How it works.
+
+Each end of the connection derives a 4-byte increasing value. This value is unique to each side and has no real numerical significance. The opposite end does not care what the value is, it will simply echo it back to the original sender. The original sender can then measure the timing between the packet(s) that were sent and received with this unique value.
+
+The value used by each end will be increased as the connection goes along. Many TCP implementations will add the measured network RTT value (in milliseconds) to the 4-byte timestamp and use this new number for the next segment to be sent.
+
+Put differently:
+
+If both hosts support the TCP Timestamp mechanism, the initiating host will send a TCP timestamp value and the receiving host will echo this value, while at the same time sending it's own timestamp value. This allows both hosts to infer the RTT of the connection.
+
+After the timestamp value was echoed to the host, it will add the RTT to the first value as next value of the TCP timestamp mechanism.
+
+What is interesting from a fingerprinting perspective is not the actual RTT (maybe only to infer the type of network, or whether the RTT is stable), but more the following things:
+
+1. How does the client choose to increase the timestamp value? Does the client increase the timestamp by the measure RTT? `timestamp_increase_type`
+2. What is the frequency of the timestamp value? Is it 100hz, 250hz, or 1000hz? `timestamp_frequency`
+
+Theory: <https://www.rfc-editor.org/rfc/rfc1323>
