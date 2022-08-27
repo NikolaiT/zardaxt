@@ -313,7 +313,7 @@ def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply):
       'timestamp_echo_replies' :[tcp_timestamp_echo_reply],
       'clock_ticks': [packetReceived]
     }
-  elif len(timestamps[key]) <= 20:
+  elif len(timestamps[key].get('timestamps', [])) <= 20:
     timestamps[key]['timestamps'].append(tcp_timestamp)
     timestamps[key]['timestamp_echo_replies'].append(tcp_timestamp_echo_reply)
     timestamps[key]['clock_ticks'].append(packetReceived)
