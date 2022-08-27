@@ -237,7 +237,7 @@ def tcpProcess(pkt, layer, ts, packetReceived):
     }
 
     # add tcp ts from syn packet
-    addTimestamp(key, packetReceived, tcpTimeStamp, tcpTimeStampEchoReply)
+    addTimestamp(key, packetReceived, tcpTimeStamp, tcpTimeStampEchoReply, tcp1.seq)
 
     if classify:
       classification = makeOsGuess(fingerprints[key])
@@ -282,12 +282,12 @@ def tcpProcess(pkt, layer, ts, packetReceived):
     key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
     # this line makes sure that we alrady got the initial SYN packet
     if key in fingerprints:
-      addTimestamp(key, packetReceived, tcpTimeStamp, tcpTimeStampEchoReply)
+      addTimestamp(key, packetReceived, tcpTimeStamp, tcpTimeStampEchoReply, tcp1.seq)
       tss = timestamps[key].get('timestamps', [])
       ticks = timestamps[key].get('clock_ticks', [])
-      if len(tss) >= 2:
-        delta_tcp_ts = tss[1] - tss[0]
-        delta_clock = ticks[1] - ticks[0]
+      if len(tss) >= 2 and isInt(tss[-1]) and isInt(tss[0]):
+        delta_tcp_ts = tss[-1] - tss[0]
+        delta_clock = ticks[-1] - ticks[0]
         hertz_observed = delta_tcp_ts / delta_clock
         hertz = computeNearTimestampTick(hertz_observed)
         fingerprints[key]['uptime_interpolation'] = {
@@ -306,17 +306,19 @@ def tcpProcess(pkt, layer, ts, packetReceived):
           fingerprints[key]['uptime_interpolation']['uptime'] = str(timedelta(seconds=uptime))
 
 
-def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply):
+def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply, tcp_seq):
   if not key in timestamps:
     timestamps[key] = {
       'timestamps': [tcp_timestamp],
       'timestamp_echo_replies' :[tcp_timestamp_echo_reply],
       'clock_ticks': [packetReceived],
+      'seq_nums': [tcp_seq]
     }
   elif len(timestamps[key].get('timestamps', [])) <= 20:
     timestamps[key]['timestamps'].append(tcp_timestamp)
     timestamps[key]['timestamp_echo_replies'].append(tcp_timestamp_echo_reply)
     timestamps[key]['clock_ticks'].append(packetReceived)
+    timestamps[key]['seq_nums'].append(tcp_seq)
     tss = timestamps[key].get('timestamps', [])
     ticks = timestamps[key].get('clock_ticks', [])
     deltas = []
@@ -353,6 +355,14 @@ def computeNearTTL(ip_ttl):
     guessed_ttl_start = 255
 
   return guessed_ttl_start
+
+
+def isInt(test):
+  try:
+    int(test)
+    return True
+  except ValueError:
+    return False
 
 
 def computeNearTimestampTick(hertz_observed):
