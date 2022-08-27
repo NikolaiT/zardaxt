@@ -314,9 +314,9 @@ def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply):
       'clock_ticks': [packetReceived]
     }
   elif len(timestamps[key]) <= 20:
-    timestamps[key]['timestamps'].push(tcp_timestamp)
-    timestamps[key]['timestamp_echo_replies'].push(tcp_timestamp_echo_reply)
-    timestamps[key]['clock_ticks'].push(packetReceived)
+    timestamps[key]['timestamps'].append(tcp_timestamp)
+    timestamps[key]['timestamp_echo_replies'].append(tcp_timestamp_echo_reply)
+    timestamps[key]['clock_ticks'].append(packetReceived)
 
 
 def computeIP(info):
