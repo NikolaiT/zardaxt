@@ -237,7 +237,7 @@ def tcpProcess(pkt, layer, ts, packetReceived):
     }
 
     # add tcp ts from syn packet
-    addTimestamp(key, tcpTimeStamp, packetReceived)
+    addTimestamp(key, packetReceived, tcpTimeStamp, tcpTimeStampEchoReply)
 
     if classify:
       classification = makeOsGuess(fingerprints[key])
@@ -280,19 +280,21 @@ def tcpProcess(pkt, layer, ts, packetReceived):
     # frequency and then we compute the uptime. For most modern systems, uptime computation will be wrong:
     # On Linux the TCP timestamp feature can be controlled with the net.ipv4.tcp_timestamp kernel parameter. Normally the option can either be enabled (1) or disabled (0), however more recent kernels also have an option to add a random offset which will effectively hide the systems uptime [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
     key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
+    # this line makes sure that we alrady got the initial SYN packet
     if key in fingerprints:
-      addTimestamp(key, tcpTimeStamp, packetReceived)
-      if len(timestamps[key]) >= 2:
-        samples = list(timestamps[key].items())
-        first, last = samples[0], samples[-1]
-        delta_tcp_ts = last[0] - first[0]
-        delta_clock = last[1] - first[1]
+      addTimestamp(key, packetReceived, tcpTimeStamp, tcpTimeStampEchoReply)
+      tss = timestamps[key].get('timestamps', [])
+      ticks = timestamps[key].get('clock_ticks', [])
+      if len(tss) >= 2:
+        delta_tcp_ts = tss[0] - tss[0]
+        delta_clock = ticks[1] - ticks[1]
         hertz_observed = delta_tcp_ts / delta_clock
         hertz = computeNearTimestampTick(hertz_observed)
         fingerprints[key]['uptime_interpolation'] = {
           'hz_observed': hertz_observed,
           'hz': hertz,
           'num_timestamps': len(samples),
+          'data': timestamps[key]
         }
         uptime = None
         if isinstance(hertz, int):
@@ -304,12 +306,17 @@ def tcpProcess(pkt, layer, ts, packetReceived):
           fingerprints[key]['uptime_interpolation']['uptime'] = str(timedelta(seconds=uptime))
 
 
-
-def addTimestamp(key, tcp_ts, packetReceived):
+def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply):
   if not key in timestamps:
-    timestamps[key] = dict()
+    timestamps[key] = {
+      'timestamps': [tcp_timestamp],
+      'timestamp_echo_replies' :[tcp_timestamp_echo_reply],
+      'clock_ticks': [packetReceived]
+    }
   elif len(timestamps[key]) <= 20:
-      timestamps[key][tcp_ts] = packetReceived
+    timestamps[key]['timestamps'].push(tcp_timestamp)
+    timestamps[key]['timestamp_echo_replies'].push(tcp_timestamp_echo_reply)
+    timestamps[key]['clock_ticks'].push(packetReceived)
 
 
 def computeIP(info):
