@@ -311,12 +311,23 @@ def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply):
     timestamps[key] = {
       'timestamps': [tcp_timestamp],
       'timestamp_echo_replies' :[tcp_timestamp_echo_reply],
-      'clock_ticks': [packetReceived]
+      'clock_ticks': [packetReceived],
     }
   elif len(timestamps[key].get('timestamps', [])) <= 20:
     timestamps[key]['timestamps'].append(tcp_timestamp)
     timestamps[key]['timestamp_echo_replies'].append(tcp_timestamp_echo_reply)
     timestamps[key]['clock_ticks'].append(packetReceived)
+    tss = timestamps[key].get('timestamps', [])
+    ticks = timestamps[key].get('clock_ticks', [])
+    deltas = []
+    if len(tss) > 2:
+      for i in range(len(tss) - 1):
+        rtt = int(tss[i+1]) - int(tss[i])
+        real = ticks[i+1] - ticks[i]
+        deltas.append('rtt={}, clock={}'.format(rtt, real))
+
+    timestamps[key]['deltas'] = deltas
+
 
 
 def computeIP(info):
