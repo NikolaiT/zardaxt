@@ -36,7 +36,7 @@ a huge mess (randomly failing code segments and capturing the errors, not good).
 
 # global variables
 classify = False
-writeAfter = 40
+writeAfter = 100
 # after how many classifications the data structure should be cleared
 # we have to reset in order to prevent memory leaks
 clearDictAfter = 3000
@@ -294,7 +294,7 @@ def tcpProcess(pkt, layer, ts, packetReceived):
           'hz_observed': hertz_observed,
           'hz': hertz,
           'num_timestamps': len(tss),
-          'data': timestamps[key]
+          # 'data': timestamps[key]
         }
         uptime = None
         if isinstance(hertz, int):
