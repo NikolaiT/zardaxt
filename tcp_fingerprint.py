@@ -312,7 +312,8 @@ def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply, t
       'timestamps': [tcp_timestamp],
       'timestamp_echo_replies' :[tcp_timestamp_echo_reply],
       'clock_ticks': [packetReceived],
-      'seq_nums': [tcp_seq]
+      'seq_nums': [tcp_seq],
+      'deltas':[]
     }
   elif len(timestamps[key].get('timestamps', [])) <= 20:
     timestamps[key]['timestamps'].append(tcp_timestamp)
@@ -321,13 +322,13 @@ def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply, t
     timestamps[key]['seq_nums'].append(tcp_seq)
     tss = timestamps[key].get('timestamps', [])
     ticks = timestamps[key].get('clock_ticks', [])
-    deltas = []
-    if len(tss) > 2:
-      for i in range(len(tss) - 1):
-        rtt = int(tss[i+1]) - int(tss[i])
-        real = ticks[i+1] - ticks[i]
-        deltas.append('rtt={}, clock={}'.format(rtt, real))
-
+    deltas = timestamps[key].get('deltas', [])
+    if len(tss) >= 2:
+      i = len(tss)-2
+      rtt = int(tss[i+1]) - int(tss[i])
+      real = ticks[i+1] - ticks[i]
+      deltas.append('rtt={}, clock={}'.format(rtt, real))
+      
     timestamps[key]['deltas'] = deltas
 
 
