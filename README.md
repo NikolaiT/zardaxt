@@ -63,6 +63,9 @@ cd zardaxt
 Setup with `pipenv`. You can also use `pew`.
 
 ```bash
+# install dependencies
+apt install -y libpcap-dev
+
 # create a virtual environment
 pipenv shell --python python3
 # install packages
