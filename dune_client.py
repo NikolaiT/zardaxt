@@ -7,6 +7,7 @@ counter = {
     "data": {},
 }
 
+
 def incr(api, ip, push_after=200):
     global counter
     counter['hits'] += 1
