@@ -284,30 +284,31 @@ def tcpProcess(pkt, ts, packetReceived):
         key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
         # this line makes sure that we alrady got the initial SYN packet
         if key in fingerprints:
-            addTimestamp(key, packetReceived, tcpTimeStamp,
-                         tcpTimeStampEchoReply, tcp1.seq)
-            tss = timestamps[key].get('timestamps', [])
-            ticks = timestamps[key].get('clock_ticks', [])
-            if len(tss) >= 2 and isInt(tss[-1]) and isInt(tss[0]):
-                delta_tcp_ts = tss[-1] - tss[0]
-                delta_clock = ticks[-1] - ticks[0]
-                hertz_observed = delta_tcp_ts / delta_clock
-                hertz = computeNearTimestampTick(hertz_observed)
-                fingerprints[key]['uptime_interpolation'] = {
-                    'hz_observed': hertz_observed,
-                    'hz': hertz,
-                    'num_timestamps': len(tss),
-                    # 'data': timestamps[key]
-                }
-                uptime = None
-                if isinstance(hertz, int):
-                    uptime = tss[0] / hertz
-                else:
-                    uptime = tss[0] / hertz_observed
+            if tcpTimeStamp and isInt(tcpTimeStamp):
+                addTimestamp(key, packetReceived, tcpTimeStamp,
+                             tcpTimeStampEchoReply, tcp1.seq)
+                if key in timestamps:
+                    tss = timestamps[key].get('timestamps', [])
+                    ticks = timestamps[key].get('clock_ticks', [])
+                    if len(tss) >= 2 and isInt(tss[-1]) and isInt(tss[0]):
+                        delta_tcp_ts = tss[-1] - tss[0]
+                        delta_clock = ticks[-1] - ticks[0]
+                        hertz_observed = delta_tcp_ts / delta_clock
+                        hertz = computeNearTimestampTick(hertz_observed)
+                        fingerprints[key]['uptime_interpolation'] = {
+                            'hz_observed': hertz_observed,
+                            'hz': hertz,
+                            'num_timestamps': len(tss),
+                        }
+                        uptime = None
+                        if isinstance(hertz, int):
+                            uptime = tss[0] / hertz
+                        else:
+                            uptime = tss[0] / hertz_observed
 
-                if uptime:
-                    fingerprints[key]['uptime_interpolation']['uptime'] = str(
-                        timedelta(seconds=uptime))
+                        if uptime:
+                            fingerprints[key]['uptime_interpolation']['uptime'] = str(
+                                timedelta(seconds=uptime))
 
 
 def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply, tcp_seq):
@@ -329,9 +330,13 @@ def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply, t
         deltas = []
         if len(tss) > 2:
             for i in range(len(tss) - 1):
-                rtt = int(tss[i+1]) - int(tss[i])
-                real = ticks[i+1] - ticks[i]
-                deltas.append('rtt={}, clock={}'.format(rtt, real))
+                try:
+                    rtt = int(tss[i+1]) - int(tss[i])
+                    real = ticks[i+1] - ticks[i]
+                    deltas.append('rtt={}, clock={}'.format(rtt, real))
+                except Exception as err:
+                    log('error: {}, tss: {}'.format(str(err), str(tss)),
+                        'tcp_fingerprint', level='ERROR')
 
         timestamps[key]['deltas'] = deltas
 
