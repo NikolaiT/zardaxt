@@ -37,7 +37,7 @@ classify = False
 writeAfter = 100
 # after how many classifications the data structure should be cleared
 # we have to reset in order to prevent memory leaks
-clearDictAfter = 3000
+clearDictAfter = 10000
 interface = None
 verbose = False
 fingerprints = {}

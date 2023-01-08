@@ -79,10 +79,6 @@ class MyServer(BaseHTTPRequestHandler):
             if res:
                 res['ip'] = ip
                 res['lookup_ip'] = lookup_ip
-                res['vpn_detected'] = False
-                if 'fp' in res and 'tcp_mss' in res['fp']:
-                    res['vpn_detected'] = res['fp']['tcp_mss'] in [
-                        1240, 1361, 1289]
                 self.wfile.write(
                     bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
             else:
@@ -101,10 +97,7 @@ class MyServer(BaseHTTPRequestHandler):
         res = self.data.get(ip, None)
         if res:
             res['ip'] = ip
-            res['vpn_detected'] = False
             res['os_mismatch'] = self.detect_os_mismatch(res)
-            if 'fp' in res and 'tcp_mss' in res['fp']:
-                res['vpn_detected'] = res['fp']['tcp_mss'] in [1240, 1361, 1289]
             self.wfile.write(
                 bytes(json.dumps(res, indent=2, sort_keys=True), "utf-8"))
         else:
