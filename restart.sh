@@ -2,6 +2,9 @@
 
 cd /root/tcp_fingerprint
 
+# purge log files for size reasons
+rm /root/tcp_fingerprint/log/*;
+
 if [ -f /var/run/tcp_fingerprint.pid ]
 then
   kill `cat /var/run/tcp_fingerprint.pid`
