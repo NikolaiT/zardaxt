@@ -20,7 +20,7 @@ from api import run_api
 Author: Nikolai Tschacher
 Website: incolumitas.com
 Date: March/April 2021
-Update: September 2022
+Update: January 2023
 
 Allows to fingerprint an incoming TCP/IP connection by the intial SYN packet.
 
@@ -43,7 +43,7 @@ verbose = False
 fingerprints = {}
 timestamps = {}
 classifications = {}
-databaseFile = './database/combinedJune2022.json'
+databaseFile = './database/January2023Cleaned.json'
 dbList = []
 
 

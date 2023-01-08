@@ -6,9 +6,11 @@ fp/*
 fp/
 fingerprints.json
 database/node_modules/
+database/January2023.json
 fingerprintsOld.json
 database/db_June_2022.json
 tcpip_fp.env
 __pycache__
 __pycache__/
 .DS_Store
+download.sh
