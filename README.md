@@ -21,32 +21,6 @@ If the key `os_mismatch` is true, then the TCP/IP inferred OS is different from 
 + [Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
 + [API page](https://incolumitas.com/pages/TCP-IP-Fingerprint/)
 
-## Real World Examples
-
-I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool.
-
-Please forgive me, browserstack sometimes reduces the resolution of the screen recording for the devices. It's not my fault here :)
-
-### Safari on iPhone 13
-
-<img src="tcp-ip-fps/new/iPhone-13-Safari.png" width=50%>
-
-### Chrome on Galaxy S22
-
-<img src="tcp-ip-fps/new/Chrome-Galaxy-S22.png" width=50%>
-
-### Edge on Windows 11
-
-<img src="tcp-ip-fps/new/Edge-Windows-11.png" width=40%>
-
-### Chrome 102 on Windows 7
-
-<img src="tcp-ip-fps/new/Chrome-102-Windows-7.png" width=40%>
-
-### Chrome on Google Pixel 6
-
-<img src="tcp-ip-fps/new/Chrome-Google-Pixel-6.png" width=50%>
-
 ## Installation & Usage
 
 **Important:** I tested this only on my Ubuntu 20.04 server. Installation currently does not work on my MacBook Pro for example.
@@ -105,6 +79,33 @@ set +a
 
 nohup python tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
 ```
+
+## Real World Examples
+
+I tested the TCP/IP fingerprinting tool on [browserstack](https://www.browserstack.com/). Browserstack.com uses real devices with real browsers. It's the perfect site to test this tool.
+
+Please forgive me, browserstack sometimes reduces the resolution of the screen recording for the devices. It's not my fault here :)
+
+### Safari on iPhone 13
+
+<img src="tcp-ip-fps/new/iPhone-13-Safari.png" width=50%>
+
+### Chrome on Galaxy S22
+
+<img src="tcp-ip-fps/new/Chrome-Galaxy-S22.png" width=50%>
+
+### Edge on Windows 11
+
+<img src="tcp-ip-fps/new/Edge-Windows-11.png" width=40%>
+
+### Chrome 102 on Windows 7
+
+<img src="tcp-ip-fps/new/Chrome-102-Windows-7.png" width=40%>
+
+### Chrome on Google Pixel 6
+
+<img src="tcp-ip-fps/new/Chrome-Google-Pixel-6.png" width=50%>
+
 
 ## Quick Example
 
