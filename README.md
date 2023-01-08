@@ -62,11 +62,13 @@ cd zardaxt
 
 Setup with `pipenv`. You can also use `pew`.
 
+Note: For newer Python 3 versions (Such as Python 3.10), you will have to install `pcapy-ng` (See: https://pypi.org/project/pcapy-ng/) instead of `pcapy`.
+
 ```bash
 # create a virtual environment
 pipenv shell --python python3
 # install packages
-pipenv install pypacker pcapy untangle requests
+pipenv install pypacker pcapy-ng untangle requests
 ```
 
 Now you need to create an environment file called `tcpip_fp.env` with the following variable:
