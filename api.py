@@ -49,6 +49,12 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         BaseHTTPRequestHandler.end_headers(self)
 
+    def deny(self):
+      self.send_response(403)
+      self.end_headers()
+      self.wfile.write(
+          bytes("Access Denied. Please query only endpoint /classify", "utf-8"))
+
     # infer the base operating system from the user-agent
     # and then infer the operating system from the TCP/IP
     # fingerprint and detect if there is a lie
@@ -76,7 +82,8 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             return None
 
     def handle_lookup(self, client_ip, lookup_ip):
-        fp_list = self.fingerprints.get(lookup_ip, None)
+        fpCopy = self.fingerprints.copy()
+        fp_list = fpCopy.get(lookup_ip, None)
         if fp_list and len(fp_list) > 0:
             # return the newest fingerprint
             fp_res = fp_list[-1]
@@ -90,7 +97,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         else:
             msg = {
                 'lookup_ip': lookup_ip,
-                'msg': 'no fingerprint for this IP ({} db entries)'.format(len(self.fingerprints)),
+                'msg': 'no fingerprint for this IP ({} db entries)'.format(len(fpCopy)),
             }
             log(msg, 'api')
             self.wfile.write(
@@ -103,7 +110,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             self.handle_lookup(client_ip, lookup_ip)
         else:
             self.wfile.write(
-                bytes(json.dumps(self.fingerprints, indent=2, sort_keys=True), "utf-8"))
+                bytes(json.dumps(self.fingerprints.copy(), indent=2, sort_keys=True), "utf-8"))
 
     def handle_lookup_by_client_ip(self, client_ip):
         log('No Api Key provided. Looking up client IP {}'.format(client_ip), 'api')
@@ -125,11 +132,23 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
                     self.handle_authenticated_lookup(client_ip)
                 else:
                     self.handle_lookup_by_client_ip(client_ip)
+
+            elif self.path.startswith('/stats'):
+                key = self.get_query_arg('key')
+                if key and API_KEY == key:
+                  fpCopy = self.fingerprints.copy()
+                  numIPs = len(fpCopy)
+                  numFingerprints = sum([len(value) for value in fpCopy.values()])
+                  stats = {
+                    'numIPs': numIPs,
+                    'numFingerprints': numFingerprints,
+                  }
+                  self.wfile.write(
+                      bytes(json.dumps(stats, indent=2, sort_keys=True), "utf-8"))
+                else:
+                  self.deny()
             else:
-                self.send_response(403)
-                self.end_headers()
-                self.wfile.write(
-                    bytes("Access Denied. Please query only endpoint /classify", "utf-8"))
+                self.deny()
         except Exception as e:
             traceback_str = ''.join(traceback.format_tb(e.__traceback__))
             msg = f'do_GET() failed: {e} with traceback {traceback_str}'
