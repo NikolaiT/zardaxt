@@ -8,7 +8,6 @@ import pcapy
 import getopt
 import time
 import sys
-import pprint
 import traceback
 import signal
 import json
@@ -32,107 +31,18 @@ However, the codebase of github.com/xnih/satori was quite frankly
 a huge mess (randomly failing code segments and capturing the errors, not good). 
 """
 
-# global variables
-classify = False
-writeAfter = 100
-# after how many classifications the data structure should be cleared
+# global configuration
+PCAP_FILTER = 'tcp port 80 or tcp port 443'
+storeFingerprints = False
+writeAfter = 1000
+# after how many fingerprints the data structure should be cleared
 # we have to reset in order to prevent memory leaks
 clearDictAfter = 3000
+enableUptimeInterpolation = False
 interface = None
 verbose = False
 fingerprints = {}
 timestamps = {}
-classifications = {}
-databaseFile = './database/January2023Cleaned.json'
-dbList = []
-
-
-def makeOsGuess(fp, n=3):
-    """
-    Return the highest scoring TCP/IP fingerprinting match from the database.
-    If there is more than one highest scoring match, return all the highest scoring matches.
-
-    As a second guess, output the operating system with the highest, normalized average score.
-    """
-    perfectScore = 11.5
-    scores = []
-    for i, entry in enumerate(dbList):
-        score = 0
-        # @TODO: consider `ip_tll`
-        if computeNearTTL(entry['ip_ttl']) == computeNearTTL(fp['ip_ttl']):
-            score += 1.5
-        # @TODO: consider `tcp_window_scaling`
-        # check IP DF bit
-        if entry['ip_df'] == fp['ip_df']:
-            score += 1
-        # check IP MF bit
-        if entry['ip_mf'] == fp['ip_mf']:
-            score += 1
-        # check TCP window size
-        if entry['tcp_window_size'] == fp['tcp_window_size']:
-            score += 1.5
-        # check TCP flags
-        if entry['tcp_flags'] == fp['tcp_flags']:
-            score += 1
-        # check TCP header length
-        if entry['tcp_header_length'] == fp['tcp_header_length']:
-            score += 1
-        # check TCP MSS
-        if entry['tcp_mss'] == fp['tcp_mss']:
-            score += 1.5
-        # check TCP options
-        if entry['tcp_options'] == fp['tcp_options']:
-            score += 3
-        else:
-            # check order of TCP options (this is weaker than TCP options equality)
-            orderEntry = ''.join(
-                [e[0] for e in entry['tcp_options'].split(',') if e])
-            orderFp = ''.join([e[0]
-                              for e in fp['tcp_options'].split(',') if e])
-            if orderEntry == orderFp:
-                score += 2
-
-        scores.append({
-            'i': i,
-            'score': score,
-            'os': entry.get('os', {}).get('name'),
-        })
-
-    # Return the highest scoring TCP/IP fingerprinting match
-    scores.sort(key=lambda x: x['score'], reverse=True)
-    guesses = []
-    highest_score = scores[0].get('score')
-    for guess in scores:
-        if guess['score'] != highest_score:
-            break
-        guesses.append({
-            'score': '{}/{}'.format(guess['score'], perfectScore),
-            'os': guess['os'],
-        })
-
-    # get the os with the highest, normalized average score
-    os_score = {}
-    for guess in scores:
-        if guess['os']:
-            if not os_score.get(guess['os']):
-                os_score[guess['os']] = []
-            os_score[guess['os']].append(guess['score'])
-
-    avg_os_score = {}
-    for key in os_score:
-        N = len(os_score[key])
-        # only consider OS classes with at least 8 elements
-        if N >= 8:
-            avg = sum(os_score[key]) / N
-            avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
-
-    return {
-        'perfectScore': perfectScore,
-        'bestNGuesses': guesses[:n],
-        'avgScoreOsClass': avg_os_score,
-        'fp': fp,
-    }
-
 
 def updateFile():
     log('writing fingerprints.json with {} objects...'.format(
@@ -210,8 +120,13 @@ def tcpProcess(pkt, ts, packetReceived):
         ), 'tcp_fingerprint')
 
     if label == 'SYN':
-        key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
-        fingerprints[key] = {
+        src_ip, src_port = pkt[ip.IP].src_s, pkt[tcp.TCP].sport
+        # the key is the src_ip and the value is a list of all fingerprints
+        # for this src_ip
+        if not fingerprints.get(src_ip, None):
+            fingerprints[src_ip] = []
+
+        fingerprints[src_ip].append({
             'packet_received': packetReceived,
             'ts': ts,
             'src_ip': pkt[ip.IP].src_s,
@@ -235,32 +150,22 @@ def tcpProcess(pkt, ts, packetReceived):
             'tcp_timestamp': tcpTimeStamp,
             'tcp_timestamp_echo_reply': tcpTimeStampEchoReply,
             'tcp_mss': mss
-        }
+        })
 
         # add tcp ts from syn packet
-        addTimestamp(key, packetReceived, tcpTimeStamp,
-                     tcpTimeStampEchoReply, tcp1.seq)
+        if enableUptimeInterpolation:
+            addTimestamp(key, packetReceived, tcpTimeStamp,
+                        tcpTimeStampEchoReply, tcp1.seq)
 
-        if classify:
-            classification = makeOsGuess(fingerprints[key])
-            if verbose:
-                pprint.pprint(classification)
-
-            classifications[pkt[ip.IP].src_s] = classification
-            log('Classified SYN packet from IP={} [{}/{}]'.format(
-                pkt[ip.IP].src_s,
-                len(classifications),
-                clearDictAfter), 'tcp_fingerprint')
-
-            if len(classifications) > clearDictAfter:
-                log('Clearing classifications dict', 'tcp_fingerprint')
-                classifications.clear()
-                fingerprints.clear()
-                timestamps.clear()
+        if len(fingerprints) > clearDictAfter:
+            log('Clearing fingerprints dict', 'tcp_fingerprint')
+            fingerprints.clear()
+            timestamps.clear()
 
         # update file once in a while
-        if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
-            updateFile()
+        if storeFingerprints:
+            if len(fingerprints) > 0 and len(fingerprints) % writeAfter == 0:
+                updateFile()
 
     elif label == 'ACK':
         # Here we take timestamp samples from the client. We only regard timestamps from
@@ -281,34 +186,35 @@ def tcpProcess(pkt, ts, packetReceived):
         # If we managed to infer the frequency (hz) of at least two timestamps, we will infer the likely exact
         # frequency and then we compute the uptime. For most modern systems, uptime computation will be wrong:
         # On Linux the TCP timestamp feature can be controlled with the net.ipv4.tcp_timestamp kernel parameter. Normally the option can either be enabled (1) or disabled (0), however more recent kernels also have an option to add a random offset which will effectively hide the systems uptime [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
-        key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
-        # this line makes sure that we alrady got the initial SYN packet
-        if key in fingerprints:
-            if tcpTimeStamp and isInt(tcpTimeStamp):
-                addTimestamp(key, packetReceived, tcpTimeStamp,
-                             tcpTimeStampEchoReply, tcp1.seq)
-                if key in timestamps:
-                    tss = timestamps[key].get('timestamps', [])
-                    ticks = timestamps[key].get('clock_ticks', [])
-                    if len(tss) >= 2 and isInt(tss[-1]) and isInt(tss[0]):
-                        delta_tcp_ts = tss[-1] - tss[0]
-                        delta_clock = ticks[-1] - ticks[0]
-                        hertz_observed = delta_tcp_ts / delta_clock
-                        hertz = computeNearTimestampTick(hertz_observed)
-                        fingerprints[key]['uptime_interpolation'] = {
-                            'hz_observed': hertz_observed,
-                            'hz': hertz,
-                            'num_timestamps': len(tss),
-                        }
-                        uptime = None
-                        if isinstance(hertz, int):
-                            uptime = tss[0] / hertz
-                        else:
-                            uptime = tss[0] / hertz_observed
+        if enableUptimeInterpolation:
+            key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
+            # this line makes sure that we alrady got the initial SYN packet
+            if key in fingerprints:
+                if tcpTimeStamp and isInt(tcpTimeStamp):
+                    addTimestamp(key, packetReceived, tcpTimeStamp,
+                                tcpTimeStampEchoReply, tcp1.seq)
+                    if key in timestamps:
+                        tss = timestamps[key].get('timestamps', [])
+                        ticks = timestamps[key].get('clock_ticks', [])
+                        if len(tss) >= 2 and isInt(tss[-1]) and isInt(tss[0]):
+                            delta_tcp_ts = tss[-1] - tss[0]
+                            delta_clock = ticks[-1] - ticks[0]
+                            hertz_observed = delta_tcp_ts / delta_clock
+                            hertz = computeNearTimestampTick(hertz_observed)
+                            fingerprints[key]['uptime_interpolation'] = {
+                                'hz_observed': hertz_observed,
+                                'hz': hertz,
+                                'num_timestamps': len(tss),
+                            }
+                            uptime = None
+                            if isinstance(hertz, int):
+                                uptime = tss[0] / hertz
+                            elif hertz_observed > 0:
+                                uptime = tss[0] / hertz_observed
 
-                        if uptime:
-                            fingerprints[key]['uptime_interpolation']['uptime'] = str(
-                                timedelta(seconds=uptime))
+                            if uptime:
+                                fingerprints[key]['uptime_interpolation']['uptime'] = str(
+                                    timedelta(seconds=uptime))
 
 
 def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply, tcp_seq):
@@ -345,26 +251,6 @@ def computeIP(info):
     ipVersion = int('0x0' + hex(info)[2], 16)
     ipHdrLen = int('0x0' + hex(info)[3], 16) * 4
     return [ipVersion, ipHdrLen]
-
-
-def computeNearTTL(ip_ttl):
-    guessed_ttl_start = ip_ttl
-
-    if ip_ttl > 0 and ip_ttl <= 16:
-        guessed_ttl_start = 16
-    elif ip_ttl > 16 and ip_ttl <= 32:
-        guessed_ttl_start = 32
-    elif ip_ttl > 32 and ip_ttl <= 60:
-        guessed_ttl_start = 60  # unlikely to find many of these anymore
-    elif ip_ttl > 60 and ip_ttl <= 64:
-        guessed_ttl_start = 64
-    elif ip_ttl > 64 and ip_ttl <= 128:
-        guessed_ttl_start = 128
-    elif ip_ttl > 128:
-        guessed_ttl_start = 255
-
-    return guessed_ttl_start
-
 
 def isInt(test):
     try:
@@ -426,7 +312,6 @@ def usage():
     -i, --interface   interface to listen to; example: -i eth0
     -l, --log         log file to write output to; example -l output.txt (not implemented yet)
     -v, --verbose     verbose logging, mostly just telling you where/what we're doing, not recommended if want to parse output typically
-    -c, --classify    classify TCP SYN connections when they are coming in
     -n, --writeAfter  after how many SYN packets writing to the file""")
 
 
@@ -475,7 +360,7 @@ def main():
 # program entry point
 try:
     opts, args = getopt.getopt(sys.argv[1:], "i:v:c:", [
-                               'interface=', 'verbose', 'classify'])
+                               'interface=', 'verbose'])
     proceed = False
 
     for opt, val in opts:
@@ -484,19 +369,12 @@ try:
             proceed = True
         if opt in ('-v', '--verbose'):
             verbose = True
-        if opt in ('-c', '--classify'):
-            classify = True
         if opt in ('-n', '--writeAfter'):
             writeAfter = int(val)
 
     if (__name__ == '__main__') and proceed:
-        # load fingerprints into database
-        with open(databaseFile) as f:
-            dbList = json.load(f)
-        log('Loaded {} fingerprints from the database'.format(
-            len(dbList)), 'tcp_fingerprint')
         # run the API thread
-        run_api(classifications)
+        run_api(fingerprints)
         # run PCAP loop
         main()
     else:

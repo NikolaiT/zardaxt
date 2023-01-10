@@ -15,7 +15,6 @@ scp -i $SSH_PRIV_KEY tcpip_fp.env $SERVER:$BASE_DIR/tcpip_fp.env
 
 ssh -i $SSH_PRIV_KEY $SERVER << EOF
   cd tcp_fingerprint/;
-  pipenv install
   ./restart.sh
 EOF
 

@@ -66,7 +66,7 @@ set -a
 source tcpip_fp.env
 set +a
 
-python tcp_fingerprint.py -i eth0 --classify
+python tcp_fingerprint.py -i eth0
 ```
 
 Or run in the background on your server
@@ -77,7 +77,7 @@ set -a
 source tcpip_fp.env
 set +a
 
-nohup python tcp_fingerprint.py -i eth0 --classify > fp.out 2> fp.err < /dev/null &
+nohup python tcp_fingerprint.py -i eth0 > fp.out 2> fp.err < /dev/null &
 ```
 
 ## Real World Examples
