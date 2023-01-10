@@ -38,7 +38,7 @@ writeAfter = 1000
 # after how many fingerprints the data structure should be cleared
 # we have to reset in order to prevent memory leaks
 clearDictAfter = 5000
-enableUptimeInterpolation = True
+enableUptimeInterpolation = False
 interface = None
 verbose = False
 fingerprints = {}
