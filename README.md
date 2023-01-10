@@ -21,6 +21,10 @@ If the key `os_mismatch` is true, then the TCP/IP inferred OS is different from 
 + [Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
 + [API page](https://incolumitas.com/pages/TCP-IP-Fingerprint/)
 
+## TODO
+
++ Fix uptime interpolation
+
 ## Installation & Usage
 
 **Important:** I tested this only on my Ubuntu 20.04 server. Installation currently does not work on my MacBook Pro for example.

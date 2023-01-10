@@ -81,9 +81,10 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             # return the newest fingerprint
             fp_res = fp_list[-1]
             classification = makeOsGuess(fp_res)
-            classification['result']['lookup_ip'] = lookup_ip
-            classification['result']['client_ip'] = client_ip
-            classification['result']['os_mismatch'] = self.detect_os_mismatch(classification)
+            classification['details']['num_fingerprints'] = len(fp_list)
+            classification['details']['lookup_ip'] = lookup_ip
+            classification['details']['client_ip'] = client_ip
+            classification['details']['os_mismatch'] = self.detect_os_mismatch(classification)
             self.wfile.write(
                 bytes(json.dumps(classification, indent=2, sort_keys=True), "utf-8"))
         else:
