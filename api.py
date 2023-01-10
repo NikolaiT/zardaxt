@@ -105,15 +105,14 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             classification['details']['lookup_ip'] = lookup_ip
             classification['details']['client_ip'] = client_ip
             classification['details']['os_mismatch'] = self.detect_os_mismatch(classification)
-            self.wfile.write(
-                bytes(json.dumps(classification, indent=2, sort_keys=True), "utf-8"))
+            return self.send_json(classification)
         else:
             msg = {
                 'lookup_ip': lookup_ip,
                 'msg': 'no fingerprint for this IP ({} db entries)'.format(len(fpCopy)),
             }
             log(msg, 'api')
-            self.send_json(msg)
+            return self.send_json(msg)
 
     def handle_authenticated_lookup(self, client_ip):
         lookup_ip = self.get_query_arg('ip')
@@ -121,7 +120,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             log('Api Key provided. Looking up IP {}'.format(lookup_ip), 'api')
             self.handle_lookup(client_ip, lookup_ip)
         else:
-            self.send_json(self.fingerprints.copy())
+            return self.send_json(self.fingerprints.copy())
 
     def handle_lookup_by_client_ip(self, client_ip):
         log('No Api Key provided. Looking up client IP {}'.format(client_ip), 'api')
@@ -130,11 +129,11 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
     def handle_uptime_interpolation(self, lookup_ip):
         timestampsCopy = self.timestamps.copy()
         res = []
-        for key, value in timestampsCopy.values():
+        for key, value in timestampsCopy.items():
           if lookup_ip in key:
             if value.get('uptime_interpolation'):
               res.append(value)
-        self.send_json(res)
+        return self.send_json(res)
 
     def do_GET(self):
         client_ip = self.get_ip()
@@ -143,38 +142,32 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
 
         try:
             if self.path.startswith('/classify'):
-                self.send_response(200)
-                self.send_header("Content-type", "text/json")
-                self.end_headers()
                 log('Incoming API request from IP: {} with path: {}'.format(
                     client_ip, self.path), 'api')
                 if key and API_KEY == key:
-                    self.handle_authenticated_lookup(client_ip)
+                    return self.handle_authenticated_lookup(client_ip)
                 else:
-                    self.handle_lookup_by_client_ip(client_ip)
-
+                    return self.handle_lookup_by_client_ip(client_ip)
             elif self.path.startswith('/uptime'):
               if key and API_KEY == key:
                 lookup_ip = self.get_query_arg('ip')
-                if lookup_ip:
-                  self.handle_uptime_interpolation(lookup_ip)
-              else:
-                  self.deny()
+                if not lookup_ip:
+                  lookup_ip = client_ip
+                return self.handle_uptime_interpolation(lookup_ip)
             elif self.path.startswith('/stats'):
                 if key and API_KEY == key:
                   fpCopy = self.fingerprints.copy()
-                  self.send_json({
+                  return self.send_json({
                     'numIPs': len(fpCopy),
                     'numFingerprints': sum([len(value) for value in fpCopy.values()]),
                   })
-                else:
-                  self.deny()
-            else:
-                self.deny()
+            
+            return self.deny()
         except Exception as e:
             traceback_str = ''.join(traceback.format_tb(e.__traceback__))
             msg = f'do_GET() failed: {e} with traceback {traceback_str}'
             log(msg, 'api', level='ERROR')
+            return self.deny()
 
 
 def create_server(fingerprints, timestamps):

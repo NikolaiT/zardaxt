@@ -7,3 +7,6 @@ def log(msg, module, level='INFO'):
     print(msg)
     with open('log/tcp_fingerprint.log', 'a') as logfile:
         logfile.write(msg)
+    if level == 'ERROR':
+      with open('log/tcp_fingerprint.err', 'a') as logfile:
+          logfile.write(msg)
