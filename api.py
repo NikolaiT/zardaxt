@@ -23,8 +23,9 @@ def S(string):
 
 
 class ZardaxtApiServer(BaseHTTPRequestHandler):
-    def __init__(self, fingerprints):
+    def __init__(self, fingerprints, timestamps):
         self.fingerprints = fingerprints
+        self.timestamps = timestamps
 
     def __call__(self, *args, **kwargs):
         """ Handle a request """
@@ -49,11 +50,23 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         BaseHTTPRequestHandler.end_headers(self)
 
+    def send_json(self, payload):
+        self.send_response(200)
+        self.send_header("Content-type", "text/json")
+        self.end_headers()
+        self.wfile.write(
+            bytes(json.dumps(payload, indent=2, sort_keys=True), "utf-8"))
+
     def deny(self):
-      self.send_response(403)
-      self.end_headers()
-      self.wfile.write(
-          bytes("Access Denied. Please query only endpoint /classify", "utf-8"))
+        self.send_response(403)
+        self.end_headers()
+        self.wfile.write(bytes("Access Denied. Please query only endpoint /classify", "utf-8"))
+
+    def send_text(self, payload):
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain")
+        self.end_headers()
+        self.wfile.write(bytes(payload, "utf-8"))
 
     # infer the base operating system from the user-agent
     # and then infer the operating system from the TCP/IP
@@ -100,8 +113,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
                 'msg': 'no fingerprint for this IP ({} db entries)'.format(len(fpCopy)),
             }
             log(msg, 'api')
-            self.wfile.write(
-                bytes(json.dumps(msg, indent=2, sort_keys=True), "utf-8"))
+            self.send_json(msg)
 
     def handle_authenticated_lookup(self, client_ip):
         lookup_ip = self.get_query_arg('ip')
@@ -109,16 +121,25 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             log('Api Key provided. Looking up IP {}'.format(lookup_ip), 'api')
             self.handle_lookup(client_ip, lookup_ip)
         else:
-            self.wfile.write(
-                bytes(json.dumps(self.fingerprints.copy(), indent=2, sort_keys=True), "utf-8"))
+            self.send_json(self.fingerprints.copy())
 
     def handle_lookup_by_client_ip(self, client_ip):
         log('No Api Key provided. Looking up client IP {}'.format(client_ip), 'api')
         self.handle_lookup(client_ip, client_ip)
 
+    def handle_uptime_interpolation(self, lookup_ip):
+        timestampsCopy = self.timestamps.copy()
+        res = []
+        for key, value in timestampsCopy.values():
+          if lookup_ip in key:
+            if value.get('uptime_interpolation'):
+              res.append(value)
+        self.send_json(res)
+
     def do_GET(self):
         client_ip = self.get_ip()
         incr('tcp_ip_fingerprint_public', client_ip)
+        key = self.get_query_arg('key')
 
         try:
             if self.path.startswith('/classify'):
@@ -127,24 +148,25 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
                 self.end_headers()
                 log('Incoming API request from IP: {} with path: {}'.format(
                     client_ip, self.path), 'api')
-                key = self.get_query_arg('key')
                 if key and API_KEY == key:
                     self.handle_authenticated_lookup(client_ip)
                 else:
                     self.handle_lookup_by_client_ip(client_ip)
 
+            elif self.path.startswith('/uptime'):
+              if key and API_KEY == key:
+                lookup_ip = self.get_query_arg('ip')
+                if lookup_ip:
+                  self.handle_uptime_interpolation(lookup_ip)
+              else:
+                  self.deny()
             elif self.path.startswith('/stats'):
-                key = self.get_query_arg('key')
                 if key and API_KEY == key:
                   fpCopy = self.fingerprints.copy()
-                  numIPs = len(fpCopy)
-                  numFingerprints = sum([len(value) for value in fpCopy.values()])
-                  stats = {
-                    'numIPs': numIPs,
-                    'numFingerprints': numFingerprints,
-                  }
-                  self.wfile.write(
-                      bytes(json.dumps(stats, indent=2, sort_keys=True), "utf-8"))
+                  self.send_json({
+                    'numIPs': len(fpCopy),
+                    'numFingerprints': sum([len(value) for value in fpCopy.values()]),
+                  })
                 else:
                   self.deny()
             else:
@@ -155,9 +177,9 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             log(msg, 'api', level='ERROR')
 
 
-def create_server(fingerprints):
+def create_server(fingerprints, timestamps):
     server_address = ('0.0.0.0', 8249)
-    handler = ZardaxtApiServer(fingerprints)
+    handler = ZardaxtApiServer(fingerprints, timestamps)
     httpd = HTTPServer(server_address, handler)
     log("TCP/IP Fingerprint API started on http://%s:%s" %
         server_address, 'api', level='INFO')
@@ -171,6 +193,6 @@ def create_server(fingerprints):
     log("TCP/IP Fingerprint API stopped.", 'api', level='INFO')
 
 
-def run_api(fingerprints):
-    thread = _thread.start_new_thread(create_server, (fingerprints, ))
+def run_api(fingerprints, timestamps):
+    thread = _thread.start_new_thread(create_server, (fingerprints, timestamps))
     return thread
