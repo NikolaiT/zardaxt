@@ -154,6 +154,7 @@ def tcpProcess(pkt, ts, packetReceived):
 
         # add tcp ts from syn packet
         if enableUptimeInterpolation:
+            key = '{}:{}'.format(src_ip, src_port)
             addTimestamp(key, packetReceived, tcpTimeStamp,
                         tcpTimeStampEchoReply, tcp1.seq)
 
@@ -189,32 +190,31 @@ def tcpProcess(pkt, ts, packetReceived):
         if enableUptimeInterpolation:
             key = '{}:{}'.format(pkt[ip.IP].src_s, pkt[tcp.TCP].sport)
             # this line makes sure that we alrady got the initial SYN packet
-            if key in fingerprints:
-                if tcpTimeStamp and isInt(tcpTimeStamp):
-                    addTimestamp(key, packetReceived, tcpTimeStamp,
-                                tcpTimeStampEchoReply, tcp1.seq)
-                    if key in timestamps:
-                        tss = timestamps[key].get('timestamps', [])
-                        ticks = timestamps[key].get('clock_ticks', [])
-                        if len(tss) >= 2 and isInt(tss[-1]) and isInt(tss[0]):
-                            delta_tcp_ts = tss[-1] - tss[0]
-                            delta_clock = ticks[-1] - ticks[0]
-                            hertz_observed = delta_tcp_ts / delta_clock
-                            hertz = computeNearTimestampTick(hertz_observed)
-                            fingerprints[key]['uptime_interpolation'] = {
-                                'hz_observed': hertz_observed,
-                                'hz': hertz,
-                                'num_timestamps': len(tss),
-                            }
-                            uptime = None
-                            if isinstance(hertz, int):
-                                uptime = tss[0] / hertz
-                            elif hertz_observed > 0:
-                                uptime = tss[0] / hertz_observed
+            if tcpTimeStamp and isInt(tcpTimeStamp):
+                addTimestamp(key, packetReceived, tcpTimeStamp,
+                            tcpTimeStampEchoReply, tcp1.seq)
+                if key in timestamps:
+                    tss = timestamps[key].get('timestamps', [])
+                    ticks = timestamps[key].get('clock_ticks', [])
+                    if len(tss) >= 2 and isInt(tss[-1]) and isInt(tss[0]):
+                        delta_tcp_ts = tss[-1] - tss[0]
+                        delta_clock = ticks[-1] - ticks[0]
+                        hertz_observed = delta_tcp_ts / delta_clock
+                        hertz = computeNearTimestampTick(hertz_observed)
+                        timestamps[key]['uptime_interpolation'] = {
+                            'hz_observed': hertz_observed,
+                            'hz': hertz,
+                            'num_timestamps': len(tss),
+                        }
+                        uptime = None
+                        if isinstance(hertz, int):
+                            uptime = tss[0] / hertz
+                        elif hertz_observed > 0:
+                            uptime = tss[0] / hertz_observed
 
-                            if uptime:
-                                fingerprints[key]['uptime_interpolation']['uptime'] = str(
-                                    timedelta(seconds=uptime))
+                        if uptime:
+                            timestamps[key]['uptime_interpolation']['uptime'] = str(
+                                timedelta(seconds=uptime))
 
 
 def addTimestamp(key, packetReceived, tcp_timestamp, tcp_timestamp_echo_reply, tcp_seq):

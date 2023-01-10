@@ -114,11 +114,11 @@ def makeOsGuess(fp, n=3):
             highest_os_avg = max(avg, highest_os_avg)
 
     return {
-        'perfect_score': perfectScore,
         'best_n_guesses': guesses[:n],
         'avg_score_os_class': avg_os_score,
         'fp': fp,
-        'result': {
+        'details': {
           'os_highest_class': highest_os,
+          'perfect_score': perfectScore,
         }
     }
