@@ -37,8 +37,8 @@ storeFingerprints = False
 writeAfter = 1000
 # after how many fingerprints the data structure should be cleared
 # we have to reset in order to prevent memory leaks
-clearDictAfter = 3000
-enableUptimeInterpolation = False
+clearDictAfter = 5000
+enableUptimeInterpolation = True
 interface = None
 verbose = False
 fingerprints = {}
@@ -374,7 +374,7 @@ try:
 
     if (__name__ == '__main__') and proceed:
         # run the API thread
-        run_api(fingerprints)
+        run_api(fingerprints, timestamps)
         # run PCAP loop
         main()
     else:
