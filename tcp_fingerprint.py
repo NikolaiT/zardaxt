@@ -323,7 +323,19 @@ def main():
     log('listening on interface {}'.format(interface), 'tcp_fingerprint')
 
     try:
-        preader = pcapy.open_live(interface, 65536, False, 1)
+        # Arguments here are:
+        # snaplen (maximum number of bytes to capture per packet)
+        max_bytes = 100
+        # promiscious mode (1 for true)
+        promiscuous = False
+        # https://github.com/the-tcpdump-group/libpcap/issues/572
+        # The main purpose of timeouts in packet capture mechanisms is to allow the capture mechanism 
+        # to buffer up multiple packets, and deliver multiple packets in a single wakeup, rather than one 
+        # wakeup per packet, reducing the number of wakeups (which aren't free), 
+        # without causing indefinitely-long waits for a packet to be delivered.
+        # timeout (in milliseconds)
+        read_timeout = 0
+        preader = pcapy.open_live(interface, max_bytes, promiscuous, read_timeout)
         preader.setfilter('tcp port 80 or tcp port 443')
     except Exception as e:
         print(e, end='\n', flush=True)
