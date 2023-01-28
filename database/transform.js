@@ -1,5 +1,5 @@
 const fs = require('fs')
-const Bowser = require("bowser");
+const UAParser = require('ua-parser-js');
 
 let db_file = 'db_june_2022.json';
 let data = JSON.parse(fs.readFileSync(db_file))
@@ -10,7 +10,7 @@ for (let key in data.obj) {
   let new_entry = Object.assign({}, entry.tcpip_fp.fp);
 
   if (entry.userAgent) {
-    let parsed = Bowser.parse(entry.userAgent);
+    let parsed = UAParser(entry.userAgent);
     console.log(parsed);
     new_entry.userAgent = entry.userAgent;
     new_entry.os = parsed.os;
