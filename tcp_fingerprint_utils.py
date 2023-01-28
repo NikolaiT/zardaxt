@@ -75,9 +75,9 @@ def makeOsGuess(fp, n=3):
                 score += 2
 
         scores.append({
-            'i': i,
-            'score': score,
-            'os': entry.get('os', {}).get('name'),
+          'i': i,
+          'score': score,
+          'os': entry['userAgentParsed']['os']['name'],
         })
 
     # Return the highest scoring TCP/IP fingerprinting match
@@ -114,12 +114,12 @@ def makeOsGuess(fp, n=3):
             highest_os_avg = max(avg, highest_os_avg)
 
     return {
-        'best_n_guesses': guesses[:n],
-        'avg_score_os_class': avg_os_score,
-        'fp': fp,
-        'details': {
-          'os_highest_class': highest_os,
-          'highest_os_avg': highest_os_avg,
-          'perfect_score': perfectScore,
-        }
+      'best_n_guesses': guesses[:n],
+      'avg_score_os_class': avg_os_score,
+      'fp': fp,
+      'details': {
+        'os_highest_class': highest_os,
+        'highest_os_avg': highest_os_avg,
+        'perfect_score': perfectScore,
+      }
     }
