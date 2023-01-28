@@ -71,6 +71,17 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
     # infer the base operating system from the user-agent
     # and then infer the operating system from the TCP/IP
     # fingerprint and detect if there is a lie
+    # {
+    #   Windows: 2501,
+    #   Android: 2501,
+    #   iOS: 2501,
+    #   Linux: 1149,
+    #   'Mac OS': 2501,
+    #   Ubuntu: 200,
+    #   HarmonyOS: 11,
+    #   android: 1,
+    #   Fedora: 1
+    # }
     def detect_os_mismatch(self, tcp_ip_fp):
         user_agent = self.get_user_agent()
         if user_agent:
@@ -79,7 +90,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             tcpip_os = {
                 'linux': max(S(tcp_ip_fp["avg_score_os_class"]['Android']), S(tcp_ip_fp["avg_score_os_class"]['Linux'])),
                 'win': S(tcp_ip_fp["avg_score_os_class"]['Windows']),
-                'mac': max(S(tcp_ip_fp["avg_score_os_class"]['iOS']), S(tcp_ip_fp["avg_score_os_class"]['macOS'])),
+                'mac': max(S(tcp_ip_fp["avg_score_os_class"]['iOS']), S(tcp_ip_fp["avg_score_os_class"]['Mac OS'])),
             }
             # get highest OS from TCP/IP fingerprint
             highestOS = max(tcpip_os, key=tcpip_os.get)
