@@ -119,6 +119,7 @@ def makeOsGuess(fp, n=3):
         'fp': fp,
         'details': {
           'os_highest_class': highest_os,
+          'highest_os_avg': highest_os_avg,
           'perfect_score': perfectScore,
         }
     }
