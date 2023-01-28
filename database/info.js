@@ -1,8 +1,7 @@
 const fs = require('fs')
 
 const files = [
-  'combinedJune2022.json',
-  'combined.json'
+  'January2023Cleaned.json'
 ];
 
 for (let db_file of files) {
