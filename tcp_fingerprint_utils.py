@@ -105,10 +105,13 @@ def makeOsGuess(fp, n=3):
     avg_os_score = {}
     for key in os_score:
         N = len(os_score[key])
-        # only consider OS classes with at least 8 elements
-        if N >= 8:
+        # only consider OS classes with at least 10 elements
+        if N >= 10:
             avg = sum(os_score[key]) / N
-            avg_os_score[key] = 'avg={}, N={}'.format(round(avg, 2), N)
+            avg_os_score[key] = {
+              'avg': round(avg, 2),
+              'n': N
+            }
             if avg >= highest_os_avg:
                 highest_os = key
             highest_os_avg = max(avg, highest_os_avg)
