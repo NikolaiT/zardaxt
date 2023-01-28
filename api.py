@@ -88,9 +88,9 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             # get os by tcp ip fingerprint
             # Linux, macOS or Windows
             tcpip_os = {
-                'linux': max(S(tcp_ip_fp["avg_score_os_class"]['Android']), S(tcp_ip_fp["avg_score_os_class"]['Linux'])),
-                'win': S(tcp_ip_fp["avg_score_os_class"]['Windows']),
-                'mac': max(S(tcp_ip_fp["avg_score_os_class"]['iOS']), S(tcp_ip_fp["avg_score_os_class"]['Mac OS'])),
+              'linux': max(S(tcp_ip_fp["avg_score_os_class"]['Android']), S(tcp_ip_fp["avg_score_os_class"]['Linux'])),
+              'win': S(tcp_ip_fp["avg_score_os_class"]['Windows']),
+              'mac': max(S(tcp_ip_fp["avg_score_os_class"]['iOS']), S(tcp_ip_fp["avg_score_os_class"]['Mac OS'])),
             }
             # get highest OS from TCP/IP fingerprint
             highestOS = max(tcpip_os, key=tcpip_os.get)
