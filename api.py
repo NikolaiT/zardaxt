@@ -2,7 +2,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import _thread
 import json
 import os
-import re
 import traceback
 from tcpip_fp_logging import log
 from dune_client import incr
@@ -12,15 +11,6 @@ from tcp_fingerprint_utils import makeOsGuess
 API_KEY = os.environ.get('API_KEY', '')
 if not API_KEY:
     raise Exception('InvalidAPIKeyException')
-
-regex = re.compile(r'avg=(\d*\.\d*)')
-
-
-def S(string):
-    matches = regex.findall(string)
-    if len(matches) > 0:
-        return float(matches[0])
-
 
 class ZardaxtApiServer(BaseHTTPRequestHandler):
     def __init__(self, fingerprints, timestamps):
@@ -88,9 +78,15 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             # get os by tcp ip fingerprint
             # Linux, macOS or Windows
             tcpip_os = {
-              'linux': max(S(tcp_ip_fp["avg_score_os_class"]['Android']), S(tcp_ip_fp["avg_score_os_class"]['Linux'])),
-              'win': S(tcp_ip_fp["avg_score_os_class"]['Windows']),
-              'mac': max(S(tcp_ip_fp["avg_score_os_class"]['iOS']), S(tcp_ip_fp["avg_score_os_class"]['Mac OS'])),
+              'linux': max(
+                tcp_ip_fp["avg_score_os_class"]['Android']['avg'], 
+                tcp_ip_fp["avg_score_os_class"]['Linux']['avg']
+              ),
+              'win': tcp_ip_fp["avg_score_os_class"]['Windows']['avg'],
+              'mac': max(
+                tcp_ip_fp["avg_score_os_class"]['iOS']['avg'], 
+                tcp_ip_fp["avg_score_os_class"]['Mac OS']['avg']
+              ),
             }
             # get highest OS from TCP/IP fingerprint
             highestOS = max(tcpip_os, key=tcpip_os.get)
