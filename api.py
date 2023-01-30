@@ -118,19 +118,19 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
                 'lookup_ip': lookup_ip,
                 'msg': 'no fingerprint for this IP ({} db entries)'.format(len(fpCopy)),
             }
-            log(msg, 'api')
+            log(msg, 'api', onlyPrint=True)
             return self.send_json(msg)
 
     def handle_authenticated_lookup(self, client_ip):
         lookup_ip = self.get_query_arg('ip')
         if lookup_ip:
-            log('Api Key provided. Looking up IP {}'.format(lookup_ip), 'api')
+            log('Api Key provided. Looking up IP {}'.format(lookup_ip), 'api', onlyPrint=True)
             self.handle_lookup(client_ip, lookup_ip)
         else:
             return self.send_json(self.fingerprints.copy())
 
     def handle_lookup_by_client_ip(self, client_ip):
-        log('No Api Key provided. Looking up client IP {}'.format(client_ip), 'api')
+        log('No Api Key provided. Looking up client IP {}'.format(client_ip), 'api', onlyPrint=True)
         self.handle_lookup(client_ip, client_ip)
 
     def handle_uptime_interpolation(self, lookup_ip):
@@ -150,7 +150,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         try:
             if self.path.startswith('/classify'):
                 log('Incoming API request from IP: {} with path: {}'.format(
-                    client_ip, self.path), 'api')
+                    client_ip, self.path), 'api', onlyPrint=True)
                 if key and API_KEY == key:
                     return self.handle_authenticated_lookup(client_ip)
                 else:
