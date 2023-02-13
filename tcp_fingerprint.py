@@ -334,7 +334,15 @@ def main():
         # wakeup per packet, reducing the number of wakeups (which aren't free), 
         # without causing indefinitely-long waits for a packet to be delivered.
         # timeout (in milliseconds)
-        read_timeout = 0
+
+        # The first argument is the device that we specified in the previous section. 
+        # snaplen is an integer which defines the maximum number of bytes to be captured by pcap. 
+        # promisc, when set to true, brings the interface into promiscuous mode 
+        # (however, even if it is set to false, it is possible under specific cases for the interface 
+        # to be in promiscuous mode, anyway). to_ms is the read time out in milliseconds 
+        # (a value of 0 means no time out; on at least some platforms, this means that you may wait until a 
+        # sufficient number of packets arrive before seeing any packets, so you should use a non-zero timeout). 
+        read_timeout = 1
         preader = pcapy.open_live(interface, max_bytes, promiscuous, read_timeout)
         preader.setfilter('tcp port 80 or tcp port 443')
     except Exception as e:
