@@ -7,7 +7,7 @@ Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your serve
 **Why the rewrite?**
 
 + [p0f](https://github.com/p0f/p0f) is dead. [p0f's](https://github.com/p0f/p0f) database is too old and C is a bit overkill and hard to quickly hack in.
-+ [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the *code* are awesome)
++ [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the *code* are awesome). Actually, some code and inspiration used in zardaxt has been taken from [satori.py](https://github.com/xnih/satori).
 + The actual statistics/traffic samples behind TCP/IP fingerprinting are more important than the tool itself. Therefore it makes sense to rewrite it.
 
 **What can I do with this tool?**
@@ -104,17 +104,7 @@ curl http://0.0.0.0:8249/classify?key=abcd1234&ip=103.14.251.215
 
 ## Theory
 
-Several fields such as TCP Options or TCP Window Size or IP Fragment Flag depend heavily on the OS type and version.
-
-Detecting operating systems by analyzing the first incoming SYN packet is surely no exact science, but it's better than nothing.
-
-Some code and inspiration has been taken from: <https://github.com/xnih/satori>
-
-However, the codebase of github.com/xnih/satori was quite frankly
-a huge mess (randomly failing code segments and capturing all Errors: Not good, no no no).
-
-This project does not attempt to be exact, it should give some hints what might be the OS of the
-incoming TCP/IP stream.
+Several fields such as TCP Options or TCP Window Size or IP Fragment Flag depend heavily on the OS type and version. Detecting operating systems by analyzing the first incoming SYN packet is surely no exact science, but it's better than nothing.
 
 ## What header fields are used for TCP/IP fingerprinting?
 
