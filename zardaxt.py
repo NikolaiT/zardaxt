@@ -104,7 +104,7 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
             'ip_off': ip_pkt.off,
             'ip_protocol': ip_pkt.p,
             'ip_checksum': ip_pkt.sum,
-            'tcp_header_length': len(tcp_pkt),
+            'tcp_header_length': tcp_pkt.__hdr_len__,
             'tcp_window_size': tcp_pkt.win,
             'tcp_checksum': tcp_pkt.sum,
             'tcp_flags': tcp_pkt.flags,
