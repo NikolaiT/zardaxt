@@ -102,11 +102,9 @@ If you want to query/lookup a specific IP address (Example: 103.14.251.215), you
 curl http://0.0.0.0:8249/classify?key=abcd1234&ip=103.14.251.215
 ```
 
-## Theory
+## What header fields are used for TCP/IP fingerprinting?
 
 Several fields such as TCP Options or TCP Window Size or IP Fragment Flag depend heavily on the OS type and version. Detecting operating systems by analyzing the first incoming SYN packet is surely no exact science, but it's better than nothing.
-
-## What header fields are used for TCP/IP fingerprinting?
 
 ### Entropy from the [IP header](https://en.wikipedia.org/wiki/IPv4)
 
