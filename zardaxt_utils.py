@@ -219,5 +219,14 @@ def test_tcp_packet():
   print(tcp.pprint())
   print('tcp.__hdr_len__', tcp.__hdr_len__)
   
+def test_ip_packet():
+  from dpkt.ip import IP
+  s = (b'\x4f\x00\x00\x3c\xae\x08\x00\x00\x40\x06\x18\x10\xc0\xa8\x0a\x26\xc0\xa8\x0a\x01\x07\x27'
+        b'\x08\x01\x02\x03\x04\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+        b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+  ip = IP(s)
+  print(ip.pprint())
+  
 if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'test':
   test_tcp_packet()
+  test_ip_packet()

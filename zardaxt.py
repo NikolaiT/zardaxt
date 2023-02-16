@@ -76,6 +76,7 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
       udp_pkt = ip_pkt.data
 
     # Currently, only TCP is considered for the TCP/IP fingerprint
+    # @TODO: Consider other protocols such as QUIC in the future
     if tcp_pkt:
       tcp_options = parse_opts(tcp_pkt.opts)
       [str_opts, timestamp, timestamp_echo_reply, mss, window_scaling] = decode_tcp_options(tcp_options)
@@ -97,14 +98,18 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
             'ip_hdr_length': ip_pkt.hl,
             'ip_version': ip_pkt.v,
             'ip_total_length': ip_pkt.len,
+            'ip_tos': ip_pkt.tos,
             'ip_id': ip_pkt.id,
             'ip_ttl': ip_pkt.ttl,
+            'ip_rf': ip_pkt.rf,
             'ip_df': ip_pkt.df,
             'ip_mf': ip_pkt.mf,
             'ip_off': ip_pkt.off,
             'ip_protocol': ip_pkt.p,
             'ip_checksum': ip_pkt.sum,
+            # @TODO: this is likely not what we want (Probably just take tcp_off)
             'tcp_header_length': tcp_pkt.__hdr_len__,
+            'tcp_off': tcp_pkt.off,
             'tcp_window_size': tcp_pkt.win,
             'tcp_checksum': tcp_pkt.sum,
             'tcp_flags': tcp_pkt.flags,
