@@ -32,7 +32,11 @@ git clone https://github.com/NikolaiT/zardaxt
 cd zardaxt
 ```
 
-I am using [pew](https://github.com/berdario/pew) to create Python virtual environments.
+I am using [pew](https://github.com/berdario/pew) to create Python virtual environments. If you don't have `pew` installed yet, install it as follows:
+
+```bash
+pip3 install pew
+```
 
 Note: For newer Python 3 versions (Such as Python 3.10), you will have to install `pcapy-ng` (See: <https://pypi.org/project/pcapy-ng/>) instead of `pcapy`.
 
@@ -41,20 +45,20 @@ Note: For newer Python 3 versions (Such as Python 3.10), you will have to instal
 pew new zardaxt
 # work on virtual environment `zardaxt`
 pew workon zardaxt
-# install packages
+# install packages now with pip inside the environment `zardaxt`
 pip install dpkt pcapy-ng requests
 ```
 
-By default, `zardaxt.py` looks for a configuration file named `zardaxt.json` that resides in the same directory as `zardaxt.py`. But you can provide your own path to your own config file as argument to `zardaxt.py`.
+By default, `zardaxt.py` looks for a configuration file named `zardaxt.json` that should reside in the same directory as `zardaxt.py`. But you can provide your own path to your own config file as first argument to `zardaxt.py`.
 
 ```bash
-python zardaxt.py zardaxt.json
+python zardaxt.py ./zardaxt.json
 ```
 
-Or run in the background on your server
+Or run `zardaxt.py` in the background on your server
 
 ```bash
-nohup python zardaxt.py > zardaxt.out 2> zardaxt.err < /dev/null &
+nohup pew in zardaxt python zardaxt.py 
 ```
 
 ## API Support

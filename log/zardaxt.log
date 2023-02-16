@@ -118,3 +118,13 @@
 [2023-02-16 17:58:24.677386] - INFO - zardaxt - listening on interface en0
 [2023-02-16 17:58:24.738497] - INFO - api - TCP/IP Fingerprint API started on http://0.0.0.0:8249
 [2023-02-16 17:59:29.374218] - INFO - zardaxt - writing fingerprints.json with 2 objects...
+[2023-02-16 20:04:42.310821] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
+[2023-02-16 20:04:42.352996] - INFO - zardaxt - listening on interface en0
+[2023-02-16 20:04:47.456482] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
+[2023-02-16 20:04:47.499718] - INFO - zardaxt - listening on interface en0
+[2023-02-16 20:04:51.723490] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
+[2023-02-16 20:04:51.765307] - INFO - zardaxt - listening on interface en0
+[2023-02-16 20:16:54.589806] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
+[2023-02-16 20:17:25.449789] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
+[2023-02-16 20:18:26.864580] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
+[2023-02-16 20:18:54.794166] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database

@@ -1,23 +1,23 @@
 #/bin/bash
 
-cd /root/tcp_fingerprint
+cd /root/zardaxt/;
 
 # purge log files for size reasons
-rm /root/tcp_fingerprint/log/*;
+rm /root/zardaxt/log/*;
 
 if [ -f /var/run/zardaxt.pid ]
 then
   kill `cat /var/run/zardaxt.pid`
-  echo zardaxt pid `cat /var/run/zardaxt.pid` killed.
+  echo "zardaxt pid `cat /var/run/zardaxt.pid` killed."
   rm -f /var/run/zardaxt.pid
 else
-  echo zardaxt not running.
+  echo "zardaxt not running.";
 fi
 
 # kill everything just in case
-pkill --echo -f "python zardaxt.py"
+pkill --echo -f "python zardaxt.py";
 
-nohup /usr/local/bin/pipenv run python zardaxt.py > log/z.out 2> log/z.err < /dev/null &
+nohup pew in zardaxt python zardaxt.py zardaxt-server.json > log/nohup.out 2> log/nohup.err < /dev/null &
 
 echo $! > /var/run/zardaxt.pid
 

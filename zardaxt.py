@@ -36,7 +36,7 @@ verbose = False
 fingerprints = {}
 timestamps = {}
 config = None
-if len(sys.argv) > 1:
+if len(sys.argv) == 2:
   config = load_config(sys.argv[1])
 else:
   config = load_config()
@@ -104,6 +104,7 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
             'ip_off': ip_pkt.off,
             'ip_protocol': ip_pkt.p,
             'ip_checksum': ip_pkt.sum,
+            'tcp_header_length': len(tcp_pkt),
             'tcp_window_size': tcp_pkt.win,
             'tcp_checksum': tcp_pkt.sum,
             'tcp_flags': tcp_pkt.flags,
