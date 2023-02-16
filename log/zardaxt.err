@@ -1,0 +1,6 @@
+[2023-02-16 16:55:20.659655] - ERROR - api - do_GET() failed: 'api_key' with traceback   File "/Users/nikolaitschacher/projects/zardaxt/zardaxt_api.py", line 151, in do_GET
+    if key and self.config['api_key'] == key:
+
+[2023-02-16 16:55:21.477968] - ERROR - api - do_GET() failed: 'api_key' with traceback   File "/Users/nikolaitschacher/projects/zardaxt/zardaxt_api.py", line 151, in do_GET
+    if key and self.config['api_key'] == key:
+

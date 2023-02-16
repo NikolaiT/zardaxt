@@ -1,25 +1,22 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import _thread
 import json
-import os
 import traceback
-from tcpip_fp_logging import log
+from zardaxt_logging import log
 from dune_client import incr
 from urllib.parse import urlparse, parse_qs
-from tcp_fingerprint_utils import makeOsGuess
+from zardaxt_utils import make_os_guess
 
-API_KEY = os.environ.get('API_KEY', '')
-if not API_KEY:
-    raise Exception('InvalidAPIKeyException')
 
 class ZardaxtApiServer(BaseHTTPRequestHandler):
-    def __init__(self, fingerprints, timestamps):
-        self.fingerprints = fingerprints
-        self.timestamps = timestamps
+    def __init__(self, config, fingerprints, timestamps):
+      self.config = config
+      self.fingerprints = fingerprints
+      self.timestamps = timestamps
 
     def __call__(self, *args, **kwargs):
-        """ Handle a request """
-        super().__init__(*args, **kwargs)
+      """ Handle a request """
+      super().__init__(*args, **kwargs)
 
     def get_ip(self):
         ip = self.client_address[0]
@@ -61,17 +58,6 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
     # infer the base operating system from the user-agent
     # and then infer the operating system from the TCP/IP
     # fingerprint and detect if there is a lie
-    # {
-    #   Windows: 2501,
-    #   Android: 2501,
-    #   iOS: 2501,
-    #   Linux: 1149,
-    #   'Mac OS': 2501,
-    #   Ubuntu: 200,
-    #   HarmonyOS: 11,
-    #   android: 1,
-    #   Fedora: 1
-    # }
     def detect_os_mismatch(self, tcp_ip_fp):
         user_agent = self.get_user_agent()
         if user_agent:
@@ -102,12 +88,12 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             return None
 
     def handle_lookup(self, client_ip, lookup_ip):
-        fpCopy = self.fingerprints.copy()
-        fp_list = fpCopy.get(lookup_ip, None)
+        fp_copy = self.fingerprints.copy()
+        fp_list = fp_copy.get(lookup_ip, None)
         if fp_list and len(fp_list) > 0:
             # return the newest fingerprint
             fp_res = fp_list[-1]
-            classification = makeOsGuess(fp_res)
+            classification = make_os_guess(fp_res)
             classification['details']['num_fingerprints'] = len(fp_list)
             classification['details']['lookup_ip'] = lookup_ip
             classification['details']['client_ip'] = client_ip
@@ -116,7 +102,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         else:
             msg = {
                 'lookup_ip': lookup_ip,
-                'msg': 'no fingerprint for this IP ({} db entries)'.format(len(fpCopy)),
+                'msg': 'no fingerprint for this IP ({} db entries)'.format(len(fp_copy)),
             }
             log(msg, 'api', onlyPrint=True)
             return self.send_json(msg)
@@ -151,18 +137,18 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             if self.path.startswith('/classify'):
                 log('Incoming API request from IP: {} with path: {}'.format(
                     client_ip, self.path), 'api', onlyPrint=True)
-                if key and API_KEY == key:
+                if key and self.config['api_key'] == key:
                     return self.handle_authenticated_lookup(client_ip)
                 else:
                     return self.handle_lookup_by_client_ip(client_ip)
             elif self.path.startswith('/uptime'):
-              if key and API_KEY == key:
+              if key and self.config['api_key'] == key:
                 lookup_ip = self.get_query_arg('ip')
                 if not lookup_ip:
                   lookup_ip = client_ip
                 return self.handle_uptime_interpolation(lookup_ip)
             elif self.path.startswith('/stats'):
-                if key and API_KEY == key:
+                if key and self.config['api_key'] == key:
                   fpCopy = self.fingerprints.copy()
                   return self.send_json({
                     'numIPs': len(fpCopy),
@@ -177,22 +163,22 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             return self.deny()
 
 
-def create_server(fingerprints, timestamps):
+def create_server(config, fingerprints, timestamps):
     server_address = ('0.0.0.0', 8249)
-    handler = ZardaxtApiServer(fingerprints, timestamps)
+    handler = ZardaxtApiServer(config, fingerprints, timestamps)
     httpd = HTTPServer(server_address, handler)
     log("TCP/IP Fingerprint API started on http://%s:%s" %
         server_address, 'api', level='INFO')
 
     try:
-        httpd.serve_forever()
+      httpd.serve_forever()
     except KeyboardInterrupt:
-        pass
+      pass
 
     httpd.server_close()
     log("TCP/IP Fingerprint API stopped.", 'api', level='INFO')
 
 
-def run_api(fingerprints, timestamps):
-    thread = _thread.start_new_thread(create_server, (fingerprints, timestamps))
+def run_api(config, fingerprints, timestamps):
+    thread = _thread.start_new_thread(create_server, (config, fingerprints, timestamps))
     return thread

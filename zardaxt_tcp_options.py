@@ -3,7 +3,7 @@ import struct
 """
 Parse TCP options.
 
-TCP options is probably the most valueable source of entropy in
+TCP options is probably the most valuable source of entropy in
 TCP SYN packets.
 
 https://www.iana.org/assignments/tcp-parameters/tcp-parameters.xhtml
@@ -49,45 +49,47 @@ TCP_OPT_EXP1 = 253
 TCP_OPT_EXP2 = 254
 
 
-def decodeTCPOptions(opts):
+def decode_tcp_options(opts):
     """
     Decodes TCP options into a readable string.
+    
+    [(2, b'\x05\xb4'), (1, b''), (3, b'\x06'), (1, b''), (1, b''), (8, b'3.S\xa8\x00\x00\x00\x00'), (4, b''), (0, b''), (0, b'')]
     """
-    res = ''
+    str_opts = ''
     mss = 0
-    tcpTimeStampEchoReply = ''
-    tcpTimeStamp = ''
-    windowScaling = None
+    timestamp_echo_reply = ''
+    timestamp = ''
+    window_scaling = None
 
-    for i in opts:
-        if i.type == TCP_OPT_EOL:  # End of options list
-            res = res + 'E,'
-        elif i.type == TCP_OPT_NOP:  # No operation
-            res = res + 'N,'
-        elif i.type == TCP_OPT_MSS:  # Maximum segment size
-            mss = struct.unpack('!h', i.body_bytes)[0]
-            res = res + 'M' + str(mss) + ','
-        elif i.type == TCP_OPT_WSCALE:  # Window scaling
-            windowScaling = struct.unpack('!b', i.body_bytes)[0]
-            res = res + 'W' + str(windowScaling) + ','
-        elif i.type == TCP_OPT_SACKOK:  # Selective Acknowledgement permitted
-            res = res + 'S,'
-        elif i.type == TCP_OPT_SACK:  # Selective ACKnowledgement (SACK)
-            res = res + 'K,'
-        elif i.type == TCP_OPT_ECHO:
-            res = res + 'J,'
-        elif i.type == TCP_OPT_ECHOREPLY:
-            res = res + 'F,'
-            #print("Options Echo (need to compute?):  %s" % (i.body_bytes))
-        elif i.type == TCP_OPT_TIMESTAMP:
-            res = res + 'T,'
-            tcpTimeStamp = struct.unpack('!I', i.body_bytes[0:4])[0]
-            tcpTimeStampEchoReply = struct.unpack('!I', i.body_bytes[4:8])[0]
-        elif i.type == TCP_OPT_POCONN:
-            res = res + 'P,'
-        elif i.type == TCP_OPT_POSVC:
-            res = res + 'R,'
-        else:  # unknown TCP option. Just store the opt_type
-            res = res + 'U' + str(i.type) + ','
+    for opt in opts:
+      option_type, option_value = opt
+      if option_type == TCP_OPT_EOL:  # End of options list
+        str_opts = str_opts + 'E,'
+      elif option_type == TCP_OPT_NOP:  # No operation
+        str_opts = str_opts + 'N,'
+      elif option_type == TCP_OPT_MSS:  # Maximum segment size
+        mss = struct.unpack('!h', option_value)[0]
+        str_opts = str_opts + 'M' + str(mss) + ','
+      elif option_type == TCP_OPT_WSCALE:  # Window scaling
+        window_scaling = struct.unpack('!b', option_value)[0]
+        str_opts = str_opts + 'W' + str(window_scaling) + ','
+      elif option_type == TCP_OPT_SACKOK:  # Selective Acknowledgement permitted
+        str_opts = str_opts + 'S,'
+      elif option_type == TCP_OPT_SACK:  # Selective ACKnowledgement (SACK)
+        str_opts = str_opts + 'K,'
+      elif option_type == TCP_OPT_ECHO:
+        str_opts = str_opts + 'J,'
+      elif option_type == TCP_OPT_ECHOREPLY:
+        str_opts = str_opts + 'F,'
+      elif option_type == TCP_OPT_TIMESTAMP:
+        str_opts = str_opts + 'T,'
+        timestamp = struct.unpack('!I', option_value[0:4])[0]
+        timestamp_echo_reply = struct.unpack('!I', option_value[4:8])[0]
+      elif option_type == TCP_OPT_POCONN:
+        str_opts = str_opts + 'P,'
+      elif option_type == TCP_OPT_POSVC:
+        str_opts = str_opts + 'R,'
+      else:  # unknown TCP option. Just store the opt_type
+        str_opts = str_opts + 'U' + str(option_type) + ','
 
-    return (res, tcpTimeStamp, tcpTimeStampEchoReply, mss, windowScaling)
+    return (str_opts, timestamp, timestamp_echo_reply, mss, window_scaling)
