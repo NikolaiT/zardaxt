@@ -1,16 +1,38 @@
 import json
-from tcpip_fp_logging import log
+import os
+from zardaxt_logging import log
 
-databaseFile = './database/January2023Cleaned.json'
+databaseLoaded = False
 dbList = []
 
-# load fingerprints into database
-with open(databaseFile) as f:
-    dbList = json.load(f)
-log('Loaded {} fingerprints from the database'.format(
-    len(dbList)), 'tcp_fingerprint')
+def maybe_load_database():
+  global databaseLoaded
+  if not databaseLoaded:
+    # load fingerprints into database
+    databaseFile = './database/January2023Cleaned.json'
+    with open(databaseFile) as f:
+        dbList = json.load(f)
+    log('Loaded {} fingerprints from the database'.format(
+        len(dbList)), 'zardaxt_utils')
+    databaseLoaded = True
+    
+maybe_load_database()
 
-def computeNearTTL(ip_ttl):
+def load_config(config_path = None):
+  actual_path = None
+  if os.path.exists(config_path):
+    actual_path = config_path
+  else:
+    actual_path = './zardaxt.json'
+  if os.path.exists(actual_path):
+    config = None
+    with open('./zardaxt.json') as f:
+        config = json.load(f)
+    return config
+  else:
+    raise Exception('config_path {} does not exist'.format(actual_path))
+
+def compute_near_ttl(ip_ttl):
     guessed_ttl_start = ip_ttl
 
     if ip_ttl > 0 and ip_ttl <= 16:
@@ -29,7 +51,56 @@ def computeNearTTL(ip_ttl):
     return guessed_ttl_start
 
 
-def makeOsGuess(fp, n=3):
+# TCP control flags
+TH_FIN = 0x01		# end of data
+TH_SYN = 0x02		# synchronize sequence numbers
+TH_RST = 0x04		# reset connection
+TH_PUSH = 0x08		# push
+TH_ACK = 0x10		# acknowledgment number set
+TH_URG = 0x20		# urgent pointer set
+TH_ECE = 0x40		# ECN echo, RFC 3168
+TH_CWR = 0x80		# congestion window reduced
+
+def get_tcp_flags(tcp_pkt):
+    tcp_flags = []
+    if tcp_pkt.flags & TH_FIN:
+        tcp_flags.append('FIN')  # end of data
+    if tcp_pkt.flags & TH_RST:
+        tcp_flags.append('RST')  # reset connection
+    if tcp_pkt.flags & TH_SYN:
+        tcp_flags.append('SYN')  # synchronize sequence numbers
+    if tcp_pkt.flags & TH_ACK:
+        tcp_flags.append('ACK')  # acknowledgment number set
+    if tcp_pkt.flags & TH_PUSH:
+        tcp_flags.append('PUSH')  # push
+    if tcp_pkt.flags & TH_URG:
+        tcp_flags.append('URG')  # urgent pointer set
+    if tcp_pkt.flags & TH_ECE:
+        tcp_flags.append('ECE')  # ECN echo, RFC 3168
+    if tcp_pkt.flags & TH_CWR:
+        tcp_flags.append('CWR')  # congestion window reduced
+
+    return ' '.join(tcp_flags)
+  
+def compute_near_timestamp_tick(hertz_observed):
+    """
+    Guess what the TCP timestamp tick must have been from measurements
+
+    Theory: https://www.rfc-editor.org/rfc/rfc1323#section-4
+
+    So far, what I have seen in the wild is 1000hz, 250hz, 100hz and 10hz
+    """
+    if hertz_observed > 800 and hertz_observed < 1200:
+        return 1000
+    if hertz_observed > 240 and hertz_observed < 260:
+        return 250
+    if hertz_observed > 90 and hertz_observed < 110:
+        return 100
+    if hertz_observed > 5 and hertz_observed < 15:
+        return 10
+    return 'unknown'
+
+def make_os_guess(fp, n=3):
     """
     Return the highest scoring TCP/IP fingerprinting match from the database.
     If there is more than one highest scoring match, return all the highest scoring matches.
@@ -41,7 +112,7 @@ def makeOsGuess(fp, n=3):
     for i, entry in enumerate(dbList):
         score = 0
         # @TODO: consider `ip_tll`
-        if computeNearTTL(entry['ip_ttl']) == computeNearTTL(fp['ip_ttl']):
+        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
             score += 1.5
         # @TODO: consider `tcp_window_scaling`
         # check IP DF bit

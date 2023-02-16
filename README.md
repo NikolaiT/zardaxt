@@ -23,8 +23,6 @@ If the key `os_mismatch` is true, then the TCP/IP inferred OS is different from 
 
 ## Installation & Usage
 
-**Important:** I tested this only on my Ubuntu 20.04 server. Installation currently does not work on my MacBook Pro for example.
-
 First clone the repo:
 
 ```bash
@@ -34,55 +32,34 @@ git clone https://github.com/NikolaiT/zardaxt
 cd zardaxt
 ```
 
-Setup with `pipenv`. You can also use `pew`.
+I am using [pew](https://github.com/berdario/pew) to create Python virtual environments.
 
 Note: For newer Python 3 versions (Such as Python 3.10), you will have to install `pcapy-ng` (See: <https://pypi.org/project/pcapy-ng/>) instead of `pcapy`.
 
 ```bash
 # create a virtual environment
-pipenv shell --python python3
+new new zardaxt
+# work in virtual environment `zardaxt`
+pew workon zardaxt
 # install packages
-pipenv install pypacker pcapy-ng untangle requests
+pip install dpkt pcapy-ng requests
 ```
 
-Now you need to create an environment file called `tcpip_fp.env` with the following variable:
+By default, `zardaxt.py` looks for a configuration file named `zardaxt.json` that resides in the same directory as `zardaxt.py`. But you can provide your own path to your own config file as argument to `zardaxt.py`.
 
 ```bash
-# tcpip_fp.env
-API_KEY='abcd1234' # set your API key here
-```
-
-You can create the file `tcpip_fp.env` with this command:
-
-```bash
-echo "API_KEY='abcd1234'" > tcpip_fp.env
-```
-
-Now run Zardaxt.py:
-
-```bash
-# load tcpip_fp.env file
-set -a
-source tcpip_fp.env
-set +a
-
-python tcp_fingerprint.py -i eth0
+python zardaxt.py zardaxt.json
 ```
 
 Or run in the background on your server
 
 ```bash
-# load tcpip_fp.env file
-set -a
-source tcpip_fp.env
-set +a
-
-nohup python tcp_fingerprint.py -i eth0 > fp.out 2> fp.err < /dev/null &
+nohup python zardaxt.py > zardaxt.out 2> zardaxt.err < /dev/null &
 ```
 
 ## API Support
 
-When you run `tcp_fingerprint.py`, the program automatically launches a simple web API that you can query. A http server is bound to `0.0.0.0:8249`. You can query it on `http://0.0.0.0:8249/classify`.
+When you run `zardaxt.py`, the program automatically launches a simple web API that you can query. A http server is bound to `0.0.0.0:8249`. You can query it on `http://0.0.0.0:8249/classify`.
 
 If you want to query the TCP/IP fingerprint only for the client IP address, use
 
@@ -108,7 +85,7 @@ Several fields such as TCP Options or TCP Window Size or IP Fragment Flag depend
 
 ### Entropy from the [IP header](https://en.wikipedia.org/wiki/IPv4)
 
-+ `IP.ihl (4 bits)` - **Internet Header Length (IHL)** - The IPv4 header is variable in size due to the optional 14th field (Options). The IHL field contains the size of the IPv4 header. The minimum value for this field is 5 (20 bytes) and the maximum value is 15 (60 bytes). If the IP Options field correlates with the the underlying OS (which I don't think it does normally), the `IP.ihl` is relevant.
++ `IP.ihl (4 bits)` - **Internet Header Length (IHL)** - The IPv4 header is variable in size due to the optional 14th field (Options). The IHL field contains the size of the IPv4 header. The minimum value for this field is 5 (20 bytes) and the maximum value is 15 (60 bytes). If the IP options field correlates with the the underlying OS (which I don't think is necessarily the case), the `IP.ihl` is relevant.
 + `IP.len (16 bits)` - **Total Length** - This 16-bit field defines the entire packet size in bytes, including header and data. The minimum size is 20 bytes (header without data) and the maximum is 65,535 bytes. `IP.len` is likely relevant for the TCP/IP fingerprint.
 + `IP.id (16 bits)` - **Identification** - This field is an identification field and is primarily used for uniquely identifying the group of fragments of a single IP datagram. However, the `IP.id` field is used for other purposes and it seems that [its behavior is OS dependent](https://perso.telecom-paristech.fr/drossi/paper/rossi17ipid.pdf): "We find that that the majority
 of hosts adopts a constant IP-IDs (39%) or local counter (34%), that
