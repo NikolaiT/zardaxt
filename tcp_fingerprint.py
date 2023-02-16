@@ -135,6 +135,7 @@ def tcpProcess(pkt, ts, packetReceived):
             'dst_port': '{}'.format(pkt[tcp.TCP].dport),
             'ip_hdr_length': ipHdrLen,
             'ip_total_length': ip4.len,
+            'ip_id': ip4.id,
             'ip_opts': ip4.opts,
             'ip_ttl': ip4.ttl,
             'ip_df': df,
