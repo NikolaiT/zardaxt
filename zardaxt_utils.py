@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from zardaxt_logging import log
 
 databaseLoaded = False
@@ -216,5 +217,7 @@ def test_tcp_packet():
       opts=b'\x02\x04\x05\xb4\x01\x01\x04\x02'
   )
   print(tcp.pprint())
-  print(len(tcp))
-  print(dir(tcp))
+  print('tcp.__hdr_len__', tcp.__hdr_len__)
+  
+if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'test':
+  test_tcp_packet()
