@@ -37,9 +37,9 @@ I am using [pew](https://github.com/berdario/pew) to create Python virtual envir
 Note: For newer Python 3 versions (Such as Python 3.10), you will have to install `pcapy-ng` (See: <https://pypi.org/project/pcapy-ng/>) instead of `pcapy`.
 
 ```bash
-# create a virtual environment
-new new zardaxt
-# work in virtual environment `zardaxt`
+# create a virtual environment with pew
+pew new zardaxt
+# work on virtual environment `zardaxt`
 pew workon zardaxt
 # install packages
 pip install dpkt pcapy-ng requests
