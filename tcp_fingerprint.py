@@ -145,6 +145,7 @@ def tcpProcess(pkt, ts, packetReceived):
             'ip_protocol': ip4.p,
             'ip_checksum': ip4.sum,
             'tcp_window_size': tcp1.win,
+            'tcp_checksum': tcp1.sum,
             'tcp_flags': tcp1.flags,
             'tcp_ack': tcp1.ack,
             'tcp_seq': tcp1.seq,
