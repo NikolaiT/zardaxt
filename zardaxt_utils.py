@@ -7,6 +7,7 @@ dbList = []
 
 def maybe_load_database():
   global databaseLoaded
+  global dbList
   if not databaseLoaded:
     # load fingerprints into database
     databaseFile = './database/January2023Cleaned.json'
@@ -20,14 +21,16 @@ maybe_load_database()
 
 def load_config(config_path = None):
   actual_path = None
-  if os.path.exists(config_path):
+  if config_path and os.path.exists(config_path):
     actual_path = config_path
   else:
     actual_path = './zardaxt.json'
   if os.path.exists(actual_path):
     config = None
-    with open('./zardaxt.json') as f:
+    with open(actual_path) as f:
         config = json.load(f)
+    log('Loaded config from path {}'.format(
+        actual_path), 'zardaxt_utils')
     return config
   else:
     raise Exception('config_path {} does not exist'.format(actual_path))
@@ -197,3 +200,21 @@ def make_os_guess(fp, n=3):
         'perfect_score': perfectScore,
       }
     }
+    
+def test_tcp_packet():
+  from dpkt.tcp import TCP
+  tcp = TCP(
+      sport=3372,
+      dport=80,
+      seq=951057939,
+      ack=0,
+      off=7,
+      flags=TH_SYN,
+      win=8760,
+      sum=0xc30c,
+      urp=0,
+      opts=b'\x02\x04\x05\xb4\x01\x01\x04\x02'
+  )
+  print(tcp.pprint())
+  print(len(tcp))
+  print(dir(tcp))
