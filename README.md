@@ -139,7 +139,7 @@ Sources:
 + `TCP.urgent_pointer (16 bits)` - If the URG flag is set, then this 16-bit field is an offset from the sequence number indicating the last urgent data byte. It *should* be zero in initial SYN packets.
 + `TCP.options (Variable 0-320 bits)` - All TCP Options. The length of this field is determined by the data offset field. Contains a lot of information, but most importantly: The Maximum Segment Size (MSS), the Window scale value. Because the TCP options data is variable in size, it is the most important source of entropy to distinguish operating systems. The order of the TCP options is also taken into account.
 
-### TCP Timestamp Mechanism
+## TCP Timestamp Mechanism
 
 Furthermore, in order to interpolate the [host uptime via TCP timestamps](https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html), the [TCP timestamp](https://www.rfc-editor.org/rfc/rfc1323#section-4) from a couple of consecutive TCP segments can be taken.
 
