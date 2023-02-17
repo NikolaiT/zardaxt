@@ -68,19 +68,19 @@ When you run `zardaxt.py`, the program automatically launches a simple web API t
 If you want to query the TCP/IP fingerprint only for the client IP address, use
 
 ```shell
-curl http://0.0.0.0:8249/classify
+curl "http://0.0.0.0:8249/classify"
 ```
 
 If you want to query all fingerprints in the API database, you have to specify the API key:
 
 ```shell
-curl http://0.0.0.0:8249/classify?key=abcd1234
+curl "http://0.0.0.0:8249/classify?key=abcd1234"
 ```
 
 If you want to query/lookup a specific IP address (Example: 103.14.251.215), you will have to specify the IP address and the API key:
 
 ```shell
-curl http://0.0.0.0:8249/classify?key=abcd1234&ip=103.14.251.215
+curl "http://0.0.0.0:8249/classify?key=abcd1234&ip=103.14.251.215"
 ```
 
 ## What header fields are used for TCP/IP fingerprinting?
