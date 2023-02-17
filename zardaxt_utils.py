@@ -20,6 +20,12 @@ def maybe_load_database():
 
 maybe_load_database()
 
+def check_config_looks_good(config):
+  required_config_keys = ['interface', 'api_server_ip', 'api_server_port', 'api_key']
+  for key in required_config_keys:
+    if key not in config:
+      raise Exception('Missing required config key: {}'.format(key))
+
 def load_config(config_path = None):
   actual_path = None
   if config_path and os.path.exists(config_path):
@@ -32,6 +38,7 @@ def load_config(config_path = None):
       config = json.load(f)
     log('Loaded config from path {}'.format(
       actual_path), 'zardaxt_utils')
+    check_config_looks_good(config)
     return config
   else:
     raise Exception('config_path {} does not exist'.format(actual_path))

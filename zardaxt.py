@@ -123,18 +123,18 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
         'tcp_mss': mss
       })
 
-      if config['enable_uptime_interpolation']:
+      if config.get('enable_uptime_interpolation', False):
         key = '{}:{}'.format(src_ip, tcp_pkt.sport)
         add_timestamp(key, ts, timestamp,
                     timestamp_echo_reply, tcp_pkt.seq)
 
-      if len(fingerprints) > config['clear_dict_after']:
+      if len(fingerprints) > config.get('clear_dict_after', 5000):
         log('Clearing fingerprints dict', 'zardaxt')
         fingerprints.clear()
         timestamps.clear()
 
-      if config['store_fingerprints']:
-        if len(fingerprints) > 0 and len(fingerprints) % config['write_after'] == 0:
+      if config.get('store_fingerprints', False):
+        if len(fingerprints) > 0 and len(fingerprints) % config.get('write_after', 1000) == 0:
           update_file()
 
     elif is_ack:
@@ -156,7 +156,7 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
       # If we managed to infer the frequency (hz) of at least two timestamps, we will infer the likely exact
       # frequency and then we compute the uptime. For most modern systems, uptime computation will be wrong:
       # On Linux the TCP timestamp feature can be controlled with the net.ipv4.tcp_timestamp kernel parameter. Normally the option can either be enabled (1) or disabled (0), however more recent kernels also have an option to add a random offset which will effectively hide the systems uptime [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
-      if config['enable_uptime_interpolation']:
+      if config.get('enable_uptime_interpolation', False):
         key = '{}:{}'.format(src_ip, tcp_pkt.sport)
         # this line makes sure that we already got the initial SYN packet
         if timestamp:
@@ -239,7 +239,7 @@ def main():
   # sufficient number of packets arrive before seeing any packets, so you should use a non-zero timeout). 
   read_timeout = 1
   preader = pcapy.open_live(config['interface'], max_bytes, promiscuous, read_timeout)
-  preader.setfilter(config['pcap_filter'])
+  preader.setfilter(config.get('pcap_filter', ''))
   while True:
     (header, buf) = preader.next()
     ts = time.perf_counter()
