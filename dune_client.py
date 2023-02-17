@@ -3,8 +3,8 @@ import os
 
 # API client implementation
 counter = {
-    "hits": 0,
-    "data": {},
+  "hits": 0,
+  "data": {},
 }
 
 
