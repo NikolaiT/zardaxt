@@ -254,7 +254,11 @@ def main():
       ip_pkt = eth.data
       header_len = header.getlen()
       cap_len = header.getcaplen()
-      process_packet(ts, header_len, cap_len, ip_pkt)
+      try:
+        process_packet(ts, header_len, cap_len, ip_pkt)
+      except Exception as err:
+        log('Error in process_packet(): {}'.format(str(err)),
+                        'zardaxt', level='ERROR')
 
 
 if __name__ == '__main__':
