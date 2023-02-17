@@ -225,8 +225,9 @@ def main():
   log('listening on interface {}'.format(config['interface']), 'zardaxt')
   # Arguments here are:
   # snaplen (maximum number of bytes to capture per packet)
-  max_bytes = 100
-  # promiscious mode (1 for true)
+  # 120 bytes are picked, since the maximum TCP header is 60 bytes and the maximum IP header is also 60 bytes
+  max_bytes = 120
+  # promiscuous mode (1 for true)
   promiscuous = False
   # https://github.com/the-tcpdump-group/libpcap/issues/572
   # The main purpose of timeouts in packet capture mechanisms is to allow the capture mechanism 
