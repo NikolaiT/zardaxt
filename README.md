@@ -4,6 +4,12 @@
 
 Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers the header fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake.
 
+Test your TCP/IP Fingerprint with `curl`:
+
+```shell
+curl 'https://tcpip.incolumitas.com/classify?by_ip=1'
+```
+
 **Why the rewrite?**
 
 + [p0f](https://github.com/p0f/p0f) is dead. [p0f's](https://github.com/p0f/p0f) database is too old and C is a bit overkill and hard to quickly hack in.
@@ -15,6 +21,8 @@ Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your serve
 This tool may be used to correlate an incoming TCP/IP connection with a operating system class. For example, It can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the operating system taken from the User-Agent.
 
 If the key `os_mismatch` is true, then the TCP/IP inferred OS is different from the User-Agent OS.
+
+On the other hand, most VPN protocols cannot be revealed by TCP/IP fingerprint mismatches. This is because VPN protocols work on the network layer, and VPN servers do not establish a dedicated TCP/IP connection that could have the TCP/IP characteristics of the VPN server.
 
 ## Demo
 
