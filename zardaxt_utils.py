@@ -43,6 +43,12 @@ def load_config(config_path = None):
   else:
     raise Exception('config_path {} does not exist'.format(actual_path))
 
+def compute_ip_id(ip_id):
+  if ip_id == 0:
+    return 0
+  else:
+    return 1
+
 def compute_near_ttl(ip_ttl):
   """Interpolate the assumed initial TTL by the TTL we see on our interface.
   
@@ -125,20 +131,15 @@ def compute_near_timestamp_tick(hertz_observed):
     return 10
   return 'unknown'
 
-def make_os_guess(fp, n=3):
-  """
-  Return the highest scoring TCP/IP fingerprinting match from the database.
-  If there is more than one highest scoring match, return all the highest scoring matches.
 
-  As a second guess, output the operating system with the highest, normalized average score.
-  """
+def score_fp(fp):
+  global dbList
   perfectScore = 11.5
   scores = []
   for i, entry in enumerate(dbList):
     score = 0
     if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
       score += 1.5
-    # @TODO: consider `tcp_window_scaling`
     # check IP DF bit
     if entry['ip_df'] == fp['ip_df']:
       score += 1
@@ -174,7 +175,100 @@ def make_os_guess(fp, n=3):
       'score': score,
       'os': entry['userAgentParsed']['os']['name'],
     })
+    
+  return perfectScore, scores
+    
+    
+def score_fp_new(fp):
+  """The most recent version of TCP/IP fingerprint scoring algorithm.
+  
+  In this algorithm, the following new header entropy is now being considered:
+  
+  - ip_hdr_length - unfiltered (all values) - 0.5 points
+  - ip_id - only if it is 0 or any other value (binary) - 0.5 points
+  - ip_off - unfiltered (all values) - 0.5 points
+  - ip_protocol - unfiltered (all values) - 0.5 points
+  - ip_rf - unfiltered (all values) - 0.5 points
+  - ip_tos - unfiltered (all values) - 1 point
+  - ip_total_length - unfiltered (all values) - 1 point
+  - ip_version - unfiltered (all values) - 0.5 points
+  - tcp_off - unfiltered (all values) - 0.5 points
+  - tcp_timestamp_echo_reply - unfiltered (all values) - 0.5 points
+  - tcp_window_scaling - unfiltered (all values) - 1 point
 
+  Args:
+      fp (dict): The fingerprint to score
+
+  Returns:
+      tuple: perfect score, all the scores against the db
+  """
+  global dbList
+  perfectScore = 18.5
+  scores = []
+  for i, entry in enumerate(dbList):
+    score = 0
+    if entry['ip_hdr_length'] == fp['ip_hdr_length']:
+      score += 0.5
+    if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
+      score += 0.5
+    if entry['ip_off'] == fp['ip_off']:
+      score += 0.5
+    if entry['ip_protocol'] == fp['ip_protocol']:
+      score += 0.5
+    if entry['ip_rf'] == fp['ip_rf']:
+      score += 0.5
+    if entry['ip_tos'] == fp['ip_tos']:
+      score += 1
+    if entry['ip_total_length'] == fp['ip_total_length']:
+      score += 1
+    if entry['ip_version'] == fp['ip_version']:
+      score += 0.5
+    if entry['tcp_off'] == fp['tcp_off']:
+      score += 0.5
+    if entry['tcp_timestamp_echo_reply'] == fp['tcp_timestamp_echo_reply']:
+      score += 0.5
+    if entry['tcp_window_scaling'] == fp['tcp_window_scaling']:
+      score += 1
+    if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
+      score += 1.5
+    if entry['ip_df'] == fp['ip_df']:
+      score += 1
+    if entry['ip_mf'] == fp['ip_mf']:
+      score += 1
+    if entry['tcp_window_size'] == fp['tcp_window_size']:
+      score += 1.5
+    if entry['tcp_flags'] == fp['tcp_flags']:
+      score += 1
+    if entry['tcp_header_length'] == fp['tcp_header_length']:
+      score += 1
+    if entry['tcp_mss'] == fp['tcp_mss']:
+      score += 1.5
+    if entry['tcp_options'] == fp['tcp_options']:
+      score += 3
+    else:
+      orderEntry = ''.join(
+        [e[0] for e in entry['tcp_options'].split(',') if e])
+      orderFp = ''.join([e[0]
+                        for e in fp['tcp_options'].split(',') if e])
+      if orderEntry == orderFp:
+        score += 2
+
+    scores.append({
+      'i': i,
+      'score': score,
+      'os': entry['userAgentParsed']['os']['name'],
+    })
+    
+  return perfectScore, scores
+    
+def make_os_guess(fp, n=3):
+  """
+  Return the highest scoring TCP/IP fingerprinting match from the database.
+  If there is more than one highest scoring match, return all the highest scoring matches.
+
+  As a second guess, output the operating system with the highest, normalized average score.
+  """
+  perfectScore, scores = score_fp(fp)
   # Return the highest scoring TCP/IP fingerprinting match
   scores.sort(key=lambda x: x['score'], reverse=True)
   guesses = []
