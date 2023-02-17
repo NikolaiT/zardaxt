@@ -15,7 +15,7 @@ def maybe_load_database():
     with open(databaseFile) as f:
       dbList = json.load(f)
     log('Loaded {} fingerprints from the database'.format(
-        len(dbList)), 'zardaxt_utils')
+      len(dbList)), 'zardaxt_utils')
     databaseLoaded = True
 
 maybe_load_database()
@@ -31,7 +31,7 @@ def load_config(config_path = None):
     with open(actual_path) as f:
       config = json.load(f)
     log('Loaded config from path {}'.format(
-        actual_path), 'zardaxt_utils')
+      actual_path), 'zardaxt_utils')
     return config
   else:
     raise Exception('config_path {} does not exist'.format(actual_path))
