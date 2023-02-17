@@ -85,12 +85,17 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
     src_ip = socket.inet_ntoa(ip_pkt.src)
     dst_ip = socket.inet_ntoa(ip_pkt.dst)
 
+    # The reason we are looking for a TCP segment that has the SYN flag
+    # but not the ACK flag is that we are only interested in packets 
+    # coming from client to server and not the SYN+ACK from server to client.
     if is_syn and not is_ack:
       if not fingerprints.get(src_ip, None):
         fingerprints[src_ip] = []
           
       fingerprints[src_ip].append({
         'ts': ts,
+        'header_len': header_len,
+        'cap_len': cap_len,
         'src_ip': src_ip,
         'dst_ip': dst_ip,
         'src_port': tcp_pkt.sport,
@@ -107,7 +112,7 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
         'ip_off': ip_pkt.off,
         'ip_protocol': ip_pkt.p,
         'ip_checksum': ip_pkt.sum,
-        # @TODO: this is likely not what we want (Probably just take tcp_off)
+        # @TODO: this is likely not what we want (Probably just take tcp_off instead)
         'tcp_header_length': tcp_pkt.__hdr_len__,
         'tcp_off': tcp_pkt.off,
         'tcp_window_size': tcp_pkt.win,
