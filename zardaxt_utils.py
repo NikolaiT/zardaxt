@@ -44,15 +44,29 @@ def load_config(config_path = None):
     raise Exception('config_path {} does not exist'.format(actual_path))
 
 def compute_near_ttl(ip_ttl):
+  """Interpolate the assumed initial TTL by the TTL we see on our interface.
+  
+  Why do we do that? The initial TTL depends on the OS.
+  
+  References:
+  - https://ostechnix.com/identify-operating-system-ttl-ping/
+  - https://superuser.com/questions/1345113/why-there-are-different-default-values-of-ttl-used-by-different-operating-system
+  
+  The default initial TTL value for Linux/Unix is 64, and TTL value for Windows is 128.
+  In today's age, packets arrive at most of their destinations after no more than 10-15 hops.
+  Therefore, we cannot distinguish initial TTL's such as 60 or 64.
+
+  Args:
+      ip_ttl (int): the seen TTL on the interface
+
+  Returns:
+      int: The assumed initial TTL
+  """
   guessed_ttl_start = ip_ttl
 
-  if ip_ttl > 0 and ip_ttl <= 16:
-    guessed_ttl_start = 16
-  elif ip_ttl > 16 and ip_ttl <= 32:
+  if ip_ttl > 0 and ip_ttl <= 32:
     guessed_ttl_start = 32
-  elif ip_ttl > 32 and ip_ttl <= 60:
-    guessed_ttl_start = 60  # unlikely to find many of these anymore
-  elif ip_ttl > 60 and ip_ttl <= 64:
+  elif ip_ttl > 32 and ip_ttl <= 64:
     guessed_ttl_start = 64
   elif ip_ttl > 64 and ip_ttl <= 128:
     guessed_ttl_start = 128
@@ -122,7 +136,6 @@ def make_os_guess(fp, n=3):
   scores = []
   for i, entry in enumerate(dbList):
     score = 0
-    # @TODO: consider `ip_tll`
     if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
       score += 1.5
     # @TODO: consider `tcp_window_scaling`
