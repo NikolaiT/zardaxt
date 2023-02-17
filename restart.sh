@@ -17,7 +17,7 @@ fi
 # kill everything just in case
 pkill --echo -f "python zardaxt.py";
 
-nohup pew in zardaxt python zardaxt.py zardaxt-server.json > log/nohup.out 2> log/nohup.err < /dev/null &
+/usr/bin/nohup /usr/local/bin/pew in zardaxt python zardaxt.py zardaxt-server.json > log/nohup.out 2> log/nohup.err < /dev/null &
 
 echo $! > /var/run/zardaxt.pid
 
