@@ -205,8 +205,12 @@ def score_fp_new(fp):
     - tcp_timestamp_echo_reply - unfiltered (all values)
     - tcp_window_scaling - unfiltered (all values)
 
+    Most of the above header values do not strongly correlate with the OS.
+    Nevertheless, I am unsure wether we should ignore them. However, 
+    adding them to the algorithm does not hurt either.
+
     Perfect Score: 0.5 + 0.25 + 0.5 + 0.25 + 0.25 + 1 + 1 + 
-    0.25 + 0.5 + 0.5 + 1 + 1.5 + 1 + 1 + 1.5 + 1 + 1 + 1.5 + 3
+    0.25 + 0.5 + 0.5 + 1 + 1.5 + 1 + 1 + 1.5 + 1 + 1 + 1.5 + 4
 
     Args:
         fp (dict): The fingerprint to score
@@ -215,7 +219,7 @@ def score_fp_new(fp):
         tuple: perfect score, all the scores against the db
     """
     global dbList
-    perfectScore = 17.5
+    perfectScore = 18.5
     scores = []
     for i, entry in enumerate(dbList):
         score = 0
@@ -256,14 +260,14 @@ def score_fp_new(fp):
         if entry['tcp_mss'] == fp['tcp_mss']:
             score += 1.5
         if entry['tcp_options'] == fp['tcp_options']:
-            score += 3
+            score += 4
         else:
             orderEntry = ''.join(
                 [e[0] for e in entry['tcp_options'].split(',') if e])
             orderFp = ''.join([e[0]
                               for e in fp['tcp_options'].split(',') if e])
             if orderEntry == orderFp:
-                score += 2
+                score += 2.5
 
         scores.append({
             'i': i,
