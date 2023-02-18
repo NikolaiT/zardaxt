@@ -193,17 +193,17 @@ def score_fp_new(fp):
 
     In this algorithm, the following new header entropy is now being considered:
 
-    - ip_hdr_length - unfiltered (all values) - 0.5 points
-    - ip_id - only if it is 0 or any other value (binary) - 0.5 points
-    - ip_off - unfiltered (all values) - 0.5 points
-    - ip_protocol - unfiltered (all values) - 0.5 points
-    - ip_rf - unfiltered (all values) - 0.5 points
-    - ip_tos - unfiltered (all values) - 1 point
-    - ip_total_length - unfiltered (all values) - 1 point
-    - ip_version - unfiltered (all values) - 0.5 points
-    - tcp_off - unfiltered (all values) - 0.5 points
-    - tcp_timestamp_echo_reply - unfiltered (all values) - 0.5 points
-    - tcp_window_scaling - unfiltered (all values) - 1 point
+    - ip_hdr_length - unfiltered (all values)
+    - ip_id - only if it is 0 or any other value (binary)
+    - ip_off - unfiltered (all values)
+    - ip_protocol - unfiltered (all values)
+    - ip_rf - unfiltered (all values)
+    - ip_tos - unfiltered (all values)
+    - ip_total_length - unfiltered (all values)
+    - ip_version - unfiltered (all values)
+    - tcp_off - unfiltered (all values)
+    - tcp_timestamp_echo_reply - unfiltered (all values)
+    - tcp_window_scaling - unfiltered (all values)
 
     Perfect Score: 0.5 + 0.25 + 0.5 + 0.25 + 0.25 + 1 + 1 + 
     0.25 + 0.5 + 0.5 + 1 + 1.5 + 1 + 1 + 1.5 + 1 + 1 + 1.5 + 3
