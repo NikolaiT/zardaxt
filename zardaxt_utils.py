@@ -278,7 +278,7 @@ def make_os_guess(fp, n=3):
 
     As a second guess, output the operating system with the highest, normalized average score.
     """
-    perfectScore, scores = score_fp(fp)
+    perfectScore, scores = score_fp_new(fp)
     # Return the highest scoring TCP/IP fingerprinting match
     scores.sort(key=lambda x: x['score'], reverse=True)
     guesses = []
