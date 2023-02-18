@@ -205,6 +205,9 @@ def score_fp_new(fp):
     - tcp_timestamp_echo_reply - unfiltered (all values) - 0.5 points
     - tcp_window_scaling - unfiltered (all values) - 1 point
 
+    Perfect Score: 0.5 + 0.25 + 0.5 + 0.25 + 0.25 + 1 + 1 + 
+    0.25 + 0.5 + 0.5 + 1 + 1.5 + 1 + 1 + 1.5 + 1 + 1 + 1.5 + 3
+
     Args:
         fp (dict): The fingerprint to score
 
@@ -212,26 +215,26 @@ def score_fp_new(fp):
         tuple: perfect score, all the scores against the db
     """
     global dbList
-    perfectScore = 18.5
+    perfectScore = 17.5
     scores = []
     for i, entry in enumerate(dbList):
         score = 0
         if entry['ip_hdr_length'] == fp['ip_hdr_length']:
             score += 0.5
         if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
-            score += 0.5
+            score += 0.25
         if entry['ip_off'] == fp['ip_off']:
             score += 0.5
         if entry['ip_protocol'] == fp['ip_protocol']:
-            score += 0.5
+            score += 0.25
         if entry['ip_rf'] == fp['ip_rf']:
-            score += 0.5
+            score += 0.25
         if entry['ip_tos'] == fp['ip_tos']:
             score += 1
         if entry['ip_total_length'] == fp['ip_total_length']:
             score += 1
         if entry['ip_version'] == fp['ip_version']:
-            score += 0.5
+            score += 0.25
         if entry['tcp_off'] == fp['tcp_off']:
             score += 0.5
         if entry['tcp_timestamp_echo_reply'] == fp['tcp_timestamp_echo_reply']:
