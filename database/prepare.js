@@ -17,4 +17,4 @@ for (let entry of data) {
   }
 }
 
-fs.writeFileSync('February2023Cleaned.json', JSON.stringify(newData, null, 2))
+fs.writeFileSync('February2023Cleaned.json', JSON.stringify(newData, null, 2));
