@@ -1,17 +1,7 @@
 const fs = require('fs')
 
-let data = JSON.parse(fs.readFileSync('January2023.json'))
+let data = JSON.parse(fs.readFileSync('February2023.json'))
 let newData = [];
-
-// "avg_score_os_class": {
-//   "Android": "avg=6.07, N=2501",
-//   "HarmonyOS": "avg=6.68, N=11",
-//   "Linux": "avg=5.1, N=1149",
-//   "Mac OS": "avg=10.08, N=2501",
-//   "Ubuntu": "avg=5.08, N=200",
-//   "Windows": "avg=3.71, N=2501",
-//   "iOS": "avg=8.46, N=2501"
-// },
 
 const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS'];
 
@@ -27,4 +17,4 @@ for (let entry of data) {
   }
 }
 
-fs.writeFileSync('January2023Cleaned.json', JSON.stringify(newData, null, 2))
+fs.writeFileSync('February2023Cleaned.json', JSON.stringify(newData, null, 2))
