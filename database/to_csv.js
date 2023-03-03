@@ -1,4 +1,5 @@
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const fs = require('fs');
 
 const includeUserAgent = false;
 const fields = ['ip_checksum', 'ip_df', 'ip_hdr_length',
@@ -42,6 +43,8 @@ for (let obj of data) {
   }
   records.push(d);
 }
+
+fs.writeFileSync('../analysis/data.json', JSON.stringify(records, null, 2));
 
 csvWriter.writeRecords(records)
   .then(() => {
