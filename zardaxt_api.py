@@ -110,6 +110,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
                 return self.send_json({
                     "os_mismatch": classification['details']['os_mismatch'],
                     "lookup_ip": lookup_ip,
+                    "perfect_score": classification['details']["perfect_score"],
                     "avg_score_os_class": scores
                 })
         else:
