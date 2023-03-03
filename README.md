@@ -1,7 +1,7 @@
 # Passive TCP/IP Fingerprinting 🚀
 
-[Live Demo](https://tcpip.incolumitas.com/classify?by_ip=1)
-[Live Demo with more details](https://tcpip.incolumitas.com/classify?by_ip=1&detail=1)
++ [Live Demo](https://tcpip.incolumitas.com/classify?by_ip=1)
++ [Live Demo with full Details](https://tcpip.incolumitas.com/classify?by_ip=1&detail=1)
 
 Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers the header fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake.
 
