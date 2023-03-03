@@ -88,6 +88,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             return None
 
     def handle_lookup(self, client_ip, lookup_ip):
+        detailed = self.get_query_arg('detail') is not None
         fp_copy = self.fingerprints.copy()
         fp_list = fp_copy.get(lookup_ip, None)
         if fp_list and len(fp_list) > 0:
@@ -99,11 +100,22 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             classification['details']['client_ip'] = client_ip
             classification['details']['os_mismatch'] = self.detect_os_mismatch(
                 classification)
-            return self.send_json(classification)
+            if detailed:
+                return self.send_json(classification)
+            else:
+                # only return the information absolutely necessary
+                scores = {}
+                for key in classification["avg_score_os_class"]:
+                    scores[key] = classification["avg_score_os_class"][key]['avg']
+                return self.send_json({
+                    "os_mismatch": classification['details']['os_mismatch'],
+                    "lookup_ip": lookup_ip,
+                    "avg_score_os_class": scores
+                })
         else:
             msg = {
                 'lookup_ip': lookup_ip,
-                'msg': 'no fingerprint for this IP ({} db entries)'.format(len(fp_copy)),
+                'msg': 'no fingerprint for this IP ({} fingerprints in memory)'.format(len(fp_copy)),
             }
             log(msg, 'api', onlyPrint=True)
             return self.send_json(msg)

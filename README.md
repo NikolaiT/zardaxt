@@ -1,6 +1,7 @@
 # Passive TCP/IP Fingerprinting 🚀
 
 [Live Demo](https://tcpip.incolumitas.com/classify?by_ip=1)
+[Live Demo with more details](https://tcpip.incolumitas.com/classify?by_ip=1&detail=1)
 
 Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers the header fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake.
 
@@ -8,6 +9,7 @@ Test your TCP/IP Fingerprint with `curl`:
 
 ```shell
 curl 'https://tcpip.incolumitas.com/classify?by_ip=1'
+curl 'https://tcpip.incolumitas.com/classify?by_ip=1&detail=1'
 ```
 
 **Why the rewrite?**
@@ -77,6 +79,12 @@ If you want to query the TCP/IP fingerprint only for the client IP address, use
 
 ```shell
 curl "http://0.0.0.0:8249/classify"
+```
+
+And if you want to have all details in the API output, append `` to the URL:
+
+```shell
+curl "http://0.0.0.0:8249/classify?detail=1"
 ```
 
 If you want to query all fingerprints in the API database, you have to specify the API key:

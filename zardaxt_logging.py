@@ -2,7 +2,7 @@
 from datetime import datetime
 
 
-def log(msg, module, onlyPrint=False, level='INFO'):
+def log(msg, module, onlyPrint=True, level='INFO'):
     msg = f'[{datetime.now()}] - {level} - {module} - {msg}'
     print(msg)
     if onlyPrint is False:
