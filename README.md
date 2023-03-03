@@ -81,7 +81,7 @@ If you want to query the TCP/IP fingerprint only for the client IP address, use
 curl "http://0.0.0.0:8249/classify"
 ```
 
-And if you want to have all details in the API output, append `` to the URL:
+And if you want to have all details in the API output, append `&detail=1` to the URL:
 
 ```shell
 curl "http://0.0.0.0:8249/classify?detail=1"
