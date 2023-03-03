@@ -6,6 +6,7 @@ fp/*
 fp/
 fingerprints.json
 database/node_modules/
+database/February2023.json
 database/January2023.json
 fingerprintsOld.json
 database/db_June_2022.json
