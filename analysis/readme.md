@@ -25,6 +25,7 @@ Then the idea is to rank all the above fields by importance. Which field brings 
 
 How is this ranking created?
 
-1. Reference Score: The reference score is computed for all 5 clusters with all variables switched on.
-2. Switch Score: For each variable, the variable is removed from the computation of the score. The switch score is noted.
-3. Based on all the switch scores, a ranking is made which variable has had the most influence on the overall score.
+1. Reference Miss Rate: The reference miss rate is computed for all 5 clusters with all variables switched on.
+2. Switch Miss Rate: For each variable, the variable is removed from the computation of the score. The number of false positives is noted.
+3. Based on all the switch miss rates, a ranking is made which variable has had the most influence on the overall score. Put differently: The
+  removal of what variable caused the miss rate to increase the most?
