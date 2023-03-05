@@ -111,8 +111,6 @@ print('num training: {}, num testing: {}'.format(len(training), len(testing)))
 def get_miss_rate(ignoreKey=None):
     avg_miss_rate = {}
     miss_rate = {}
-    # first, compute the average prediction
-    # score with all fields enabled
     for i, entry in enumerate(testing):
         os_name = entry['os_name']
         score = get_score(entry, training, ignoreKey=ignoreKey)
