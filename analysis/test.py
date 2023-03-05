@@ -1,13 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
-
-"""
-  {'Android': 2501, 'Linux': 2501, 'Mac OS': 2501, 'Windows': 2501, 'iOS': 2501}
-"""
-
-df = pd.read_csv('../database/tcp_ip.csv')
-print(df)
+import math
+import random
 
 clusters = ["Android", "Linux", "Mac OS", "Windows", "iOS"]
 remaining = ['ip_checksum', 'ip_df', 'ip_hdr_length',
@@ -18,12 +13,14 @@ remaining = ['ip_checksum', 'ip_df', 'ip_hdr_length',
              'tcp_window_scaling', 'tcp_window_size']
 more = ['os_name', 'os_version']
 
-print('unique ip_ttl', df['ip_ttl'].nunique())
-print('unique tcp_options', df['tcp_options'].nunique())
-print(df['tcp_options'].value_counts())
-print(df['os_name'].value_counts())
-print(df['tcp_window_size'].value_counts())
-print(df['ip_ttl'].value_counts())
+# df = pd.read_csv('../database/tcp_ip.csv')
+# print(df)
+# print('unique ip_ttl', df['ip_ttl'].nunique())
+# print('unique tcp_options', df['tcp_options'].nunique())
+# print(df['tcp_options'].value_counts())
+# print(df['os_name'].value_counts())
+# print(df['tcp_window_size'].value_counts())
+# print(df['ip_ttl'].value_counts())
 
 dbList = []
 databaseFile = 'data.json'
@@ -31,16 +28,18 @@ with open(databaseFile) as f:
     dbList = json.load(f)
 
 
-def get_score(fp, dbList):
+def get_score(fp, dbList, ignoreKey=None):
     scores = []
     for i, entry in enumerate(dbList):
         score = 0
-        if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
-            score += 1
-        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
-            score += 1
+        if ignoreKey != 'ip_id':
+            if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
+                score += 1
+        if ignoreKey != 'ip_ttl':
+            if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
+                score += 1
         for key in remaining:
-            if fp[key] == entry[key]:
+            if ignoreKey != key and fp[key] == entry[key]:
                 score += 1
         scores.append({
             'os_name': entry['os_name'],
@@ -96,8 +95,54 @@ def compute_near_ttl(ip_ttl):
     return guessed_ttl_start
 
 
-for i, entry in enumerate(dbList):
-    score = get_score(entry, dbList)
-    highest = max(score, key=score.get)
-    if entry['os_name'] != highest:
-        print(entry['os_name'], highest, score)
+def get_learning_data(data, threshold=.8):
+    num_training = math.floor(len(data) * threshold)
+    # we have the same amount of data for each class
+    # just shuffle, this will be good enough
+    # {'Android': 2501, 'Linux': 2501, 'Mac OS': 2501, 'Windows': 2501, 'iOS': 2501}
+    random.shuffle(data)
+    return data[:num_training], data[num_training:]
+
+
+training, testing = get_learning_data(dbList)
+print('num training: {}, num testing: {}'.format(len(training), len(testing)))
+
+
+def get_miss_rate(ignoreKey=None):
+    avg_miss_rate = {}
+    miss_rate = {}
+    # first, compute the average prediction
+    # score with all fields enabled
+    for i, entry in enumerate(testing):
+        os_name = entry['os_name']
+        score = get_score(entry, training, ignoreKey=ignoreKey)
+        highest_os = max(score, key=score.get)
+
+        if not miss_rate.get(os_name):
+            miss_rate[os_name] = {'miss': 0, 'total': 0}
+
+        miss_rate[os_name]['total'] += 1
+        if os_name != highest_os:
+            miss_rate[os_name]['miss'] += 1
+
+    for os in miss_rate:
+        avg_miss_rate[os] = round(miss_rate[os]['miss'] /
+                                  miss_rate[os]['total'], 3)
+    return avg_miss_rate
+
+
+def main():
+    base_miss_rate = get_miss_rate()
+    print('base_miss_rate', base_miss_rate)
+    results = {
+        'base_score': base_miss_rate,
+    }
+    for key in remaining:
+        miss_rate_toggle_field = get_miss_rate(key)
+        results[key] = miss_rate_toggle_field
+        print(key, miss_rate_toggle_field)
+        with open('miss_rates.json', 'w') as fp:
+            json.dump(results, fp)
+
+
+main()
