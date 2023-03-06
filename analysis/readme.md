@@ -1,180 +1,86 @@
 # Analysis Questions
 
 1. What header fields should be used for the TCP/IP fingerprint?
-2. What header fields do correlate with the operating systems: `Android`, `Linux`, `Mac OS`, `Windows` and `iOS` most?
-3. What header fields are not necessary?
+2. What header fields do correlate most with the operating systems: `Android`, `Linux`, `Mac OS`, `Windows` and `iOS` most?
+3. What header fields are not necessary for the TCP/IP fingerprint?
+
+What we want is to have some kind of analysis that gives us a ranking what variable
+carries the most entropy for the TCP/IP fingerprint?
 
 All relevant variables:
 
 ```python
-fields = ['ip_checksum', 'ip_df', 'ip_hdr_length',
-          'ip_id', 'ip_mf', 'ip_off', 'ip_protocol', 'ip_rf', 'ip_tos',
-          'ip_total_length', 'ip_ttl', 'ip_version', 'tcp_ack', 'tcp_checksum',
-          'tcp_flags', 'tcp_header_length', 'tcp_mss', 'tcp_off', 'tcp_options',
-          'tcp_seq', 'tcp_timestamp', 'tcp_timestamp_echo_reply', 'tcp_urp',
-          'tcp_window_scaling', 'tcp_window_size']
+['ip_checksum', 'ip_df', 'ip_hdr_length',
+'ip_id', 'ip_mf', 'ip_off', 'ip_protocol', 'ip_rf', 'ip_tos',
+'ip_total_length', 'ip_ttl', 'ip_version', 'tcp_ack', 'tcp_checksum',
+'tcp_flags', 'tcp_header_length', 'tcp_mss', 'tcp_off', 'tcp_options',
+'tcp_seq', 'tcp_timestamp', 'tcp_timestamp_echo_reply', 'tcp_urp',
+'tcp_window_scaling', 'tcp_window_size']
 ```
 
 How do best measure what header field has the most entropy for the TCP/IP fingerprint?
 
-The data is clustered into 5 clusters for each OS.
+The data is clustered into 5 clusters for each OS: `Android`, `Linux`, `Mac OS`, `Windows` and `iOS`
 
 80% of the data is used for training, 20% of the data is used for verification.
 
-Then the idea is to rank all the above fields by importance. Which field brings the most entropy in regards to TCP/IP fingerprinting?
+Then the idea is to rank all the above variables by importance. Which variable brings the most entropy in regards to TCP/IP fingerprinting? Put differently: What variable has the most prediction power? What variable correlates the most with the operating system?
 
-How is this ranking created?
+The algorithm is as follows:
 
-1. Reference Miss Rate: The reference miss rate is computed for all 5 clusters with all variables switched on.
-2. Switch Miss Rate: For each variable, the variable is removed from the computation of the score. The number of false positives is noted.
-3. Based on all the switch miss rates, a ranking is made which variable has had the most influence on the overall score. Put differently: The
-  removal of what variable caused the miss rate to increase the most?
+1. For each variable, we create a histogram of all instances of this variable grouped by the OS. We create the histogram with the 80% training data.
+2. In a second step, we use the testing data. We iterate over all variables. For each variable, we lookup the frequency of this instance in the histogram. We also look for the frequency of this variable in all other histograms. The ratio between `r = freq_correct / freq_all_sum` is stored. At the end, the average `r` is returned for each variable. The higher the average `r` is, the greater the predictive power of this variable to predict the OS.
 
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-import json
-import math
-import random
+Those are the variable rankings for all 5 OS: `Android`, `Linux`, `Mac OS`, `Windows` and `iOS`
+(`0.2` means variable has no predictive value)
 
-clusters = ["Android", "Linux", "Mac OS", "Windows", "iOS"]
-remaining = ['ip_checksum', 'ip_df', 'ip_hdr_length',
-             'ip_mf', 'ip_off', 'ip_protocol', 'ip_rf', 'ip_tos',
-             'ip_total_length', 'ip_version', 'tcp_ack', 'tcp_checksum',
-             'tcp_flags', 'tcp_header_length', 'tcp_mss', 'tcp_off', 'tcp_options',
-             'tcp_seq', 'tcp_timestamp', 'tcp_timestamp_echo_reply', 'tcp_urp',
-             'tcp_window_scaling', 'tcp_window_size']
-more = ['os_name', 'os_version']
+```text
+tcp_options 0.804
+ip_total_length 0.569
+tcp_off 0.569
+tcp_window_scaling 0.544
+tcp_window_size 0.393
+ip_ttl 0.384
+ip_id 0.382
+tcp_timestamp_echo_reply 0.363
+tcp_mss 0.274
+ip_tos 0.214
+tcp_flags 0.209
+ip_df 0.2
+ip_hdr_length 0.2
+ip_mf 0.2
+ip_off 0.2
+ip_protocol 0.2
+ip_rf 0.2
+ip_version 0.2
+tcp_ack 0.2
+tcp_header_length 0.2
+tcp_urp 0.2
+```
 
-# df = pd.read_csv('../database/tcp_ip.csv')
-# print(df)
-# print('unique ip_ttl', df['ip_ttl'].nunique())
-# print('unique tcp_options', df['tcp_options'].nunique())
-# print(df['tcp_options'].value_counts())
-# print(df['os_name'].value_counts())
-# print(df['tcp_window_size'].value_counts())
-# print(df['ip_ttl'].value_counts())
+And those are the results for only three operating system classes: `Unix-Like`, `Apple-Like`, `Windows`
+(`0.36` means variable has no predictive value):
 
-dbList = []
-databaseFile = 'data.json'
-with open(databaseFile) as f:
-    dbList = json.load(f)
-
-
-def get_score(fp, dbList, ignoreKey=None):
-    scores = []
-    for i, entry in enumerate(dbList):
-        score = 0
-        if ignoreKey != 'ip_id':
-            if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
-                score += 1
-        if ignoreKey != 'ip_ttl':
-            if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
-                score += 1
-        for key in remaining:
-            if ignoreKey != key and fp[key] == entry[key]:
-                score += 1
-        scores.append({
-            'os_name': entry['os_name'],
-            'score': score,
-        })
-
-    avg_score_os_class = {
-        "Android": 0,
-        "Linux":  0,
-        "Mac OS":  0,
-        "Windows":  0,
-        "iOS": 0,
-    }
-
-    os_count = {
-        "Android": 0,
-        "Linux":  0,
-        "Mac OS":  0,
-        "Windows":  0,
-        "iOS": 0,
-    }
-
-    for score in scores:
-        avg_score_os_class[score['os_name']] += score['score']
-        os_count[score['os_name']] += 1
-
-    for os in avg_score_os_class:
-        avg_score_os_class[os] = round(
-            avg_score_os_class[os] / os_count[os], 1)
-
-    return avg_score_os_class
-
-
-def compute_ip_id(ip_id):
-    if ip_id == 0:
-        return 0
-    else:
-        return 1
-
-
-def compute_near_ttl(ip_ttl):
-    guessed_ttl_start = ip_ttl
-
-    if ip_ttl > 0 and ip_ttl <= 32:
-        guessed_ttl_start = 32
-    elif ip_ttl > 32 and ip_ttl <= 64:
-        guessed_ttl_start = 64
-    elif ip_ttl > 64 and ip_ttl <= 128:
-        guessed_ttl_start = 128
-    elif ip_ttl > 128:
-        guessed_ttl_start = 255
-
-    return guessed_ttl_start
-
-
-def get_learning_data(data, threshold=.75):
-    num_training = math.floor(len(data) * threshold)
-    # we have the same amount of data for each class
-    # just shuffle, this will be good enough
-    # {'Android': 2501, 'Linux': 2501, 'Mac OS': 2501, 'Windows': 2501, 'iOS': 2501}
-    random.shuffle(data)
-    return data[:num_training], data[num_training:]
-
-
-training, testing = get_learning_data(dbList)
-print('num training: {}, num testing: {}'.format(len(training), len(testing)))
-
-
-def get_miss_rate(ignoreKey=None):
-    avg_miss_rate = {}
-    miss_rate = {}
-    for i, entry in enumerate(testing):
-        os_name = entry['os_name']
-        score = get_score(entry, training, ignoreKey=ignoreKey)
-        highest_os = max(score, key=score.get)
-
-        if not miss_rate.get(os_name):
-            miss_rate[os_name] = {'miss': 0, 'total': 0}
-
-        miss_rate[os_name]['total'] += 1
-        if os_name != highest_os:
-            miss_rate[os_name]['miss'] += 1
-
-    for os in miss_rate:
-        avg_miss_rate[os] = round(miss_rate[os]['miss'] /
-                                  miss_rate[os]['total'], 4)
-    return avg_miss_rate
-
-
-def main():
-    base_miss_rate = get_miss_rate()
-    print('base_miss_rate', base_miss_rate)
-    results = {
-        'base_score': base_miss_rate,
-    }
-    for key in remaining:
-        miss_rate_toggle_field = get_miss_rate(key)
-        results[key] = miss_rate_toggle_field
-        print(key, miss_rate_toggle_field)
-        with open('miss_rates.json', 'w') as fp:
-            json.dump(results, fp, indent=2)
-
-
-main()
+```
+tcp_options 0.992
+ip_total_length 0.952
+tcp_off 0.952
+tcp_window_scaling 0.773
+ip_id 0.699
+ip_ttl 0.57
+tcp_timestamp_echo_reply 0.552
+tcp_window_size 0.551
+tcp_mss 0.404
+tcp_flags 0.375
+ip_tos 0.365
+ip_df 0.36
+ip_hdr_length 0.36
+ip_mf 0.36
+ip_off 0.36
+ip_protocol 0.36
+ip_rf 0.36
+ip_version 0.36
+tcp_ack 0.36
+tcp_header_length 0.36
+tcp_urp 0.36
 ```
