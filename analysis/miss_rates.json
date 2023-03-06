@@ -1,1 +1,79 @@
-{"base_score": {"Windows": 0.002, "Mac OS": 0.152, "iOS": 0.605, "Android": 0.075, "Linux": 0.264}, "ip_checksum": {"Windows": 0.002, "Mac OS": 0.152, "iOS": 0.605, "Android": 0.075, "Linux": 0.264}, "ip_df": {"Windows": 0.002, "Mac OS": 0.156, "iOS": 0.614, "Android": 0.075, "Linux": 0.266}}
+{
+  "base_score": {
+    "Android": 0.0634,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5671,
+    "Linux": 0.2516
+  },
+  "ip_checksum": {
+    "Android": 0.0634,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5671,
+    "Linux": 0.2516
+  },
+  "ip_df": {
+    "Android": 0.0601,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5927,
+    "Linux": 0.2516
+  },
+  "ip_hdr_length": {
+    "Android": 0.0634,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5671,
+    "Linux": 0.2516
+  },
+  "ip_id": {
+    "Android": 0.0634,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5974,
+    "Linux": 0.2516
+  },
+  "ip_mf": {
+    "Android": 0.0634,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5671,
+    "Linux": 0.2516
+  },
+  "ip_off": {
+    "Android": 0.0601,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5927,
+    "Linux": 0.2516
+  },
+  "ip_protocol": {
+    "Android": 0.0634,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5671,
+    "Linux": 0.2516
+  },
+  "ip_rf": {
+    "Android": 0.0634,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5671,
+    "Linux": 0.2516
+  },
+  "ip_tos": {
+    "Android": 0.0417,
+    "Mac OS": 0.1777,
+    "Windows": 0.0065,
+    "iOS": 0.5639,
+    "Linux": 0.2689
+  },
+  "ip_total_length": {
+    "Android": 0.0634,
+    "Mac OS": 0.1762,
+    "Windows": 0.0065,
+    "iOS": 0.5527,
+    "Linux": 0.2531
+  }
+}
