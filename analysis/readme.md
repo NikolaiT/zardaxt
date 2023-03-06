@@ -31,8 +31,11 @@ The algorithm is as follows:
 1. For each variable, we create a histogram of all instances of this variable grouped by the OS. We create the histogram with the 80% training data.
 2. In a second step, we use the testing data. We iterate over all variables. For each variable, we lookup the frequency of this instance in the histogram. We also look for the frequency of this variable in all other histograms. The ratio between `r = freq_correct / freq_all_sum` is stored. At the end, the average `r` is returned for each variable. The higher the average `r` is, the greater the predictive power of this variable to predict the OS.
 
+## Results
+
 Those are the variable rankings for all 5 OS: `Android`, `Linux`, `Mac OS`, `Windows` and `iOS`
-(`0.2` means variable has no predictive value)
+
+> `0.2` means variable has no predictive value
 
 ```text
 tcp_options 0.804
@@ -59,7 +62,8 @@ tcp_urp 0.2
 ```
 
 And those are the results for only three operating system classes: `Unix-Like`, `Apple-Like`, `Windows`
-(`0.36` means variable has no predictive value):
+
+> `0.36` means variable has no predictive value
 
 ```
 tcp_options 0.992
