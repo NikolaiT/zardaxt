@@ -1,79 +1,366 @@
 {
   "base_score": {
-    "Android": 0.0634,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5671,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8025
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7298
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6778
+    }
   },
   "ip_checksum": {
-    "Android": 0.0634,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5671,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8025
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.73
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6778
+    }
   },
   "ip_df": {
-    "Android": 0.0601,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5927,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7913
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7147
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6626
+    }
   },
   "ip_hdr_length": {
-    "Android": 0.0634,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5671,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
   },
   "ip_id": {
-    "Android": 0.0634,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5974,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8183
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.766
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6878
+    }
   },
   "ip_mf": {
-    "Android": 0.0634,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5671,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
   },
   "ip_off": {
-    "Android": 0.0601,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5927,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7913
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7147
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6626
+    }
   },
   "ip_protocol": {
-    "Android": 0.0634,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5671,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
   },
   "ip_rf": {
-    "Android": 0.0634,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5671,
-    "Linux": 0.2516
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
   },
   "ip_tos": {
-    "Android": 0.0417,
-    "Mac OS": 0.1777,
-    "Windows": 0.0065,
-    "iOS": 0.5639,
-    "Linux": 0.2689
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7927
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7177
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.665
+    }
   },
   "ip_total_length": {
-    "Android": 0.0634,
-    "Mac OS": 0.1762,
-    "Windows": 0.0065,
-    "iOS": 0.5527,
-    "Linux": 0.2531
+    "Unix-Like": {
+      "miss_rate": 0.0486,
+      "avg_dist": 0.8493
+    },
+    "Apple-Like": {
+      "miss_rate": 0.01,
+      "avg_dist": 0.7706
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.7115
+    }
+  },
+  "ip_ttl": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8144
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7393
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6979
+    }
+  },
+  "ip_version": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
+  },
+  "tcp_ack": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
+  },
+  "tcp_checksum": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8025
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7298
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6778
+    }
+  },
+  "tcp_flags": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7924
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7129
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6626
+    }
+  },
+  "tcp_header_length": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
+  },
+  "tcp_mss": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8008
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7277
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6763
+    }
+  },
+  "tcp_off": {
+    "Unix-Like": {
+      "miss_rate": 0.0486,
+      "avg_dist": 0.8493
+    },
+    "Apple-Like": {
+      "miss_rate": 0.01,
+      "avg_dist": 0.7706
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.7115
+    }
+  },
+  "tcp_options": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8052
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7333
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6822
+    }
+  },
+  "tcp_seq": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8025
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7298
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6778
+    }
+  },
+  "tcp_timestamp": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8035
+    },
+    "Apple-Like": {
+      "miss_rate": 0.01,
+      "avg_dist": 0.7301
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.714
+    }
+  },
+  "tcp_timestamp_echo_reply": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8196
+    },
+    "Apple-Like": {
+      "miss_rate": 0.01,
+      "avg_dist": 0.7424
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.714
+    }
+  },
+  "tcp_urp": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7905
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7139
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.66
+    }
+  },
+  "tcp_window_scaling": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.8063
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.7485
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.6965
+    }
+  },
+  "tcp_window_size": {
+    "Unix-Like": {
+      "miss_rate": 0.0406,
+      "avg_dist": 0.7985
+    },
+    "Apple-Like": {
+      "miss_rate": 0.02,
+      "avg_dist": 0.753
+    },
+    "Windows": {
+      "miss_rate": 0.0041,
+      "avg_dist": 0.695
+    }
   }
 }
