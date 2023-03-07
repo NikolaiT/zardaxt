@@ -36,6 +36,8 @@ def get_var_value(var, entry, assume_ttl=False):
         value = compute_ip_id(entry['ip_id'])
     if assume_ttl and var == 'ip_ttl':
         value = compute_near_ttl(entry['ip_ttl'])
+    if var == 'tcp_timestamp':
+        value = compute_tcp_timestamp(entry['tcp_timestamp'])
     return value
 
 
@@ -51,6 +53,16 @@ def create_histogram_for_var(training, var):
         histogram[_os][value] += 1
 
     return histogram
+
+
+def compute_tcp_timestamp(tcp_timestamp):
+    if isinstance(tcp_timestamp, int) and tcp_timestamp > 0:
+        return 1
+    elif tcp_timestamp == '':
+        return 0
+    else:
+        raise Exception(
+            'Invalid tcp_timestamp value: {}'.format(tcp_timestamp))
 
 
 def compute_ip_id(ip_id):
