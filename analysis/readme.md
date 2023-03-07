@@ -41,18 +41,18 @@ Those are the variable rankings for all 5 OS: `Android`, `Linux`, `Mac OS`, `Win
 > `0.2` means variable has no predictive value
 
 ```text
-tcp_timestamp 0.813
-tcp_options 0.801
-ip_total_length 0.561
-tcp_off 0.561
-tcp_window_scaling 0.549
-tcp_window_size 0.388
-ip_id 0.384
-ip_ttl 0.371
-tcp_timestamp_echo_reply 0.352
-tcp_mss 0.277
-ip_tos 0.212
-tcp_flags 0.208
+tcp_options 0.807
+ip_total_length 0.57
+tcp_off 0.57
+tcp_window_scaling 0.546
+tcp_window_size 0.393
+ip_ttl 0.385
+ip_id 0.382
+tcp_timestamp 0.364
+tcp_timestamp_echo_reply 0.364
+tcp_mss 0.275
+ip_tos 0.214
+tcp_flags 0.21
 ip_df 0.2
 ip_hdr_length 0.2
 ip_mf 0.2
@@ -70,26 +70,26 @@ And those are the results for only three operating system classes: `Unix-Like`, 
 > `0.36` means variable has no predictive value
 
 ```
-tcp_options 0.992
-ip_total_length 0.953
-tcp_off 0.953
-tcp_timestamp 0.823
-tcp_window_scaling 0.774
-ip_id 0.699
-ip_ttl 0.569
-tcp_timestamp_echo_reply 0.552
-tcp_window_size 0.551
-tcp_mss 0.403
-tcp_flags 0.375
-ip_tos 0.366
-ip_df 0.361
-ip_off 0.361
-ip_hdr_length 0.36
-ip_mf 0.36
-ip_protocol 0.36
-ip_rf 0.36
-ip_version 0.36
-tcp_ack 0.36
-tcp_header_length 0.36
-tcp_urp 0.36
+tcp_options 0.991
+ip_total_length 0.954
+tcp_off 0.954
+tcp_window_scaling 0.773
+ip_id 0.706
+ip_ttl 0.56
+tcp_window_size 0.549
+tcp_timestamp 0.548
+tcp_timestamp_echo_reply 0.548
+tcp_mss 0.405
+tcp_flags 0.377
+ip_tos 0.369
+ip_df 0.362
+ip_off 0.362
+ip_hdr_length 0.361
+ip_mf 0.361
+ip_protocol 0.361
+ip_rf 0.361
+ip_version 0.361
+tcp_ack 0.361
+tcp_header_length 0.361
+tcp_urp 0.361
 ```
