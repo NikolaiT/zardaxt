@@ -11,7 +11,7 @@ all_keys = ['ip_checksum', 'ip_df', 'ip_hdr_length', 'ip_id',
 exclude_vars = ['ip_checksum', 'tcp_checksum', 'tcp_seq']
 
 
-def gos(os_name, reduce_classes=False):
+def gos(os_name, reduce_classes=True):
     """
     Unix-Like: Android and Linux
     Apple-Like: iOS and Mac OS
