@@ -1,6 +1,6 @@
-import json
 import math
 import random
+from analysis_utils import gos, get_var_value, get_data
 
 all_keys = ['ip_checksum', 'ip_df', 'ip_hdr_length', 'ip_id',
             'ip_mf', 'ip_off', 'ip_protocol', 'ip_rf', 'ip_tos',
@@ -9,36 +9,6 @@ all_keys = ['ip_checksum', 'ip_df', 'ip_hdr_length', 'ip_id',
             'tcp_seq', 'tcp_timestamp', 'tcp_timestamp_echo_reply', 'tcp_urp',
             'tcp_window_scaling', 'tcp_window_size']
 exclude_vars = ['ip_checksum', 'tcp_checksum', 'tcp_seq']
-
-
-def gos(os_name, reduce_classes=True):
-    """
-    Unix-Like: Android and Linux
-    Apple-Like: iOS and Mac OS
-
-    Args:
-        os_name (str): The detailed operating system
-
-    Returns:
-        str: The clustered operating system
-    """
-    if reduce_classes:
-        if os_name in ["Android", "Linux"]:
-            return 'Unix-Like'
-        if os_name in ["Mac OS", "iOS"]:
-            return 'Apple-Like'
-    return os_name
-
-
-def get_var_value(var, entry, assume_ttl=False):
-    value = entry[var]
-    if var == 'ip_id':
-        value = compute_ip_id(entry['ip_id'])
-    if assume_ttl and var == 'ip_ttl':
-        value = compute_near_ttl(entry['ip_ttl'])
-    if var == 'tcp_timestamp':
-        value = compute_tcp_timestamp(entry['tcp_timestamp'])
-    return value
 
 
 def create_histogram_for_var(training, var):
@@ -55,38 +25,6 @@ def create_histogram_for_var(training, var):
     return histogram
 
 
-def compute_tcp_timestamp(tcp_timestamp):
-    if isinstance(tcp_timestamp, int) and tcp_timestamp > 0:
-        return 1
-    elif tcp_timestamp == '':
-        return 0
-    else:
-        raise Exception(
-            'Invalid tcp_timestamp value: {}'.format(tcp_timestamp))
-
-
-def compute_ip_id(ip_id):
-    if ip_id == 0:
-        return 0
-    else:
-        return 1
-
-
-def compute_near_ttl(ip_ttl):
-    guessed_ttl_start = ip_ttl
-
-    if ip_ttl > 0 and ip_ttl <= 32:
-        guessed_ttl_start = 32
-    elif ip_ttl > 32 and ip_ttl <= 64:
-        guessed_ttl_start = 64
-    elif ip_ttl > 64 and ip_ttl <= 128:
-        guessed_ttl_start = 128
-    elif ip_ttl > 128:
-        guessed_ttl_start = 255
-
-    return guessed_ttl_start
-
-
 def get_learning_data(data, threshold=.8):
     num_training = math.floor(len(data) * threshold)
     # we have the same amount of data for each class
@@ -97,11 +35,7 @@ def get_learning_data(data, threshold=.8):
 
 
 def main():
-    data = []
-    databaseFile = 'data.json'
-    with open(databaseFile) as f:
-        data = json.load(f)
-
+    data = get_data()
     training, testing = get_learning_data(data, threshold=0.7)
     scores = {}
     for var in all_keys:
