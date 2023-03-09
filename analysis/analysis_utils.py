@@ -72,19 +72,19 @@ def compute_near_ttl(ip_ttl):
 
 
 def create_hist():
-    histogram = {}
     data = get_data()
-    for fp in data:
-        value = fp['ip_total_length']
-        _os = gos(fp['os_name'])
-        if not histogram.get(_os):
-            histogram[_os] = {}
-        if not histogram[_os].get(value, False):
-            histogram[_os][value] = 0
-        histogram[_os][value] += 1
-
-    with open('./data/ip_total_length.json', 'w') as fp:
-        json.dump(histogram, fp, indent=2)
+    for var in ['ip_total_length', 'tcp_off']:
+        histogram = {}
+        for fp in data:
+            value = fp[var]
+            _os = gos(fp['os_name'])
+            if not histogram.get(_os):
+                histogram[_os] = {}
+            if not histogram[_os].get(value, False):
+                histogram[_os][value] = 0
+            histogram[_os][value] += 1
+        with open('./data/{}.json'.format(var), 'w') as fp:
+            json.dump(histogram, fp, indent=2)
 
 
 if __name__ == '__main__':
