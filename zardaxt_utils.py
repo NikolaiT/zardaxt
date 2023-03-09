@@ -141,53 +141,6 @@ def compute_near_timestamp_tick(hertz_observed):
     return 'unknown'
 
 
-def score_fp(fp):
-    global dbList
-    perfectScore = 11.5
-    scores = []
-    for i, entry in enumerate(dbList):
-        score = 0
-        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
-            score += 1.5
-        # check IP DF bit
-        if entry['ip_df'] == fp['ip_df']:
-            score += 1
-        # check IP MF bit
-        if entry['ip_mf'] == fp['ip_mf']:
-            score += 1
-        # check TCP window size
-        if entry['tcp_window_size'] == fp['tcp_window_size']:
-            score += 1.5
-        # check TCP flags
-        if entry['tcp_flags'] == fp['tcp_flags']:
-            score += 1
-        # check TCP header length
-        if entry['tcp_header_length'] == fp['tcp_header_length']:
-            score += 1
-        # check TCP MSS
-        if entry['tcp_mss'] == fp['tcp_mss']:
-            score += 1.5
-        # check TCP options
-        if entry['tcp_options'] == fp['tcp_options']:
-            score += 3
-        else:
-            # check order of TCP options (this is weaker than TCP options equality)
-            orderEntry = ''.join(
-                [e[0] for e in entry['tcp_options'].split(',') if e])
-            orderFp = ''.join([e[0]
-                              for e in fp['tcp_options'].split(',') if e])
-            if orderEntry == orderFp:
-                score += 2
-
-        scores.append({
-            'i': i,
-            'score': score,
-            'os': entry['userAgentParsed']['os']['name'],
-        })
-
-    return perfectScore, scores
-
-
 def score_fp_new(fp):
     """The most recent version of TCP/IP fingerprint scoring algorithm.
 
@@ -278,6 +231,60 @@ def score_fp_new(fp):
     return perfectScore, scores
 
 
+def score_fp_v2(fp):
+    """The most recent version of TCP/IP fingerprint scoring algorithm.
+
+    Args:
+        fp (dict): The fingerprint to score
+
+    Returns:
+        tuple: perfect score, all the scores against the db
+    """
+    global dbList
+    scores = []
+    # 1.5 + 0.25 + 2.5 + 2.5 + 2 + 2 + 2 + 2 + 0.25 + 1.5 + 4
+    perfectScore = 20.5
+    for i, entry in enumerate(dbList):
+        score = 0
+        if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
+            score += 1.5
+        if entry['ip_tos'] == fp['ip_tos']:
+            score += 0.25
+        if entry['ip_total_length'] == fp['ip_total_length']:
+            score += 2.5
+        if entry['tcp_off'] == fp['tcp_off']:
+            score += 2.5
+        if entry['tcp_timestamp_echo_reply'] == fp['tcp_timestamp_echo_reply']:
+            score += 2
+        if entry['tcp_window_scaling'] == fp['tcp_window_scaling']:
+            score += 2
+        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
+            score += 2
+        if entry['tcp_window_size'] == fp['tcp_window_size']:
+            score += 2
+        if entry['tcp_flags'] == fp['tcp_flags']:
+            score += 0.25
+        if entry['tcp_mss'] == fp['tcp_mss']:
+            score += 1.5
+        if entry['tcp_options'] == fp['tcp_options']:
+            score += 4
+        else:
+            orderEntry = ''.join(
+                [e[0] for e in entry['tcp_options'].split(',') if e])
+            orderFp = ''.join([e[0]
+                              for e in fp['tcp_options'].split(',') if e])
+            if orderEntry == orderFp:
+                score += 2.5
+
+        scores.append({
+            'i': i,
+            'score': score,
+            'os': entry['userAgentParsed']['os']['name'],
+        })
+
+    return perfectScore, scores
+
+
 def make_os_guess(fp, n=3):
     """
     Return the highest scoring TCP/IP fingerprinting match from the database.
@@ -285,7 +292,7 @@ def make_os_guess(fp, n=3):
 
     As a second guess, output the operating system with the highest, normalized average score.
     """
-    perfectScore, scores = score_fp_new(fp)
+    perfectScore, scores = score_fp_v2(fp)
     # Return the highest scoring TCP/IP fingerprinting match
     scores.sort(key=lambda x: x['score'], reverse=True)
     guesses = []
