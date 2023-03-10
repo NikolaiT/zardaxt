@@ -71,6 +71,28 @@ Or run `zardaxt.py` in the background on your server
 nohup pew in zardaxt python zardaxt.py 
 ```
 
+## Serving over https via `nginx`
+
+If you want to serve `zardaxt.py` over nginx, your configuration has to look something like this:
+
+```text
+server {
+  listen 443 ssl;
+  server_name tcpip.incolumitas.com;
+
+  location / {
+    proxy_pass http://localhost:8249;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Host $host;
+    proxy_set_header  X-Real-IP $remote_addr;
+    proxy_cache_bypass $http_upgrade;
+  }
+    ssl_certificate /etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/abs.incolumitas.com/privkey.pem; # managed by Certbot
+}
+```
+
 ## API Support
 
 When you run `zardaxt.py`, the program automatically launches a simple web API that you can query. A http server is bound to `0.0.0.0:8249`. You can query it on `http://0.0.0.0:8249/classify`.
