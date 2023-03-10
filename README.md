@@ -73,7 +73,8 @@ nohup pew in zardaxt python zardaxt.py
 
 ## Serving over https via `nginx`
 
-If you want to serve `zardaxt.py` over nginx, your configuration has to look something like this:
+If you want to serve `zardaxt.py` over nginx, your configuration has to look something like this. HTTPS is provided by
+[Let’s Encrypt (certbot)](https://certbot.eff.org/).
 
 ```text
 server {
