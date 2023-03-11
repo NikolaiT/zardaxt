@@ -4,7 +4,7 @@
   "api_server_port": 8249,
   "verbose": false,
   "api_key": "abcd1234",
-  "pcap_filter": "tcp port 80 or tcp port 443",
+  "pcap_filter": "tcp[tcpflags] & (tcp-syn|tcp-ack) != 0",
   "store_fingerprints": false,
   "write_after": 1000,
   "clear_dict_after": 5000,
