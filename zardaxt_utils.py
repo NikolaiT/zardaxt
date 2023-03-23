@@ -252,13 +252,13 @@ def score_fp_v2(fp):
             score += 0.25
         if entry['ip_total_length'] == fp['ip_total_length']:
             score += 2.5
+        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
+            score += 2
         if entry['tcp_off'] == fp['tcp_off']:
             score += 2.5
         if entry['tcp_timestamp_echo_reply'] == fp['tcp_timestamp_echo_reply']:
             score += 2
         if entry['tcp_window_scaling'] == fp['tcp_window_scaling']:
-            score += 2
-        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
             score += 2
         if entry['tcp_window_size'] == fp['tcp_window_size']:
             score += 2

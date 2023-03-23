@@ -1,6 +1,6 @@
 {
   "interface": "en0",
-  "api_server_ip": "0.0.0.0",
+  "api_server_ip": "::",
   "api_server_port": 8249,
   "verbose": false,
   "api_key": "abcd1234",

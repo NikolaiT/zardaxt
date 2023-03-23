@@ -1,11 +1,16 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import _thread
 import json
+import socket
 import traceback
 from zardaxt_logging import log
 from dune_client import incr
 from urllib.parse import urlparse, parse_qs
 from zardaxt_utils import make_os_guess
+
+
+class HTTPServerIPv6(HTTPServer):
+    address_family = socket.AF_INET6
 
 
 class ZardaxtApiServer(BaseHTTPRequestHandler):
@@ -20,7 +25,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
 
     def get_ip(self):
         ip = self.client_address[0]
-        if ip == '127.0.0.1':
+        if ip == '127.0.0.1' or ip == '::ffff:127.0.0.1':
             ip = self.headers.get('X-Real-IP')
         return ip
 
@@ -48,7 +53,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         self.send_response(403)
         self.end_headers()
         self.wfile.write(
-            bytes("Access Denied. Please query only endpoint /classify", "utf-8"))
+            bytes("Access Denied", "utf-8"))
 
     def send_text(self, payload):
         self.send_response(200)
@@ -157,6 +162,12 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
                     return self.handle_authenticated_lookup(client_ip)
                 else:
                     return self.handle_lookup_by_client_ip(client_ip)
+            if self.path.startswith('/all'):
+                if key and self.config['api_key'] == key:
+                    fpCopy = self.fingerprints.copy()
+                    return self.send_json(fpCopy)
+                else:
+                    return self.deny(fpCopy)
             elif self.path.startswith('/uptime'):
                 if key and self.config['api_key'] == key:
                     lookup_ip = self.get_query_arg('ip')
@@ -181,7 +192,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
 def create_server(config, fingerprints, timestamps):
     server_address = (config['api_server_ip'], config['api_server_port'])
     handler = ZardaxtApiServer(config, fingerprints, timestamps)
-    httpd = HTTPServer(server_address, handler)
+    httpd = HTTPServerIPv6(server_address, handler)
     log("TCP/IP Fingerprint API started on http://%s:%s" %
         server_address, 'api', level='INFO')
 

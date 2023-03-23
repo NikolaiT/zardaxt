@@ -3,7 +3,6 @@ import socket
 from dpkt.tcp import parse_opts
 import pcapy
 from datetime import timedelta
-import time
 import sys
 import signal
 import json
@@ -20,11 +19,11 @@ Update: January 2023
 
 Allows to fingerprint an incoming TCP/IP connection by the initial SYN packet.
 
-Several fields such as TCP Options or TCP Window Size 
+Several fields such as TCP Options or TCP Window Size
 or IP fragment flag depend heavily on the OS type and version.
 
 Some code has been taken from: https://github.com/xnih/satori
-However, the codebase of github.com/xnih/satori was quite frankly 
+However, the codebase of github.com/xnih/satori was quite frankly
 a huge mess (randomly failing code segments and capturing the errors, not good).
 
 As of 2023, it is actually a complete rewrite.
@@ -58,41 +57,51 @@ signal.signal(signal.SIGINT, signal_handler)  # ctlr + c
 signal.signal(signal.SIGTSTP, signal_handler)  # ctlr + z
 
 
-def process_packet(ts, header_len, cap_len, ip_pkt):
+def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
     """
-    Processes an IP packet.
+    We are only considering TCP segments here.
 
-    We are only considering TCP segments here. 
-
-    It likely makes sense to also make a TCP/IP fingerprint for other 
-    TCP-like protocols such as QUIC, which is builds on top of UDP.
-
-    For now, only TCP is considered. In the future, this will be updated.
+    It likely makes sense to also make a TCP/IP fingerprint for other
+    TCP-like protocols such as QUIC, which builds on top of UDP.
     """
     tcp_pkt = None
-    udp_pkt = None
 
     if ip_pkt.p == dpkt.ip.IP_PROTO_TCP:
         tcp_pkt = ip_pkt.data
 
-    if ip_pkt.p == dpkt.ip.IP_PROTO_UDP:
-        udp_pkt = ip_pkt.data
-
-    # Currently, only TCP is considered for the TCP/IP fingerprint
-    # @TODO: Consider other protocols such as QUIC in the future
     if tcp_pkt:
-        tcp_options = parse_opts(tcp_pkt.opts)
-        [str_opts, timestamp, timestamp_echo_reply, mss,
-            window_scaling] = decode_tcp_options(tcp_options)
         is_syn = tcp_pkt.flags & TH_SYN
         is_ack = tcp_pkt.flags & TH_ACK
-        src_ip = socket.inet_ntoa(ip_pkt.src)
-        dst_ip = socket.inet_ntoa(ip_pkt.dst)
+
+        addr_fam = socket.AF_INET
+        if ip_version == 6:
+            addr_fam = socket.AF_INET6
+
+        src_ip = socket.inet_ntop(addr_fam, ip_pkt.src)
+        dst_ip = socket.inet_ntop(addr_fam, ip_pkt.dst)
 
         # The reason we are looking for a TCP segment that has the SYN flag
         # but not the ACK flag is that we are only interested in packets
         # coming from client to server and not the SYN+ACK from server to client.
         if is_syn and not is_ack:
+            tcp_options = parse_opts(tcp_pkt.opts)
+            [str_opts, timestamp, timestamp_echo_reply, mss,
+                window_scaling] = decode_tcp_options(tcp_options)
+
+            ip_len = None
+            ip_ttl = None
+            if ip_version == 4:
+                ip_ttl = ip_pkt.ttl
+                ip_len = ip_pkt.len
+            elif ip_version == 6:
+                ip_len = len(ip_pkt)
+                # Hop Limit (8 bits)
+                # Replaces the time to live field in IPv4.
+                # This value is decremented by one at each forwarding node and the packet is discarded
+                # if it becomes 0. However, the destination node should process the packet normally
+                # even if received with a hop limit of 0.
+                ip_ttl = ip_pkt.hlim
+
             if not fingerprints.get(src_ip, None):
                 fingerprints[src_ip] = []
 
@@ -104,18 +113,20 @@ def process_packet(ts, header_len, cap_len, ip_pkt):
                 'dst_ip': dst_ip,
                 'src_port': tcp_pkt.sport,
                 'dst_port': tcp_pkt.dport,
-                'ip_hdr_length': ip_pkt.hl,
+                'ip_hdr_length': ip_pkt.hl if ip_version == 4 else None,
                 'ip_version': ip_pkt.v,
-                'ip_total_length': ip_pkt.len,
-                'ip_tos': ip_pkt.tos,
-                'ip_id': ip_pkt.id,
-                'ip_ttl': ip_pkt.ttl,
-                'ip_rf': ip_pkt.rf,
-                'ip_df': ip_pkt.df,
-                'ip_mf': ip_pkt.mf,
-                'ip_off': ip_pkt.off,
+                'ip_total_length': ip_len,
+                'ip_tos': ip_pkt.tos if ip_version == 4 else None,
+                'ip_id': ip_pkt.id if ip_version == 4 else None,
+                'ip_ttl': ip_ttl,
+                'ip_rf': ip_pkt.rf if ip_version == 4 else None,
+                'ip_df': ip_pkt.df if ip_version == 4 else None,
+                'ip_mf': ip_pkt.mf if ip_version == 4 else None,
+                'ip_off': ip_pkt.off if ip_version == 4 else None,
                 'ip_protocol': ip_pkt.p,
-                'ip_checksum': ip_pkt.sum,
+                'ip_checksum': ip_pkt.sum if ip_version == 4 else None,
+                'ip_plen': ip_pkt.plen if ip_version == 6 else None,
+                'ip_nxt': ip_pkt.nxt if ip_version == 6 else None,
                 # @TODO: this is likely not what we want (Probably just take tcp_off instead)
                 'tcp_header_length': tcp_pkt.__hdr_len__,
                 'tcp_off': tcp_pkt.off,
@@ -226,13 +237,14 @@ def add_timestamp(key, ts, tcp_timestamp, tcp_timestamp_echo_reply, tcp_seq):
 
 
 def main():
-    log('listening on interface {}'.format(config['interface']), 'zardaxt')
+    log('Listen on interface {}'.format(config['interface']), 'zardaxt')
     # Arguments here are:
     # snaplen (maximum number of bytes to capture per packet)
     # 120 bytes are picked, since the maximum TCP header is 60 bytes and the maximum IP header is also 60 bytes
+    # The IPv6 header is always present and is a fixed size of 40 bytes.
     max_bytes = 120
     # promiscuous mode (1 for true)
-    promiscuous = False
+    promiscuous = 1
     # https://github.com/the-tcpdump-group/libpcap/issues/572
     # The main purpose of timeouts in packet capture mechanisms is to allow the capture mechanism
     # to buffer up multiple packets, and deliver multiple packets in a single wakeup, rather than one
@@ -253,23 +265,19 @@ def main():
     preader.setfilter(config.get('pcap_filter', ''))
     while True:
         (header, buf) = preader.next()
-        eth = None
-        try:
-            eth = dpkt.ethernet.Ethernet(buf)
-        except Exception as err:
-            continue
-        # ignore everything other than IP packets
-        if eth.type != dpkt.ethernet.ETH_TYPE_IP:
-            continue
-        ip_pkt = eth.data
-        header_len = header.getlen()
-        cap_len = header.getcaplen()
-        ts = header.getts()
-        try:
-            process_packet(ts, header_len, cap_len, ip_pkt)
-        except Exception as err:
-            log('Error in process_packet(): {}'.format(str(err)),
-                'zardaxt', level='ERROR')
+        eth = dpkt.ethernet.Ethernet(buf)
+        # ignore everything other than IPv4 or IPv6
+        if eth.type == dpkt.ethernet.ETH_TYPE_IP or eth.type == dpkt.ethernet.ETH_TYPE_IP6:
+            ip_pkt = eth.data
+            header_len = header.getlen()
+            cap_len = header.getcaplen()
+            ts = header.getts()
+
+            ip_version = 4
+            if eth.type == dpkt.ethernet.ETH_TYPE_IP6:
+                ip_version = 6
+
+            process_packet(ts, header_len, cap_len, ip_pkt, ip_version)
 
 
 if __name__ == '__main__':

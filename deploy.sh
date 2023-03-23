@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# add your env variables into a file .env
-source .env
+if [ -z "$1" ]
+  then
+    # add your env variables into a file .env
+    source .env
+else
+    source "$1"
+fi
 
 # sync webapp
 rsync --chown www-data:www-data --exclude-from "$LOCAL_DIR/exclude.txt" \
