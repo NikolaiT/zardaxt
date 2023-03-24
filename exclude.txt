@@ -7,3 +7,5 @@ Pipfile-Server
 database/January2023.json
 log/
 analysis/
+env/*
+old_src/*

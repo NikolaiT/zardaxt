@@ -3,7 +3,7 @@
 if [ -z "$1" ]
   then
     # add your env variables into a file .env
-    source .env
+    source env/.env
 else
     source "$1"
 fi

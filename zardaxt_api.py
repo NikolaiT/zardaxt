@@ -130,7 +130,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         lookup_ip = self.get_query_arg('ip')
         if lookup_ip:
             log('Api Key provided. Looking up IP {}'.format(
-                lookup_ip), 'api', onlyPrint=True)
+                lookup_ip), 'api')
             self.handle_lookup(client_ip, lookup_ip)
         else:
             return self.send_json(self.fingerprints.copy())
