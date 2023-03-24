@@ -143,6 +143,11 @@ def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
                 'tcp_mss': mss
             })
 
+            if config.get('enable_uptime_interpolation', False):
+                key = '{}:{}'.format(src_ip, tcp_pkt.sport)
+                add_timestamp(key, ts, timestamp,
+                              timestamp_echo_reply, tcp_pkt.seq)
+
             if len(fingerprints) > config.get('clear_dict_after', 5000):
                 log('Clearing fingerprints dict', 'zardaxt')
                 fingerprints.clear()
@@ -152,9 +157,88 @@ def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
                 if len(fingerprints) > 0 and len(fingerprints) % config.get('write_after', 1000) == 0:
                     update_file()
 
+        elif is_ack:
+            # Here we take timestamp samples from the client. We only regard timestamps from
+            # ACK segments from the client ---> server.
+
+            # RFC 1323 specifies timestamps must be monotonically increasing, and tick between 1 ms and 1 second.
+            # The starting value for the timestamp is not explicitly specified, however many network stack implementations
+            # use a systems uptime to calculate the timestamp. [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
+
+            # Read https://www.rfc-editor.org/rfc/rfc1323#section-4 in order to understand
+            # how TCP timestamps work.
+
+            # We only take new timestamp samples, if the timestamp increases, otherwise
+            # there is no further information to extract from identical timestamps (I guess
+            # this happens because TCP/IP stacks fire out segments with the same TCP timestamp)
+            # Most commonly, timestamps are in MS (milliseconds) (which means the frequency is 1000hz), but this is not always the case.
+
+            # If we managed to infer the frequency (hz) of at least two timestamps, we will infer the likely exact
+            # frequency and then we compute the uptime. For most modern systems, uptime computation will be wrong:
+            # On Linux the TCP timestamp feature can be controlled with the net.ipv4.tcp_timestamp kernel parameter. Normally the option can either be enabled (1) or disabled (0), however more recent kernels also have an option to add a random offset which will effectively hide the systems uptime [https://floatingoctothorpe.uk/2018/detecting-uptime-from-tcp-timestamps.html]
+            if config.get('enable_uptime_interpolation', False):
+                key = '{}:{}'.format(src_ip, tcp_pkt.sport)
+                # this line makes sure that we already got the initial SYN packet
+                if timestamp:
+                    add_timestamp(key, ts, timestamp,
+                                  timestamp_echo_reply, tcp_pkt.seq)
+                    if key in timestamps:
+                        tss = timestamps[key].get('timestamps', [])
+                        ticks = timestamps[key].get('clock_ticks', [])
+                        if len(tss) >= 2:
+                            delta_tcp_ts = tss[-1] - tss[0]
+                            delta_clock = ticks[-1] - ticks[0]
+                            hertz_observed = delta_tcp_ts / delta_clock
+                            hertz = compute_near_timestamp_tick(hertz_observed)
+                            timestamps[key]['uptime_interpolation'] = {
+                                'hz_observed': hertz_observed,
+                                'hz': hertz,
+                                'num_timestamps': len(tss),
+                            }
+                            uptime = None
+                            if isinstance(hertz, int):
+                                uptime = tss[0] / hertz
+                            elif hertz_observed > 0:
+                                uptime = tss[0] / hertz_observed
+
+                            if uptime:
+                                timestamps[key]['uptime_interpolation']['uptime'] = str(
+                                    timedelta(seconds=uptime))
+
+
+def add_timestamp(key, ts, tcp_timestamp, tcp_timestamp_echo_reply, tcp_seq):
+    if not key in timestamps:
+        timestamps[key] = {
+            'timestamps': [tcp_timestamp],
+            'timestamp_echo_replies': [tcp_timestamp_echo_reply],
+            'clock_ticks': [ts],
+            'seq_nums': [tcp_seq]
+        }
+    elif len(timestamps[key].get('timestamps', [])) <= 20:
+        timestamps[key]['timestamps'].append(tcp_timestamp)
+        timestamps[key]['timestamp_echo_replies'].append(
+            tcp_timestamp_echo_reply)
+        timestamps[key]['clock_ticks'].append(ts)
+        timestamps[key]['seq_nums'].append(tcp_seq)
+        tss = timestamps[key].get('timestamps', [])
+        ticks = timestamps[key].get('clock_ticks', [])
+        deltas = []
+        if len(tss) > 2:
+            for i in range(len(tss) - 1):
+                try:
+                    rtt = int(tss[i+1]) - int(tss[i])
+                    real = ticks[i+1] - ticks[i]
+                    deltas.append('rtt={}, clock={}'.format(rtt, real))
+                except Exception as err:
+                    log('error: {}, tss: {}'.format(str(err), str(tss)),
+                        'zardaxt', level='ERROR')
+
+        timestamps[key]['deltas'] = deltas
+
 
 def main():
     log('Listen on interface {}'.format(config['interface']), 'zardaxt')
+    # Arguments here are:
     # snaplen (maximum number of bytes to capture per packet)
     # 120 bytes are picked, since the maximum TCP header is 60 bytes and the maximum IP header is also 60 bytes
     # The IPv6 header is always present and is a fixed size of 40 bytes.
@@ -165,20 +249,24 @@ def main():
     # The main purpose of timeouts in packet capture mechanisms is to allow the capture mechanism
     # to buffer up multiple packets, and deliver multiple packets in a single wakeup, rather than one
     # wakeup per packet, reducing the number of wakeups (which aren't free),
+    # without causing indefinitely-long waits for a packet to be delivered.
     # timeout (in milliseconds)
-    read_timeout = 1
 
-    # Read from the network interface in live mode
+    # The first argument is the device that we specified in the previous section.
+    # snaplen is an integer which defines the maximum number of bytes to be captured by pcap.
+    # promisc, when set to true, brings the interface into promiscuous mode
+    # (however, even if it is set to false, it is possible under specific cases for the interface
+    # to be in promiscuous mode, anyway). to_ms is the read time out in milliseconds
+    # (a value of 0 means no time out; on at least some platforms, this means that you may wait until a
+    # sufficient number of packets arrive before seeing any packets, so you should use a non-zero timeout).
+    read_timeout = 1
     preader = pcapy.open_live(
         config['interface'], max_bytes, promiscuous, read_timeout)
-
-    # Filter certain traffic
     preader.setfilter(config.get('pcap_filter', ''))
-
     while True:
         (header, buf) = preader.next()
         eth = dpkt.ethernet.Ethernet(buf)
-        # Ignore everything other than IPv4 or IPv6
+        # ignore everything other than IPv4 or IPv6
         if eth.type == dpkt.ethernet.ETH_TYPE_IP or eth.type == dpkt.ethernet.ETH_TYPE_IP6:
             ip_pkt = eth.data
             header_len = header.getlen()

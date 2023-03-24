@@ -78,7 +78,9 @@ If you want to serve `zardaxt.py` over nginx, your configuration has to look som
 
 ```text
 server {
-  listen 443 ssl;
+  listen 443 ssl default_server;
+  listen [::]:443 ssl default_server;
+  
   server_name tcpip.incolumitas.com;
 
   location / {
@@ -89,8 +91,9 @@ server {
     proxy_set_header  X-Real-IP $remote_addr;
     proxy_cache_bypass $http_upgrade;
   }
-    ssl_certificate /etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/abs.incolumitas.com/privkey.pem; # managed by Certbot
+  
+  ssl_certificate /etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/abs.incolumitas.com/privkey.pem; # managed by Certbot
 }
 ```
 

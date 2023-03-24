@@ -3,12 +3,12 @@ import os
 
 # API client implementation
 counter = {
-  "hits": 0,
-  "data": {},
+    "hits": 0,
+    "data": {},
 }
 
 
-def incr(api, ip, push_after=200):
+def incr(api, ip, push_after=500):
     global counter
     counter['hits'] += 1
 
