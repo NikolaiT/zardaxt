@@ -140,15 +140,6 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             client_ip), 'api', onlyPrint=True)
         self.handle_lookup(client_ip, client_ip)
 
-    def handle_uptime_interpolation(self, lookup_ip):
-        timestampsCopy = self.timestamps.copy()
-        res = []
-        for key, value in timestampsCopy.items():
-            if lookup_ip in key:
-                if value.get('uptime_interpolation'):
-                    res.append(value)
-        return self.send_json(res)
-
     def do_GET(self):
         client_ip = self.get_ip()
         incr('tcp_ip_fingerprint_public', client_ip)
@@ -168,12 +159,6 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
                     return self.send_json(fpCopy)
                 else:
                     return self.deny(fpCopy)
-            elif self.path.startswith('/uptime'):
-                if key and self.config['api_key'] == key:
-                    lookup_ip = self.get_query_arg('ip')
-                    if not lookup_ip:
-                        lookup_ip = client_ip
-                    return self.handle_uptime_interpolation(lookup_ip)
             elif self.path.startswith('/stats'):
                 if key and self.config['api_key'] == key:
                     fpCopy = self.fingerprints.copy()
@@ -193,7 +178,7 @@ def create_server(config, fingerprints, timestamps):
     server_address = (config['api_server_ip'], config['api_server_port'])
     handler = ZardaxtApiServer(config, fingerprints, timestamps)
     httpd = HTTPServerIPv6(server_address, handler)
-    log("TCP/IP Fingerprint API started on http://%s:%s" %
+    log("TCP/IP Fingerprint (Zardaxt.py) API started on http://%s:%s" %
         server_address, 'api', level='INFO')
 
     try:

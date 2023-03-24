@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from zardaxt_logging import log
 
 databaseLoaded = False
@@ -140,7 +141,97 @@ def compute_near_timestamp_tick(hertz_observed):
     return 'unknown'
 
 
-def score_fp(fp):
+def score_fp_new(fp):
+    """The most recent version of TCP/IP fingerprint scoring algorithm.
+
+    In this algorithm, the following new header entropy is now being considered:
+
+    - ip_hdr_length - unfiltered (all values)
+    - ip_id - only if it is 0 or any other value (binary)
+    - ip_off - unfiltered (all values)
+    - ip_protocol - unfiltered (all values)
+    - ip_rf - unfiltered (all values)
+    - ip_tos - unfiltered (all values)
+    - ip_total_length - unfiltered (all values)
+    - ip_version - unfiltered (all values)
+    - tcp_off - unfiltered (all values)
+    - tcp_timestamp_echo_reply - unfiltered (all values)
+    - tcp_window_scaling - unfiltered (all values)
+
+    Most of the above header values do not strongly correlate with the OS.
+    Nevertheless, I am unsure wether we should ignore them. However, 
+    adding them to the algorithm does not hurt either.
+
+    Perfect Score: 0.5 + 0.25 + 0.5 + 0.25 + 0.25 + 1 + 1 + 
+    0.25 + 0.5 + 0.5 + 1 + 1.5 + 1 + 1 + 1.5 + 1 + 1 + 1.5 + 4
+
+    Args:
+        fp (dict): The fingerprint to score
+
+    Returns:
+        tuple: perfect score, all the scores against the db
+    """
+    global dbList
+    perfectScore = 18.5
+    scores = []
+    for i, entry in enumerate(dbList):
+        score = 0
+        if entry['ip_hdr_length'] == fp['ip_hdr_length']:
+            score += 0.5
+        if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
+            score += 0.25
+        if entry['ip_off'] == fp['ip_off']:
+            score += 0.5
+        if entry['ip_protocol'] == fp['ip_protocol']:
+            score += 0.25
+        if entry['ip_rf'] == fp['ip_rf']:
+            score += 0.25
+        if entry['ip_tos'] == fp['ip_tos']:
+            score += 1
+        if entry['ip_total_length'] == fp['ip_total_length']:
+            score += 1
+        if entry['ip_version'] == fp['ip_version']:
+            score += 0.25
+        if entry['tcp_off'] == fp['tcp_off']:
+            score += 0.5
+        if entry['tcp_timestamp_echo_reply'] == fp['tcp_timestamp_echo_reply']:
+            score += 0.5
+        if entry['tcp_window_scaling'] == fp['tcp_window_scaling']:
+            score += 1
+        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
+            score += 1.5
+        if entry['ip_df'] == fp['ip_df']:
+            score += 1
+        if entry['ip_mf'] == fp['ip_mf']:
+            score += 1
+        if entry['tcp_window_size'] == fp['tcp_window_size']:
+            score += 1.5
+        if entry['tcp_flags'] == fp['tcp_flags']:
+            score += 1
+        if entry['tcp_header_length'] == fp['tcp_header_length']:
+            score += 1
+        if entry['tcp_mss'] == fp['tcp_mss']:
+            score += 1.5
+        if entry['tcp_options'] == fp['tcp_options']:
+            score += 4
+        else:
+            orderEntry = ''.join(
+                [e[0] for e in entry['tcp_options'].split(',') if e])
+            orderFp = ''.join([e[0]
+                              for e in fp['tcp_options'].split(',') if e])
+            if orderEntry == orderFp:
+                score += 2.5
+
+        scores.append({
+            'i': i,
+            'score': score,
+            'os': entry['userAgentParsed']['os']['name'],
+        })
+
+    return perfectScore, scores
+
+
+def score_fp_v2(fp):
     """The most recent version of TCP/IP fingerprint scoring algorithm.
 
     Args:
@@ -201,7 +292,7 @@ def make_os_guess(fp, n=3):
 
     As a second guess, output the operating system with the highest, normalized average score.
     """
-    perfectScore, scores = score_fp(fp)
+    perfectScore, scores = score_fp_v2(fp)
     # Return the highest scoring TCP/IP fingerprinting match
     scores.sort(key=lambda x: x['score'], reverse=True)
     guesses = []
@@ -248,3 +339,35 @@ def make_os_guess(fp, n=3):
             'perfect_score': perfectScore,
         }
     }
+
+
+def test_tcp_packet():
+    from dpkt.tcp import TCP
+    tcp = TCP(
+        sport=3372,
+        dport=80,
+        seq=951057939,
+        ack=0,
+        off=7,
+        flags=TH_SYN,
+        win=8760,
+        sum=0xc30c,
+        urp=0,
+        opts=b'\x02\x04\x05\xb4\x01\x01\x04\x02'
+    )
+    print(tcp.pprint())
+    print('tcp.__hdr_len__', tcp.__hdr_len__)
+
+
+def test_ip_packet():
+    from dpkt.ip import IP
+    s = (b'\x4f\x00\x00\x3c\xae\x08\x00\x00\x40\x06\x18\x10\xc0\xa8\x0a\x26\xc0\xa8\x0a\x01\x07\x27'
+         b'\x08\x01\x02\x03\x04\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+         b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+    ip = IP(s)
+    print(ip.pprint())
+
+
+if __name__ == '__main__' and len(sys.argv) > 1 and sys.argv[1] == 'test':
+    test_tcp_packet()
+    test_ip_packet()
