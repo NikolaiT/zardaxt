@@ -84,6 +84,7 @@ def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
         # but not the ACK flag is that we are only interested in packets
         # coming from client to server and not the SYN+ACK from server to client.
         if is_syn and not is_ack:
+            log('SYN packet from {} to {}'.format(src_ip, dst_ip), 'zardaxt')
             tcp_options = parse_opts(tcp_pkt.opts)
             [str_opts, timestamp, timestamp_echo_reply, mss,
                 window_scaling] = decode_tcp_options(tcp_options)
@@ -160,7 +161,7 @@ def main():
     # The IPv6 header is always present and is a fixed size of 40 bytes.
     max_bytes = 120
     # promiscuous mode (1 for true)
-    promiscuous = 1
+    promiscuous = False
     # https://github.com/the-tcpdump-group/libpcap/issues/572
     # The main purpose of timeouts in packet capture mechanisms is to allow the capture mechanism
     # to buffer up multiple packets, and deliver multiple packets in a single wakeup, rather than one
