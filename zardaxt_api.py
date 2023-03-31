@@ -28,8 +28,8 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
         if ip == '127.0.0.1' or ip == '::ffff:127.0.0.1':
             ip = self.headers.get('X-Real-IP')
 
-        # print(f"CLIENT IDs: {self.client_address}")
-        # print(f"HEADERS: {self.headers}")
+        print(f"CLIENT IDs: {self.client_address}")
+        print(f"HEADERS: {self.headers}")
         print("Returning IP: " + ip)
         return ip
 

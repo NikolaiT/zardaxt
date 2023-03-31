@@ -1999,3 +1999,17 @@
 [2023-03-31 09:40:04.711021] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:c36::
 [2023-03-31 09:40:09.509156] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:916::
 [2023-03-31 09:40:34.094431] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700:20::ac43:459e
+[2023-03-31 09:43:00.766957] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:c36::
+[2023-03-31 09:43:04.569023] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700::6810:b50f
+[2023-03-31 09:43:04.570032] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700::6810:b50f
+[2023-03-31 09:43:04.570472] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700::6810:b50f
+[2023-03-31 09:43:04.649588] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:916::
+[2023-03-31 09:43:42.572303] - INFO - zardaxt - SYN packet from 10.13.148.51 to 192.168.1.100
+[2023-03-31 09:43:46.427601] - INFO - zardaxt - SYN packet from 192.168.1.101 to 192.168.1.100
+[2023-03-31 09:44:35.758626] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700:20::ac43:4a39
+[2023-03-31 09:44:35.770639] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700:20::ac43:4a39
+[2023-03-31 09:44:35.771474] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700:20::ac43:4a39
+[2023-03-31 09:45:42.425293] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2400:8280:2:7::2be1:2352
+[2023-03-31 09:45:42.679139] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2400:8280:2:7::2be1:2350
+[2023-03-31 09:47:36.818292] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:c36::
+[2023-03-31 09:47:41.640905] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:916::
