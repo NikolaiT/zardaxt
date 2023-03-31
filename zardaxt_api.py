@@ -26,7 +26,7 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
     def get_ip(self):
         ip = self.client_address[0]
         if ip == '127.0.0.1' or ip == '::ffff:127.0.0.1':
-            ip = self.headers.get('X-Real-IP')
+            ip = self.headers.get('X-Forwarded-For')
         return ip
 
     def get_user_agent(self):
