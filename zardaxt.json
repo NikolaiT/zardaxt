@@ -8,4 +8,5 @@
   "store_fingerprints": false,
   "write_after": 1000,
   "clear_dict_after": 5000
+
 }

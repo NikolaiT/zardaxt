@@ -131,3 +131,187 @@
 [2023-02-16 20:27:06.715351] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
 [2023-02-16 20:36:42.278975] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
 [2023-02-16 20:37:13.879536] - INFO - zardaxt_utils - Loaded 11153 fingerprints from the database
+[2023-03-31 06:38:53.690268] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:38:53.814037] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:38:53.814202] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:39:21.896858] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:39:21.966511] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:39:21.966747] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:39:21.967890] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:41:34.934183] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:41:35.024495] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:41:35.024679] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:41:38.797208] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:41:38.866839] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:41:38.867066] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:41:38.868224] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:43:15.038640] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:43:15.108779] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:43:15.108998] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:43:15.110293] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:46:44.368334] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:46:44.457189] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:46:44.457351] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:46:44.458645] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:47:57.483695] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:47:57.572580] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:47:57.572766] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:47:57.573843] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:50:47.530932] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:50:47.609923] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:50:47.610102] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:50:47.611381] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:50:49.534418] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:50:49.604858] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:50:49.605102] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:50:49.606446] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:50:52.026899] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:50:52.095149] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:50:52.095409] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:50:52.096603] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:53:22.042513] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:53:22.119132] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:53:22.119318] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:53:22.120388] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:53:30.992277] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:53:31.059203] - INFO - zardaxt_utils - Loaded config from path zardaxt.json
+[2023-03-31 06:53:31.059458] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:53:31.060645] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:57:33.053970] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:57:33.133894] - INFO - zardaxt_utils - Loaded config from path ./zardaxt.json
+[2023-03-31 06:57:33.134147] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:57:33.135156] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:57:41.716696] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:57:41.784932] - INFO - zardaxt_utils - Loaded config from path zardaxt.json
+[2023-03-31 06:57:41.785148] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:57:41.786322] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 06:57:57.709254] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 06:57:57.776581] - INFO - zardaxt_utils - Loaded config from path zardaxt.json
+[2023-03-31 06:57:57.776826] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 06:57:57.777924] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 07:05:05.700765] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 07:05:05.778204] - INFO - zardaxt_utils - Loaded config from path zardaxt.json
+[2023-03-31 07:05:05.778364] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 07:05:05.779720] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 07:09:41.337757] - INFO - zardaxt_utils - Loaded 12505 fingerprints from the database
+[2023-03-31 07:09:41.429579] - INFO - zardaxt_utils - Loaded config from path zardaxt.json
+[2023-03-31 07:09:41.429759] - INFO - zardaxt - Listen on interface en0
+[2023-03-31 07:09:41.431094] - INFO - api - TCP/IP Fingerprint (Zardaxt.py) API started on http://:::8249
+[2023-03-31 07:09:43.767791] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:82a::2005
+[2023-03-31 07:09:48.621505] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.182.143.211
+[2023-03-31 07:09:52.818097] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:832::200e
+[2023-03-31 07:09:53.559673] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.168.117.170
+[2023-03-31 07:09:56.915837] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:82f::200e
+[2023-03-31 07:09:57.373450] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:822::2001
+[2023-03-31 07:10:30.381909] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:826::2001
+[2023-03-31 07:10:30.416243] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:826::2001
+[2023-03-31 07:10:46.934056] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:82a::2005
+[2023-03-31 07:11:52.972948] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:81f::200e
+[2023-03-31 07:11:52.974227] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:81f::200e
+[2023-03-31 07:12:11.474240] - INFO - zardaxt - SYN packet from 192.168.1.100 to 20.207.73.82
+[2023-03-31 07:12:12.322905] - INFO - api - Api Key provided. Looking up IP 103.14.251.215
+[2023-03-31 07:12:12.675573] - INFO - zardaxt - SYN packet from 192.168.1.100 to 140.82.114.26
+[2023-03-31 07:12:45.641574] - INFO - zardaxt - SYN packet from 192.168.1.100 to 172.67.74.128
+[2023-03-31 07:12:46.217408] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2001:4de0:ac18::1:a:3a
+[2023-03-31 07:12:46.411446] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2001:4de0:ac18::1:a:3a
+[2023-03-31 07:12:46.455793] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2001:4de0:ac18::1:a:3a
+[2023-03-31 07:12:46.456502] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2001:4de0:ac18::1:a:3a
+[2023-03-31 07:12:47.659176] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:815::200a
+[2023-03-31 07:12:50.704683] - INFO - zardaxt - SYN packet from 192.168.1.100 to 193.108.117.116
+[2023-03-31 07:12:50.784440] - INFO - zardaxt - SYN packet from 192.168.1.100 to 162.159.136.66
+[2023-03-31 07:12:50.785155] - INFO - zardaxt - SYN packet from 192.168.1.100 to 104.244.42.129
+[2023-03-31 07:12:50.807845] - INFO - zardaxt - SYN packet from 192.168.1.100 to 192.0.77.40
+[2023-03-31 07:12:50.808316] - INFO - zardaxt - SYN packet from 192.168.1.100 to 199.232.253.140
+[2023-03-31 07:12:50.808589] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:c36::
+[2023-03-31 07:12:50.820079] - INFO - zardaxt - SYN packet from 192.168.1.100 to 199.232.254.132
+[2023-03-31 07:12:50.831972] - INFO - zardaxt - SYN packet from 192.168.1.100 to 23.33.244.239
+[2023-03-31 07:12:50.832411] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:9000:237b:8400:7:49a5:5fd2:8621
+[2023-03-31 07:12:50.844738] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2620:100:6031:18::a27d:5112
+[2023-03-31 07:12:50.866764] - INFO - zardaxt - SYN packet from 192.168.1.100 to 193.108.117.116
+[2023-03-31 07:12:50.934537] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.158.121.3
+[2023-03-31 07:12:50.981637] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.158.121.3
+[2023-03-31 07:12:50.982374] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2620:100:6031:18::a27d:5112
+[2023-03-31 07:12:50.982815] - INFO - zardaxt - SYN packet from 192.168.1.100 to 23.33.244.239
+[2023-03-31 07:12:51.108705] - INFO - zardaxt - SYN packet from 192.168.1.100 to 23.203.36.247
+[2023-03-31 07:12:51.143014] - INFO - zardaxt - SYN packet from 192.168.1.100 to 162.125.81.18
+[2023-03-31 07:12:51.156315] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:81c::200e
+[2023-03-31 07:12:51.178399] - INFO - zardaxt - SYN packet from 192.168.1.100 to 23.49.51.236
+[2023-03-31 07:12:51.290831] - INFO - zardaxt - SYN packet from 192.168.1.100 to 162.125.81.18
+[2023-03-31 07:12:51.303525] - INFO - zardaxt - SYN packet from 192.168.1.100 to 108.158.46.121
+[2023-03-31 07:12:51.349371] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:81c::200e
+[2023-03-31 07:12:51.462707] - INFO - zardaxt - SYN packet from 192.168.1.100 to 142.250.183.110
+[2023-03-31 07:12:51.542528] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2606:4700:7::a29f:9904
+[2023-03-31 07:12:51.657633] - INFO - zardaxt - SYN packet from 192.168.1.100 to 142.250.183.110
+[2023-03-31 07:12:51.738418] - INFO - zardaxt - SYN packet from 192.168.1.100 to 13.127.99.68
+[2023-03-31 07:12:51.772971] - INFO - zardaxt - SYN packet from 192.168.1.100 to 18.66.41.45
+[2023-03-31 07:12:51.784879] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2603:1046:2000:60::a
+[2023-03-31 07:12:51.830330] - INFO - zardaxt - SYN packet from 192.168.1.100 to 23.212.99.184
+[2023-03-31 07:12:51.864290] - INFO - zardaxt - SYN packet from 192.168.1.100 to 151.101.64.134
+[2023-03-31 07:12:51.908789] - INFO - zardaxt - SYN packet from 192.168.1.100 to 87.240.132.72
+[2023-03-31 07:12:51.931613] - INFO - zardaxt - SYN packet from 192.168.1.100 to 151.101.2.217
+[2023-03-31 07:12:52.045153] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2a02:6b8::a4
+[2023-03-31 07:12:52.112176] - INFO - zardaxt - SYN packet from 192.168.1.100 to 87.240.132.72
+[2023-03-31 07:12:52.242610] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2a02:6b8::a4
+[2023-03-31 07:12:52.345255] - INFO - zardaxt - SYN packet from 192.168.1.100 to 77.88.21.37
+[2023-03-31 07:12:52.896813] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:0:47fc::
+[2023-03-31 07:12:56.374360] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:12:56.626676] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:12:57.376528] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:12:57.630852] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:12:58.378725] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:12:58.622579] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:12:59.376966] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:12:59.632280] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:00.375113] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:00.628170] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:01.377448] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:01.632615] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:03.374694] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:03.630279] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:07.385860] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:07.630144] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:13.348362] - INFO - api - Api Key provided. Looking up IP 103.14.251.215
+[2023-03-31 07:13:15.380073] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:15.633970] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:27.437378] - INFO - zardaxt - SYN packet from 192.168.1.100 to 104.18.90.237
+[2023-03-31 07:13:27.947963] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1f18:e8a:cd08:3437:aff5:50c:d298
+[2023-03-31 07:13:28.149707] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1f18:e8a:cd08:3437:aff5:50c:d298
+[2023-03-31 07:13:28.782383] - INFO - zardaxt - SYN packet from 192.168.1.100 to 104.18.90.237
+[2023-03-31 07:13:31.377259] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:31.631147] - INFO - zardaxt - SYN packet from 192.168.1.100 to 42.106.36.182
+[2023-03-31 07:13:54.209588] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:804::200e
+[2023-03-31 07:13:59.545013] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2001:4860:4860::8888
+[2023-03-31 07:13:59.600245] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2001:4860:4860::8888
+[2023-03-31 07:14:06.841839] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.145.89
+[2023-03-31 07:14:06.843820] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.177.33
+[2023-03-31 07:14:07.031037] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.177.33
+[2023-03-31 07:14:07.032098] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.145.89
+[2023-03-31 07:14:46.707096] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:820::2005
+[2023-03-31 07:14:46.763248] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:820::2005
+[2023-03-31 07:15:02.097780] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.196.10
+[2023-03-31 07:15:02.296298] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.196.10
+[2023-03-31 07:15:03.780712] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.192.106
+[2023-03-31 07:15:03.847846] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.92.192.106
+[2023-03-31 07:15:23.773540] - INFO - zardaxt - SYN packet from 192.168.1.100 to 20.207.73.82
+[2023-03-31 07:16:20.176800] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2a04:4e42:42::760
+[2023-03-31 07:17:35.441052] - INFO - zardaxt - SYN packet from 192.168.1.100 to 117.18.232.200
+[2023-03-31 07:17:35.496704] - INFO - zardaxt - SYN packet from 192.168.1.100 to 117.18.232.200
+[2023-03-31 07:17:58.272983] - INFO - zardaxt - SYN packet from 192.168.1.100 to 167.99.241.135
+[2023-03-31 07:17:58.549381] - INFO - zardaxt - SYN packet from 192.168.1.100 to 167.99.241.135
+[2023-03-31 07:18:04.182652] - INFO - zardaxt - SYN packet from 192.168.1.100 to 17.57.145.120
+[2023-03-31 07:18:05.003572] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2403:300:1364:2::10
+[2023-03-31 07:18:46.748859] - INFO - zardaxt - SYN packet from 192.168.1.100 to 104.18.90.237
+[2023-03-31 07:18:48.160015] - INFO - zardaxt - SYN packet from 192.168.1.100 to 104.18.90.237
+[2023-03-31 07:18:48.929645] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.218.177.89
+[2023-03-31 07:18:49.132028] - INFO - zardaxt - SYN packet from 192.168.1.100 to 52.218.177.89
+[2023-03-31 07:18:56.661137] - INFO - zardaxt - SYN packet from 192.168.1.100 to 64.227.130.46
+[2023-03-31 07:19:05.721257] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:826::200e
+[2023-03-31 07:19:14.061357] - INFO - zardaxt - SYN packet from 192.168.1.100 to 151.101.129.69
+[2023-03-31 07:19:14.782616] - INFO - zardaxt - SYN packet from 192.168.1.100 to 146.75.116.193
+[2023-03-31 07:19:48.122787] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:828::2005
+[2023-03-31 07:19:52.148371] - INFO - zardaxt - SYN packet from 192.168.1.100 to 20.207.73.82
+[2023-03-31 07:19:53.611071] - INFO - zardaxt - SYN packet from 192.168.1.100 to 140.82.113.26
+[2023-03-31 07:20:10.465134] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4009:80d::2003
+[2023-03-31 07:20:24.006691] - INFO - zardaxt - SYN packet from 192.168.1.100 to 185.199.110.154
+[2023-03-31 07:20:26.285233] - INFO - zardaxt - SYN packet from 192.168.1.100 to 185.199.110.154
+[2023-03-31 07:21:05.458028] - INFO - zardaxt - SYN packet from 192.168.1.100 to 13.89.179.10

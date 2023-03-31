@@ -178,7 +178,11 @@ def main():
 
     while True:
         (header, buf) = preader.next()
-        eth = dpkt.ethernet.Ethernet(buf)
+        if len(buf) >= 14:
+            eth = dpkt.ethernet.Ethernet(buf)
+        else:
+            # Log a message or ignore the packet
+            continue
         # Ignore everything other than IPv4 or IPv6
         if eth.type == dpkt.ethernet.ETH_TYPE_IP or eth.type == dpkt.ethernet.ETH_TYPE_IP6:
             ip_pkt = eth.data
