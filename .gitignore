@@ -19,3 +19,4 @@ download.sh
 rw.md
 zardaxt-server.json
 env/*
+*.log
