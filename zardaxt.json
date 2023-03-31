@@ -1,6 +1,6 @@
 {
   "interface": "eth0",
-  "api_server_ip": "::",
+  "api_server_ip": "127.0.0.1",
   "api_server_port": 8249,
   "verbose": true,
   "api_key": "abcd1234",

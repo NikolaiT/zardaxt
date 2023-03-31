@@ -2013,3 +2013,6 @@
 [2023-03-31 09:45:42.679139] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2400:8280:2:7::2be1:2350
 [2023-03-31 09:47:36.818292] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:c36::
 [2023-03-31 09:47:41.640905] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:916::
+[2023-03-31 09:51:03.051262] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2404:6800:4015:800::2005
+[2023-03-31 09:51:35.483893] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:916::
+[2023-03-31 09:52:49.151792] - INFO - zardaxt - SYN packet from 2402:3a80:8f2:cdd0:d9c5:ebb5:a74c:69d6 to 2600:1901:1:c36::
