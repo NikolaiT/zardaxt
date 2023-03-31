@@ -9,5 +9,7 @@ def read_root():
 
 @app.get("/classify")
 def classify():
-    return requests.get('http://0.0.0.0:8249/classify').json()
+    resp = requests.get('http://0.0.0.0:8249/classify').json()
+    print(resp)
+    return resp
 
