@@ -11,7 +11,7 @@ def maybe_load_database():
     global dbList
     if not databaseLoaded:
         # load fingerprints into database
-        databaseFile = './database/February2023Cleaned.json'
+        databaseFile = './database/newCleaned.json'
         with open(databaseFile) as f:
             dbList = json.load(f)
         log('Loaded {} fingerprints from the database'.format(
@@ -188,7 +188,7 @@ def score_fp(fp):
         scores.append({
             'i': i,
             'score': score,
-            'os': entry['userAgentParsed']['os']['name'],
+            'os': entry['os'],
         })
 
     return perfectScore, scores
