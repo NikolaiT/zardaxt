@@ -155,7 +155,7 @@ def score_fp(fp):
         fp (dict): The fingerprint to score
 
     Returns:
-        tuple: perfect score, all the scores against the db
+        avg_os_score: average score of this fingerprint for all OS
     """
     global dbList
     # Hardcoded for performance reasons
@@ -203,44 +203,21 @@ def score_fp(fp):
     return avg_os_score
 
 
-def make_os_guess(fp, n=3):
+def make_os_guess(fp):
     """
     Return the highest scoring TCP/IP fingerprinting match from the database.
     If there is more than one highest scoring match, return all the highest scoring matches.
 
     As a second guess, output the operating system with the highest, normalized average score.
     """
-    perfectScore, scores, avg_os_score = score_fp(fp)
-    # Return the highest scoring TCP/IP fingerprinting match
-    scores.sort(key=lambda x: x['score'], reverse=True)
-    guesses = []
-    highest_score = scores[0].get('score')
-    for guess in scores:
-        if guess['score'] != highest_score or len(guesses) >= n:
-            break
-        guesses.append({
-            'score': '{}/{}'.format(guess['score'], perfectScore),
-            'os': guess['os'],
-        })
-
-    # get the os with the highest, normalized average score
-    os_score = {}
-    for guess in scores:
-        if guess['os']:
-            if not os_score.get(guess['os']):
-                os_score[guess['os']] = []
-            os_score[guess['os']].append(guess['score'])
-
-    highest_os_avg = 0
-    highest_os = None
+    avg_os_score = score_fp(fp)
     return {
-        'best_n_guesses': guesses,
         'avg_score_os_class': avg_os_score,
         'fp': fp,
         'details': {
-            'os_highest_class': highest_os,
-            'highest_os_avg': round(highest_os_avg, 2),
-            'perfect_score': perfectScore,
+            'os_highest_class': max(avg_os_score, key=avg_os_score.get),
+            'highest_os_avg': max(avg_os_score.values()),
+            'perfect_score': 22.5
         }
     }
 
