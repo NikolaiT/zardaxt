@@ -63,6 +63,10 @@ def compute_ip_id(ip_id):
         return 1
 
 
+def getTcpTimestamp(tcp_ts):
+    return 0 if tcp_ts == "" else 1
+
+
 def compute_near_ttl(ip_ttl):
     """Interpolate the assumed initial TTL by the TTL we see on our interface.
 
@@ -203,6 +207,20 @@ def score_fp(fp):
     return avg_os_score
 
 
+def normalize_fp(fp):
+    """
+    Normalize the fingerprint.
+    """
+    fp["ip_ttl"] = compute_near_ttl(fp["ip_ttl"])
+    fp["ip_id"] = compute_ip_id(fp["ip_id"])
+
+    fp["tcp_timestamp"] = getTcpTimestamp(fp["tcp_timestamp"])
+    fp["tcp_timestamp_echo_reply"] = getTcpTimestamp(
+        fp["tcp_timestamp_echo_reply"])
+
+    return fp
+
+
 def make_os_guess(fp):
     """
     Return the highest scoring TCP/IP fingerprinting match from the database.
@@ -210,6 +228,7 @@ def make_os_guess(fp):
 
     As a second guess, output the operating system with the highest, normalized average score.
     """
+    fp = normalize_fp(fp)
     avg_os_score = score_fp(fp)
     return {
         'avg_score_os_class': avg_os_score,
