@@ -20,6 +20,7 @@ def maybe_load_database():
                 if el['os'] not in os_sample_count:
                     os_sample_count[el['os']] = 0
                 os_sample_count[el['os']] += 1
+            log(f'os_sample_count={os_sample_count}')
 
         log('Loaded {} fingerprints from the database'.format(
             len(dbList)), 'zardaxt_utils')
