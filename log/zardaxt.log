@@ -162,3 +162,5 @@
 [2023-04-03 17:02:02.315249] - INFO - zardaxt_utils - Loaded 1031 fingerprints from the database
 [2023-04-03 17:02:16.979328] - INFO - zardaxt_utils - os_sample_count={'Android': 184, 'Windows': 153, 'iOS': 258, 'Mac OS': 194, 'Linux': 242}
 [2023-04-03 17:02:16.979511] - INFO - zardaxt_utils - Loaded 1031 fingerprints from the database
+[2023-04-03 17:51:25.000258] - INFO - zardaxt_utils - os_sample_count={'Android': 184, 'Windows': 153, 'iOS': 258, 'Mac OS': 194, 'Linux': 242}
+[2023-04-03 17:51:25.000819] - INFO - zardaxt_utils - Loaded 1031 fingerprints from the database
