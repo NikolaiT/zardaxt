@@ -138,6 +138,8 @@ def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
                 'tcp_seq': tcp_pkt.seq,
                 'tcp_urp': tcp_pkt.urp,
                 'tcp_options': str_opts,
+                'tcp_options_ordered': ''.join(
+                    [e[0] for e in str_opts.split(',') if e]),
                 'tcp_window_scaling': window_scaling,
                 'tcp_timestamp': timestamp,
                 'tcp_timestamp_echo_reply': timestamp_echo_reply,

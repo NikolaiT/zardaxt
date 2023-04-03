@@ -1,9 +1,11 @@
 import json
 import os
 from zardaxt_logging import log
+import time
 
 databaseLoaded = False
 dbList = []
+os_sample_count = {}
 
 
 def maybe_load_database():
@@ -14,6 +16,11 @@ def maybe_load_database():
         databaseFile = './database/newCleaned.json'
         with open(databaseFile) as f:
             dbList = json.load(f)
+            for el in dbList:
+                if el['os'] not in os_sample_count:
+                    os_sample_count[el['os']] = 0
+                os_sample_count[el['os']] += 1
+
         log('Loaded {} fingerprints from the database'.format(
             len(dbList)), 'zardaxt_utils')
         databaseLoaded = True
@@ -150,18 +157,24 @@ def score_fp(fp):
         tuple: perfect score, all the scores against the db
     """
     global dbList
-    scores = []
-    # 1.5 + 0.25 + 2.5 + 2.5 + 2 + 2 + 2 + 2 + 0.25 + 1.5 + 4
-    perfectScore = 20.5
-    for i, entry in enumerate(dbList):
+    # Hardcoded for performance reasons
+    os_scores = {
+        'Android': 0,
+        'Windows': 0,
+        'Mac OS': 0,
+        'iOS': 0,
+        'Linux': 0
+    }
+    for entry in dbList:
         score = 0
-        if compute_ip_id(entry['ip_id']) == compute_ip_id(fp['ip_id']):
+        os_name = entry['os']
+        if entry['ip_id'] == fp['ip_id']:
             score += 1.5
         if entry['ip_tos'] == fp['ip_tos']:
             score += 0.25
         if entry['ip_total_length'] == fp['ip_total_length']:
             score += 2.5
-        if compute_near_ttl(entry['ip_ttl']) == compute_near_ttl(fp['ip_ttl']):
+        if entry['ip_ttl'] == fp['ip_ttl']:
             score += 2
         if entry['tcp_off'] == fp['tcp_off']:
             score += 2.5
@@ -177,21 +190,16 @@ def score_fp(fp):
             score += 1.5
         if entry['tcp_options'] == fp['tcp_options']:
             score += 4
-        else:
-            orderEntry = ''.join(
-                [e[0] for e in entry['tcp_options'].split(',') if e])
-            orderFp = ''.join([e[0]
-                              for e in fp['tcp_options'].split(',') if e])
-            if orderEntry == orderFp:
-                score += 2.5
+        elif entry['tcp_options_ordered'] == fp['tcp_options_ordered']:
+            score += 2.5
+        os_scores[os_name] += score
 
-        scores.append({
-            'i': i,
-            'score': score,
-            'os': entry['os'],
-        })
+    avg_os_score = {}
+    for os_name in os_scores:
+        avg_os_score[os_name] = round(
+            os_scores[os_name] / os_sample_count[os_name], 2)
 
-    return perfectScore, scores
+    return avg_os_score
 
 
 def make_os_guess(fp, n=3):
@@ -201,13 +209,13 @@ def make_os_guess(fp, n=3):
 
     As a second guess, output the operating system with the highest, normalized average score.
     """
-    perfectScore, scores = score_fp(fp)
+    perfectScore, scores, avg_os_score = score_fp(fp)
     # Return the highest scoring TCP/IP fingerprinting match
     scores.sort(key=lambda x: x['score'], reverse=True)
     guesses = []
     highest_score = scores[0].get('score')
     for guess in scores:
-        if guess['score'] != highest_score:
+        if guess['score'] != highest_score or len(guesses) >= n:
             break
         guesses.append({
             'score': '{}/{}'.format(guess['score'], perfectScore),
@@ -224,22 +232,8 @@ def make_os_guess(fp, n=3):
 
     highest_os_avg = 0
     highest_os = None
-    avg_os_score = {}
-    for key in os_score:
-        N = len(os_score[key])
-        # only consider OS classes with at least 10 elements
-        if N >= 10:
-            avg = sum(os_score[key]) / N
-            avg_os_score[key] = {
-                'avg': round(avg, 2),
-                'n': N
-            }
-            if avg >= highest_os_avg:
-                highest_os = key
-            highest_os_avg = max(avg, highest_os_avg)
-
     return {
-        'best_n_guesses': guesses[:n],
+        'best_n_guesses': guesses,
         'avg_score_os_class': avg_os_score,
         'fp': fp,
         'details': {
@@ -248,3 +242,23 @@ def make_os_guess(fp, n=3):
             'perfect_score': perfectScore,
         }
     }
+
+
+def perf():
+    # using the TCP/IP fingerprints that didn't add any entropy as a
+    # test corpus to check the performance
+    some_fps = json.load(open('database/duplicates.json', 'r'))
+    some_fps = some_fps
+    N = len(some_fps)
+    t0 = time.time()
+    for fp in some_fps:
+        avg_os_score = score_fp(fp)
+        # print(fp['os'], avg_os_score)
+    t1 = time.time()
+    totalMs = round((t1-t0) * 1000, 2)
+    perScoreMs = round(totalMs/N, 3)
+    print(N, totalMs, perScoreMs)
+
+
+if __name__ == '__main__':
+    perf()
