@@ -71,13 +71,13 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             # Linux, macOS or Windows
             tcpip_os = {
                 'linux': max(
-                    tcp_ip_fp["avg_score_os_class"]['Android']['avg'],
-                    tcp_ip_fp["avg_score_os_class"]['Linux']['avg']
+                    tcp_ip_fp["avg_score_os_class"]['Android'],
+                    tcp_ip_fp["avg_score_os_class"]['Linux']
                 ),
-                'win': tcp_ip_fp["avg_score_os_class"]['Windows']['avg'],
+                'win': tcp_ip_fp["avg_score_os_class"]['Windows'],
                 'mac': max(
-                    tcp_ip_fp["avg_score_os_class"]['iOS']['avg'],
-                    tcp_ip_fp["avg_score_os_class"]['Mac OS']['avg']
+                    tcp_ip_fp["avg_score_os_class"]['iOS'],
+                    tcp_ip_fp["avg_score_os_class"]['Mac OS']
                 ),
             }
             # get highest OS from TCP/IP fingerprint
@@ -108,15 +108,11 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
             if detailed:
                 return self.send_json(classification)
             else:
-                # only return the information absolutely necessary
-                scores = {}
-                for key in classification["avg_score_os_class"]:
-                    scores[key] = classification["avg_score_os_class"][key]['avg']
                 return self.send_json({
                     "os_mismatch": classification['details']['os_mismatch'],
                     "lookup_ip": lookup_ip,
                     "perfect_score": classification['details']["perfect_score"],
-                    "avg_score_os_class": scores
+                    "avg_score_os_class": classification["avg_score_os_class"]
                 })
         else:
             msg = {
