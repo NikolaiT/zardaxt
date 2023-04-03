@@ -88,7 +88,7 @@ def compute_near_ttl(ip_ttl):
     """
     guessed_ttl_start = ip_ttl
 
-    if ip_ttl > 0 and ip_ttl <= 32:
+    if ip_ttl >= 0 and ip_ttl <= 32:
         guessed_ttl_start = 32
     elif ip_ttl > 32 and ip_ttl <= 64:
         guessed_ttl_start = 64
@@ -211,14 +211,13 @@ def normalize_fp(fp):
     """
     Normalize the fingerprint.
     """
-    fp["ip_ttl"] = compute_near_ttl(fp["ip_ttl"])
-    fp["ip_id"] = compute_ip_id(fp["ip_id"])
-
-    fp["tcp_timestamp"] = getTcpTimestamp(fp["tcp_timestamp"])
-    fp["tcp_timestamp_echo_reply"] = getTcpTimestamp(
-        fp["tcp_timestamp_echo_reply"])
-
-    return fp
+    new_fp = fp.copy()
+    new_fp["ip_ttl"] = compute_near_ttl(new_fp["ip_ttl"])
+    new_fp["ip_id"] = compute_ip_id(new_fp["ip_id"])
+    new_fp["tcp_timestamp"] = getTcpTimestamp(new_fp["tcp_timestamp"])
+    new_fp["tcp_timestamp_echo_reply"] = getTcpTimestamp(
+        new_fp["tcp_timestamp_echo_reply"])
+    return new_fp
 
 
 def make_os_guess(fp):
@@ -228,15 +227,15 @@ def make_os_guess(fp):
 
     As a second guess, output the operating system with the highest, normalized average score.
     """
-    fp = normalize_fp(fp)
-    avg_os_score = score_fp(fp)
+    norm_fp = normalize_fp(fp)
+    avg_os_score = score_fp(norm_fp)
     return {
         'avg_score_os_class': avg_os_score,
         'fp': fp,
         'details': {
             'os_highest_class': max(avg_os_score, key=avg_os_score.get),
             'highest_os_avg': max(avg_os_score.values()),
-            'perfect_score': 22.5
+            'perfect_score': 20.5
         }
     }
 
