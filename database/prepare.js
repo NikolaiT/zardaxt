@@ -67,7 +67,7 @@ const createNewDatabase = () => {
       const os = entry.userAgentParsed.os.name;
       const entropy = {
         "tcp_options": fp["tcp_options"],
-        "tcp_options_ordered": fp["tcp_options"].split(',').map(el => el[0]).filter(e => !!e),
+        "tcp_options_ordered": fp["tcp_options"].split(',').map(el => el[0]).filter(e => !!e).join(''),
         "ip_total_length": fp["ip_total_length"],
         "tcp_off": fp["tcp_off"],
         "tcp_window_scaling": fp["tcp_window_scaling"],
