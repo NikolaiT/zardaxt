@@ -171,19 +171,18 @@ class ZardaxtApiServer(BaseHTTPRequestHandler):
 
 
 def create_server(config, fingerprints, timestamps):
-    server_address = (config['api_server_ip'], config['api_server_port'])
-    handler = ZardaxtApiServer(config, fingerprints, timestamps)
-    httpd = HTTPServerIPv6(server_address, handler)
-    log("TCP/IP Fingerprint (Zardaxt.py) API started on http://%s:%s" %
-        server_address, 'api', level='INFO')
-
     try:
+        server_address = (config['api_server_ip'], config['api_server_port'])
+        handler = ZardaxtApiServer(config, fingerprints, timestamps)
+        httpd = HTTPServerIPv6(server_address, handler)
+        log("TCP/IP Fingerprint (Zardaxt.py) API started on http://%s:%s" %
+            server_address, 'api', level='INFO')
         httpd.serve_forever()
-    except KeyboardInterrupt:
-        pass
-
-    httpd.server_close()
-    log("TCP/IP Fingerprint API stopped.", 'api', level='INFO')
+        httpd.server_close()
+        log("TCP/IP Fingerprint API stopped.", 'api', level='INFO')
+    except Exception as err:
+        log("create_server() crashed with error: {} and stack: {}".format(
+            err, traceback.format_exc()), 'api', level='ERROR')
 
 
 def run_api(config, fingerprints, timestamps):

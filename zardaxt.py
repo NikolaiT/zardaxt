@@ -5,6 +5,7 @@ import pcapy
 from datetime import timedelta
 import sys
 import signal
+import traceback
 import json
 from zardaxt_tcp_options import decode_tcp_options
 from zardaxt_utils import TH_SYN, TH_ACK, load_config, compute_near_timestamp_tick
@@ -15,7 +16,7 @@ from zardaxt_api import run_api
 Author: Nikolai Tschacher
 GitHub: https://github.com/NikolaiT/zardaxt
 Date: March/April 2021
-Update: January 2023
+Update: July 2023
 
 Allows to fingerprint an incoming TCP/IP connection by the initial SYN packet.
 
@@ -157,42 +158,46 @@ def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
 
 
 def main():
-    log('Listen on interface {}'.format(config['interface']), 'zardaxt')
-    # snaplen (maximum number of bytes to capture per packet)
-    # 120 bytes are picked, since the maximum TCP header is 60 bytes and the maximum IP header is also 60 bytes
-    # The IPv6 header is always present and is a fixed size of 40 bytes.
-    max_bytes = 120
-    # promiscuous mode (1 for true)
-    promiscuous = False
-    # https://github.com/the-tcpdump-group/libpcap/issues/572
-    # The main purpose of timeouts in packet capture mechanisms is to allow the capture mechanism
-    # to buffer up multiple packets, and deliver multiple packets in a single wakeup, rather than one
-    # wakeup per packet, reducing the number of wakeups (which aren't free),
-    # timeout (in milliseconds)
-    read_timeout = 1
+    try:
+        log('Listen on interface {}'.format(config['interface']), 'zardaxt')
+        # snaplen (maximum number of bytes to capture per packet)
+        # 120 bytes are picked, since the maximum TCP header is 60 bytes and the maximum IP header is also 60 bytes
+        # The IPv6 header is always present and is a fixed size of 40 bytes.
+        max_bytes = 120
+        # promiscuous mode (1 for true)
+        promiscuous = False
+        # https://github.com/the-tcpdump-group/libpcap/issues/572
+        # The main purpose of timeouts in packet capture mechanisms is to allow the capture mechanism
+        # to buffer up multiple packets, and deliver multiple packets in a single wakeup, rather than one
+        # wakeup per packet, reducing the number of wakeups (which aren't free),
+        # timeout (in milliseconds)
+        read_timeout = 1
 
-    # Read from the network interface in live mode
-    preader = pcapy.open_live(
-        config['interface'], max_bytes, promiscuous, read_timeout)
+        # Read from the network interface in live mode
+        preader = pcapy.open_live(
+            config['interface'], max_bytes, promiscuous, read_timeout)
 
-    # Filter certain traffic
-    preader.setfilter(config.get('pcap_filter', ''))
+        # Filter certain traffic
+        preader.setfilter(config.get('pcap_filter', ''))
 
-    while True:
-        (header, buf) = preader.next()
-        eth = dpkt.ethernet.Ethernet(buf)
-        # Ignore everything other than IPv4 or IPv6
-        if eth.type == dpkt.ethernet.ETH_TYPE_IP or eth.type == dpkt.ethernet.ETH_TYPE_IP6:
-            ip_pkt = eth.data
-            header_len = header.getlen()
-            cap_len = header.getcaplen()
-            ts = header.getts()
+        while True:
+            (header, buf) = preader.next()
+            eth = dpkt.ethernet.Ethernet(buf)
+            # Ignore everything other than IPv4 or IPv6
+            if eth.type == dpkt.ethernet.ETH_TYPE_IP or eth.type == dpkt.ethernet.ETH_TYPE_IP6:
+                ip_pkt = eth.data
+                header_len = header.getlen()
+                cap_len = header.getcaplen()
+                ts = header.getts()
 
-            ip_version = 4
-            if eth.type == dpkt.ethernet.ETH_TYPE_IP6:
-                ip_version = 6
+                ip_version = 4
+                if eth.type == dpkt.ethernet.ETH_TYPE_IP6:
+                    ip_version = 6
 
-            process_packet(ts, header_len, cap_len, ip_pkt, ip_version)
+                process_packet(ts, header_len, cap_len, ip_pkt, ip_version)
+    except Exception as err:
+        log("main() crashed with error: {} and stack: {}".format(
+            err, traceback.format_exc()), 'api', level='ERROR')
 
 
 if __name__ == '__main__':
