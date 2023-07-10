@@ -70,7 +70,15 @@ def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
     if ip_pkt.p == dpkt.ip.IP_PROTO_TCP:
         tcp_pkt = ip_pkt.data
 
-    if tcp_pkt:
+    # Sometimes I get the following error in production:
+    # File "/root/zardaxt/zardaxt.py", line 74, in process_packet
+    # is_syn = tcp_pkt.flags & TH_SYN
+    # AttributeError: 'bytes' object has no attribute 'flags'
+
+    # Honestly I don't know why, let's use hasattr() to check that tcp_pkt
+    # has the flags attribute
+
+    if tcp_pkt and hasattr(tcp_pkt, 'flags'):
         is_syn = tcp_pkt.flags & TH_SYN
         is_ack = tcp_pkt.flags & TH_ACK
 
