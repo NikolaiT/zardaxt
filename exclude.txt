@@ -9,3 +9,7 @@ log/
 analysis/
 env/*
 old_src/*
+
+database/July2023-de.json
+database/July2023-us.json
+database/duplicates.json
