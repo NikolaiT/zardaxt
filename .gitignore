@@ -19,3 +19,6 @@ download.sh
 rw.md
 zardaxt-server.json
 env/*
+
+database/July2023-de.json
+database/July2023-us.json
