@@ -1,27 +1,6 @@
 const fs = require('fs');
 const crypto = require('crypto');
 
-const createOldDatabase = () => {
-  let data = JSON.parse(fs.readFileSync('February2023.json'))
-  let newData = [];
-
-  const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS'];
-
-  for (let entry of data) {
-    let new_entry = Object.assign({}, entry.details.fp);
-    new_entry.userAgentParsed = entry.userAgentParsed;
-    delete new_entry.src_ip;
-    delete new_entry.src_port;
-    delete new_entry.dst_ip;
-    delete new_entry.dst_port;
-    if (allowedOS.includes(entry.userAgentParsed.os.name)) {
-      newData.push(new_entry)
-    }
-  }
-
-  fs.writeFileSync('February2023Cleaned.json', JSON.stringify(newData, null, 2));
-};
-
 const getTcpTimestamp = (tcp_ts) => {
   return tcp_ts == "" ? 0 : 1;
 }
@@ -47,7 +26,11 @@ const getNearTTL = (ip_ttl) => {
 }
 
 const createNewDatabase = () => {
-  let data = JSON.parse(fs.readFileSync('February2023.json'));
+  let data1 = JSON.parse(fs.readFileSync('July2023-de.json'));
+  let data2 = JSON.parse(fs.readFileSync('July2023-us.json'));
+  let data = data1;
+  data = data.concat(data2);
+
   let newData = [];
   let duplicates = [];
   const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS'];
@@ -62,7 +45,7 @@ const createNewDatabase = () => {
   let newEntropyCount = 0;
   let noEntropyCount = 0;
   for (let entry of data) {
-    const fp = entry.details.fp;
+    const fp = entry.info.fp;
     if (allowedOS.includes(entry.userAgentParsed.os.name)) {
       const os = entry.userAgentParsed.os.name;
       const entropy = {
