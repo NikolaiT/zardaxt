@@ -28,8 +28,11 @@ const getNearTTL = (ip_ttl) => {
 const createNewDatabase = () => {
   let data1 = JSON.parse(fs.readFileSync('July2023-de.json'));
   let data2 = JSON.parse(fs.readFileSync('July2023-us.json'));
+  let data3 = JSON.parse(fs.readFileSync('August2023-de.json'));
+
   let data = data1;
   data = data.concat(data2);
+  data = data.concat(data3);
 
   let newData = [];
   let duplicates = [];
