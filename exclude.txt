@@ -14,3 +14,5 @@ database/July2023-de.json
 database/July2023-us.json
 database/August2023-de.json
 database/duplicates.json
+database/September2023-us.json
+database/September2023-de.json
