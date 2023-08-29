@@ -29,13 +29,31 @@ const createNewDatabase = () => {
   let data1 = JSON.parse(fs.readFileSync('July2023-de.json'));
   let data2 = JSON.parse(fs.readFileSync('July2023-us.json'));
   let data3 = JSON.parse(fs.readFileSync('August2023-de.json'));
+  // September 2023
+  let data4 = JSON.parse(fs.readFileSync('September2023-de.json'));
+  let data5 = JSON.parse(fs.readFileSync('September2023-us.json'));
 
   let data = data1;
   data = data.concat(data2);
   data = data.concat(data3);
+  data = data.concat(data4);
+  data = data.concat(data5);
 
   let newData = [];
   let duplicates = [];
+  // {
+  //   Windows: 10001,
+  //   Android: 10001,
+  //   iOS: 10001,
+  //   'Mac OS': 10001,
+  //   Linux: 1175,
+  //   'Chromium OS': 985,
+  //   HarmonyOS: 24,
+  //   Ubuntu: 22,
+  //   android: 1,
+  //   'Windows Phone': 1,
+  //   Debian: 1
+  // }
   const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS'];
   let entropyDict = {
     'Android': [],
@@ -50,7 +68,10 @@ const createNewDatabase = () => {
   for (let entry of data) {
     const fp = entry.info.fp;
     if (allowedOS.includes(entry.userAgentParsed.os.name)) {
-      const os = entry.userAgentParsed.os.name;
+      let os = entry.userAgentParsed.os.name;
+      if (['Ubuntu', 'Debian'].includes(os)) {
+        os = 'Linux';
+      }
       const entropy = {
         "tcp_options": fp["tcp_options"],
         "tcp_options_ordered": fp["tcp_options"].split(',').map(el => el[0]).filter(e => !!e).join(''),
