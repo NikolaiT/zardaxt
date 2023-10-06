@@ -1,4 +1,5 @@
 import struct
+from zardaxt_logging import log
 
 """
 Parse TCP options.
@@ -53,7 +54,8 @@ def decode_tcp_options(opts):
     """
     Decodes TCP options into a readable string.
 
-    [(2, b'\x05\xb4'), (1, b''), (3, b'\x06'), (1, b''), (1, b''), (8, b'3.S\xa8\x00\x00\x00\x00'), (4, b''), (0, b''), (0, b'')]
+    [(2, b'\x05\xb4'), (1, b''), (3, b'\x06'), (1, b''), (1, b''),
+      (8, b'3.S\xa8\x00\x00\x00\x00'), (4, b''), (0, b''), (0, b'')]
     """
     str_opts = ''
     mss = 0
@@ -68,8 +70,12 @@ def decode_tcp_options(opts):
         elif option_type == TCP_OPT_NOP:  # No operation
             str_opts = str_opts + 'N,'
         elif option_type == TCP_OPT_MSS:  # Maximum segment size
-            mss = struct.unpack('!h', option_value)[0]
-            str_opts = str_opts + 'M' + str(mss) + ','
+            try:
+                mss = struct.unpack('!h', option_value)[0]
+                str_opts = str_opts + 'M' + str(mss) + ','
+            except Exception as e:
+                log('failed to parse TCP_OPT_MSS: {}'.format(
+                    str(e)), 'zardaxt_tcp_options', level='ERROR')
         elif option_type == TCP_OPT_WSCALE:  # Window scaling
             window_scaling = struct.unpack('!b', option_value)[0]
             str_opts = str_opts + 'W' + str(window_scaling) + ','
@@ -82,9 +88,14 @@ def decode_tcp_options(opts):
         elif option_type == TCP_OPT_ECHOREPLY:
             str_opts = str_opts + 'F,'
         elif option_type == TCP_OPT_TIMESTAMP:
-            str_opts = str_opts + 'T,'
-            timestamp = struct.unpack('!I', option_value[0:4])[0]
-            timestamp_echo_reply = struct.unpack('!I', option_value[4:8])[0]
+            try:
+                str_opts = str_opts + 'T,'
+                timestamp = struct.unpack('!I', option_value[0:4])[0]
+                timestamp_echo_reply = struct.unpack(
+                    '!I', option_value[4:8])[0]
+            except Exception as e:
+                log('failed to parse TCP_OPT_TIMESTAMP: {}'.format(
+                    str(e)), 'zardaxt_tcp_options', level='ERROR')
         elif option_type == TCP_OPT_POCONN:
             str_opts = str_opts + 'P,'
         elif option_type == TCP_OPT_POSVC:
