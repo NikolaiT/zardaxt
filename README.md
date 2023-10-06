@@ -15,7 +15,7 @@ curl 'https://tcpip.incolumitas.com/classify?by_ip=1&detail=1'
 **Why the rewrite?**
 
 + [p0f](https://github.com/p0f/p0f) is dead. [p0f's](https://github.com/p0f/p0f) database is too old and C is a bit overkill and hard to quickly hack in.
-+ [satori.py](https://github.com/xnih/satori) is extremely buggy and hard to use (albeit the ideas behind the *code* are awesome). Actually, some code and inspiration used in zardaxt has been taken from [satori.py](https://github.com/xnih/satori).
++ [satori.py](https://github.com/xnih/satori) was the main inspiration for zardaxt.py. It used to be a bit buggy and hard to use (albeit the ideas behind the *code* are awesome). Actually, it could be argued that zardaxt.py is only a more maintained version of [satori.py](https://github.com/xnih/satori), which does a lot more than TCP/IP fingerprinting.
 + The actual statistics/traffic samples behind TCP/IP fingerprinting are more important than the tool itself. Therefore it makes sense to rewrite it.
 
 **What can I do with this tool?**
