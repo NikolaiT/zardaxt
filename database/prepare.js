@@ -29,36 +29,20 @@ const createNewDatabase = () => {
   let data1 = JSON.parse(fs.readFileSync('July2023-de.json'));
   let data2 = JSON.parse(fs.readFileSync('July2023-us.json'));
   let data3 = JSON.parse(fs.readFileSync('August2023-de.json'));
-  // September 2023
-  // let data4 = JSON.parse(fs.readFileSync('September2023-de.json'));
-  // let data5 = JSON.parse(fs.readFileSync('September2023-us.json'));
   // October 2023
   let data6 = JSON.parse(fs.readFileSync('October2023-de.json'));
   let data7 = JSON.parse(fs.readFileSync('October2023-us.json'));
+  let data8 = JSON.parse(fs.readFileSync('OctoberSecond2023-us.json'));
 
   let data = data1;
   data = data.concat(data2);
   data = data.concat(data3);
-  // data = data.concat(data4);
-  // data = data.concat(data5);
   data = data.concat(data6);
   data = data.concat(data7);
+  data = data.concat(data8);
 
   let newData = [];
   let duplicates = [];
-  // {
-  //   Windows: 10001,
-  //   Android: 10001,
-  //   iOS: 10001,
-  //   'Mac OS': 10001,
-  //   Linux: 1175,
-  //   'Chromium OS': 985,
-  //   HarmonyOS: 24,
-  //   Ubuntu: 22,
-  //   android: 1,
-  //   'Windows Phone': 1,
-  //   Debian: 1
-  // }
   const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS'];
   let entropyDict = {
     'Android': [],
