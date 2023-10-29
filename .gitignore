@@ -7,7 +7,6 @@ fp/
 fingerprints.json
 database/node_modules/
 fingerprintsOld.json
-database/db_June_2022.json
 database/hist.json
 tcpip_fp.env
 __pycache__
@@ -19,3 +18,4 @@ zardaxt-server.json
 env/*
 database/rawData/
 database/rawData/*
+database/duplicates.json

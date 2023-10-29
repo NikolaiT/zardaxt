@@ -11,3 +11,4 @@ env/*
 old_src/*
 database/rawData/
 database/rawData/*
+database/duplicates.json
