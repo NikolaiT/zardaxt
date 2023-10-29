@@ -26,13 +26,15 @@ const getNearTTL = (ip_ttl) => {
 }
 
 const createNewDatabase = () => {
-  let data1 = JSON.parse(fs.readFileSync('July2023-de.json'));
-  let data2 = JSON.parse(fs.readFileSync('July2023-us.json'));
-  let data3 = JSON.parse(fs.readFileSync('August2023-de.json'));
+  let data1 = JSON.parse(fs.readFileSync('./rawData/July2023-de.json'));
+  let data2 = JSON.parse(fs.readFileSync('./rawData/July2023-us.json'));
+  let data3 = JSON.parse(fs.readFileSync('./rawData/August2023-de.json'));
   // October 2023
-  let data6 = JSON.parse(fs.readFileSync('October2023-de.json'));
-  let data7 = JSON.parse(fs.readFileSync('October2023-us.json'));
-  let data8 = JSON.parse(fs.readFileSync('OctoberSecond2023-us.json'));
+  let data6 = JSON.parse(fs.readFileSync('./rawData/October2023-de.json'));
+  let data7 = JSON.parse(fs.readFileSync('./rawData/October2023-us.json'));
+  let data8 = JSON.parse(fs.readFileSync('./rawData/OctoberSecond2023-us.json'));
+  let data9 = JSON.parse(fs.readFileSync('./rawData/OctoberThird2023-us.json'));
+  let data10 = JSON.parse(fs.readFileSync('./rawData/OctoberThird2023-de.json'));
 
   let data = data1;
   data = data.concat(data2);
@@ -40,6 +42,8 @@ const createNewDatabase = () => {
   data = data.concat(data6);
   data = data.concat(data7);
   data = data.concat(data8);
+  data = data.concat(data9);
+  data = data.concat(data10);
 
   let newData = [];
   let duplicates = [];

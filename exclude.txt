@@ -9,15 +9,5 @@ log/
 analysis/
 env/*
 old_src/*
-
-database/July2023-de.json
-database/July2023-us.json
-database/August2023-de.json
-database/duplicates.json
-database/September2023-us.json
-database/September2023-de.json
-database/October2023-de.json
-database/October2023-us.json
-database/OctoberSecond2023-us.json
-database/OctoberThird2023-us.json
-database/OctoberThird2023-de.json
+database/rawData/
+database/rawData/*
