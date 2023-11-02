@@ -35,6 +35,8 @@ const createNewDatabase = () => {
   let data8 = JSON.parse(fs.readFileSync('./rawData/OctoberSecond2023-us.json'));
   let data9 = JSON.parse(fs.readFileSync('./rawData/OctoberThird2023-us.json'));
   let data10 = JSON.parse(fs.readFileSync('./rawData/OctoberThird2023-de.json'));
+  let data11 = JSON.parse(fs.readFileSync('./rawData/November2023-us.json'));
+  let data12 = JSON.parse(fs.readFileSync('./rawData/November2023-de.json'));
 
   let data = data1;
   data = data.concat(data2);
@@ -44,24 +46,33 @@ const createNewDatabase = () => {
   data = data.concat(data8);
   data = data.concat(data9);
   data = data.concat(data10);
+  data = data.concat(data11);
+  data = data.concat(data12);
 
   let newData = [];
   let duplicates = [];
-  const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS'];
+  const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS', 'Chromium OS'];
   let entropyDict = {
     'Android': [],
     'Linux': [],
+    'Chromium OS': [],
     'Mac OS': [],
     'Windows': [],
     'iOS': [],
   };
+  let osDist = {};
   let N = data.length;
   let newEntropyCount = 0;
   let noEntropyCount = 0;
   for (let entry of data) {
+    const osName = entry.userAgentParsed.os.name;
+    if (!osDist[osName]) {
+      osDist[osName] = 0;
+    }
+    osDist[osName]++;
     const fp = entry.info.fp;
-    if (allowedOS.includes(entry.userAgentParsed.os.name)) {
-      let os = entry.userAgentParsed.os.name;
+    if (allowedOS.includes(osName)) {
+      let os = osName;
       if (['Ubuntu', 'Debian'].includes(os)) {
         os = 'Linux';
       }
@@ -94,12 +105,12 @@ const createNewDatabase = () => {
       }
     }
   }
+  console.log('osDist', osDist);
   console.log(`N=${N}, newEntropyCount=${newEntropyCount}, noEntropyCount=${noEntropyCount}`);
   console.log(Object.entries(entropyDict).map((el) => [el[0], el[1].length]));
   fs.writeFileSync('newCleaned.json', JSON.stringify(newData, null, 2));
   fs.writeFileSync('duplicates.json', JSON.stringify(duplicates, null, 2));
 };
-
 
 /**
  * N=12510, newEntropyCount=1031, noEntropyCount=11474

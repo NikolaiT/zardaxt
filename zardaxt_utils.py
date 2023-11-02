@@ -168,7 +168,8 @@ def score_fp(fp):
         'Windows': 0,
         'Mac OS': 0,
         'iOS': 0,
-        'Linux': 0
+        'Linux': 0,
+        'Chromium OS': 0,
     }
     for entry in dbList:
         score = 0
