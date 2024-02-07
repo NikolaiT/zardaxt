@@ -17,7 +17,7 @@ function sortObjectByValue(obj) {
 
 function tcpIpFingerprintHistogram() {
   let hist = {};
-  let data = require('./data.json');
+  let data = require('./newData.json');
   for (let tcpip_fp of data) {
     for (let key of Object.keys(tcpip_fp)) {
       let value = tcpip_fp[key];

@@ -2,7 +2,7 @@ import dpkt
 import socket
 from dpkt.tcp import parse_opts
 import pcapy
-from datetime import timedelta
+import netifaces as ni
 import sys
 import signal
 import traceback
@@ -30,8 +30,13 @@ a huge mess (randomly failing code segments and capturing the errors, not good).
 As of 2023, it is actually a complete rewrite.
 """
 
+def get_default_gateway_interface_name():
+    gws = ni.gateways()
+    default_gateway = gws['default'][ni.AF_INET][1]
+    return default_gateway
+
 # do not modify those variables
-interface = None
+interface = get_default_gateway_interface_name()
 verbose = False
 fingerprints = {}
 timestamps = {}
@@ -167,7 +172,7 @@ def process_packet(ts, header_len, cap_len, ip_pkt, ip_version):
 
 def main():
     try:
-        log('Listen on interface {}'.format(config['interface']), 'zardaxt')
+        log('Listen on interface {}'.format(interface), 'zardaxt')
         # snaplen (maximum number of bytes to capture per packet)
         # 120 bytes are picked, since the maximum TCP header is 60 bytes and the maximum IP header is also 60 bytes
         # The IPv6 header is always present and is a fixed size of 40 bytes.
@@ -182,8 +187,7 @@ def main():
         read_timeout = 1
 
         # Read from the network interface in live mode
-        preader = pcapy.open_live(
-            config['interface'], max_bytes, promiscuous, read_timeout)
+        preader = pcapy.open_live(interface, max_bytes, promiscuous, read_timeout)
 
         # Filter certain traffic
         preader.setfilter(config.get('pcap_filter', ''))

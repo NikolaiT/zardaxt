@@ -1,5 +1,4 @@
 {
-  "interface": "en0",
   "api_server_ip": "::",
   "api_server_port": 8249,
   "verbose": false,

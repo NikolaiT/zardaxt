@@ -49,6 +49,7 @@ const createNewDatabase = () => {
   data = data.concat(data11);
   data = data.concat(data12);
 
+  let allData = [];
   let newData = [];
   let duplicates = [];
   const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS', 'Chromium OS'];
@@ -103,6 +104,7 @@ const createNewDatabase = () => {
         entropyDict[os].push(entropyHash);
         newData.push(entropy);
       }
+      allData.push(entropy);
     }
   }
   console.log('osDist', osDist);
@@ -110,6 +112,7 @@ const createNewDatabase = () => {
   console.log(Object.entries(entropyDict).map((el) => [el[0], el[1].length]));
   fs.writeFileSync('newCleaned.json', JSON.stringify(newData, null, 2));
   fs.writeFileSync('duplicates.json', JSON.stringify(duplicates, null, 2));
+  fs.writeFileSync('./../analysis2/rawData.json', JSON.stringify(allData, null, 2));
 };
 
 /**

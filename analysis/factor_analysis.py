@@ -15,7 +15,7 @@ def create_histogram_for_var(training, var):
     histogram = {}
     for entry in training:
         value = get_var_value(var, entry)
-        _os = gos(entry['os_name'])
+        _os = gos(entry['os'])
         if not histogram.get(_os):
             histogram[_os] = {}
         if not histogram[_os].get(value, False):
@@ -47,7 +47,7 @@ def main():
         score_sum = 0
         num = 0
         for entry in testing:
-            _os = gos(entry['os_name'])
+            _os = gos(entry['os'])
             value = get_var_value(var, entry)
             if hist[_os].get(value, False):
                 num += 1

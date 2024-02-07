@@ -8,12 +8,11 @@ dbList = []
 os_sample_count = {}
 
 
-def maybe_load_database():
+def maybe_load_database(databaseFile='./database/newCleaned.json'):
     global databaseLoaded
     global dbList
     if not databaseLoaded:
         # load fingerprints into database
-        databaseFile = './database/newCleaned.json'
         with open(databaseFile) as f:
             dbList = json.load(f)
             for el in dbList:

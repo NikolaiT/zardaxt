@@ -1,5 +1,10 @@
 #/bin/bash
 
+current_hostname=$(hostname)
+if [ "$current_hostname" == "vps-1a7d3b72" ]; then
+    su -
+fi
+
 cd /root/zardaxt/;
 
 # purge log files for size reasons

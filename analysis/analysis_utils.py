@@ -3,9 +3,10 @@ import json
 
 def get_data():
     data = []
-    databaseFile = 'data.json'
+    databaseFile = 'newData.json'
     with open(databaseFile) as f:
         data = json.load(f)
+        print(f'Loaded {len(data)} fingerprints')
     return data
 
 
