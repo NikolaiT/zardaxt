@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 current_hostname=$(hostname)
 if [ "$current_hostname" == "vps-1a7d3b72" ]; then
@@ -22,7 +22,11 @@ fi
 # kill everything just in case
 pkill --echo -f "python zardaxt.py";
 
-/usr/bin/nohup /usr/local/bin/pew in zardaxt python zardaxt.py zardaxt-server.json > log/nohup.out 2> log/nohup.err < /dev/null &
+# Define the pew command based on its location
+PEW_CMD=$(command -v pew || echo "/root/.local/bin/pew")
+
+# Run zardaxt using the determined pew command
+/usr/bin/nohup $PEW_CMD in zardaxt python zardaxt.py zardaxt-server.json > log/nohup.out 2> log/nohup.err < /dev/null &
 
 echo $! > /var/run/zardaxt.pid
 
