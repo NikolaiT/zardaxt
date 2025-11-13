@@ -26,29 +26,10 @@ const getNearTTL = (ip_ttl) => {
 }
 
 const createNewDatabase = () => {
-  let data1 = JSON.parse(fs.readFileSync('./rawData/July2023-de.json'));
-  let data2 = JSON.parse(fs.readFileSync('./rawData/July2023-us.json'));
-  let data3 = JSON.parse(fs.readFileSync('./rawData/August2023-de.json'));
-  // October 2023
-  let data6 = JSON.parse(fs.readFileSync('./rawData/October2023-de.json'));
-  let data7 = JSON.parse(fs.readFileSync('./rawData/October2023-us.json'));
-  let data8 = JSON.parse(fs.readFileSync('./rawData/OctoberSecond2023-us.json'));
-  let data9 = JSON.parse(fs.readFileSync('./rawData/OctoberThird2023-us.json'));
-  let data10 = JSON.parse(fs.readFileSync('./rawData/OctoberThird2023-de.json'));
-  let data11 = JSON.parse(fs.readFileSync('./rawData/November2023-us.json'));
-  let data12 = JSON.parse(fs.readFileSync('./rawData/November2023-de.json'));
+  let data1 = JSON.parse(fs.readFileSync('./rawData/November2025-de.json'));
+  let data2 = JSON.parse(fs.readFileSync('./rawData/November2025-us.json'));
 
-  let data = data1;
-  data = data.concat(data2);
-  data = data.concat(data3);
-  data = data.concat(data6);
-  data = data.concat(data7);
-  data = data.concat(data8);
-  data = data.concat(data9);
-  data = data.concat(data10);
-  data = data.concat(data11);
-  data = data.concat(data12);
-
+  let data = data1.concat(data2);
   let allData = [];
   let newData = [];
   let duplicates = [];
@@ -114,16 +95,5 @@ const createNewDatabase = () => {
   fs.writeFileSync('duplicates.json', JSON.stringify(duplicates, null, 2));
   fs.writeFileSync('./../analysis2/rawData.json', JSON.stringify(allData, null, 2));
 };
-
-/**
- * N=12510, newEntropyCount=1031, noEntropyCount=11474
-[
-  [ 'Android', 184 ],
-  [ 'Linux', 242 ],
-  [ 'Mac OS', 194 ],
-  [ 'Windows', 153 ],
-  [ 'iOS', 258 ]
-]
- */
 
 createNewDatabase();
