@@ -1,16 +1,13 @@
 # Passive TCP/IP Fingerprinting 🚀
 
-+ [Live Demo](https://tcpip.incolumitas.com/classify?by_ip=1)
-+ [Live Demo with full Details](https://tcpip.incolumitas.com/classify?by_ip=1&detail=1)
++ [Live Demo](https://proxydetect.live/tcpip.html)
++ [Legacy Demo (direct classify endpoint)](https://tcpip.incolumitas.com/classify?by_ip=1)
 
 Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers the header fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake.
 
-Test your TCP/IP Fingerprint with `curl`:
+Test your TCP/IP fingerprint in your browser:
 
-```shell
-curl 'https://tcpip.incolumitas.com/classify?by_ip=1'
-curl 'https://tcpip.incolumitas.com/classify?by_ip=1&detail=1'
-```
+`https://proxydetect.live/tcpip.html`
 
 **Why the rewrite?**
 
@@ -20,7 +17,7 @@ curl 'https://tcpip.incolumitas.com/classify?by_ip=1&detail=1'
 
 **What can I do with this tool?**
 
-This tool may be used to correlate an incoming TCP/IP connection with a operating system class. For example, It can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the operating system taken from the User-Agent.
+This tool may be used to correlate an incoming TCP/IP connection with an operating system class. For example, it can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the operating system taken from the User-Agent.
 
 If the key `os_mismatch` is true, then the TCP/IP inferred OS is different from the User-Agent OS.
 
@@ -28,8 +25,8 @@ On the other hand, most VPN protocols cannot be revealed by TCP/IP fingerprint m
 
 ## Demo
 
-+ [Live Demo & Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
-+ [API page](https://incolumitas.com/pages/TCP-IP-Fingerprint/)
++ [Live Demo](https://proxydetect.live/tcpip.html)
++ [Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
 
 ## Installation & Usage
 
@@ -139,7 +136,7 @@ the fraction of global counters (18%) significantly diminished, that a non
 marginal number of hosts have an odd behavior (7%) and that random
 IP-IDs are still an exception (2%)."
 + `IP.flags (3 bits)` - **Flags** - Don't fragment (DF) and more fragments (MF) flags, bit 0 (RF) is always 0. In the flags field of the IPv4 header, there are three bits for control flags. The "don't fragment" (DF) bit plays a central role in Path Maximum Transmission Unit Discovery (PMTUD) because it determines whether or not a packet is allowed to be [fragmented](https://www.cisco.com/c/en/us/support/docs/ip/generic-routing-encapsulation-gre/25885-pmtud-ipfrag.html). Some OS set the DF flag in the IP header, others don't.
-+ `IP.ttl (8 bits)` - **Time to live (TTL)** - An eight-bit time to live field limits a datagram's lifetime to prevent network failure in the event of a routing loop. The TTL indicates how long a IP packet is allowed to circulate in the Internet. Each hop (such as a router) decrements the TTL field by one. The maximum TTL value is 255, the maximum value of a single octet (8 bits). A recommended initial value is 64, but some operating systems customize this value. Hence it's relevancy for TCP/IP fingerprinting.
++ `IP.ttl (8 bits)` - **Time to live (TTL)** - An eight-bit time to live field limits a datagram's lifetime to prevent network failure in the event of a routing loop. The TTL indicates how long an IP packet is allowed to circulate in the Internet. Each hop (such as a router) decrements the TTL field by one. The maximum TTL value is 255, the maximum value of a single octet (8 bits). A recommended initial value is 64, but some operating systems customize this value. Hence its relevance for TCP/IP fingerprinting.
 + `IP.protocol (8 bits)` - **Protocol** - This field defines the protocol used in the data portion of the IP datagram. IANA maintains a list of IP protocol numbers as directed by RFC 790. It does not seem to be that relevant for TCP/IP fingerprinting, since it is mostly TCP (6).
 + `IP.sum (16 bits)` - **Header checksum** - The 16-bit IPv4 header checksum field is used for error-checking of the header. When a packet arrives at a router, the router calculates the checksum of the header and compares it to the checksum field. If the values do not match, the router discards the packet. Errors in the data field must be handled by the encapsulated protocol. Both UDP and TCP have separate checksums that apply to their data. Probably has no use for TCP/IP fingerprinting.
 
