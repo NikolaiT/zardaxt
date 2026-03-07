@@ -26,8 +26,12 @@ const getNearTTL = (ip_ttl) => {
 }
 
 const createNewDatabase = () => {
-  let data1 = JSON.parse(fs.readFileSync('./rawData/November2025-de.json'));
-  let data2 = JSON.parse(fs.readFileSync('./rawData/November2025-us.json'));
+  const deFile = process.argv[2] || './rawData/tcp_ip_fingerprints-de.json';
+  const usFile = process.argv[3] || './rawData/tcp_ip_fingerprints-us.json';
+  console.log(`Reading DE data from: ${deFile}`);
+  console.log(`Reading US data from: ${usFile}`);
+  let data1 = JSON.parse(fs.readFileSync(deFile));
+  let data2 = JSON.parse(fs.readFileSync(usFile));
 
   let data = data1.concat(data2);
   let allData = [];
