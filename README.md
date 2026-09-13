@@ -15,10 +15,8 @@ client:
 2. **Was the SYN sent by the machine the browser claims to be?** Given the
    client's `User-Agent`, a gradient-boosting model (`models/tcpip_mismatch.joblib`)
    estimates the probability that a *relay* – an HTTP or SOCKS proxy – made
-   the TCP connection on the browser's behalf. This is the signal the
-   [proxydetect.live](https://proxydetect.live) engine uses as its `tcpip_fp`
-   test. Tunnel VPNs are not caught by it: the client's own stack talks
-   through the tunnel.
+   the TCP connection on the browser's behalf. Tunnel VPNs are not caught by
+   it: the client's own stack talks through the tunnel.
 
 Why a rewrite? [p0f](https://github.com/p0f/p0f) is dead and its database old;
 [satori.py](https://github.com/xnih/satori) was the inspiration but hard to
@@ -33,13 +31,12 @@ src/fingerprint.py   OS scoring against the database, the relay model, the User-
                      and the model's feature layout (shared with the trainer)
 src/tcp_options.py   TCP option decoding into the "M1460,S,T,N,W7," string
 src/log.py           log/zardaxt.log and log/zardaxt.err
-src/dune_client.py   usage counters shipped to dune
+src/dune_client.py   anonymous usage counters
 database/            newCleaned.json (the OS database) and prepare.js that builds it
 models/              tcpip_mismatch.joblib (the relay model)
-zardaxt.json         config for a local run; zardaxt-server.json is the deployed one
-restart.sh           (re)start on a box – cron runs it every 6 hours
-deploy.sh            rsync + restart on one box:  ./deploy.sh env/de.env
-downloadAndPrepare.sh pull labelled fingerprints from the engines and rebuild the database
+zardaxt.json         example config
+restart.sh           (re)start on a server – run it from cron
+deploy.sh            rsync + restart on one server:  ./deploy.sh env/production.env
 ```
 
 ## Running
@@ -61,7 +58,7 @@ Config keys: `api_server_ip`, `api_server_port`, `api_key` (required),
 # the caller's own connection (X-Real-IP is honoured behind nginx)
 curl "http://127.0.0.1:8249/classify"
 curl "http://127.0.0.1:8249/classify?detail=1"           # raw fingerprint, per-OS scores, relay verdict
-# any IP in memory, judged against a given User-Agent (the engine does this)
+# any IP in memory, judged against a given User-Agent
 curl "http://127.0.0.1:8249/classify?key=K&ip=1.2.3.4&detail=1&ua=Mozilla/5.0%20(Windows%20NT%2010.0)"
 curl "http://127.0.0.1:8249/all?key=K"                   # every fingerprint in memory
 curl "http://127.0.0.1:8249/stats?key=K"
@@ -78,45 +75,38 @@ User-Agent is known and the model is loaded, `relay`:
 comparison of OS classes from the database scores.
 
 Behind nginx, proxy `location /` to `http://localhost:8249` and set
-`X-Real-IP $remote_addr`; the proxydetect engines do this through their
-`hostProxies` for `tcpip.incolumitas.com`.
+`X-Real-IP $remote_addr`.
 
 ## Data and training
 
-Both the database and the model are built from sessions of the proxydetect
-engines, where every connection also went through the engine's other tests
-(latency, WebRTC, timezone, ...). Those tests provide the labels:
-
-+ sessions every test called clean – the SYN is the visitor's own – and
-  enumerated VPN tunnels without a relay signature (clamped MSS, own stack);
-+ sessions the tests called proxies – the SYN is the relay's, the User-Agent
-  the browser's.
+Both the database and the model are built from labelled connections: SYN
+fingerprints of connections whose origin is known to be either the browser's
+own machine (direct connections, including VPN tunnels with their clamped
+MSS) or an HTTP/SOCKS relay in front of it. Labels come from independent
+network tests on the same connections, not from the fingerprint itself.
 
 ```bash
-./downloadAndPrepare.sh
-# = rsync data/sessions/ from both boxes + the classifier bundles
-#   -> proxyDetector/server/scripts/exportFingerprints.js   (direct-stack sessions only)
-#   -> database/prepare.js                                  (dedupe per OS -> newCleaned.json)
-cd ../flows/classifier && python3 tcpip_mismatch.py train --days 60
-# -> ../../zardaxt/models/tcpip_mismatch.joblib, with a held-out report
+# OS database: dedupe labelled fingerprints per OS into database/newCleaned.json
+node database/prepare.js fingerprints-a.json fingerprints-b.json
 ```
 
-Numbers from the 2026-09-13 build, held out from training (2,965 clean, 381
-VPN, 27,976 relay sessions), at the deployed threshold 0.8:
+Each input is a JSON list of `{ "userAgentParsed": { "os": { "name": ... } },
+"info": { "fp": { ...the fingerprint as recorded by src/zardaxt.py... } } }`.
 
-| | flags clean users | flags VPN-tunnel users | catches relays | relays from other sites than the main customer |
-|---|---|---|---|---|
-| database scoring + OS-class rule (before) | ~0% by construction | 58% | 98.6% | – |
-| relay model | 0.1% | 4.2% | 95.8% | 82% |
+The relay model is a scikit-learn `HistGradientBoostingClassifier` over the
+fields in `src/fingerprint.py` (`FEATURES`) plus the OS class of the
+User-Agent; the artifact stores the model, the categorical vocabularies and
+the decision threshold. Held-out results of the 2026-09 build at threshold
+0.8: 0.1% of direct connections flagged, 4.2% of VPN-tunnel connections
+flagged (the database rule flagged 58% of them), 95.8% of relay connections
+caught. Linux desktops are rare in the training data, so a Linux desktop
+without a proxy is the most likely false positive.
 
-The database approach could not be improved by more data: rebuilt from clean
-sessions only it *lost* relay recall (78%), because the old database had
-learned relays by accident – it was built from unfiltered sessions, so its
-"Android" entries are largely Linux relay stacks. The full evaluation is in
-`flows/classifier/EVALUATION.md`. Caveats: the labels come from the other
-tests, and 95% of the relay samples are one customer's traffic. Linux desktop
-users are rare in the clean data (164 sessions), so a Linux desktop behind
-no proxy is the most likely false positive.
+Rebuilding the *database* from correctly labelled connections did not help:
+per-OS averaging has no notion of a relay, and the earlier database only
+caught relays because it had been built from unfiltered traffic in which
+Linux relay stacks ended up labelled as "Android". The model learns the
+mismatch directly, with the OS classes as one of its inputs.
 
 ### What carries the signal
 

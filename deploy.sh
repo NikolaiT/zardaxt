@@ -1,12 +1,12 @@
 #!/bin/bash
-# Deploy zardaxt to one engine box and restart it:
-#   ./deploy.sh env/de.env
-#   ./deploy.sh env/east.env
+# Deploy zardaxt to one server and restart it:
+#   ./deploy.sh env/production.env
+# The env file defines LOCAL_DIR, BASE_DIR, SERVER and SSH_PRIV_KEY.
 set -euo pipefail
-source "${1:-env/de.env}"   # LOCAL_DIR, BASE_DIR, SERVER, SSH_PRIV_KEY
+source "${1:?usage: deploy.sh env/<server>.env}"
 
-# --delete keeps the box identical to this directory; excluded paths (config,
-# logs, raw data) are never touched there.
+# --delete keeps the server identical to this directory; excluded paths
+# (config, logs, raw data) are never touched there.
 rsync -az --delete --exclude-from "$LOCAL_DIR/exclude.txt" --info=stats0 --out-format='  %n' \
   -e "ssh -i $SSH_PRIV_KEY" "$LOCAL_DIR" "$SERVER:$BASE_DIR/"
 

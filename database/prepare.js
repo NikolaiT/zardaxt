@@ -26,14 +26,16 @@ const getNearTTL = (ip_ttl) => {
 }
 
 const createNewDatabase = () => {
-  const deFile = process.argv[2] || './rawData/tcp_ip_fingerprints-de.json';
-  const usFile = process.argv[3] || './rawData/tcp_ip_fingerprints-us.json';
-  console.log(`Reading DE data from: ${deFile}`);
-  console.log(`Reading US data from: ${usFile}`);
-  let data1 = JSON.parse(fs.readFileSync(deFile));
-  let data2 = JSON.parse(fs.readFileSync(usFile));
-
-  let data = data1.concat(data2);
+  const files = process.argv.slice(2);
+  if (files.length === 0) {
+    console.error('usage: node prepare.js <labelled fingerprints .json>...');
+    process.exit(1);
+  }
+  let data = [];
+  for (const file of files) {
+    console.log(`Reading ${file}`);
+    data = data.concat(JSON.parse(fs.readFileSync(file)));
+  }
   let allData = [];
   let newData = [];
   let duplicates = [];

@@ -2,8 +2,7 @@ dpkt
 pcapy-ng
 netifaces
 requests
-# relay model (models/tcpip_mismatch.joblib); pin the trainer's version so the
-# pickle loads: flows/classifier/.venv has scikit-learn 1.7.2
+# relay model (models/tcpip_mismatch.joblib): the pickle needs the version it was trained with
 scikit-learn==1.7.2
 joblib
 numpy

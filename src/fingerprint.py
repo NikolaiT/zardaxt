@@ -8,9 +8,9 @@ Two things, both fed by the fields zardaxt.py records for a SYN:
 
   2. Relay verdict (`MismatchModel`): given the browser's User-Agent, how
      likely is it that the SYN was sent by a proxy rather than by the machine
-     the User-Agent describes. A gradient-boosting model trained on the
-     proxydetect engines' labelled sessions (flows/classifier/tcpip_mismatch.py);
-     its feature layout is defined here so training and serving cannot drift.
+     the User-Agent describes. A gradient-boosting model trained on labelled
+     connections; its feature layout is defined here so training and serving
+     cannot drift.
 """
 import json
 import re
@@ -171,8 +171,8 @@ class MismatchModel:
             import joblib
             self.artifact = joblib.load(path)
             m = self.artifact.get('metrics', {})
-            log(f"loaded relay model {path.name}: trained {self.artifact.get('trained_at')} on {self.artifact.get('n_train')} sessions, "
-                f"threshold {self.artifact['threshold']}, held-out FPR {m.get('fpr_clean')} recall {m.get('recall')}", 'fingerprint')
+            log(f"loaded relay model {path.name}: trained {self.artifact.get('trained_at')}, threshold {self.artifact['threshold']}, "
+                f"held-out FPR {m.get('fpr_clean')} recall {m.get('recall')}", 'fingerprint')
         except Exception as err:  # missing sklearn, version mismatch, corrupt file
             log(f'cannot load relay model {path}: {err}', 'fingerprint', level='ERROR')
             self.artifact = None

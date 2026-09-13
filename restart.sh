@@ -1,5 +1,5 @@
 #!/bin/bash
-# (Re)start zardaxt on an engine box. Cron runs this every 6 hours:
+# (Re)start zardaxt on a server. Run it from cron, e.g. every 6 hours:
 #   0 */6 * * * /bin/bash /root/zardaxt/restart.sh
 # The API and the capture loop are one process; logs go to log/.
 set -u
