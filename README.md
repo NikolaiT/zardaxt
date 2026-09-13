@@ -1,125 +1,138 @@
-# Passive TCP/IP Fingerprinting 🚀
+# Zardaxt – passive TCP/IP fingerprinting
 
-+ [Live Demo](https://proxydetect.live/tcpip.html)
++ [Live demo](https://proxydetect.live/tcpip.html)
++ [Blog article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
 
-Zardaxt.py is a passive TCP/IP fingerprinting tool. Run Zardaxt.py on your server to find out what operating systems your clients are *really* using. This tool considers the header fields and options from the very first incoming SYN packet of the TCP 3-Way Handshake.
+Zardaxt runs on a server and looks at the very first packet of every incoming
+TCP connection, the SYN. Several of its header fields – TCP options and their
+order, window size and scale, MSS, TTL, the IP id, ECN flags – depend on the
+operating system that sent it. From that Zardaxt answers two questions about a
+client:
 
-Test your TCP/IP fingerprint in your browser:
+1. **Which operating system sent this SYN?** Scored against a database of
+   known fingerprints (`database/newCleaned.json`), answered as an average
+   similarity per OS (`avg_score_os_class`).
+2. **Was the SYN sent by the machine the browser claims to be?** Given the
+   client's `User-Agent`, a gradient-boosting model (`models/tcpip_mismatch.joblib`)
+   estimates the probability that a *relay* – an HTTP or SOCKS proxy – made
+   the TCP connection on the browser's behalf. This is the signal the
+   [proxydetect.live](https://proxydetect.live) engine uses as its `tcpip_fp`
+   test. Tunnel VPNs are not caught by it: the client's own stack talks
+   through the tunnel.
 
-`https://proxydetect.live/tcpip.html`
+Why a rewrite? [p0f](https://github.com/p0f/p0f) is dead and its database old;
+[satori.py](https://github.com/xnih/satori) was the inspiration but hard to
+use. The traffic samples behind the fingerprints matter more than the tool.
 
-**Why the rewrite?**
+## Layout
 
-+ [p0f](https://github.com/p0f/p0f) is dead. [p0f's](https://github.com/p0f/p0f) database is too old and C is a bit overkill and hard to quickly hack in.
-+ [satori.py](https://github.com/xnih/satori) was the main inspiration for zardaxt.py. It used to be a bit buggy and hard to use (albeit the ideas behind the *code* are awesome). Actually, it could be argued that zardaxt.py is only a more maintained version of [satori.py](https://github.com/xnih/satori), which does a lot more than TCP/IP fingerprinting.
-+ The actual statistics/traffic samples behind TCP/IP fingerprinting are more important than the tool itself. Therefore it makes sense to rewrite it.
-
-**What can I do with this tool?**
-
-This tool may be used to correlate an incoming TCP/IP connection with an operating system class. For example, it can be used to detect proxies, if the proxy operating system (mostly Linux) differs from the operating system taken from the User-Agent.
-
-If the key `os_mismatch` is true, then the TCP/IP inferred OS is different from the User-Agent OS.
-
-On the other hand, most VPN protocols cannot be revealed by TCP/IP fingerprint mismatches. This is because VPN protocols work on the network layer, and VPN servers do not establish a dedicated TCP/IP connection that could have the TCP/IP characteristics of the VPN server.
-
-## Demo
-
-+ [Live Demo](https://proxydetect.live/tcpip.html)
-+ [Blog Article](https://incolumitas.com/2021/03/13/tcp-ip-fingerprinting-for-vpn-and-proxy-detection/)
-
-## Installation & Usage
-
-First clone the repo:
-
-```bash
-# clone repo
-git clone https://github.com/NikolaiT/zardaxt
-# move into directory
-cd zardaxt
+```
+src/zardaxt.py       capture loop (pcapy + dpkt), keeps the SYN fingerprints per source IP in memory
+src/api.py           HTTP API on :8249
+src/fingerprint.py   OS scoring against the database, the relay model, the User-Agent -> OS mapping,
+                     and the model's feature layout (shared with the trainer)
+src/tcp_options.py   TCP option decoding into the "M1460,S,T,N,W7," string
+src/log.py           log/zardaxt.log and log/zardaxt.err
+src/dune_client.py   usage counters shipped to dune
+database/            newCleaned.json (the OS database) and prepare.js that builds it
+models/              tcpip_mismatch.joblib (the relay model)
+zardaxt.json         config for a local run; zardaxt-server.json is the deployed one
+restart.sh           (re)start on a box – cron runs it every 6 hours
+deploy.sh            rsync + restart on one box:  ./deploy.sh env/de.env
+downloadAndPrepare.sh pull labelled fingerprints from the engines and rebuild the database
 ```
 
-I am using [pew](https://github.com/berdario/pew) to create Python virtual environments. If you don't have `pew` installed yet, install it as follows:
+## Running
 
 ```bash
 pip3 install pew
-```
-
-Note: For newer Python 3 versions (Such as Python 3.10), you will have to install `pcapy-ng` (See: <https://pypi.org/project/pcapy-ng/>) instead of `pcapy`.
-
-```bash
-# create a virtual environment with pew
 pew new zardaxt
-# work on virtual environment `zardaxt`
-pew workon zardaxt
-# install packages now with pip inside the environment `zardaxt`
-pip install dpkt pcapy-ng requests
+pew in zardaxt pip install -r requirements.txt   # dpkt, pcapy-ng, netifaces, scikit-learn, ...
+pew in zardaxt python src/zardaxt.py zardaxt.json  # needs root for the capture
 ```
 
-By default, `zardaxt.py` looks for a configuration file named `zardaxt.json` that should reside in the same directory as `zardaxt.py`. But you can provide your own path to your own config file as first argument to `zardaxt.py`.
+Config keys: `api_server_ip`, `api_server_port`, `api_key` (required),
+`interface` (default: the default gateway's), `pcap_filter` (default `tcp`),
+`clear_dict_after` (forget all fingerprints after this many IPs, default 5000).
+
+## API
 
 ```bash
-python zardaxt.py ./zardaxt.json
+# the caller's own connection (X-Real-IP is honoured behind nginx)
+curl "http://127.0.0.1:8249/classify"
+curl "http://127.0.0.1:8249/classify?detail=1"           # raw fingerprint, per-OS scores, relay verdict
+# any IP in memory, judged against a given User-Agent (the engine does this)
+curl "http://127.0.0.1:8249/classify?key=K&ip=1.2.3.4&detail=1&ua=Mozilla/5.0%20(Windows%20NT%2010.0)"
+curl "http://127.0.0.1:8249/all?key=K"                   # every fingerprint in memory
+curl "http://127.0.0.1:8249/stats?key=K"
 ```
 
-Or run `zardaxt.py` in the background on your server
+`/classify` answers with `os_mismatch`, `avg_score_os_class` and, when a
+User-Agent is known and the model is loaded, `relay`:
+
+```json
+"relay": { "probability": 0.9496, "threshold": 0.8, "flagged": true, "ua_os": "Windows" }
+```
+
+`os_mismatch` is `relay.flagged` when the model answered, otherwise the older
+comparison of OS classes from the database scores.
+
+Behind nginx, proxy `location /` to `http://localhost:8249` and set
+`X-Real-IP $remote_addr`; the proxydetect engines do this through their
+`hostProxies` for `tcpip.incolumitas.com`.
+
+## Data and training
+
+Both the database and the model are built from sessions of the proxydetect
+engines, where every connection also went through the engine's other tests
+(latency, WebRTC, timezone, ...). Those tests provide the labels:
+
++ sessions every test called clean – the SYN is the visitor's own – and
+  enumerated VPN tunnels without a relay signature (clamped MSS, own stack);
++ sessions the tests called proxies – the SYN is the relay's, the User-Agent
+  the browser's.
 
 ```bash
-nohup pew in zardaxt python zardaxt.py 
+./downloadAndPrepare.sh
+# = rsync data/sessions/ from both boxes + the classifier bundles
+#   -> proxyDetector/server/scripts/exportFingerprints.js   (direct-stack sessions only)
+#   -> database/prepare.js                                  (dedupe per OS -> newCleaned.json)
+cd ../flows/classifier && python3 tcpip_mismatch.py train --days 60
+# -> ../../zardaxt/models/tcpip_mismatch.joblib, with a held-out report
 ```
 
-## Serving over https via `nginx`
+Numbers from the 2026-09-13 build, held out from training (2,965 clean, 381
+VPN, 27,976 relay sessions), at the deployed threshold 0.8:
 
-If you want to serve `zardaxt.py` over nginx, your configuration has to look something like this. HTTPS is provided by
-[Let’s Encrypt (certbot)](https://certbot.eff.org/).
+| | flags clean users | flags VPN-tunnel users | catches relays | relays from other sites than the main customer |
+|---|---|---|---|---|
+| database scoring + OS-class rule (before) | ~0% by construction | 58% | 98.6% | – |
+| relay model | 0.1% | 4.2% | 95.8% | 82% |
 
-```text
-server {
-  listen 443 ssl default_server;
-  listen [::]:443 ssl default_server;
-  
-  server_name tcpip.incolumitas.com;
+The database approach could not be improved by more data: rebuilt from clean
+sessions only it *lost* relay recall (78%), because the old database had
+learned relays by accident – it was built from unfiltered sessions, so its
+"Android" entries are largely Linux relay stacks. The full evaluation is in
+`flows/classifier/EVALUATION.md`. Caveats: the labels come from the other
+tests, and 95% of the relay samples are one customer's traffic. Linux desktop
+users are rare in the clean data (164 sessions), so a Linux desktop behind
+no proxy is the most likely false positive.
 
-  location / {
-    proxy_pass http://localhost:8249;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Host $host;
-    proxy_set_header  X-Real-IP $remote_addr;
-    proxy_cache_bypass $http_upgrade;
-  }
-  
-  ssl_certificate /etc/letsencrypt/live/abs.incolumitas.com/fullchain.pem; # managed by Certbot
-  ssl_certificate_key /etc/letsencrypt/live/abs.incolumitas.com/privkey.pem; # managed by Certbot
-}
+### What carries the signal
+
+A 2023 factor analysis on the fields (ratio of correct-OS frequency; 0.36 =
+no predictive value, three OS classes Unix / Apple / Windows):
+
+```
+tcp_options 0.991   ip_total_length 0.954   tcp_off 0.954   tcp_window_scaling 0.773
+ip_id 0.706   ip_ttl 0.56   tcp_window_size 0.549   tcp_timestamp 0.548   tcp_mss 0.405
+tcp_flags 0.377   ip_tos 0.369   ip_df 0.362
 ```
 
-## API Support
-
-When you run `zardaxt.py`, the program automatically launches a simple web API that you can query. A http server is bound to `0.0.0.0:8249`. You can query it on `http://0.0.0.0:8249/classify`.
-
-If you want to query the TCP/IP fingerprint only for the client IP address, use
-
-```shell
-curl "http://0.0.0.0:8249/classify"
-```
-
-And if you want to have all details in the API output, append `&detail=1` to the URL:
-
-```shell
-curl "http://0.0.0.0:8249/classify?detail=1"
-```
-
-If you want to query all fingerprints in the API database, you have to specify the API key:
-
-```shell
-curl "http://0.0.0.0:8249/classify?key=abcd1234"
-```
-
-If you want to query/lookup a specific IP address (Example: 103.14.251.215), you will have to specify the IP address and the API key:
-
-```shell
-curl "http://0.0.0.0:8249/classify?key=abcd1234&ip=103.14.251.215"
-```
+The 2026 data adds two that the averaging database underused: ECN flags on
+the SYN (`tcp_flags` 194) are set by 74% of iOS and 56% of macOS stacks but
+1% of Windows, and a zero IP id by 98% of iOS and 81% of macOS but 1.5% of
+Windows.
 
 ## What header fields are used for TCP/IP fingerprinting?
 

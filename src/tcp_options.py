@@ -1,5 +1,5 @@
 import struct
-from zardaxt_logging import log
+from log import log
 
 """
 Parse TCP options.
@@ -75,7 +75,7 @@ def decode_tcp_options(opts):
                 str_opts = str_opts + 'M' + str(mss) + ','
             except Exception as e:
                 log('failed to parse TCP_OPT_MSS: {}'.format(
-                    str(e)), 'zardaxt_tcp_options', level='ERROR')
+                    str(e)), 'tcp_options', level='ERROR')
         elif option_type == TCP_OPT_WSCALE:  # Window scaling
             window_scaling = struct.unpack('!b', option_value)[0]
             str_opts = str_opts + 'W' + str(window_scaling) + ','
@@ -95,7 +95,7 @@ def decode_tcp_options(opts):
                     '!I', option_value[4:8])[0]
             except Exception as e:
                 log('failed to parse TCP_OPT_TIMESTAMP: {}'.format(
-                    str(e)), 'zardaxt_tcp_options', level='ERROR')
+                    str(e)), 'tcp_options', level='ERROR')
         elif option_type == TCP_OPT_POCONN:
             str_opts = str_opts + 'P,'
         elif option_type == TCP_OPT_POSVC:

@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@json2csv/cli": "^6.1.2",
-    "bowser": "^2.11.0",
-    "csv-writer": "^1.6.0"
-  }
-}
