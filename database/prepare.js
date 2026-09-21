@@ -36,22 +36,15 @@ const createNewDatabase = () => {
     console.log(`Reading ${file}`);
     data = data.concat(JSON.parse(fs.readFileSync(file)));
   }
-  let allData = [];
+  // One entry per distinct (normalized fingerprint, OS); `n` counts the sessions
+  // that produced it, so fingerprint.py can weight common stacks over one-offs.
   let newData = [];
-  let duplicates = [];
-  const allowedOS = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS', 'Chromium OS'];
-  let entropyDict = {
-    'Android': [],
-    'Linux': [],
-    'Chromium OS': [],
-    'Mac OS': [],
-    'Windows': [],
-    'iOS': [],
-  };
+  const byHash = {};
+  // Android and Chrome OS are Linux: same kernel, same SYN (src/fingerprint.py, OS_CLASSES).
+  const LINUX = ['Android', 'HarmonyOS', 'Chromium OS', 'ChromeOS', 'Ubuntu', 'Debian', 'Fedora'];
+  const allowedOS = ['Linux', 'Mac OS', 'Windows', 'iOS'];
   let osDist = {};
   let N = data.length;
-  let newEntropyCount = 0;
-  let noEntropyCount = 0;
   for (let entry of data) {
     const osName = entry.userAgentParsed.os.name;
     if (!osDist[osName]) {
@@ -59,11 +52,8 @@ const createNewDatabase = () => {
     }
     osDist[osName]++;
     const fp = entry.info.fp;
-    if (allowedOS.includes(osName)) {
-      let os = osName;
-      if (['Ubuntu', 'Debian'].includes(os)) {
-        os = 'Linux';
-      }
+    const os = LINUX.includes(osName) ? 'Linux' : osName;
+    if (allowedOS.includes(os)) {
       const entropy = {
         "tcp_options": fp["tcp_options"],
         "tcp_options_ordered": fp["tcp_options"].split(',').map(el => el[0]).filter(e => !!e).join(''),
@@ -80,26 +70,21 @@ const createNewDatabase = () => {
         "ip_tos": fp["ip_tos"],
         "os": os
       };
-      const shasum = crypto.createHash('sha1');
-      shasum.update(JSON.stringify(entropy));
-      const entropyHash = shasum.digest('hex');
-      if (entropyDict[os].includes(entropyHash)) {
-        noEntropyCount++;
-        duplicates.push(entropy);
+      const entropyHash = crypto.createHash('sha1').update(JSON.stringify(entropy)).digest('hex');
+      if (byHash[entropyHash]) {
+        byHash[entropyHash].n++;
       } else {
-        newEntropyCount++;
-        entropyDict[os].push(entropyHash);
+        entropy.n = 1;
+        byHash[entropyHash] = entropy;
         newData.push(entropy);
       }
-      allData.push(entropy);
     }
   }
+  const perOs = {};
+  for (const e of newData) perOs[e.os] = (perOs[e.os] || 0) + 1;
   console.log('osDist', osDist);
-  console.log(`N=${N}, newEntropyCount=${newEntropyCount}, noEntropyCount=${noEntropyCount}`);
-  console.log(Object.entries(entropyDict).map((el) => [el[0], el[1].length]));
+  console.log(`N=${N}, distinct fingerprints=${newData.length}`, perOs);
   fs.writeFileSync('newCleaned.json', JSON.stringify(newData, null, 2));
-  fs.writeFileSync('duplicates.json', JSON.stringify(duplicates, null, 2));
-  fs.writeFileSync('./../analysis2/rawData.json', JSON.stringify(allData, null, 2));
 };
 
 createNewDatabase();

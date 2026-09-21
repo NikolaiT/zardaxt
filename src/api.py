@@ -24,11 +24,10 @@ from dune_client import incr
 from fingerprint import make_os_guess, MismatchModel, ua_os
 
 APPLE = {'iOS', 'Mac OS'}
-UNIX = {'Android', 'Linux', 'Chromium OS'}
 
 
 def os_class(name):
-    return 'apple' if name in APPLE else 'unix' if name in UNIX else name
+    return 'apple' if name in APPLE else name
 
 
 def legacy_os_mismatch(avg_scores, user_agent):

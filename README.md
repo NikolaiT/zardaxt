@@ -86,21 +86,37 @@ MSS) or an HTTP/SOCKS relay in front of it. Labels come from independent
 network tests on the same connections, not from the fingerprint itself.
 
 ```bash
-# OS database: dedupe labelled fingerprints per OS into database/newCleaned.json
-node database/prepare.js fingerprints-a.json fingerprints-b.json
+# OS database: one entry per distinct (fingerprint, OS) with `n`, the sessions behind it
+cd ../flows/classifier && python3 tcpip_mismatch.py export-os --days 90 --out /tmp/os.json
+cd ../../zardaxt/database && node prepare.js /tmp/os.json     # -> newCleaned.json
 ```
 
 Each input is a JSON list of `{ "userAgentParsed": { "os": { "name": ... } },
 "info": { "fp": { ...the fingerprint as recorded by src/zardaxt.py... } } }`.
+`score_fp` averages over sessions, not entries, so a stack seen 5,000 times
+outweighs a one-off. The classes are `Linux` (Android and Chrome OS included:
+same kernel, same SYN - kept apart, the database called half of the Android
+visitors Linux as soon as it had more data), `Windows`, `Mac OS` and `iOS`.
+The 2026-09-21 database holds 1,453 fingerprints from 23k proxydetect
+sessions in which every test was negative, each with the OS its User-Agent
+claims. Only those: the ipapid fleet's flows (`flows/fleet/`) are labelled by
+address lists, not by tests on the connection, and 7 % of its "clean" browser
+flows show a relay gap, so they stay out. Held out, the database names the OS
+of 82 % of proxydetect visitors and 84 % of fleet clients - Linux 100 / 92 %,
+Windows 84 / 83 % - while Mac OS vs iOS is a coin toss on the shared Apple
+stack (the demo page shows them as one "Apple" bar for that reason).
 
 The relay model is a scikit-learn `HistGradientBoostingClassifier` over the
 fields in `src/fingerprint.py` (`FEATURES`) plus the OS class of the
 User-Agent; the artifact stores the model, the categorical vocabularies and
-the decision threshold. Held-out results of the 2026-09 build at threshold
-0.8: 0.1% of direct connections flagged, 4.2% of VPN-tunnel connections
-flagged (the database rule flagged 58% of them), 95.8% of relay connections
-caught. Linux desktops are rare in the training data, so a Linux desktop
-without a proxy is the most likely false positive.
+the decision threshold. Held-out results of the 2026-09-21 build at threshold
+0.8: 0.1% of direct connections flagged (Linux/Android 0.3%), 6.1% of
+VPN-tunnel connections flagged (the database rule flagged 58% of them), 94.4%
+of relay connections caught. The weak spot is relays whose browser claims
+Android or Linux: 74% caught, against 96% for Windows and 99% for Mac claims,
+because with Android and Linux as one class a server-like Linux SYN under a
+Linux-family User-Agent is no contradiction. The previous build with separate
+classes caught 96.3% overall.
 
 Rebuilding the *database* from correctly labelled connections did not help:
 per-OS averaging has no notion of a relay, and the earlier database only

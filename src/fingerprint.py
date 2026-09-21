@@ -25,22 +25,21 @@ MODEL_FILE = ROOT / 'models' / 'tcpip_mismatch.joblib'
 # TCP control flags
 TH_FIN, TH_SYN, TH_RST, TH_PUSH, TH_ACK, TH_URG, TH_ECE, TH_CWR = 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80
 
-OS_CLASSES = ['Android', 'Linux', 'Mac OS', 'Windows', 'iOS', 'Chromium OS']
+OS_CLASSES = ['Linux', 'Mac OS', 'Windows', 'iOS']
 
-# The operating system a User-Agent claims, in the six classes the database
-# and the model know. Order matters: Android before Linux, CrOS before Linux.
+# The operating system a User-Agent claims, in the four classes the database
+# and the model know. Android and Chrome OS are Linux: same kernel, same SYN.
+# Order matters: iOS before Mac OS (iPhone UAs say "like Mac OS X").
 _UA_OS = [
-    (re.compile(r'Android|HarmonyOS'), 'Android'),
     (re.compile(r'iPhone|iPad|iPod'), 'iOS'),
     (re.compile(r'Windows'), 'Windows'),
     (re.compile(r'Mac OS X|Macintosh'), 'Mac OS'),
-    (re.compile(r'CrOS'), 'Chromium OS'),
-    (re.compile(r'Linux|X11|Ubuntu|Fedora|Debian'), 'Linux'),
+    (re.compile(r'Android|HarmonyOS|CrOS|Linux|X11|Ubuntu|Fedora|Debian'), 'Linux'),
 ]
 
 
 def ua_os(user_agent):
-    """'Windows', 'Mac OS', 'iOS', 'Android', 'Linux', 'Chromium OS' or None."""
+    """'Windows', 'Mac OS', 'iOS', 'Linux' or None."""
     if not user_agent:
         return None
     for pattern, name in _UA_OS:
@@ -79,17 +78,20 @@ _db_count = {}
 
 
 def load_database(path=DATABASE_FILE):
+    """Entries carry `n`, the number of sessions that produced the fingerprint
+    (database/prepare.js); databases without it weight every entry equally."""
     global _db, _db_count
     with open(path) as f:
         _db = json.load(f)
     _db_count = {}
     for e in _db:
-        _db_count[e['os']] = _db_count.get(e['os'], 0) + 1
-    log(f'loaded {len(_db)} fingerprints: {_db_count}', 'fingerprint')
+        _db_count[e['os']] = _db_count.get(e['os'], 0) + e.get('n', 1)
+    log(f'loaded {len(_db)} fingerprints from {sum(_db_count.values())} sessions: {_db_count}', 'fingerprint')
 
 
 def score_fp(fp):
-    """Average similarity of the (normalized) fingerprint to each OS's fingerprints."""
+    """Similarity of the (normalized) fingerprint to each OS's fingerprints,
+    averaged over the sessions behind them."""
     totals = {os_name: 0.0 for os_name in _db_count}
     for e in _db:
         s = 0.0
@@ -107,7 +109,7 @@ def score_fp(fp):
             s += 4
         elif e['tcp_options_ordered'] == fp['tcp_options_ordered']:
             s += 2.5
-        totals[e['os']] += s
+        totals[e['os']] += s * e.get('n', 1)
     return {os_name: round(totals[os_name] / _db_count[os_name], 2) for os_name in totals}
 
 
